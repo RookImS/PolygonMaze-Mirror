@@ -34,6 +34,23 @@ public class EnemyBehaviour : MonoBehaviour
         
     }
 
+    public void MoveToDestination()
+    {
+
+        destination = GameObject.FindWithTag("Destination");
+        agent.CalculatePath(destination.transform.position, path);
+        ChangeAgentSpeed();
+
+        if (path.status == NavMeshPathStatus.PathPartial)
+        {
+            Debug.Log("Invalid path");
+        }
+        else
+        {
+            agent.SetPath(path);
+        }
+    }
+
     void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.CompareTag("Destination"))
@@ -43,21 +60,6 @@ public class EnemyBehaviour : MonoBehaviour
         
     }
 
-    public void MoveToDestination()
-    {
-        ChangeAgentSpeed();
-        destination = GameObject.FindWithTag("Destination");
-        agent.CalculatePath(destination.transform.position, path);
-        if (path.status == NavMeshPathStatus.PathPartial)
-        {
-            Debug.Log("Invalid path");
-        }
-        else
-        {
-            agent.SetPath(path);
-        }
-        Invoke("ChangeSpeed", 3);
-    }
 
     public void ExitDestination()
     {

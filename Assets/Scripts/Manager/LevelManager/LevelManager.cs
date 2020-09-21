@@ -73,7 +73,7 @@ public class LevelManager : MonoBehaviour
         
     }
 
-    void CreateEnemy()
+    void CreateEnemys()
     {
         if (!enemyEditorInfos.Equals(null))
             foreach (EnemyEditorInfo eInfo in enemyEditorInfos)
