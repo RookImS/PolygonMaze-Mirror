@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DestinationChecker : MonoBehaviour
+public class WaveSystem
 {
     // Start is called before the first frame update
     void Start()

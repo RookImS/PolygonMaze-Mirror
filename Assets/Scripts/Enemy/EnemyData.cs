@@ -2,10 +2,16 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyData
+public class EnemyData : MonoBehaviour
 {
+    private int spawnNo;
+    private int reward;
+    private int damage;
+
     public string desc;
     public EnemyStatSystem Stats;
+    public EColorSystem EColorSys = new EColorSystem();
+    public WaveSystem WaveSys = new WaveSystem();
 
 
     public void Init()
