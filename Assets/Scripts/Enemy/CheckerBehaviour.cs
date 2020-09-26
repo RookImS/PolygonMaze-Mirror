@@ -1,23 +1,17 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
-using TMPro;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine;
 
-public class EnemyBehaviour : MonoBehaviour
+public class CheckerBehaviour : MonoBehaviour
 {
     private NavMeshAgent agent;
     private NavMeshPath path;
     private GameObject destination; // test code
 
-    public EnemyData enemyData => m_EnemyData;
-    EnemyData m_EnemyData;
-
     void Awake()
     {
-        m_EnemyData = GetComponent<EnemyData>();
-        m_EnemyData.Init();
-
         agent = GetComponent<NavMeshAgent>();
         path = new NavMeshPath();
         MoveToDestination();
@@ -35,41 +29,20 @@ public class EnemyBehaviour : MonoBehaviour
         //empty
     }
 
-    public void MoveToDestination()
+    public bool MoveToDestination()
     {
         destination = GameObject.FindWithTag("Destination");
         agent.CalculatePath(destination.transform.position, path);
-        ChangeAgentSpeed(m_EnemyData.Stats.stats.speed);
 
         if (path.status == NavMeshPathStatus.PathPartial)
         {
             Debug.Log("Invalid path");
+            return false;
         }
         else
         {
-            agent.SetPath(path);
             Debug.Log("valid path");
+            return true;
         }
-        
-    }
-
-    void OnTriggerEnter(Collider other)
-    {
-        if (other.gameObject.CompareTag("Destination"))
-        {
-            ExitDestination();
-        }
-        
-    }
-
-    public void ExitDestination()
-    {
-        enemyData.Attack();
-        enemyData.Death();
-    }
-
-    public void ChangeAgentSpeed(float speed)
-    {
-        agent.speed = speed;
     }
 }
