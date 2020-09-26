@@ -6,7 +6,7 @@ public class TowerBehaviour : MonoBehaviour
 {
     TowerData m_TowerData;
 
-    void Start()
+    void Awake()
     {
         m_TowerData = GetComponent<TowerData>();
     }

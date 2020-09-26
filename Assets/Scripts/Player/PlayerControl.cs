@@ -49,10 +49,6 @@ public class PlayerControl : MonoBehaviour
         DontDestroyOnLoad(gameObject);
     }
 
-
-
-
-
     public void Init()
     {
         playerData.Init();
