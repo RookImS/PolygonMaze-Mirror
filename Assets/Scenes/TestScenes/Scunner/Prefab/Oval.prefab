@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &2520472759329384109
+--- !u!1 &395670888544259268
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,50 +8,50 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 3004275001354370071}
-  - component: {fileID: 2170330017884484530}
-  - component: {fileID: 4177784571884980088}
-  - component: {fileID: -5458235868219638484}
-  - component: {fileID: 6663637625878783996}
-  - component: {fileID: -4670615056953366672}
-  - component: {fileID: -3982039199962139326}
-  - component: {fileID: 5381262560881482610}
+  - component: {fileID: 1024116188043843198}
+  - component: {fileID: 4150559270529374683}
+  - component: {fileID: 2196992335454891281}
+  - component: {fileID: 3582059549205168476}
+  - component: {fileID: 2025877173148315632}
+  - component: {fileID: 8076212444414865761}
+  - component: {fileID: 889265704002243942}
+  - component: {fileID: -3025334008540326400}
   m_Layer: 0
-  m_Name: Circle
+  m_Name: Oval
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &3004275001354370071
+--- !u!4 &1024116188043843198
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2520472759329384109}
+  m_GameObject: {fileID: 395670888544259268}
   m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!33 &2170330017884484530
+--- !u!33 &4150559270529374683
 MeshFilter:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2520472759329384109}
-  m_Mesh: {fileID: 4711208715938537054, guid: f1568d448e2636b4ca1bcedd3b024cef, type: 3}
---- !u!23 &4177784571884980088
+  m_GameObject: {fileID: 395670888544259268}
+  m_Mesh: {fileID: -634717780905097206, guid: a281d5dbd217f504c8406b6a6457122f, type: 3}
+--- !u!23 &2196992335454891281
 MeshRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2520472759329384109}
+  m_GameObject: {fileID: 395670888544259268}
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
@@ -86,58 +86,13 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!135 &-5458235868219638484
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2520472759329384109}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.5
-  m_Center: {x: 0.00000011920929, y: 0, z: -0.0000011771917}
---- !u!114 &6663637625878783996
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2520472759329384109}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2117414a62b000f4e8490b3b39745a7c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  reward: 10
-  damage: 1
-  desc: Circle, the weakest enemy
-  Stats:
-    baseStats:
-      hp: 1000
-      speed: 3
-      def: 5
---- !u!114 &-4670615056953366672
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2520472759329384109}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 567f9bcc314d0b34082ef6b8f0489fdd, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!195 &-3982039199962139326
+--- !u!195 &3582059549205168476
 NavMeshAgent:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2520472759329384109}
+  m_GameObject: {fileID: 395670888544259268}
   m_Enabled: 1
   m_AgentTypeID: -1372625422
   m_Radius: 0.1
@@ -147,19 +102,64 @@ NavMeshAgent:
   m_AngularSpeed: 360
   m_StoppingDistance: 0
   m_AutoTraverseOffMeshLink: 1
-  m_AutoBraking: 0
+  m_AutoBraking: 1
   m_AutoRepath: 1
   m_Height: 1
-  m_BaseOffset: 0.5
+  m_BaseOffset: 0.05650165
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
---- !u!54 &5381262560881482610
+--- !u!114 &2025877173148315632
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 395670888544259268}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 567f9bcc314d0b34082ef6b8f0489fdd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &8076212444414865761
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 395670888544259268}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2117414a62b000f4e8490b3b39745a7c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  reward: 25
+  damage: 1
+  desc: 'Oval: has high defense and low movement speed.'
+  Stats:
+    baseStats:
+      hp: 1500
+      speed: 2
+      def: 50
+--- !u!65 &889265704002243942
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 395670888544259268}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.96063346, y: 0.05650165, z: 1.6732779}
+  m_Center: {x: 0.0000028312206, y: 0.028250825, z: -0.00000071525574}
+--- !u!54 &-3025334008540326400
 Rigidbody:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2520472759329384109}
+  m_GameObject: {fileID: 395670888544259268}
   serializedVersion: 2
   m_Mass: 1
   m_Drag: 0

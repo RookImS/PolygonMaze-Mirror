@@ -5,8 +5,8 @@ using UnityEngine;
 public class EnemyData : MonoBehaviour
 {
     private int spawnNo;
-    private int reward;
-    private int damage;
+    public int reward;
+    public int damage;
 
     public string desc;
     public EnemyStatSystem Stats;
@@ -21,7 +21,7 @@ public class EnemyData : MonoBehaviour
 
     void Awake()
     {
-        //empty
+        
     }
 
     // Update is called once per frame
@@ -33,6 +33,7 @@ public class EnemyData : MonoBehaviour
     public void Death()
     {
         Stats.Death();
+        Destroy(this.gameObject);
     }
 
     /// <summary>
@@ -40,9 +41,9 @@ public class EnemyData : MonoBehaviour
     /// with the CanAttackTarget function.
     /// </summary>
     /// <param name="target">The CharacterData you want to attack</param>
-    public void Attack(PlayerData target)
+    public void Attack()
     {
-        //enemy decrease life of player
+        //PlayerControl.Instance.Damage(this.damage);
     }
 
     /// <summary>

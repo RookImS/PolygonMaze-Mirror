@@ -8,7 +8,7 @@ public class EnemyBehaviour : MonoBehaviour
 {
     private NavMeshAgent agent;
     private NavMeshPath path;
-    private GameObject destination;
+    private GameObject destination; // test code
 
     public EnemyData enemyData => m_EnemyData;
     EnemyData m_EnemyData;
@@ -22,6 +22,7 @@ public class EnemyBehaviour : MonoBehaviour
         path = new NavMeshPath();
         MoveToDestination();
     }
+
     // Start is called before the first frame update
     void Start()
     {
@@ -31,24 +32,25 @@ public class EnemyBehaviour : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        //empty
     }
 
     public void MoveToDestination()
     {
-
         destination = GameObject.FindWithTag("Destination");
         agent.CalculatePath(destination.transform.position, path);
-        ChangeAgentSpeed();
+        ChangeAgentSpeed(m_EnemyData.Stats.stats.speed);
 
         if (path.status == NavMeshPathStatus.PathPartial)
         {
-            Debug.Log("Invalid path");
+            //Debug.Log("Invalid path");
         }
         else
         {
             agent.SetPath(path);
+            //Debug.Log("valid path");
         }
+        
     }
 
     void OnTriggerEnter(Collider other)
@@ -60,17 +62,14 @@ public class EnemyBehaviour : MonoBehaviour
         
     }
 
-
     public void ExitDestination()
     {
-        //enemyData.Death();
-        Destroy(this.gameObject);
-
-        //+Enemy decrease life of player
+        enemyData.Attack();
+        enemyData.Death();
     }
 
-    public void ChangeAgentSpeed()
+    public void ChangeAgentSpeed(float speed)
     {
-        agent.speed = m_EnemyData.Stats.stats.speed;
+        agent.speed = speed;
     }
 }
