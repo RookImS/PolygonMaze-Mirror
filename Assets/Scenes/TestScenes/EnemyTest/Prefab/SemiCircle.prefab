@@ -77,7 +77,7 @@ NavMeshAgent:
   m_AngularSpeed: 360
   m_StoppingDistance: 0
   m_AutoTraverseOffMeshLink: 1
-  m_AutoBraking: 1
+  m_AutoBraking: 0
   m_AutoRepath: 1
   m_Height: 1
   m_BaseOffset: 0.048198402
@@ -140,7 +140,7 @@ PrefabInstance:
       objectReference: {fileID: 2100000, guid: ac0d4500f639ddb4fafe043ea5ef7b05, type: 2}
     - target: {fileID: 919132149155446097, guid: 1c51d7845a5f1cd499b8ee7074318407, type: 3}
       propertyPath: m_Name
-      value: Semicircle
+      value: SemiCircle
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1c51d7845a5f1cd499b8ee7074318407, type: 3}
