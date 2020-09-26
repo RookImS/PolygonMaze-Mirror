@@ -125,4 +125,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6da820c75eae8c348849b8510fef56c8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Tower: {fileID: 3721878949162066384, guid: 94147f7675166ac4d9288bf70ee451ab, type: 3}
+  realTower: {fileID: 7271484921240024667, guid: 74c8413134add1641be9e2920c61074c, type: 3}
+  layerMask:
+    serializedVersion: 2
+    m_Bits: 0
+  innerRadius: 0

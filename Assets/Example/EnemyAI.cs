@@ -17,7 +17,6 @@ public class EnemyAI : MonoBehaviour
         agent.destination = goal.position;
     }
 
-
     public void Reeeeeest()
     {
         transform.position = originPosition;

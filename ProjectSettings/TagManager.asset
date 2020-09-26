@@ -3,7 +3,12 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - SideCollider
+  - SideCollider_Deploy
+  - Tower
+  - Neutral
+  - Enemy
   layers:
   - Default
   - TransparentFX
@@ -13,8 +18,8 @@ TagManager:
   - UI
   - 
   - 
-  - 
-  - 
+  - Tower
+  - SideCollider
   - 
   - 
   - 

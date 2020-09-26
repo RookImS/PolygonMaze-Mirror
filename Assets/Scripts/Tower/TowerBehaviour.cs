@@ -4,15 +4,20 @@ using UnityEngine;
 
 public class TowerBehaviour : MonoBehaviour
 {
-    // Start is called before the first frame update
+    TowerData m_TowerData;
+
     void Start()
     {
-        
+        m_TowerData = GetComponent<TowerData>();
     }
 
-    // Update is called once per frame
-    void Update()
+    public void setNeighbor(GameObject obj)
     {
-        
+        m_TowerData.neighbor.Add(obj);
     }
+
+    public void OnEnable()
+    {
+    }
+
 }
