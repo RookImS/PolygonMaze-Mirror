@@ -11,13 +11,15 @@ public class DeployBehavior : MonoBehaviour
 
     public float innerRadius;
     private bool isDeployEnable;
+    public bool isOverlapped;
 
-    public void LocateTower(Vector3 pos)
+    public GameObject LocateTower(Vector3 mousePos)
     {
-        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        Vector3 realPos = Camera.main.ScreenToWorldPoint(mousePos);
+        Ray ray = Camera.main.ScreenPointToRay(mousePos);
         RaycastHit hit;
 
-        transform.position = new Vector3(pos.x, 0.75f, pos.z);
+        transform.position = new Vector3(realPos.x, 0.75f, realPos.z);
 
         if (Physics.Raycast(ray, out hit, Camera.main.transform.position.y * 1.3f, layerMask))
         {
@@ -27,25 +29,27 @@ public class DeployBehavior : MonoBehaviour
             transform.eulerAngles = rotateAngle;
 
             Vector3 direction = transform.rotation * Vector3.back;
-            Vector3 targetPoint = direction * (innerRadius);
+            Vector3 targetPoint = direction * ((innerRadius) - 0.1f);
 
             transform.position = objectHit.transform.position + targetPoint;
 
             isDeployEnable = true;
+            return objectHit.gameObject.transform.parent.gameObject;
         }
         else
         {
             transform.eulerAngles = new Vector3(0f, 0f, 0f);
             isDeployEnable = false;
-        }
 
+            return null;
+        }
     }
     public bool CheckOverlap()
     {
-        if (transform.GetChild(1).GetComponent<CheckOverlap>().isOverlapped)
+        if (isOverlapped)
             isDeployEnable = false;
 
-        return transform.GetChild(1).GetComponent<CheckOverlap>().isOverlapped;
+        return isOverlapped;
     }
     public bool CheckPath()
     {
@@ -53,11 +57,23 @@ public class DeployBehavior : MonoBehaviour
         // 문제 없으면 true
         return true;
     }
-    public void DeployTower(Vector3 pos)
+    public void DeployTower(GameObject neighborObject)
     {
+        
         if (isDeployEnable)
         {
-            Instantiate(realTower, pos, transform.rotation);
+            GameObject newTower = Instantiate(realTower, transform.position, transform.rotation);
+            //GameObject neighborObject = hitObject.transform.parent.gameObject;
+
+            Debug.Log("이웃" + neighborObject);
+            Debug.Log("새타워" + newTower);
+
+            //hitObject.GetComponent<Collider>().enabled = false;
+            //newTower.transform.GetChild(1).gameObject.GetComponent<Collider>().enabled = false;
+
+            neighborObject.GetComponent<TowerBehaviour>().setNeighbor(newTower);
+            newTower.GetComponent<TowerBehaviour>().setNeighbor(neighborObject);
+
             /*
             if (PlayerControl.Instance.UseCost(realTower.GetComponent<TowerData>().cost))
                 Instantiate(realTower, pos, transform.rotation);
@@ -69,6 +85,18 @@ public class DeployBehavior : MonoBehaviour
             */
         }
         Destroy(this.gameObject);
+    }
+
+    private void OnTriggerStay(Collider other)
+    {
+        if (other.gameObject.CompareTag("Tower") || other.gameObject.CompareTag("Neutral"))
+            isOverlapped = true;
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.gameObject.CompareTag("Tower") || other.gameObject.CompareTag("Neutral"))
+            isOverlapped = false;
     }
 
 }
