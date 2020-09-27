@@ -59,6 +59,11 @@ public class EnemyBehaviour : MonoBehaviour
         {
             ExitDestination();
         }
+
+        if (other.gameObject.CompareTag("Hit"))
+        {
+            //enemyData.Damage(other.gameObject.GetComponent<BulletData>().attackData)
+        }
         
     }
 
