@@ -4,15 +4,54 @@ using UnityEngine;
 
 public class BulletBehaviour : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    BulletData m_BulletData;
+    public List<GameObject> EnemyList;
+
+    private void Awake()
     {
-        
+        m_BulletData = GetComponent<BulletData>();
+    }
+    private void Start()
+    {
+        EnemyList = new List<GameObject>();
+        CheckRange();
     }
 
-    // Update is called once per frame
-    void Update()
+    private void Update()
     {
-        
+        Act();
+
+        if(EnemyList.Count > 0)
+        {
+            foreach(GameObject enemy in EnemyList)
+            {
+                // enemy 때리는 거
+                Debug.Log("Attack!");
+            }
+            Destroy(this.gameObject);
+        }
+    }
+
+    public void CheckRange()
+    {
+        StartCoroutine(m_BulletData.CheckLiving());
+    }
+
+    public void Act()
+    {
+        m_BulletData.Act();
+    }
+    
+    public void Attack()
+    {
+        m_BulletData.Attack();
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.tag == "Enemy")
+        {
+            Attack();            
+        }
     }
 }

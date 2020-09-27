@@ -12,6 +12,16 @@ public class TowerData : MonoBehaviour
     public List<GameObject> neighbor;   // public x?
     public bool isDeploy;   // public x
 
-    public TColor color;    // public x
     
+    public TColor color;    // public x
+    public GameObject bullet;
+
+    public void Init()
+    {
+        Stats.Init(this);
+    }
+
+    public virtual void Shoot(Transform muzzle)
+    {
+    }
 }

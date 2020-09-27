@@ -8,6 +8,9 @@ TagManager:
   - SideCollider_Deploy
   - Tower
   - Neutral
+  - Enemy
+  - Hit
+  - Bullet
   layers:
   - Default
   - TransparentFX
