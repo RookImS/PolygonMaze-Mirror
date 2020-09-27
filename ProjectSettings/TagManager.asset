@@ -9,6 +9,9 @@ TagManager:
   - Enemy
   - Wall
   - Obstacle
+  - SideCollider
+  - Tower
+  - Neutral
   layers:
   - Default
   - TransparentFX
@@ -18,8 +21,8 @@ TagManager:
   - UI
   - 
   - 
-  - 
-  - 
+  - Tower
+  - SideCollider
   - 
   - 
   - 
