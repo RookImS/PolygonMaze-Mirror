@@ -50,6 +50,10 @@ public class PlayerControl : MonoBehaviour
         DontDestroyOnLoad(gameObject);
     }
 
+    private void Start()
+    {
+        //GameManager.Instance.DeployTower += UseCost
+    }
     public void Init()
     {
         Debug.Log("Init");
@@ -81,9 +85,5 @@ public class PlayerControl : MonoBehaviour
         playerData.Death();
     }
 
-    //public void CostDecrease()
-    //{
-    //    UseCost(towerData.cost);
-    //}
 }
 

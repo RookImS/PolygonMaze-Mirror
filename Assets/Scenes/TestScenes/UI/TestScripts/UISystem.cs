@@ -15,6 +15,7 @@ public class UISystem : MonoBehaviour
     {
         Instance = this;
         PlayerControl.Instance.Init();
+        GameManager.Instance.Init();
     }
 
     // Start is called before the first frame update

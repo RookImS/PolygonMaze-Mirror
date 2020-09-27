@@ -1,5 +1,4 @@
-
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -58,21 +57,22 @@ public class DeployBehavior : MonoBehaviour
         if (isDeployEnable)
         {
 
-
-
-
             if (PlayerControl.Instance.UseCost(realTower.GetComponent<TowerData>().cost))
+            {
                 Instantiate(realTower, pos, transform.rotation);
+                GameManager.Instance.OnDeployTower();
+                Debug.Log("Deploy");
 
+            }
             else
             {
+                GameManager.Instance.FailDeployTower();
+                Debug.Log("돈이 없음");
                 //부족하다고 알리는 트리거
             }
-
-
         }
         Destroy(this.gameObject);
-        Debug.Log("Deploy");
+
     }
 }
 
