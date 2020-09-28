@@ -6,12 +6,14 @@ TagManager:
   tags:
   - Destination
   - Spawner
-  - Enemy
   - Wall
   - Obstacle
   - SideCollider
   - Tower
   - Neutral
+  - Enemy
+  - Hit
+  - Bullet
   layers:
   - Default
   - TransparentFX
