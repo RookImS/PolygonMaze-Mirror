@@ -7,33 +7,27 @@ public class CheckerBehaviour : MonoBehaviour
 {
     private NavMeshAgent agent;
     private NavMeshPath path;
+    private NavMeshPath tempPath;
     private GameObject destination; // test code
 
     void Awake()
     {
         agent = GetComponent<NavMeshAgent>();
-        path = new NavMeshPath();
-        MoveToDestination();
     }
 
-    // Start is called before the first frame update
     void Start()
     {
-        //empty
+        CalculatePath();
+        ApplyPath();
     }
 
-    // Update is called once per frame
-    void Update()
+    public bool CalculatePath()
     {
-        //empty
-    }
-
-    public bool MoveToDestination()
-    {
+        tempPath = new NavMeshPath();
         destination = GameObject.FindWithTag("Destination");
-        agent.CalculatePath(destination.transform.position, path);
+        agent.CalculatePath(destination.transform.position, tempPath);
 
-        if (path.status == NavMeshPathStatus.PathPartial)
+        if (tempPath.status == NavMeshPathStatus.PathPartial)
         {
             Debug.Log("Invalid path");
             return false;
@@ -43,5 +37,10 @@ public class CheckerBehaviour : MonoBehaviour
             Debug.Log("valid path");
             return true;
         }
+    }
+
+    public void ApplyPath()
+    {
+        path = tempPath;
     }
 }

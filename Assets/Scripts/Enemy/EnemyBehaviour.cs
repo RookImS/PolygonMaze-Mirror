@@ -15,10 +15,7 @@ public class EnemyBehaviour : MonoBehaviour
 
     void Awake()
     {
-        m_EnemyData = GetComponent<EnemyData>();
-        m_EnemyData.Init();
-
-        agent = GetComponent<NavMeshAgent>();
+        Init();
         path = new NavMeshPath();
         MoveToDestination();
     }
@@ -34,7 +31,15 @@ public class EnemyBehaviour : MonoBehaviour
     {
         //empty
     }
+    
+    void Init()
+    {
+        m_EnemyData = GetComponent<EnemyData>();
+        m_EnemyData.Init();
 
+        agent = GetComponent<NavMeshAgent>();
+    }
+    
     public void MoveToDestination()
     {
         destination = GameObject.FindWithTag("Destination");
@@ -51,6 +56,11 @@ public class EnemyBehaviour : MonoBehaviour
             Debug.Log("valid path");
         }
         
+    }
+
+    public void Damage(int damage)
+    {
+        m_EnemyData.Damage(damage);
     }
 
     void OnTriggerEnter(Collider other)

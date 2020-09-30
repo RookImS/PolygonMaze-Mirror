@@ -9,9 +9,7 @@ public class TowerData : MonoBehaviour
 
     public TowerStatSystem Stats;
     public int cost;
-    public List<GameObject> neighbor;   // public x?
-    public bool isDeploy;   // public x
-
+    public List<GameObject> neighbor;
     
     public TColor color;    // public x
     public GameObject bullet;

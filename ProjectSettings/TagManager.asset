@@ -14,6 +14,8 @@ TagManager:
   - Enemy
   - Hit
   - Bullet
+  - WallCornerSide1
+  - WallCornerSide2
   layers:
   - Default
   - TransparentFX
@@ -25,8 +27,8 @@ TagManager:
   - 
   - Tower
   - SideCollider
-  - 
-  - 
+  - Stage
+  - DeployUI
   - 
   - 
   - 

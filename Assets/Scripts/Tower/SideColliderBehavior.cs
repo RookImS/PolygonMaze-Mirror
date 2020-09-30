@@ -7,7 +7,8 @@ public class SideColliderBehavior : MonoBehaviour
 {
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.CompareTag("Tower") || other.gameObject.CompareTag("Neutral"))
+        if (other.gameObject.CompareTag("Tower") || other.gameObject.CompareTag("Neutral") 
+            ||other.gameObject.CompareTag("Wall") || other.gameObject.CompareTag("WallCornerSide1") || other.gameObject.CompareTag("WallCornerSide2") || other.gameObject.CompareTag("Spawner") || other.gameObject.CompareTag("Destination"))
         {
             if (!this.transform.parent.Equals(other.transform))
             {
