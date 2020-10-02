@@ -65,7 +65,7 @@ MonoBehaviour:
   desc: Circle
   Stats:
     baseStats:
-      hp: 1000
+      hp: 500
       speed: 3
       def: 5
 --- !u!65 &8383970278859737560

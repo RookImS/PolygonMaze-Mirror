@@ -68,20 +68,12 @@ public class EnemyBehaviour : MonoBehaviour
         {
             ExitDestination();
         }
-
-        /*
-        if (other.gameObject.CompareTag("Hit"))
-        {
-            enemyData.Damage(other.gameObject.GetComponent<BulletData>().attackData)
-        }
-        */
-        
     }
 
     public void ExitDestination()
     {
         m_EnemyData.Attack();
-        m_EnemyData.Death();
+        Destroy(this.gameObject);
     }
 
     public void ChangeAgentSpeed(float speed)
