@@ -1,12 +1,93 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!54 &347268284727695372
+--- !u!1 &8823159148962381299
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4421627279371852161}
+  - component: {fileID: 2267622519217134803}
+  - component: {fileID: 7903268670659505694}
+  - component: {fileID: 5850620350833123655}
+  - component: {fileID: 1315189123061703426}
+  - component: {fileID: 5891084901732780967}
+  m_Layer: 0
+  m_Name: Elipse
+  m_TagString: Enemy
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4421627279371852161
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8823159148962381299}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 8103444775068424427}
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2267622519217134803
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8823159148962381299}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 567f9bcc314d0b34082ef6b8f0489fdd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &7903268670659505694
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8823159148962381299}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2117414a62b000f4e8490b3b39745a7c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  reward: 25
+  damage: 1
+  desc: Elipse
+  Stats:
+    baseStats:
+      hp: 1500
+      speed: 2
+      def: 50
+--- !u!65 &5850620350833123655
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8823159148962381299}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.8, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!54 &1315189123061703426
 Rigidbody:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 619676088665254597}
+  m_GameObject: {fileID: 8823159148962381299}
   serializedVersion: 2
   m_Mass: 1
   m_Drag: 0
@@ -16,49 +97,16 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 126
   m_CollisionDetection: 0
---- !u!65 &7182010924560149930
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 619676088665254597}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 0.7, y: 1, z: 0.9513657}
-  m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &1375503378500065413
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 619676088665254597}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2117414a62b000f4e8490b3b39745a7c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  reward: 25
-  damage: 1
-  desc: Ellipse
-  Stats:
-    baseStats:
-      hp: 1500
-      speed: 2
-      def: 50
---- !u!195 &3483544546020340323
+--- !u!195 &5891084901732780967
 NavMeshAgent:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 619676088665254597}
+  m_GameObject: {fileID: 8823159148962381299}
   m_Enabled: 1
   m_AgentTypeID: -1372625422
-  m_Radius: 0.01
+  m_Radius: 0.1
   m_Speed: 0
   m_Acceleration: 500
   avoidancePriority: 50
@@ -71,24 +119,12 @@ NavMeshAgent:
   m_BaseOffset: 0.5
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
---- !u!114 &3985090523806381057
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 619676088665254597}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 567f9bcc314d0b34082ef6b8f0489fdd, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!1001 &313248455168300948
+--- !u!1001 &8646772109161250560
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
-    m_TransformParent: {fileID: 0}
+    m_TransformParent: {fileID: 4421627279371852161}
     m_Modifications:
     - target: {fileID: -8679921383154817045, guid: e23ac2beb9ebf934f9b265f714fb79af, type: 3}
       propertyPath: m_LocalPosition.x
@@ -134,26 +170,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: e23ac2beb9ebf934f9b265f714fb79af, type: 3}
-      propertyPath: m_LocalScale.y
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: -7511558181221131132, guid: e23ac2beb9ebf934f9b265f714fb79af, type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: cc5c2a853197ad848add2e9e6b37c652, type: 2}
     - target: {fileID: 919132149155446097, guid: e23ac2beb9ebf934f9b265f714fb79af, type: 3}
       propertyPath: m_Name
-      value: Ellipse
-      objectReference: {fileID: 0}
-    - target: {fileID: 919132149155446097, guid: e23ac2beb9ebf934f9b265f714fb79af, type: 3}
-      propertyPath: m_TagString
-      value: Enemy
+      value: Elipse
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e23ac2beb9ebf934f9b265f714fb79af, type: 3}
---- !u!1 &619676088665254597 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: e23ac2beb9ebf934f9b265f714fb79af, type: 3}
-  m_PrefabInstance: {fileID: 313248455168300948}
+--- !u!4 &8103444775068424427 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: e23ac2beb9ebf934f9b265f714fb79af, type: 3}
+  m_PrefabInstance: {fileID: 8646772109161250560}
   m_PrefabAsset: {fileID: 0}

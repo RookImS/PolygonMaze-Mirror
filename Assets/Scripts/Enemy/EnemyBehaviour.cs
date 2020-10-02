@@ -10,7 +10,6 @@ public class EnemyBehaviour : MonoBehaviour
     private NavMeshPath path;
     private GameObject destination; // test code
 
-    public EnemyData enemyData => m_EnemyData;
     EnemyData m_EnemyData;
 
     void Awake()
@@ -48,12 +47,12 @@ public class EnemyBehaviour : MonoBehaviour
 
         if (path.status == NavMeshPathStatus.PathPartial)
         {
-            Debug.Log("Invalid path");
+            //Debug.Log("Invalid path");
         }
         else
         {
             agent.SetPath(path);
-            Debug.Log("valid path");
+            //Debug.Log("valid path");
         }
         
     }
@@ -81,8 +80,8 @@ public class EnemyBehaviour : MonoBehaviour
 
     public void ExitDestination()
     {
-        enemyData.Attack();
-        enemyData.Death();
+        m_EnemyData.Attack();
+        m_EnemyData.Death();
     }
 
     public void ChangeAgentSpeed(float speed)

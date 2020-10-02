@@ -4,11 +4,13 @@ using UnityEngine;
 
 public class HitColliderBehaviour : MonoBehaviour
 {
+    public GameObject parentBullet;
+
     private void OnTriggerEnter(Collider other)
     {
         if(other.CompareTag("Enemy"))
         {
-            transform.parent.gameObject.GetComponent<BulletBehaviour>().EnemyList.Add(other.gameObject);
+            parentBullet.GetComponent<BulletBehaviour>().EnemyList.Add(other.gameObject);
         }
     }
 }

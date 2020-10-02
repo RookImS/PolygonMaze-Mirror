@@ -9,7 +9,7 @@ public class TowerBehaviour : MonoBehaviour
     public Transform target;
     public List<GameObject> targetList;
 
-    public Transform firePoint;
+    public Transform muzzle;
     float fireCountDown;
 
     void Awake()
@@ -49,10 +49,10 @@ public class TowerBehaviour : MonoBehaviour
         targetList = new List<GameObject>();
         target = null;
 
-        transform.GetChild(2).GetComponent<SphereCollider>().radius = m_TowerData.Stats.stats.recogRange;
+        muzzle.GetComponent<SphereCollider>().radius = m_TowerData.Stats.stats.recogRange;
     }
 
-    public void setNeighbor(GameObject obj)
+    public void SetNeighbor(GameObject obj)
     {
         m_TowerData.neighbor.Add(obj);
     }
@@ -82,12 +82,12 @@ public class TowerBehaviour : MonoBehaviour
 
     public void SetDirection()
     {
-        firePoint.LookAt(target.position);
+        muzzle.LookAt(target.position);
     }
 
     public void Attack()
     {
-        m_TowerData.Shoot(firePoint);
+        m_TowerData.Shoot(muzzle);
     }
 
     public void DeleteTarget()

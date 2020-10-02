@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 5946718349013474132}
   m_Layer: 0
   m_Name: NormalBullet
-  m_TagString: Untagged
+  m_TagString: Bullet
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -107,6 +107,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2968150259745563276}
   - component: {fileID: 638528725362110773}
+  - component: {fileID: 1000585714199142724}
   m_Layer: 0
   m_Name: HitCollider
   m_TagString: Untagged
@@ -141,6 +142,19 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 0.1
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &1000585714199142724
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1718079793294334707}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 92af20fd97d698c4fb9cd04520d75c8a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  parentBullet: {fileID: 1007396303048527707}
 --- !u!1001 &9066102993940992905
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -8,14 +8,19 @@ using UnityEngine.AI;
 public class DeployBehaviour : MonoBehaviour
 {
     public GameObject realTower;
-    CheckerBehaviour checker;
     public LayerMask layerMask;
-    public NavMeshSurface checkerNav;
-    public NavMeshSurface enemyNav;
+
+    private CheckerBehaviour checker;
+    private NavMeshSurface checkerNav;
+    private NavMeshSurface enemyNav;
 
     public float innerRadius;
+
     private bool isDeployEnable;
-    public bool isOverlapped;
+    private bool isProperLocate;
+    private bool isSkipFrame;
+    private bool isPathEnable;
+    private bool isOverlapped;
 
     private void Awake()
     {
@@ -23,6 +28,16 @@ public class DeployBehaviour : MonoBehaviour
         checkerNav = GameObject.Find("CheckerNavMeshSurface").GetComponent<NavMeshSurface>();
         enemyNav = GameObject.Find("EnemyNavMeshSurface").GetComponent<NavMeshSurface>();
         checker = GameObject.FindGameObjectWithTag("Spawner").GetComponent<CheckerBehaviour>();
+
+        isDeployEnable = false;
+        isProperLocate = false;
+        isSkipFrame = true;
+        isOverlapped = false;
+    }
+
+    private void Update()
+    {
+        isPathEnable = CheckPath();
     }
 
     public GameObject LocateTower(Vector3 mousePos)
@@ -33,29 +48,26 @@ public class DeployBehaviour : MonoBehaviour
 
         // locate tower at mousePos(realPos)
         transform.position = new Vector3(realPos.x, 0.25f, realPos.z);
+        transform.eulerAngles = new Vector3(0f, 0f, 0f);
 
         if (Physics.Raycast(ray, out hit, Camera.main.transform.position.y * 1.3f, layerMask))
         {
             Collider objectHit = hit.collider;
 
-            // locate proper position
-            Vector3 rotateAngle = new Vector3(0f, (objectHit.transform.rotation.eulerAngles.y + 180) % 360, 0f);
-            transform.eulerAngles = rotateAngle;
-
-            Vector3 direction = transform.rotation * Vector3.back;
-            Vector3 targetPoint = direction * ((innerRadius) - 0.1f);
-            transform.position = objectHit.transform.position + targetPoint;
-
+            //locate proper position
+            locateProperPos(objectHit.transform);
 
             // update checker navMesh
             GetComponent<NavMeshModifier>().ignoreFromBuild = false;
-            StartCoroutine(UpdateNavMesh(checkerNav));
+            checkerNav.UpdateNavMesh(checkerNav.navMeshData);
+
+            isProperLocate = true;
 
             // check path
-            if (checker.CalculatePath())
+            if (isPathEnable)
             {
                 isDeployEnable = true;
-                return objectHit.gameObject.transform.parent.gameObject;
+                return objectHit.gameObject.GetComponent<SideColliderBehavior>().parentObject;
             }
             else
             {
@@ -65,14 +77,15 @@ public class DeployBehaviour : MonoBehaviour
         }
         else
         {
-
             // rotate tower to origin angle
-            transform.eulerAngles = new Vector3(0f, 0f, 0f);
+            //transform.eulerAngles = new Vector3(0f, 0f, 0f);
             isDeployEnable = false;
 
             // update checker navMesh
             GetComponent<NavMeshModifier>().ignoreFromBuild = true;
-            StartCoroutine(UpdateNavMesh(checkerNav));
+            checkerNav.UpdateNavMesh(checkerNav.navMeshData);
+
+            isProperLocate = false;
 
             return null;
         }
@@ -80,45 +93,68 @@ public class DeployBehaviour : MonoBehaviour
  
     }
 
+    private void locateProperPos(Transform pos)
+    {
+        Vector3 rotateAngle = new Vector3(0f, (pos.rotation.eulerAngles.y + 180) % 360, 0f);
+        transform.eulerAngles = rotateAngle;
+
+        Vector3 direction = transform.rotation * Vector3.back;
+        Vector3 targetPoint = direction * ((innerRadius) - 0.1f);
+        transform.position = pos.position + targetPoint;
+    }
+
     public bool CheckPath()
     {
-        return checker.CalculatePath(); ;
+        bool temp;
+
+        if (isProperLocate)
+        {
+            temp = checker.CalculatePath();
+            if (isSkipFrame)
+            {
+                isSkipFrame = false;
+                return false;
+            }
+            else
+                return temp;
+        }
+        else
+            isSkipFrame = true;
+
+        return false;
     }
+
     public void DeployTower(GameObject neighborObject)
     {
 
         if (isDeployEnable)
         {
-            GameObject newTower = Instantiate(realTower, transform.position, transform.rotation);
-
-            if (!neighborObject.CompareTag("Neutral"))
-                neighborObject.GetComponent<TowerBehaviour>().setNeighbor(newTower);
-            newTower.GetComponent<TowerBehaviour>().setNeighbor(neighborObject);
-
-            // update enemy navMesh
-            StartCoroutine(UpdateNavMesh(enemyNav));
-            checker.GetComponent<CheckerBehaviour>().ApplyPath();
-            /*
             if (PlayerControl.Instance.UseCost(realTower.GetComponent<TowerData>().cost))
-                Instantiate(realTower, pos, transform.rotation);
-            
+            {
+                //Debug.Log("check");
+                GameObject newTower = Instantiate(realTower, transform.position, transform.rotation);
+
+                if (!neighborObject.CompareTag("Neutral"))
+                    neighborObject.GetComponent<TowerBehaviour>().SetNeighbor(newTower);
+                newTower.GetComponent<TowerBehaviour>().SetNeighbor(neighborObject);
+
+                // update enemy navMesh
+                enemyNav.UpdateNavMesh(enemyNav.navMeshData);
+                checker.ApplyPath();
+
+                PlayerControl.Instance.Call();
+            }
             else
             {
-                 부족하다고 알리는 트리거
+                //부족하다고 알리는 트리거
             }
-            */
         }
 
         // update checker navMesh
         GetComponent<NavMeshModifier>().ignoreFromBuild = true;
-        StartCoroutine(UpdateNavMesh(checkerNav));
+        checkerNav.UpdateNavMesh(checkerNav.navMeshData);
 
         Destroy(this.gameObject);
-    }
-
-    IEnumerator UpdateNavMesh(NavMeshSurface nm)
-    {
-        yield return nm.UpdateNavMesh(nm.navMeshData);
     }
 
     private void OnTriggerStay(Collider other)

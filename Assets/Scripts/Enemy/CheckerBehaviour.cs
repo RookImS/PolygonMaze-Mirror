@@ -29,12 +29,12 @@ public class CheckerBehaviour : MonoBehaviour
 
         if (tempPath.status == NavMeshPathStatus.PathPartial)
         {
-            Debug.Log("Invalid path");
+            //Debug.Log("Invalid path");
             return false;
         }
         else
         {
-            Debug.Log("valid path");
+            //Debug.Log("valid path");
             return true;
         }
     }

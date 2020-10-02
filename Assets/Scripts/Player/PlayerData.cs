@@ -2,16 +2,15 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerData : MonoBehaviour
+public class PlayerData
 {
     public int cost;
     public int life;
 
-
     public bool Init()
     {
-        this.cost = 0;
-        this.life = 0;
+        this.cost = 150;
+        this.life = 50;
 
         // 파일 정보 불러오기
 
@@ -28,6 +27,7 @@ public class PlayerData : MonoBehaviour
 
     public bool ChangeCost(int cost)
     {
+        Debug.Log("check");
         if (this.cost + cost < 0)
             return false;
 
