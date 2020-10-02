@@ -33,6 +33,7 @@ public class EnemyData : MonoBehaviour
     public void Death()
     {
         Stats.Death();
+        PlayerControl.Instance.GainCost(this.reward);
         Destroy(this.gameObject);
     }
 
@@ -43,7 +44,7 @@ public class EnemyData : MonoBehaviour
     /// <param name="target">The CharacterData you want to attack</param>
     public void Attack()
     {
-        //PlayerControl.Instance.Damage(this.damage);
+        PlayerControl.Instance.Damage(this.damage);
     }
 
     /// <summary>

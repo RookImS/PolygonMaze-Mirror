@@ -37,11 +37,6 @@ public class PlayerControl : MonoSingleton<PlayerControl>
         playerData.ChangeLife(-life);
     }
 
-    public void Death()
-    {
-        playerData.Death();
-    }
-
     public void Call()
     {
         Debug.Log("remain cost : " + playerData.cost + " // remain life : " + playerData.life);

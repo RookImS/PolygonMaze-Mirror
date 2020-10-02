@@ -195,6 +195,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Circle
       objectReference: {fileID: 0}
+    - target: {fileID: 3350396553093369702, guid: 9dfa5bafdf521d3448f47e83dae12726, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8323882765557795305, guid: 9dfa5bafdf521d3448f47e83dae12726, type: 3}
       propertyPath: m_LocalPosition.x
       value: -5.3
@@ -2861,6 +2865,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Sector
       objectReference: {fileID: 0}
+    - target: {fileID: 474593776622616134, guid: 47e5a2504444b29468ba4a30c8bbb9e8, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 566694899878196549, guid: 47e5a2504444b29468ba4a30c8bbb9e8, type: 3}
       propertyPath: m_LocalPosition.x
       value: -6.25
@@ -2961,6 +2969,10 @@ PrefabInstance:
     - target: {fileID: 5497063479883312189, guid: e88779b93f1c4c44ea008233069030e7, type: 3}
       propertyPath: m_Name
       value: Ring
+      objectReference: {fileID: 0}
+    - target: {fileID: 5497063479883312189, guid: e88779b93f1c4c44ea008233069030e7, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e88779b93f1c4c44ea008233069030e7, type: 3}
@@ -3075,6 +3087,10 @@ PrefabInstance:
     - target: {fileID: 8823159148962381299, guid: 34eb260e904644442ae2be89ba757e0a, type: 3}
       propertyPath: m_Name
       value: Elipse
+      objectReference: {fileID: 0}
+    - target: {fileID: 8823159148962381299, guid: 34eb260e904644442ae2be89ba757e0a, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 34eb260e904644442ae2be89ba757e0a, type: 3}

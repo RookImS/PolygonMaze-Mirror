@@ -65,7 +65,7 @@ MonoBehaviour:
   desc: Ring
   Stats:
     baseStats:
-      hp: 4000
+      hp: 2000
       speed: 2
       def: 25
 --- !u!65 &5091053163055222037

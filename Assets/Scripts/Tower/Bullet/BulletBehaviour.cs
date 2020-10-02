@@ -25,8 +25,7 @@ public class BulletBehaviour : MonoBehaviour
         {
             foreach(GameObject enemy in EnemyList)
             {
-                // enemy 때리는 거
-                Debug.Log("Attack!");
+                enemy.GetComponent<EnemyBehaviour>().Damage(m_BulletData.stats.stats.damage);
             }
             Destroy(this.gameObject);
         }

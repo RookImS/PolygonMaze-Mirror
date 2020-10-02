@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 1315189123061703426}
   - component: {fileID: 5891084901732780967}
   m_Layer: 0
-  m_Name: Elipse
+  m_Name: Ellipse
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -65,7 +65,7 @@ MonoBehaviour:
   desc: Elipse
   Stats:
     baseStats:
-      hp: 1500
+      hp: 750
       speed: 2
       def: 50
 --- !u!65 &5850620350833123655

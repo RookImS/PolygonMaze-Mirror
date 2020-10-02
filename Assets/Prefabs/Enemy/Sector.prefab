@@ -65,7 +65,7 @@ MonoBehaviour:
   desc: Sector
   Stats:
     baseStats:
-      hp: 1000
+      hp: 500
       speed: 4.5
       def: 0
 --- !u!65 &7217041635517532021

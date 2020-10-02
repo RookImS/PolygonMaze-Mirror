@@ -6,11 +6,13 @@ public class PlayerData
 {
     public int cost;
     public int life;
+    public int currentLife;
 
     public bool Init()
     {
         this.cost = 150;
         this.life = 50;
+        this.currentLife = this.life;
 
         // 파일 정보 불러오기
 
@@ -20,6 +22,7 @@ public class PlayerData
     {
         this.cost = cost;
         this.life = life;
+        this.currentLife = this.life;
 
         // 컬러덱?
     }
@@ -27,22 +30,28 @@ public class PlayerData
 
     public bool ChangeCost(int cost)
     {
-        Debug.Log("check");
+        
         if (this.cost + cost < 0)
             return false;
 
         this.cost += cost;
+
+        Debug.Log(string.Format("player current cost : {0}", this.cost));
         return true;
     }
 
     public void ChangeLife(int life)
     {
-        this.life += life;
+        this.currentLife = Mathf.Clamp(this.currentLife + life, 0, this.life);
+        Debug.Log(string.Format("Player current life : {0}", this.currentLife));
+        if (currentLife <= 0)
+            Death();
     }
 
 
     public void Death()
     {
+        Debug.Log("player death");
         // 죽었을 시 걸리는 트리거
     }
 
