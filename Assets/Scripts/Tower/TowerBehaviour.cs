@@ -7,14 +7,17 @@ public class TowerBehaviour : MonoBehaviour
     TowerData m_TowerData;
 
     public Transform target;
-    List<GameObject> targetList;
+    public List<GameObject> targetList;
 
-    public Transform firePoint;
+    public Transform muzzle;
     float fireCountDown;
 
-    void Start()
+    void Awake()
     {
         Init();
+    }
+    void Start()
+    {
         fireCountDown = 0f;
     }
     void Update()
@@ -36,9 +39,8 @@ public class TowerBehaviour : MonoBehaviour
             Invoke("Attack", m_TowerData.Stats.stats.aheadDelay);
             fireCountDown = 1f / m_TowerData.Stats.stats.attackRate;
         }
-        fireCountDown -=Time.deltaTime;
+        fireCountDown -= Time.deltaTime;
     }
-
 
     public void Init()
     {
@@ -47,11 +49,10 @@ public class TowerBehaviour : MonoBehaviour
         targetList = new List<GameObject>();
         target = null;
 
-        GetComponent<SphereCollider>().radius = m_TowerData.Stats.stats.recogRange;
+        muzzle.GetComponent<SphereCollider>().radius = m_TowerData.Stats.stats.recogRange;
     }
 
-
-    public void setNeighbor(GameObject obj)
+    public void SetNeighbor(GameObject obj)
     {
         m_TowerData.neighbor.Add(obj);
     }
@@ -81,37 +82,18 @@ public class TowerBehaviour : MonoBehaviour
 
     public void SetDirection()
     {
-        firePoint.LookAt(target.position);
+        muzzle.LookAt(target.position);
     }
 
     public void Attack()
     {
-        m_TowerData.Shoot(firePoint);
+        m_TowerData.Shoot(muzzle);
     }
 
-    void DeleteTarget()
+    public void DeleteTarget()
     {
         target = null;
     }
 
-    private void OnTriggerEnter(Collider other)
-    {
-        if (other.gameObject.CompareTag("Enemy"))
-        {
-            targetList.Add(other.gameObject);
-        }
-    }
-    private void OnTriggerExit(Collider other)
-    {
-        if (other.gameObject.CompareTag("Enemy"))
-        {
-            targetList.Remove(other.gameObject);
-            if (target.gameObject == other.gameObject)
-            {
-                DeleteTarget();
-                SetTarget();
-            }
 
-        }
-    }
 }

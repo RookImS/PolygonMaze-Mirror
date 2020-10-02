@@ -2,51 +2,14 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerControl : MonoBehaviour
+public class PlayerControl : MonoSingleton<PlayerControl>
 {
-    private static PlayerControl instance;
+    private PlayerData playerData;
 
-    private static PlayerData playerData;
-    bool isGameOver;
-
-    public static PlayerControl Instance
-    {
-        get
-        {
-            if (instance == null)
-            {
-                var obj = FindObjectOfType<PlayerControl>();
-                if(obj!=null)
-                {
-                    instance = obj;
-                }
-                else
-                {
-                    GameObject gobj = new GameObject("test");
-                 
-                    var temp = gobj.AddComponent<PlayerControl>();
-                    playerData = gobj.AddComponent<PlayerData>();
-
-                    instance = temp;
-                }
-
-            }
-            return instance;
-        }
-        private set
-        {
-            instance = value;
-        }
-    }
     private void Awake()
     {
-        var objs = FindObjectsOfType<PlayerControl>();
-        if(objs.Length != 1)
-        {
-            Destroy(gameObject);
-            return;
-        }
-        DontDestroyOnLoad(gameObject);
+        playerData = new PlayerData();
+        Init();
     }
 
     public void Init()
@@ -77,6 +40,11 @@ public class PlayerControl : MonoBehaviour
     public void Death()
     {
         playerData.Death();
+    }
+
+    public void Call()
+    {
+        Debug.Log("remain cost : " + playerData.cost + " // remain life : " + playerData.life);
     }
 }
 

@@ -10,15 +10,11 @@ public class EnemyBehaviour : MonoBehaviour
     private NavMeshPath path;
     private GameObject destination; // test code
 
-    public EnemyData enemyData => m_EnemyData;
     EnemyData m_EnemyData;
 
     void Awake()
     {
-        m_EnemyData = GetComponent<EnemyData>();
-        m_EnemyData.Init();
-
-        agent = GetComponent<NavMeshAgent>();
+        Init();
         path = new NavMeshPath();
         MoveToDestination();
     }
@@ -34,7 +30,15 @@ public class EnemyBehaviour : MonoBehaviour
     {
         //empty
     }
+    
+    void Init()
+    {
+        m_EnemyData = GetComponent<EnemyData>();
+        m_EnemyData.Init();
 
+        agent = GetComponent<NavMeshAgent>();
+    }
+    
     public void MoveToDestination()
     {
         destination = GameObject.FindWithTag("Destination");
@@ -43,14 +47,19 @@ public class EnemyBehaviour : MonoBehaviour
 
         if (path.status == NavMeshPathStatus.PathPartial)
         {
-            Debug.Log("Invalid path");
+            //Debug.Log("Invalid path");
         }
         else
         {
             agent.SetPath(path);
-            Debug.Log("valid path");
+            //Debug.Log("valid path");
         }
         
+    }
+
+    public void Damage(int damage)
+    {
+        m_EnemyData.Damage(damage);
     }
 
     void OnTriggerEnter(Collider other)
@@ -71,8 +80,8 @@ public class EnemyBehaviour : MonoBehaviour
 
     public void ExitDestination()
     {
-        enemyData.Attack();
-        enemyData.Death();
+        m_EnemyData.Attack();
+        m_EnemyData.Death();
     }
 
     public void ChangeAgentSpeed(float speed)

@@ -20,14 +20,10 @@ public class test : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHand
     {
         mousePos = Input.mousePosition;
 
-        hitObject = newObject.GetComponent<DeployBehavior>().LocateTower(mousePos);
-        newObject.GetComponent<DeployBehavior>().CheckOverlap();
-        //{
-        //    Debug.Log("overlap!");
-        //}
+        hitObject = newObject.GetComponent<DeployBehaviour>().LocateTower(mousePos);
     }
     public void OnEndDrag(PointerEventData eventData)
     { 
-        newObject.GetComponent<DeployBehavior>().DeployTower(hitObject);
+        newObject.GetComponent<DeployBehaviour>().DeployTower(hitObject);
     }
 }

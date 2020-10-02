@@ -5,13 +5,16 @@ using UnityEngine;
 
 public class SideColliderBehavior : MonoBehaviour
 {
+    public GameObject parentObject;
+
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.CompareTag("Tower") || other.gameObject.CompareTag("Neutral"))
+        if (other.gameObject.CompareTag("Tower") || other.gameObject.CompareTag("Neutral") 
+            ||other.gameObject.CompareTag("Wall") || other.gameObject.CompareTag("WallCornerSide1") || other.gameObject.CompareTag("WallCornerSide2") || other.gameObject.CompareTag("Spawner") || other.gameObject.CompareTag("Destination"))
         {
-            if (!this.transform.parent.Equals(other.transform))
+            if (!parentObject.Equals(other.gameObject))
             {
-                this.gameObject.GetComponent<Collider>().enabled = false;
+                GetComponent<Collider>().enabled = false;
             }
         }
     }

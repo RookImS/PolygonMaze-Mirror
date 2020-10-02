@@ -52,12 +52,9 @@ public class EnemyData : MonoBehaviour
     /// manually when writing special elemental effect)
     /// </summary>
     /// <param name="attackData"></param>
-    /*
-    public void Damage(BulletData.AttackData attackData)
+ 
+    public void Damage(int damage)
     {
-        Stats.Damage(attackData);
-
-        OnDamage.Invoke();
+        Stats.Damage(damage);
     }
-    */
 }

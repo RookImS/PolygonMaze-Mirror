@@ -247,14 +247,11 @@ public class EnemyStatSystem
         }
     }
 
-  
-    /*
-    public void Damage(BulletData.AttackData attackData)
+    public void Damage(int damage)
     {
-        int totalDamage = attackData.GetFullDamage();
+        int totalDamage = damage - stats.def;
 
         Changehp(-totalDamage);
-        DamageUI.Instance.NewDamage(totalDamage, m_Owner.transform.position);
+        //DamageUI.Instance.NewDamage(totalDamage, m_Owner.transform.position);
     }
-    */
 }
