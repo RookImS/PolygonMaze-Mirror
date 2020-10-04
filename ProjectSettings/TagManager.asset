@@ -4,11 +4,11 @@
 TagManager:
   serializedVersion: 2
   tags:
-  - Destination
-  - Spawner
-  - Enemy
   - Wall
-  - Obstacle
+  - WallCornerSide1
+  - WallCornerSide2
+  - Spawner
+  - Destination
   layers:
   - Default
   - TransparentFX
@@ -20,7 +20,7 @@ TagManager:
   - 
   - 
   - 
-  - 
+  - WallCollidor
   - 
   - 
   - 

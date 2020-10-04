@@ -8,8 +8,8 @@ public class StageData
 {
     public string stageName;
     public int stageLevel;
+    public int playerLife;
     public int startMoney;
-
 
     [Serializable]
     public class ObstacleInfo
@@ -123,16 +123,19 @@ public class StageData
         }
     }
 
-    public void UpdateBlankInfo(List<GameObject> gameObjectList)
+    public void UpdateBlankInfo(List<LevelEditor.BlankTempInfo> blankTempInfoList)
     {
+        GameObject obj;
         BlankInfo blankInfo;
-        foreach (GameObject obj in gameObjectList)
+
+        foreach (LevelEditor.BlankTempInfo temp in blankTempInfoList)
         {
+            obj = temp.blank;
             blankInfo = new BlankInfo();
 
-            if (obj.tag == "Spawner")
+            if (temp.blank.tag == "Spawner")
                 blankInfo.blankSpecific = BlankInfo.BlankSpecific.Spawner;
-            else
+            else if (temp.blank.tag == "Destination")
                 blankInfo.blankSpecific = BlankInfo.BlankSpecific.Destination;
 
             blankInfo.positionX = obj.transform.position.x;

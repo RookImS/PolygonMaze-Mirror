@@ -5,10 +5,18 @@ using System.IO;
 
 public class LevelEditor : MonoBehaviour
 {
+    public class BlankTempInfo
+    {
+        public GameObject blank;
+        public GameObject disabledWall;
+    }
+
+    public static LevelEditor instance { get; private set; }
     private StageData stageData;
+    private int playerLife;
+    private int startCost;
     private List<GameObject> obstacleList;
-    private List<GameObject> spawnerList;
-    private List<GameObject> destinationList;
+    private List<BlankTempInfo> blankList;
     private List<StageData.EnemyWaveInfo> enemyWaveInfoList;
 
     public void Awake()
@@ -18,10 +26,23 @@ public class LevelEditor : MonoBehaviour
 
     public void Init()
     {
+        instance = this;
         stageData = new StageData();
+        playerLife = 10;
+        startCost = 200;
         obstacleList = new List<GameObject>();
-        spawnerList = new List<GameObject>();
-        destinationList = new List<GameObject>();
+        blankList = new List<BlankTempInfo>();
+        enemyWaveInfoList = new List<StageData.EnemyWaveInfo>();
+    }
+
+    public void SetPlayerLife(int playerLife)
+    {
+        this.playerLife = playerLife;
+    }
+
+    public void SetStartCost(int startCost)
+    {
+        this.startCost = startCost;
     }
 
     public void AddObstacle(GameObject obstacle)
@@ -42,39 +63,43 @@ public class LevelEditor : MonoBehaviour
         stageData.UpdateObstacleInfo(obstacleList);
     }
 
-    public void AddSpawner(GameObject spawner)
+    public void AddBlank(GameObject blank, GameObject disabledwall)
     {
-        spawnerList.Add(spawner);
+        if (blankList.Find(x => x.blank == blank) == null && blankList.Find(x => x.disabledWall == disabledwall) == null)
+        {
+            BlankTempInfo blankTempInfo = new BlankTempInfo();
+            blankTempInfo.blank = blank;
+            blankTempInfo.disabledWall = disabledwall;
+            blankList.Add(blankTempInfo);
+        }
+        else
+        {
+            Debug.Log("Error in AddBlank of LevelEditor.cs");
+        }
     }
 
-    public void DeleteSpawner(GameObject spawner)
+    public GameObject DeleteBlank(GameObject blank)
     {
-        spawnerList.Remove(spawner);
+        GameObject disabledWall = null;
+        BlankTempInfo blankTempInfo = blankList.Find(x => x.blank == blank);
+        if (blankTempInfo != null)
+        {
+            blankList.Remove(blankTempInfo);
+            disabledWall = blankTempInfo.disabledWall;
+        }
+        else
+        {
+            Debug.Log("Error in DeleteBlank of LevelEditor.cs");
+        }
+
+        return disabledWall;
     }
     /*
-     * spawner info를 stageData에 update
+     * blank(spawner,destination) info를 stageData에 update
      */
-    public void UpdateSpawnerInfo()
+    public void UpdateBlankInfo()
     {
-        stageData.UpdateBlankInfo(spawnerList);
-    }
-
-    public void AddDestination(GameObject destination)
-    {
-        destinationList.Add(destination);
-    }
-
-    public void DeleteDestination(GameObject destination)
-    {
-        destinationList.Remove(destination);
-    }
-
-    /*
-     * destination info를 stageData에 update
-     */
-    public void UpdateDestinationInfo()
-    {
-        stageData.UpdateBlankInfo(destinationList);
+        stageData.UpdateBlankInfo(blankList);
     }
 
     public void AddEnemyWaveInfoList(StageData.EnemyWaveInfo enemyWaveInfo)
@@ -101,8 +126,7 @@ public class LevelEditor : MonoBehaviour
     public void UpdateStageData()
     {
         UpdateObstacleInfo();
-        UpdateSpawnerInfo();
-        UpdateDestinationInfo();
+        UpdateBlankInfo();
         UpdateEnemyWaveInfo();
     }
 
