@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 387785620365507434}
   - component: {fileID: 9098133939303622013}
   - component: {fileID: 8989813896959315471}
-  m_Layer: 11
+  m_Layer: 0
   m_Name: PentagonDeployTower
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -51,10 +51,7 @@ MonoBehaviour:
   layerMask:
     serializedVersion: 2
     m_Bits: 512
-  checkerNav: {fileID: 0}
-  enemyNav: {fileID: 0}
   innerRadius: 0.688
-  isOverlapped: 0
 --- !u!64 &387785620365507434
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -158,7 +155,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: e0c7836d32e8afc46b089001804c31fd, type: 3}
       propertyPath: m_Layer
-      value: 11
+      value: 12
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e0c7836d32e8afc46b089001804c31fd, type: 3}

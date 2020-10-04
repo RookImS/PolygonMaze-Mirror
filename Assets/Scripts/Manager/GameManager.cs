@@ -12,7 +12,7 @@ public class GameManager : MonoBehaviour
     public static PlayerData playerdata;
     public static TowerData towerdata;
     public static EnemyData enemydata;
-    public static DeployBehavior deploybehavior;
+    public static DeployBehaviour deploybehaviour;
     public static TowerBehaviour towerbehaviour;
     public static UISystem uisystem;
     bool isGameOver;

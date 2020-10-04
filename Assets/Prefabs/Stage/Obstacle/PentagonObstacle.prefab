@@ -24,7 +24,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 837676649401058073}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.00000011920929, y: 0, z: -0.077168345}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 565172457625718382}
@@ -61,8 +61,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2794733357929734837}
   m_LocalRotation: {x: -0, y: 0.9510566, z: -0, w: -0.30901688}
-  m_LocalPosition: {x: -0.46299988, y: 0, z: -0.56083167}
-  m_LocalScale: {x: 0.89999974, y: 1, z: 0.2999999}
+  m_LocalPosition: {x: -0.463, y: 0, z: -0.638}
+  m_LocalScale: {x: 0.9, y: 1, z: 0.3}
   m_Children: []
   m_Father: {fileID: 1329472592257138705}
   m_RootOrder: 3
@@ -120,8 +120,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5176936019695225612}
   m_LocalRotation: {x: -0, y: 0.95105654, z: -0, w: 0.309017}
-  m_LocalPosition: {x: 0.46300012, y: 0, z: -0.56083167}
-  m_LocalScale: {x: 0.90000004, y: 1, z: 0.29999998}
+  m_LocalPosition: {x: 0.463, y: 0, z: -0.638}
+  m_LocalScale: {x: 0.9, y: 1, z: 0.3}
   m_Children: []
   m_Father: {fileID: 1329472592257138705}
   m_RootOrder: 2
@@ -179,8 +179,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5339536441273287141}
   m_LocalRotation: {x: -0, y: 0.58778524, z: -0, w: -0.809017}
-  m_LocalPosition: {x: -0.7489999, y: 0, z: 0.32116836}
-  m_LocalScale: {x: 0.9000001, y: 1, z: 0.3}
+  m_LocalPosition: {x: -0.749, y: 0, z: 0.244}
+  m_LocalScale: {x: 0.9, y: 1, z: 0.3}
   m_Children: []
   m_Father: {fileID: 1329472592257138705}
   m_RootOrder: 4
@@ -238,8 +238,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8192459065100801915}
   m_LocalRotation: {x: -0, y: 0.58778524, z: -0, w: 0.809017}
-  m_LocalPosition: {x: 0.74900013, y: 0, z: 0.32116836}
-  m_LocalScale: {x: 0.9000001, y: 1, z: 0.3}
+  m_LocalPosition: {x: 0.749, y: 0, z: 0.244}
+  m_LocalScale: {x: 0.9, y: 1, z: 0.3}
   m_Children: []
   m_Father: {fileID: 1329472592257138705}
   m_RootOrder: 1
@@ -297,8 +297,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8715468934397662244}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0.86516833}
-  m_LocalScale: {x: 0.9, y: 1, z: 0.29999998}
+  m_LocalPosition: {x: 0, y: 0, z: 0.788}
+  m_LocalScale: {x: 0.9, y: 1, z: 0.3}
   m_Children: []
   m_Father: {fileID: 1329472592257138705}
   m_RootOrder: 0
@@ -341,9 +341,9 @@ GameObject:
   - component: {fileID: 8811219413331195969}
   - component: {fileID: 4391468293345224440}
   - component: {fileID: 7434481183158160593}
-  m_Layer: 10
+  m_Layer: 0
   m_Name: PentagonObstacle
-  m_TagString: Neutral
+  m_TagString: Obstacle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -451,7 +451,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: e0c7836d32e8afc46b089001804c31fd, type: 3}
       propertyPath: m_Layer
-      value: 10
+      value: 11
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e0c7836d32e8afc46b089001804c31fd, type: 3}

@@ -26,8 +26,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 101561258773888611}
   m_LocalRotation: {x: -0, y: 0.86602545, z: -0, w: 0.49999994}
-  m_LocalPosition: {x: 0.337, y: 0, z: -0.05787933}
-  m_LocalScale: {x: 0.84999996, y: 1, z: 0.3}
+  m_LocalPosition: {x: 0.337, y: 0, z: -0.195}
+  m_LocalScale: {x: 0.85, y: 1, z: 0.3}
   m_Children: []
   m_Father: {fileID: 3146877603247920896}
   m_RootOrder: 1
@@ -85,8 +85,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2993717746155329520}
   m_LocalRotation: {x: -0, y: 0.8660254, z: -0, w: -0.5}
-  m_LocalPosition: {x: -0.337, y: 0, z: -0.05787933}
-  m_LocalScale: {x: 0.85, y: 1, z: 0.29999995}
+  m_LocalPosition: {x: -0.337, y: 0, z: -0.195}
+  m_LocalScale: {x: 0.85, y: 1, z: 0.3}
   m_Children: []
   m_Father: {fileID: 3146877603247920896}
   m_RootOrder: 2
@@ -129,9 +129,9 @@ GameObject:
   - component: {fileID: 5210137595178004963}
   - component: {fileID: 7717587538718616020}
   - component: {fileID: 6898091323485912537}
-  m_Layer: 10
+  m_Layer: 0
   m_Name: TriangleObstacle
-  m_TagString: Neutral
+  m_TagString: Obstacle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -208,8 +208,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7508284868441703146}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0.52612066}
-  m_LocalScale: {x: 0.85, y: 1, z: 0.29999998}
+  m_LocalPosition: {x: 0, y: 0, z: 0.389}
+  m_LocalScale: {x: 0.85, y: 1, z: 0.3}
   m_Children: []
   m_Father: {fileID: 3146877603247920896}
   m_RootOrder: 0
@@ -265,7 +265,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 9150539222791391570}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -0.13712066}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 3896583466866337051}
@@ -331,7 +331,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 4fbbd535c348c6e4590c63a6a5c6b33c, type: 3}
       propertyPath: m_Layer
-      value: 10
+      value: 11
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4fbbd535c348c6e4590c63a6a5c6b33c, type: 3}

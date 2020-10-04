@@ -159,7 +159,7 @@ public class DeployBehaviour : MonoBehaviour
 
     private void OnTriggerStay(Collider other)
     {
-        if (other.gameObject.CompareTag("Tower") || other.gameObject.CompareTag("Neutral") || other.gameObject.CompareTag("Enemy") || other.gameObject.CompareTag("Wall") || other.gameObject.CompareTag("WallCornerSide1") || other.gameObject.CompareTag("WallCornerSide2") || other.gameObject.CompareTag("Spawner") || other.gameObject.CompareTag("Destination"))
+        if (TagManager.Instance.isNotDeployableTag(other.gameObject.tag))
         {
             isOverlapped = true;
             isDeployEnable = false;
@@ -168,7 +168,7 @@ public class DeployBehaviour : MonoBehaviour
 
     private void OnTriggerExit(Collider other)
     {
-        if (other.gameObject.CompareTag("Tower") || other.gameObject.CompareTag("Neutral") || other.gameObject.CompareTag("Enemy") || other.gameObject.CompareTag("Wall") || other.gameObject.CompareTag("WallCornerSide1") || other.gameObject.CompareTag("WallCornerSide2") || other.gameObject.CompareTag("Spawner") || other.gameObject.CompareTag("Destination"))
+        if (TagManager.Instance.isNotDeployableTag(other.gameObject.tag))
         {
             isOverlapped = false;
         }
