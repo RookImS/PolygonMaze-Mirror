@@ -168,7 +168,6 @@ MonoBehaviour:
       splashRange: 0.3
   cost: 0
   neighbor: []
-  isDeploy: 0
   color: {fileID: 0}
   bullet: {fileID: 2277885889595583674, guid: 518574336befb1a4f836230a1f8a4001, type: 3}
   bulletNumber: 5
@@ -186,7 +185,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   target: {fileID: 0}
-  firePoint: {fileID: 2074996631}
+  targetList: []
+  muzzle: {fileID: 0}
 --- !u!135 &78784346
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -373,7 +373,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 567f9bcc314d0b34082ef6b8f0489fdd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 3
 --- !u!54 &144138911
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -515,7 +514,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 567f9bcc314d0b34082ef6b8f0489fdd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 3
 --- !u!1 &390055401
 GameObject:
   m_ObjectHideFlags: 0
@@ -550,7 +548,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   target: {fileID: 0}
-  firePoint: {fileID: 757234466}
+  targetList: []
+  muzzle: {fileID: 0}
 --- !u!23 &390055404
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -652,7 +651,6 @@ MonoBehaviour:
       splashRange: 0.3
   cost: 20
   neighbor: []
-  isDeploy: 0
   color: {fileID: 0}
   bullet: {fileID: 2277885889595583674, guid: 518574336befb1a4f836230a1f8a4001, type: 3}
 --- !u!1 &757234465

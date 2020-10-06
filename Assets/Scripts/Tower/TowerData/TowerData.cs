@@ -14,7 +14,7 @@ public class TowerData : MonoBehaviour
     public TColor color;    // public x
     public GameObject bullet;
 
-    public void Init()
+    public virtual void Init()
     {
         Stats.Init(this);
     }

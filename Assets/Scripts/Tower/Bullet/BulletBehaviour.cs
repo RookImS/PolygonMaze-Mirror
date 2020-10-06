@@ -4,53 +4,29 @@ using UnityEngine;
 
 public class BulletBehaviour : MonoBehaviour
 {
-    BulletData m_BulletData;
-    public List<GameObject> EnemyList;
+    protected BulletData m_BulletData;
+    public List<GameObject> enemyList;
+    public GameObject hitCollider;
 
-    private void Awake()
+    protected void Awake()
     {
         m_BulletData = GetComponent<BulletData>();
-    }
-    private void Start()
-    {
-        EnemyList = new List<GameObject>();
-        CheckRange();
+        enemyList = new List<GameObject>();
     }
 
-    private void Update()
+    public virtual void Init(TowerStatSystem t_stat)
     {
-        Act();
 
-        if(EnemyList.Count > 0)
-        {
-            foreach(GameObject enemy in EnemyList)
-            {
-                enemy.GetComponent<EnemyBehaviour>().Damage(m_BulletData.stats.stats.damage);
-            }
-            Destroy(this.gameObject);
-        }
     }
 
-    public void CheckRange()
+    public virtual void Init(TowerStatSystem t_stat, int ticRate, float attackDuration)
     {
-        StartCoroutine(m_BulletData.CheckLiving());
+
     }
 
-    public void Act()
+    protected virtual void Attack()
     {
-        m_BulletData.Act();
-    }
-    
-    public void Attack()
-    {
-        m_BulletData.Attack();
+        
     }
 
-    private void OnTriggerEnter(Collider other)
-    {
-        if (TagManager.Instance.isEnemyTag(other.gameObject.tag))
-        {
-            Attack();            
-        }
-    }
 }
