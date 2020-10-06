@@ -74,7 +74,7 @@ public class StageData
     public class EnemyWaveInfo
     {
         public List<EnemyInfo> enemyInfos;
-        public float enemySpawnTime;
+        public float enemySpawnDuration;
         [Serializable]
         public enum NextPhaseTrigger
         {
@@ -85,9 +85,10 @@ public class StageData
             Timer // 특정 시간이 지난 이후
         }
         public NextPhaseTrigger nextPhaseTrigger;
-        public float timer;
+        public float breakTime;
     }
     public List<EnemyWaveInfo> baseEnemyWaveInfos;
+    public int enenmyNum;
 
     public StageData()
     {
@@ -152,19 +153,14 @@ public class StageData
 
     public void UpdateEnemyWaveInfo(List<EnemyWaveInfo> enemyWaveInfoList)
     {
-        //EnemyWaveInfo enemyWaveInfo;
         foreach (EnemyWaveInfo obj in enemyWaveInfoList)
         {
             baseEnemyWaveInfos.Add(obj);
-
-            /*
-            enemyWaveInfo = new EnemyWaveInfo();
-            enemyWaveInfo.enemyInfos = obj.enemyInfos;
-            enemyWaveInfo.enemySpawnTime = obj.enemySpawnTime;
-            enemyWaveInfo.nextPhaseTrigger = obj.nextPhaseTrigger;
-            enemyWaveInfo.timer = obj.timer;
-            */
-
         }
+    }
+
+    public void UpdateEnemyNum(int enemyNum)
+    {
+        this.enenmyNum = enemyNum;
     }
 }

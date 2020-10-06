@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class BlankButtonUI : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler
+public class BlankCreateButtonUISystem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler
 {
     public GameObject blankPrefab; // prefab
 
@@ -56,9 +56,24 @@ public class BlankButtonUI : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
             hitGameObject.SetActive(false);
 
             if (hitGameObject != null)
-                LevelEditor.instance.AddBlank(currentObject, hitGameObject);
-            else
-                Debug.Log("hitGameObject instance is null");
+                if (currentObject.CompareTag("Spawner"))
+                {
+                    LevelEditor.instance.AddSpawner(currentObject, hitGameObject);
+
+                    if(LevelEditor.instance.GetSpawnerList().Count >= 1)
+                        LevelEditorUISystem.instance.ChangeButtonColor(LevelEditorUISystem.SettingUISystemSpecific.SpawnerSetting,
+                            LevelEditorUISystem.ButtonColor.ReadyColor);
+                }
+                else if (currentObject.CompareTag("Destination"))
+                {
+                    LevelEditor.instance.AddDestination(currentObject, hitGameObject);
+                    
+                    if (LevelEditor.instance.GetDestinationList().Count >= 1)
+                        LevelEditorUISystem.instance.ChangeButtonColor(LevelEditorUISystem.SettingUISystemSpecific.DestinationSetting,
+                            LevelEditorUISystem.ButtonColor.ReadyColor);
+                }
+                else
+                    Debug.Log("hitGameObject instance is null");
         }
         else
         {

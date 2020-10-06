@@ -6,6 +6,7 @@ public class SpawnerBehaviour: MonoBehaviour
 {
     private void OnMouseDown()
     {
-        LevelEditorUISystem.instance.ClickBlank(this.gameObject, 1);
+        LevelEditorUISystem.instance.GetBlankSettingUISystem().OnClickBlank(this.gameObject,
+            BlankSettingUISystem.BlankSpecific.Spawner);
     }
 }

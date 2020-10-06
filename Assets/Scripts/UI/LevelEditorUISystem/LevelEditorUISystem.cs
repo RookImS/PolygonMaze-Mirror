@@ -1,154 +1,161 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Globalization;
 using TMPro;
 using UnityEngine;
-using UnityEngine.SocialPlatforms.GameCenter;
 using UnityEngine.UI;
-using UnityEngine.UIElements;
 
 public class LevelEditorUISystem : MonoBehaviour
 {
     public static LevelEditorUISystem instance { get; private set; }
 
-    private GameObject canvas;
-    private GameObject selectedBlank;
+    public enum SettingUISystemSpecific
+    {
+        PlayerSetting,
+        SpawnerSetting,
+        DestinationSetting,
+        ObstacleSetting,
+        EnemyWaveSetting
+    }
 
-    public GameObject playerSettingPanel;
-    public GameObject mainPanel;
-    public GameObject spawnerPanel;
-    public GameObject destinationPanel;
-    public GameObject obstaclePanel;
-    public GameObject enemyWaveSettingPanel;
+    public enum ButtonColor
+    {
+        ReadyColor,
+        NotReadyColor
+    }
+
+    private bool coroutineFlag;
+    private Color32 readyColor;
+    private Color32 notReadyColor;
+
+
+    //UI System
+    private PlayerSettingUISystem playerSettingUISystem;
+    private BlankSettingUISystem blankSettingUISystem;
+    //private ObstacleSettingUISystem obstacleSettingUISystem;
+    private EnemyWaveSettingUISystem enemyWaveSettingUISystem;
+
+    [Header("Setting Button")]
+    public GameObject playerSettingButton;
+    public GameObject spawnerCreateButton;
+    public GameObject destinationCreateButton;
+    public GameObject obstacleSettingButton;
+    public GameObject enemyWaveSettingButton;
+
+    [Header("Save & Exit")]
     public GameObject savePanel;
     public GameObject exitPanel;
+
+    [Header("Preserved Prefabs")]
     public GameObject warningMessagePrefab;
 
 
     private void Awake()
     {
         instance = this;
-        canvas = this.gameObject;
-        selectedBlank = null;
+
+        coroutineFlag = false;
+        readyColor = new Color32(127, 255, 193, 255);
+        notReadyColor = new Color32(255, 255, 255, 255);
+
+        playerSettingUISystem = this.gameObject.transform.GetComponent<PlayerSettingUISystem>();
+        blankSettingUISystem = this.gameObject.transform.GetComponent<BlankSettingUISystem>();
+        //
+        enemyWaveSettingUISystem = this.gameObject.transform.GetComponent<EnemyWaveSettingUISystem>();
     }
 
-    //related player setting
-    public void OnClickPlayerSettingPanel()
+    public PlayerSettingUISystem GetPlayerSettingUISystem()
     {
-        if(playerSettingPanel.activeSelf == true)
-            playerSettingPanel.SetActive(false);
+        return this.playerSettingUISystem;
+    }
+
+    public BlankSettingUISystem GetBlankSettingUISystem()
+    {
+        return this.blankSettingUISystem;
+    }
+
+    /*  
+     *  Common Button
+     */
+    public void OnClickSettingButton(GameObject panel)
+    {
+        if (panel.activeSelf == true)
+            ClosePanel(panel);
         else
-            playerSettingPanel.SetActive(true);
+            panel.SetActive(true);
     }
 
-    public void OnEndInPlayerLifeInputField(GameObject inputField)
+    public void ClosePanel(GameObject panel)
     {
-        string message = "Please modify the value in player life input field as integer value between 1 and 20!";
-        OnEndInputField(inputField, message, 0);
+        if (panel.Equals(this.playerSettingUISystem.playerSettingPanel))
+            playerSettingUISystem.OnClickCancelButton();
+        /*
+        else if (panel.Equals(this.enemyWaveSettingMainPanel))
+            OnClickCancelButtonInEnemyWaveSettingMainPanel();
+        */
     }
 
-    public void OnEndInStartCostInputField(GameObject inputField)
+    public IEnumerator ShowMessage(int flag)
     {
-        string message = "Please modify the value in start cost input field as integer value between 50 and 2000!";
-        OnEndInputField(inputField, message, 1);
-    }
+        string message = "";
 
-    private void OnEndInputField(GameObject inputField, string message, int flag)
-    {
-        int num = 0;
-
-        if (!int.TryParse(inputField.GetComponent<TMP_InputField>().text, out num))
+        if (!this.coroutineFlag)
         {
-            StartCoroutine(ShowWarningMessage(message));
-            inputField.GetComponent<TMP_InputField>().text = "";
+            if (flag == 0)
+                message = "Please correct the values in player life input field and the start cost of input field to normal integers";
+            else if (flag == 1)
+                message = "Please correct the value in player life input field as integer between 1 and 20!";
+            else if (flag == 2)
+                message = "Please correct the value in start cost input field as integer between 50 and 2000!";
+            else
+                message = string.Format("Saved success\nPlayer life: {0}\nStart cost: {1}"
+                    ,LevelEditor.instance.GetPlayerLife(), LevelEditor.instance.GetStartCost());
+
+            GameObject warningMessage = GameObject.Instantiate(warningMessagePrefab, this.gameObject.transform);
+            warningMessage.GetComponent<TMP_Text>().text = message;
+
+            this.coroutineFlag = true;
+
+            yield return new WaitForSeconds(2);
+
+            this.coroutineFlag = false;
+
+            Destroy(warningMessage);
         }
+
+    }
+
+    public void ShowWarningPanel(GameObject relatedPanel)
+    {
+        Debug.Log("Show Warning Panel");
+    }
+
+    public void ChangeButtonColor(SettingUISystemSpecific settingUISystem, ButtonColor color)
+    {
+        GameObject settingButton = null;
+
+        if (settingUISystem == SettingUISystemSpecific.PlayerSetting)
+            settingButton = playerSettingButton;
+        else if (settingUISystem == SettingUISystemSpecific.SpawnerSetting)
+            settingButton = spawnerCreateButton;
+        else if (settingUISystem == SettingUISystemSpecific.DestinationSetting)
+            settingButton = destinationCreateButton;
+        else if (settingUISystem == SettingUISystemSpecific.ObstacleSetting)
+            settingButton = obstacleSettingButton;
+        else if (settingUISystem == SettingUISystemSpecific.EnemyWaveSetting)
+            settingButton = enemyWaveSettingButton;
+
+        if (color == ButtonColor.ReadyColor)
+            settingButton.GetComponent<Image>().color = readyColor;
         else
-        {
-            if (flag == 0) // playerLife
-            {
-                if (!((1 <= num) && (num <= 20)))
-                {
-                    StartCoroutine(ShowWarningMessage(message));
-                    inputField.GetComponent<TMP_InputField>().text = "";
-                }
-            }
-            else // startCost
-            {
-                if (!((50 <= num) && (num <= 2000)))
-                {
-                    StartCoroutine(ShowWarningMessage(message));
-                    inputField.GetComponent<TMP_InputField>().text = "";
-                }
-            }
-        }
+            settingButton.GetComponent<Image>().color = notReadyColor;
     }
 
-    IEnumerator ShowWarningMessage(string message)
-    {
-        GameObject warningMessage = GameObject.Instantiate(warningMessagePrefab, this.gameObject.transform);
-        warningMessage.GetComponent<TMP_Text>().text = message;
-        warningMessage.transform.SetParent(this.gameObject.transform);
 
-        yield return new WaitForSeconds(2);
+    /*  
+     *  Related enemy wave setting
+     */
 
-        Destroy(warningMessage);
-
-    }
-
-    public void OnClickSaveButtonInPlayerSettingPanel(GameObject panel)
-    {
-
-    }
-
-    //related blank(spawner and destination)
-    public void ClickBlank(GameObject selectedBlank, int flag)
-    {
-        GameObject panel = null;
-
-        if (flag == 1)
-            panel = spawnerPanel;
-        else if (flag == 2)
-            panel = destinationPanel;
-
-        this.selectedBlank = selectedBlank;
-        float blankPanelMaxPositionX = canvas.GetComponent<RectTransform>().rect.width
-            - panel.GetComponent<RectTransform>().rect.width;
-        float blankPanelMinPositionY = 0 + panel.GetComponent<RectTransform>().rect.height;
-
-        Vector2 viewPosition = Camera.main.WorldToViewportPoint(selectedBlank.transform.position);
-        Vector2 proportionalPosition = new Vector2(viewPosition.x * canvas.GetComponent<RectTransform>().sizeDelta.x,
-            viewPosition.y * canvas.GetComponent<RectTransform>().sizeDelta.y);
-
-        if (blankPanelMaxPositionX < proportionalPosition.x)
-        {
-            proportionalPosition = new Vector2(proportionalPosition.x - panel.GetComponent<RectTransform>().rect.width
-                , proportionalPosition.y);
-        }
-
-        if (blankPanelMinPositionY > proportionalPosition.y)
-        {
-            proportionalPosition = new Vector2(proportionalPosition.x
-                , proportionalPosition.y + panel.GetComponent<RectTransform>().rect.height);
-        }
-
-        panel.GetComponent<RectTransform>().pivot = new Vector2(0, 1);
-        panel.GetComponent<RectTransform>().anchoredPosition = proportionalPosition;
-
-        panel.SetActive(true);
-    }
-
-    public void ClickDeleteButtonInBlankPanel(GameObject panel)
-    {
-        GameObject disabledWall = LevelEditor.instance.DeleteBlank(this.selectedBlank);
-        Destroy(this.selectedBlank);
-        disabledWall.SetActive(true);
-
-        panel.SetActive(false);
-    }
-
-    public void ClickCancleButton(GameObject panel)
-    {
-        panel.SetActive(false);
-    }
-
+    
 }
 

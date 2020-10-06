@@ -6,6 +6,7 @@ public class DestinationBehaviour: MonoBehaviour
 {
     private void OnMouseDown()
     {
-        LevelEditorUISystem.instance.ClickBlank(this.gameObject, 2);
+        LevelEditorUISystem.instance.GetBlankSettingUISystem().OnClickBlank(this.gameObject,
+            BlankSettingUISystem.BlankSpecific.Destination);
     }
 }
