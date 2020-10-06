@@ -24,6 +24,6 @@ public class TriangleData : TowerData
         }
 
         foreach(GameObject bulletInstance in bulletInstanceList)
-            bulletInstance.GetComponent<BulletData>().Init(Stats);
+            bulletInstance.GetComponent<BulletBehaviour>().Init(Stats);
     }
 }

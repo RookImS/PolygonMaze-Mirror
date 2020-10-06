@@ -525,7 +525,7 @@ MonoBehaviour:
   cost: 150
   neighbor: []
   color: {fileID: 0}
-  bullet: {fileID: 0}
+  bullet: {fileID: 992987161455152672, guid: 25faefafad040694aba4907b62dc8de3, type: 3}
   ticRate: 5
   attackDuration: 3
 --- !u!64 &78246184612679481

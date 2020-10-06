@@ -7,10 +7,14 @@ public class HexagonData : TowerData
     public int ticRate;
     public float attackDuration;
 
+    public override void Init()
+    {
+        Stats.Init(this);
+        Stats.stats.attackRate = 1f / (1f / Stats.stats.attackRate + attackDuration);
+    }
     public override void Shoot(Transform muzzle)
     {
         GameObject bulletInstance = Instantiate(bullet, muzzle.position, muzzle.rotation);
-        Debug.Log("Test1");
-        bulletInstance.GetComponent<BulletData>().Init(Stats);
+        bulletInstance.GetComponent<BulletBehaviour>().Init(Stats, ticRate, attackDuration);
     }
 }

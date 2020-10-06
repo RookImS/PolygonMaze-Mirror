@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5817651554433178566}
   - component: {fileID: 3423313418663073019}
-  - component: {fileID: 3313773138929749699}
+  - component: {fileID: 5706605205228580587}
   - component: {fileID: 2499822655854436719}
   - component: {fileID: 5946718349013474132}
   m_Layer: 0
@@ -48,8 +48,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 45762e972a1c61945bf10d4338db6af1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  EnemyList: []
---- !u!114 &3313773138929749699
+  enemyList: []
+  hitCollider: {fileID: 1718079793294334707}
+--- !u!114 &5706605205228580587
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -58,10 +59,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 1007396303048527707}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bd729962d3c881344beb08f073209cc1, type: 3}
+  m_Script: {fileID: 11500000, guid: 17fe91639ac66da428400792dec2ad6f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bulletName: 
+  bulletName: Normal Bullet
   stats:
     baseStats:
       speed: 20
@@ -114,7 +115,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &2968150259745563276
 Transform:
   m_ObjectHideFlags: 0
@@ -154,7 +155,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 92af20fd97d698c4fb9cd04520d75c8a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  parentBullet: {fileID: 1007396303048527707}
+  parentBulletBehaviour: {fileID: 3423313418663073019}
 --- !u!1001 &9066102993940992905
 PrefabInstance:
   m_ObjectHideFlags: 0

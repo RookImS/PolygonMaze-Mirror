@@ -46,6 +46,7 @@ public class TowerBehaviour : MonoBehaviour
     {
         m_TowerData = GetComponent<TowerData>();
         m_TowerData.Init();
+        Debug.Log("왔어용");
         targetList = new List<GameObject>();
         target = null;
 
@@ -59,25 +60,20 @@ public class TowerBehaviour : MonoBehaviour
 
     public void SetTarget()
     {
-        List<int> nullIndexList = new List<int>();
         GameObject nearestEnemy = null;
-        int index = 0;
         float shortestDistance = Mathf.Infinity;
         
         foreach (GameObject Enemy in targetList)
         {
-            if(Enemy == null)
-            {
-                nullIndexList.Add(index);
+            if (Enemy == null)
                 continue;
-            }
+
             float distanceToEnemy = Vector3.Distance(transform.position, Enemy.transform.position);
             if (distanceToEnemy < shortestDistance)
             {
                 shortestDistance = distanceToEnemy;
                 nearestEnemy = Enemy;
             }
-            index += 1;
         }
         if (nearestEnemy != null)
         {
@@ -86,11 +82,6 @@ public class TowerBehaviour : MonoBehaviour
         else
         {
             target = null;
-        }
-
-        foreach (int i in nullIndexList)
-        {
-            targetList.RemoveAt(i);
         }
     }
 
