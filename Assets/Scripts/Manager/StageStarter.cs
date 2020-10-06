@@ -7,6 +7,7 @@ public class StageStarter : MonoBehaviour
     private void Awake()
     {
         PlayerControl.Instance.Init();
-        PlayerControl.Instance.Call();
+        
+        TagManager.Instance.Init();
     }
 }

@@ -48,7 +48,7 @@ public class BulletBehaviour : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Enemy"))
+        if (TagManager.Instance.isEnemyTag(other.gameObject.tag))
         {
             Attack();            
         }

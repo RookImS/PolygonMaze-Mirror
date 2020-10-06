@@ -8,7 +8,7 @@ public class HitColliderBehaviour : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if(other.CompareTag("Enemy"))
+        if(TagManager.Instance.isEnemyTag(other.gameObject.tag))
         {
             parentBullet.GetComponent<BulletBehaviour>().EnemyList.Add(other.gameObject);
         }

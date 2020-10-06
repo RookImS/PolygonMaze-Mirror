@@ -7,7 +7,7 @@ using UnityEngine.AI;
 
 public class DeployBehaviour : MonoBehaviour
 {
-    public GameObject realTower;
+    //public GameObject realTower;
     public LayerMask layerMask;
 
     private CheckerBehaviour checker;
@@ -124,7 +124,7 @@ public class DeployBehaviour : MonoBehaviour
         return false;
     }
 
-    public void DeployTower(GameObject neighborObject)
+    public void DeployTower(GameObject neighborObject, GameObject realTower)
     {
 
         if (isDeployEnable)
@@ -134,7 +134,7 @@ public class DeployBehaviour : MonoBehaviour
                 //Debug.Log("check");
                 GameObject newTower = Instantiate(realTower, transform.position, transform.rotation);
 
-                if (!neighborObject.CompareTag("Neutral"))
+                if (!neighborObject.CompareTag("Obstacle"))
                     neighborObject.GetComponent<TowerBehaviour>().SetNeighbor(newTower);
                 newTower.GetComponent<TowerBehaviour>().SetNeighbor(neighborObject);
 
@@ -159,7 +159,7 @@ public class DeployBehaviour : MonoBehaviour
 
     private void OnTriggerStay(Collider other)
     {
-        if (other.gameObject.CompareTag("Tower") || other.gameObject.CompareTag("Neutral") || other.gameObject.CompareTag("Enemy") || other.gameObject.CompareTag("Wall") || other.gameObject.CompareTag("WallCornerSide1") || other.gameObject.CompareTag("WallCornerSide2") || other.gameObject.CompareTag("Spawner") || other.gameObject.CompareTag("Destination"))
+        if (TagManager.Instance.isNotDeployableTag(other.gameObject.tag))
         {
             isOverlapped = true;
             isDeployEnable = false;
@@ -168,7 +168,7 @@ public class DeployBehaviour : MonoBehaviour
 
     private void OnTriggerExit(Collider other)
     {
-        if (other.gameObject.CompareTag("Tower") || other.gameObject.CompareTag("Neutral") || other.gameObject.CompareTag("Enemy") || other.gameObject.CompareTag("Wall") || other.gameObject.CompareTag("WallCornerSide1") || other.gameObject.CompareTag("WallCornerSide2") || other.gameObject.CompareTag("Spawner") || other.gameObject.CompareTag("Destination"))
+        if (TagManager.Instance.isNotDeployableTag(other.gameObject.tag))
         {
             isOverlapped = false;
         }
