@@ -3,36 +3,47 @@ using System.Collections.Generic;
 using System.Dynamic;
 using UnityEngine;
 using UnityEngine.UI;
-public class UISystem : MonoBehaviour
+using TMPro;
+public class StatusUI : MonoBehaviour
 {
-    public static UISystem Instance { get; private set; }
+    private int preCost;
+    private int currentCost;
+    public TextMeshProUGUI costText;
 
-    [Header("Player")]
-    public Text CurrentCost;
-    public Text CurrentHealth;
+    private int preLife;
+    private int currentLife;
+    public TextMeshProUGUI lifeText;
 
     private void Awake()
     {
-        Instance = this;
-        PlayerControl.Instance.Init();
-        GameManager.Instance.Init();
-    }
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        
+        Init();
     }
 
     // Update is called once per frame
     void Update()
     {
-        UpdatePlayerUI();
+        UpdateStatus();
     }
 
-    void UpdatePlayerUI()
+    private void Init()
     {
-        CurrentCost.text = PlayerControl.Instance.GetComponent<PlayerData>().cost.ToString();
-        CurrentHealth.text = PlayerControl.Instance.GetComponent<PlayerData>().life.ToString();
+        preCost = 0;
+        preLife = 0;
+        currentCost = 0;
+        currentLife = 0;
+    }
+
+    void UpdateStatus()
+    {
+        currentCost = PlayerControl.Instance.playerData.cost;
+        currentLife = PlayerControl.Instance.playerData.life;
+
+        if (preCost != currentCost)
+            costText.text = PlayerControl.Instance.playerData.cost.ToString();
+        if (preLife != currentLife)
+            lifeText.text = PlayerControl.Instance.playerData.life.ToString();
+
+        preCost = currentCost;
+        preLife = currentLife;
     }
 }

@@ -3,18 +3,56 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using TMPro;
 
-public class DeployUI : MonoBehaviour/*, IBeginDragHandler, IDragHandler, IEndDragHandler*/
+public class DeployUI : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler
 {
-    public GameObject targetObject;
+    public GameObject deployTower;
+    public GameObject realTower;
     private GameObject newObject;
     private GameObject hitObject;
 
+    private bool isDeployable;
+    public TextMeshProUGUI towerCostText;
+
     Vector3 mousePos;
+
+    private void Awake()
+    {
+        Init();
+    }
+
+    private void Update()
+    {
+        UpdateTowerCostText();
+    }
+
+    private void Init()
+    {
+        towerCostText.text = realTower.GetComponent<TowerData>().cost.ToString();
+        isDeployable = false;
+    }
+
+    private void UpdateTowerCostText()
+    {
+        if (realTower.GetComponent<TowerData>().cost > PlayerControl.Instance.playerData.cost)
+            isDeployable = false;
+        else
+            isDeployable = true;
+
+        if (isDeployable)
+            towerCostText.color = Color.white;
+        else
+            towerCostText.color = Color.red;
+    }
+
     public void OnBeginDrag(PointerEventData eventData)
     {
         mousePos = Input.mousePosition;
-        newObject = Instantiate(targetObject, mousePos, targetObject.transform.rotation);
+
+        newObject = Instantiate(deployTower, mousePos, deployTower.transform.rotation);
+
+        Time.timeScale = 0.3f;
     }
     public void OnDrag(PointerEventData eventData)
     {
@@ -23,7 +61,9 @@ public class DeployUI : MonoBehaviour/*, IBeginDragHandler, IDragHandler, IEndDr
         hitObject = newObject.GetComponent<DeployBehaviour>().LocateTower(mousePos);
     }
     public void OnEndDrag(PointerEventData eventData)
-    { 
-        newObject.GetComponent<DeployBehaviour>().DeployTower(hitObject);
+    {
+        newObject.GetComponent<DeployBehaviour>().DeployTower(hitObject, realTower);
+
+        Time.timeScale = 1f;
     }
 }

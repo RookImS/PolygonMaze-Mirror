@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PlayerControl : MonoSingleton<PlayerControl>
 {
-    private PlayerData playerData;
+    public PlayerData playerData;
 
     private void Awake()
     {

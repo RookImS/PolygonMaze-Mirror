@@ -14,7 +14,7 @@ public class GameManager : MonoBehaviour
     public static EnemyData enemydata;
     public static DeployBehaviour deploybehaviour;
     public static TowerBehaviour towerbehaviour;
-    public static UISystem uisystem;
+    //public static UISystem uisystem;
     bool isGameOver;
     public static GameManager Instance
     {
