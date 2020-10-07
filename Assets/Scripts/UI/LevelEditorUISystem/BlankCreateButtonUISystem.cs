@@ -100,10 +100,8 @@ public class BlankCreateButtonUISystem : MonoBehaviour, IBeginDragHandler, IDrag
             Debug.Log("WallComponent is not 0~2 in OnTheWall of BlankButtonUI.cs");
         }
 
-        currentObject.transform.position = new Vector3(hitGameObject.transform.position.x,
-            currentObjectHeight, hitGameObject.transform.position.z);
-        currentObject.transform.eulerAngles = new Vector3(0f, hitGameObject.transform.rotation.eulerAngles.y % 360, 0f);
-
+        currentObject.transform.position = hitGameObject.transform.position;
+        currentObject.transform.rotation = hitGameObject.transform.rotation;
 
         isDeployEnable = true;
     }

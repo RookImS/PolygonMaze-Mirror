@@ -151,11 +151,5 @@ public class LevelEditorUISystem : MonoBehaviour
             settingButton.GetComponent<Image>().color = notReadyColor;
     }
 
-
-    /*  
-     *  Related enemy wave setting
-     */
-
-    
 }
 

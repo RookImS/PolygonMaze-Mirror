@@ -55,8 +55,7 @@ public class EnemyWaveSettingUISystem : MonoBehaviour
         newWaveButton = GameObject.Instantiate(waveButtonPrefab, this.enemyWaveListPanel.transform);
         newWaveButton.transform.GetChild(0).GetComponent<TMP_Text>().text = string.Format(this.waveTextForamt, waveNum);
 
-        newWaveButton.GetComponent<RectTransform>().anchoredPosition
-            = new Vector2(waveAddButtonRect.anchoredPosition.x, waveAddButtonRect.anchoredPosition.y);
+        newWaveButton.GetComponent<RectTransform>().anchoredPosition = waveAddButtonRect.anchoredPosition;
 
         newWaveButton.transform.GetComponent<Button>().onClick.AddListener(() => OnClickWaveButton(waveNum));
 

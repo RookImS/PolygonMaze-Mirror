@@ -8,6 +8,7 @@ public class LevelEditor : MonoBehaviour
 {
     public class BlankTempInfo
     {
+        public StageData.BlankInfo.BlankMeshType blankMeshType;
         public GameObject blank;
         public GameObject disabledWall;
     }
@@ -96,6 +97,14 @@ public class LevelEditor : MonoBehaviour
             && this.spawnerList.Find(x => x.disabledWall == disabledwall) == null)
         {
             BlankTempInfo blankTempInfo = new BlankTempInfo();
+
+            if (spawner.transform.GetChild(0).gameObject.activeSelf == true)
+                blankTempInfo.blankMeshType = StageData.BlankInfo.BlankMeshType.Mesh1;
+            else if (spawner.transform.GetChild(1).gameObject.activeSelf == true)
+                blankTempInfo.blankMeshType = StageData.BlankInfo.BlankMeshType.Mesh2;
+            else
+                blankTempInfo.blankMeshType = StageData.BlankInfo.BlankMeshType.Mesh3;
+
             blankTempInfo.blank = spawner;
             blankTempInfo.disabledWall = disabledwall;
             this.spawnerList.Add(blankTempInfo);
@@ -136,6 +145,14 @@ public class LevelEditor : MonoBehaviour
             && this.destinationList.Find(x => x.disabledWall == disabledwall) == null)
         {
             BlankTempInfo blankTempInfo = new BlankTempInfo();
+
+            if (destination.transform.GetChild(0).gameObject.activeSelf == true)
+                blankTempInfo.blankMeshType = StageData.BlankInfo.BlankMeshType.Mesh1;
+            else if (destination.transform.GetChild(1).gameObject.activeSelf == true)
+                blankTempInfo.blankMeshType = StageData.BlankInfo.BlankMeshType.Mesh2;
+            else
+                blankTempInfo.blankMeshType = StageData.BlankInfo.BlankMeshType.Mesh3;
+
             blankTempInfo.blank = destination;
             blankTempInfo.disabledWall = disabledwall;
             this.destinationList.Add(blankTempInfo);

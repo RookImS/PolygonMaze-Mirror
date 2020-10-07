@@ -23,37 +23,28 @@ public class StageData
         }
         public ObstacleSpecific obstacleSpecific;
 
-        public float positionX;
-        public float positionY;
-        public float positionZ;
-
-        public float rotationW;
-        public float rotationX;
-        public float rotationY;
-        public float rotationZ;
+        public Vector3 position;
+        public Quaternion rotation;
     }
     public List<ObstacleInfo> baseObstacles;
 
     [Serializable]
     public class BlankInfo
     {
-        public enum BlankSpecific
+        public enum BlankMeshType
         {
-            Spawner,
-            Destination
+            Mesh1,
+            Mesh2,
+            Mesh3
         }
-        public BlankSpecific blankSpecific;
+        public BlankMeshType blankMeshType;
 
-        public float positionX;
-        public float positionY;
-        public float positionZ;
-
-        public float rotationW;
-        public float rotationX;
-        public float rotationY;
-        public float rotationZ;
+        public Vector3 position;
+        public Quaternion rotation;
     }
-    public List<BlankInfo> blankInfos;
+
+    public List<BlankInfo> spawnerInfos;
+    public List<BlankInfo> destinationInfos;
 
     [Serializable]
     public class EnemyInfo
@@ -85,6 +76,8 @@ public class StageData
             Timer // 특정 시간이 지난 이후
         }
         public NextPhaseTrigger nextPhaseTrigger;
+
+        public int timer = 0;
         public float breakTime;
     }
     public List<EnemyWaveInfo> baseEnemyWaveInfos;
@@ -93,7 +86,8 @@ public class StageData
     public StageData()
     {
         baseObstacles = new List<ObstacleInfo>();
-        blankInfos = new List<BlankInfo>();
+        spawnerInfos = new List<BlankInfo>();
+        destinationInfos = new List<BlankInfo>();
         baseEnemyWaveInfos = new List<EnemyWaveInfo>();
     }
 
@@ -112,14 +106,9 @@ public class StageData
             else
                 obstacleInfo.obstacleSpecific = ObstacleInfo.ObstacleSpecific.Hexagon;
 
-            obstacleInfo.positionX = obj.transform.position.x;
-            obstacleInfo.positionY = obj.transform.position.y;
-            obstacleInfo.positionZ = obj.transform.position.z;
+            obstacleInfo.position = obj.transform.position;
+            obstacleInfo.rotation = obj.transform.rotation;
 
-            obstacleInfo.rotationW = obj.transform.rotation.w;
-            obstacleInfo.rotationX = obj.transform.rotation.x;
-            obstacleInfo.rotationY = obj.transform.rotation.y;
-            obstacleInfo.rotationZ = obj.transform.rotation.z;
             baseObstacles.Add(obstacleInfo);
         }
     }
@@ -134,20 +123,15 @@ public class StageData
             obj = temp.blank;
             blankInfo = new BlankInfo();
 
+            blankInfo.blankMeshType = temp.blankMeshType;
+
+            blankInfo.position = obj.transform.position;
+            blankInfo.rotation = obj.transform.rotation;
+
             if (temp.blank.tag == "Spawner")
-                blankInfo.blankSpecific = BlankInfo.BlankSpecific.Spawner;
+                spawnerInfos.Add(blankInfo);
             else if (temp.blank.tag == "Destination")
-                blankInfo.blankSpecific = BlankInfo.BlankSpecific.Destination;
-
-            blankInfo.positionX = obj.transform.position.x;
-            blankInfo.positionY = obj.transform.position.y;
-            blankInfo.positionZ = obj.transform.position.z;
-
-            blankInfo.rotationW = obj.transform.rotation.w;
-            blankInfo.rotationX = obj.transform.rotation.x;
-            blankInfo.rotationY = obj.transform.rotation.y;
-            blankInfo.rotationZ = obj.transform.rotation.z;
-            blankInfos.Add(blankInfo);
+                destinationInfos.Add(blankInfo);
         }
     }
 
