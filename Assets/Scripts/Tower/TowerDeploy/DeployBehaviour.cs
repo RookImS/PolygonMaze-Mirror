@@ -27,7 +27,7 @@ public class DeployBehaviour : MonoBehaviour
         // connect navMesh
         checkerNav = GameObject.Find("CheckerNavMeshSurface").GetComponent<NavMeshSurface>();
         enemyNav = GameObject.Find("EnemyNavMeshSurface").GetComponent<NavMeshSurface>();
-        checker = GameObject.FindGameObjectWithTag("Spawner").GetComponent<CheckerBehaviour>();
+        checker = GameObject.FindGameObjectWithTag("Checker").GetComponent<CheckerBehaviour>();
 
         isDeployEnable = false;
         isProperLocate = false;

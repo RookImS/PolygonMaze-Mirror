@@ -1,0 +1,110 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2767769afc26cbe43b9215b026d72fec, type: 3}
+  m_Name: Stage01
+  m_EditorClassIdentifier: 
+  stageName: Tutorial
+  stageLevel: 1
+  startCost: 200
+  playerLife: 10
+  baseObstacles:
+  - obstacleSpecific: 1
+    position: {x: -4.07, y: 0, z: -2.31}
+    rotation: {x: 0, y: 0, z: 0, w: 0}
+  - obstacleSpecific: 1
+    position: {x: -4.07, y: 0, z: -1.31}
+    rotation: {x: 0, y: 0, z: 0, w: 0}
+  - obstacleSpecific: 1
+    position: {x: -4.07, y: 0, z: -0.31}
+    rotation: {x: 0, y: 0, z: 0, w: 0}
+  - obstacleSpecific: 1
+    position: {x: -4.07, y: 0, z: 0.69}
+    rotation: {x: 0, y: 0, z: 0, w: 0}
+  - obstacleSpecific: 1
+    position: {x: -4.07, y: 0, z: 1.69}
+    rotation: {x: 0, y: 0, z: 0, w: 0}
+  - obstacleSpecific: 1
+    position: {x: 4.21, y: 0, z: 0.1}
+    rotation: {x: 0, y: 0, z: 0, w: 0}
+  - obstacleSpecific: 1
+    position: {x: 0, y: 0, z: 1.1}
+    rotation: {x: 0, y: 0, z: 0, w: 0}
+  - obstacleSpecific: 1
+    position: {x: 0, y: 0, z: 2.1}
+    rotation: {x: 0, y: 0, z: 0, w: 0}
+  - obstacleSpecific: 1
+    position: {x: 0, y: 0, z: 3.1}
+    rotation: {x: 0, y: 0, z: 0, w: 0}
+  - obstacleSpecific: 1
+    position: {x: 0, y: 0, z: 4.1}
+    rotation: {x: 0, y: 0, z: 0, w: 0}
+  - obstacleSpecific: 1
+    position: {x: 4.21, y: 0, z: 1.69}
+    rotation: {x: 0, y: 0, z: 0, w: 0}
+  - obstacleSpecific: 1
+    position: {x: 4.21, y: 0, z: 0.69}
+    rotation: {x: 0, y: 0, z: 0, w: 0}
+  - obstacleSpecific: 1
+    position: {x: 4.21, y: 0, z: -0.31}
+    rotation: {x: 0, y: 0, z: 0, w: 0}
+  - obstacleSpecific: 1
+    position: {x: 4.21, y: 0, z: -1.31}
+    rotation: {x: 0, y: 0, z: 0, w: 0}
+  - obstacleSpecific: 1
+    position: {x: 4.21, y: 0, z: -2.31}
+    rotation: {x: 0, y: 0, z: 0, w: 0}
+  spawnerInfo:
+    blankMeshType: 2
+    position: {x: -8.7, y: 0, z: -2.075}
+    rotation: {x: 0, y: 0.70710677, z: 0, w: 0.70710677}
+  destinationInfo:
+    blankMeshType: 2
+    position: {x: 8.7, y: 0, z: 3.875}
+    rotation: {x: 0, y: 0.70710677, z: 0, w: 0.70710677}
+  baseEnemyPhases:
+  - enemyInfoList:
+    - enemySpecific: 0
+      count: 10
+    - enemySpecific: 1
+      count: 5
+    enemySpawnDuration: 0.5
+    nextPhaseTrigger: 3
+    timer: 0
+    breakTime: 5
+  - enemyInfoList:
+    - enemySpecific: 0
+      count: 4
+    - enemySpecific: 2
+      count: 2
+    - enemySpecific: 0
+      count: 6
+    - enemySpecific: 4
+      count: 1
+    enemySpawnDuration: 0.5
+    nextPhaseTrigger: 3
+    timer: 0
+    breakTime: 5
+  - enemyInfoList:
+    - enemySpecific: 0
+      count: 5
+    - enemySpecific: 1
+      count: 5
+    - enemySpecific: 2
+      count: 5
+    - enemySpecific: 3
+      count: 5
+    - enemySpecific: 4
+      count: 5
+    enemySpawnDuration: 0.5
+    nextPhaseTrigger: 3
+    timer: 0
+    breakTime: 5
