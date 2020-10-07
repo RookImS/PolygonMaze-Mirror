@@ -208,6 +208,9 @@ public class LevelManager : MonoBehaviour
         this.checkerNavMeshSurface.BuildNavMesh();
     }
 
+    /* LoadChecker
+     * 1. Load Checker
+     */
     public void LoadChecker()
     {
         StageScriptableObject.BlankInfo info = null;
