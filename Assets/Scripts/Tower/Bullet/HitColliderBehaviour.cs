@@ -9,8 +9,9 @@ public class HitColliderBehaviour : MonoBehaviour
 
     private void Awake()
     {
-        //nullIndexList = new List<int>();
+        nullIndexList = new List<int>();
     }
+
     private void Update()
     {
         CheckNull();
@@ -18,8 +19,6 @@ public class HitColliderBehaviour : MonoBehaviour
 
     private void CheckNull()
     {
-        nullIndexList = new List<int>();
-
         for (int i = 0; i < parentBulletBehaviour.enemyList.Count; i++)
         {
             if (parentBulletBehaviour.enemyList[i] == null)
@@ -30,6 +29,8 @@ public class HitColliderBehaviour : MonoBehaviour
         {
             parentBulletBehaviour.enemyList.RemoveAt(i);
         }
+
+        nullIndexList.Clear();
     }
 
     private void OnTriggerEnter(Collider other)

@@ -46,7 +46,6 @@ public class TowerBehaviour : MonoBehaviour
     {
         m_TowerData = GetComponent<TowerData>();
         m_TowerData.Init();
-        Debug.Log("왔어용");
         targetList = new List<GameObject>();
         target = null;
 

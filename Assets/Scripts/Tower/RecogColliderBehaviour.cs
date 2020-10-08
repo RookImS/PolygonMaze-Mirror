@@ -9,8 +9,9 @@ public class RecogColliderBehaviour : MonoBehaviour
 
     private void Awake()
     {
-        //nullIndexList = new List<int>();
+        nullIndexList = new List<int>();
     }
+
     private void Update()
     {
         CheckNull();
@@ -18,18 +19,18 @@ public class RecogColliderBehaviour : MonoBehaviour
 
     private void CheckNull()
     {
-        nullIndexList = new List<int>();
-
         for (int i = 0; i < parentTowerBehaviour.targetList.Count; i++)
         {
             if (parentTowerBehaviour.targetList[i] == null)
                 nullIndexList.Add(i);
         }
 
-       foreach (int i in nullIndexList)
-       {
+        foreach (int i in nullIndexList)
+        {
             parentTowerBehaviour.targetList.RemoveAt(i);
-       }
+        }
+
+        nullIndexList.Clear();
     }
 
     private void OnTriggerEnter(Collider other)

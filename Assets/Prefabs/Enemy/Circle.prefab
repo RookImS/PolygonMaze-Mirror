@@ -65,7 +65,7 @@ MonoBehaviour:
   desc: Circle
   Stats:
     baseStats:
-      hp: 500
+      hp: 99999
       speed: 3
       def: 5
 --- !u!65 &8383970278859737560
@@ -95,7 +95,7 @@ Rigidbody:
   m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 126
   m_CollisionDetection: 0
 --- !u!195 &5597580354566801672
 NavMeshAgent:
@@ -106,7 +106,7 @@ NavMeshAgent:
   m_GameObject: {fileID: 3350396553093369702}
   m_Enabled: 1
   m_AgentTypeID: -1372625422
-  m_Radius: 0.01
+  m_Radius: 0.1
   m_Speed: 0
   m_Acceleration: 500
   avoidancePriority: 50
@@ -118,7 +118,7 @@ NavMeshAgent:
   m_Height: 1
   m_BaseOffset: 0.5
   m_WalkableMask: 4294967295
-  m_ObstacleAvoidanceType: 4
+  m_ObstacleAvoidanceType: 0
 --- !u!1001 &3645180124834840544
 PrefabInstance:
   m_ObjectHideFlags: 0

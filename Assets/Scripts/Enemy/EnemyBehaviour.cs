@@ -16,21 +16,17 @@ public class EnemyBehaviour : MonoBehaviour
     {
         Init();
         path = new NavMeshPath();
-        MoveToDestination();
+        destination = GameObject.FindWithTag("Destination");
+        
     }
 
-    // Start is called before the first frame update
     void Start()
     {
-        //empty
+        ChangeAgentSpeed(m_EnemyData.Stats.stats.speed);
+        agent.SetDestination(destination.transform.position);
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        //empty
-    }
-    
+
     void Init()
     {
         m_EnemyData = GetComponent<EnemyData>();
@@ -39,23 +35,23 @@ public class EnemyBehaviour : MonoBehaviour
         agent = GetComponent<NavMeshAgent>();
     }
     
-    public void MoveToDestination()
-    {
-        destination = GameObject.FindWithTag("Destination");
-        agent.CalculatePath(destination.transform.position, path);
-        ChangeAgentSpeed(m_EnemyData.Stats.stats.speed);
+    //public void MoveToDestination()
+    //{
+    //    destination = GameObject.FindWithTag("Destination");
+    //    agent.CalculatePath(destination.transform.position, path);
+    //    ChangeAgentSpeed(m_EnemyData.Stats.stats.speed);
 
-        if (path.status == NavMeshPathStatus.PathPartial)
-        {
-            //Debug.Log("Invalid path");
-        }
-        else
-        {
-            agent.SetPath(path);
-            //Debug.Log("valid path");
-        }
+    //    if (path.status == NavMeshPathStatus.PathPartial)
+    //    {
+    //        //Debug.Log("Invalid path");
+    //    }
+    //    else
+    //    {
+    //        agent.SetPath(path);
+    //        //Debug.Log("valid path");
+    //    }
         
-    }
+    //}
 
     public void Damage(int damage)
     {

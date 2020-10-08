@@ -7,7 +7,6 @@ using UnityEngine.AI;
 
 public class DeployBehaviour : MonoBehaviour
 {
-    //public GameObject realTower;
     public LayerMask layerMask;
 
     private CheckerBehaviour checker;
@@ -27,12 +26,11 @@ public class DeployBehaviour : MonoBehaviour
         // connect navMesh
         checkerNav = GameObject.Find("CheckerNavMeshSurface").GetComponent<NavMeshSurface>();
         enemyNav = GameObject.Find("EnemyNavMeshSurface").GetComponent<NavMeshSurface>();
-        checker = GameObject.FindGameObjectWithTag("Spawner").GetComponent<CheckerBehaviour>();
+        checker = GameObject.FindGameObjectWithTag("Checker").GetComponent<CheckerBehaviour>();
 
         isDeployEnable = false;
         isProperLocate = false;
         isSkipFrame = true;
-        isOverlapped = false;
     }
 
     private void Update()
@@ -78,7 +76,6 @@ public class DeployBehaviour : MonoBehaviour
         else
         {
             // rotate tower to origin angle
-            //transform.eulerAngles = new Vector3(0f, 0f, 0f);
             isDeployEnable = false;
 
             // update checker navMesh
@@ -90,7 +87,7 @@ public class DeployBehaviour : MonoBehaviour
             return null;
         }
 
- 
+
     }
 
     private void locateProperPos(Transform pos)
@@ -130,8 +127,7 @@ public class DeployBehaviour : MonoBehaviour
         if (isDeployEnable)
         {
             if (PlayerControl.Instance.UseCost(realTower.GetComponent<TowerData>().cost))
-            {
-                //Debug.Log("check");
+            { 
                 GameObject newTower = Instantiate(realTower, transform.position, transform.rotation);
 
                 if (!neighborObject.CompareTag("Obstacle"))
@@ -161,16 +157,7 @@ public class DeployBehaviour : MonoBehaviour
     {
         if (TagManager.Instance.isNotDeployableTag(other.gameObject.tag))
         {
-            isOverlapped = true;
             isDeployEnable = false;
-        }
-    }
-
-    private void OnTriggerExit(Collider other)
-    {
-        if (TagManager.Instance.isNotDeployableTag(other.gameObject.tag))
-        {
-            isOverlapped = false;
         }
     }
 

@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 4267321210212599204}
   - component: {fileID: 3848467622776847801}
   - component: {fileID: 5648588455992075848}
-  m_Layer: 11
+  m_Layer: 0
   m_Name: SpawnerMesh1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -27,7 +27,7 @@ Transform:
   m_GameObject: {fileID: 2248679715437024030}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1.5, y: 3, z: 0.4}
+  m_LocalScale: {x: 1.5, y: 1, z: 0.4}
   m_Children: []
   m_Father: {fileID: 1539798634487751988}
   m_RootOrder: 0
@@ -92,7 +92,7 @@ GameObject:
   - component: {fileID: 4683496597920058461}
   - component: {fileID: 6399408072223238804}
   - component: {fileID: 5557308695408172874}
-  m_Layer: 11
+  m_Layer: 0
   m_Name: SpawnerMesh2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -108,7 +108,7 @@ Transform:
   m_GameObject: {fileID: 4948789377340058243}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1.75, y: 3, z: 0.4}
+  m_LocalScale: {x: 1.75, y: 1, z: 0.4}
   m_Children: []
   m_Father: {fileID: 1539798634487751988}
   m_RootOrder: 1
@@ -207,7 +207,7 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1.45, y: 3, z: 0.4}
+  m_Size: {x: 1.45, y: 1, z: 0.4}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &9152545964651340981
 GameObject:
@@ -220,7 +220,7 @@ GameObject:
   - component: {fileID: 6797479125219358366}
   - component: {fileID: 3354561823184800412}
   - component: {fileID: 963046999822162135}
-  m_Layer: 11
+  m_Layer: 0
   m_Name: SpawnerMesh3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -236,7 +236,7 @@ Transform:
   m_GameObject: {fileID: 9152545964651340981}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1.45, y: 3, z: 0.4}
+  m_LocalScale: {x: 1.45, y: 1, z: 0.4}
   m_Children: []
   m_Father: {fileID: 1539798634487751988}
   m_RootOrder: 2

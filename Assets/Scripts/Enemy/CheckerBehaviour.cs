@@ -8,7 +8,7 @@ public class CheckerBehaviour : MonoBehaviour
     private NavMeshAgent agent;
     private NavMeshPath path;
     private NavMeshPath tempPath;
-    private GameObject destination; // test code
+    private GameObject destination;
 
     void Awake()
     {
@@ -29,12 +29,10 @@ public class CheckerBehaviour : MonoBehaviour
 
         if (tempPath.status == NavMeshPathStatus.PathPartial)
         {
-            //Debug.Log("Invalid path");
             return false;
         }
         else
         {
-            //Debug.Log("valid path");
             return true;
         }
     }

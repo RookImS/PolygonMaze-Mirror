@@ -9,7 +9,7 @@ public class SideColliderBehavior : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (TagManager.Instance.isNotDeployableTag(other.gameObject.tag))
+        if (TagManager.Instance.isBuildingObjectTag(other.gameObject.tag))
         {
             if (!parentObject.Equals(other.gameObject))
             {

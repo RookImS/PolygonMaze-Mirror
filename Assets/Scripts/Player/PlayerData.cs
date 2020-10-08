@@ -10,7 +10,7 @@ public class PlayerData
 
     public bool Init()
     {
-        this.cost = 150;
+        this.cost = 500;
         this.life = 50;
         this.currentLife = this.life;
 
@@ -36,14 +36,12 @@ public class PlayerData
 
         this.cost += cost;
 
-        Debug.Log(string.Format("player current cost : {0}", this.cost));
         return true;
     }
 
     public void ChangeLife(int life)
     {
         this.currentLife = Mathf.Clamp(this.currentLife + life, 0, this.life);
-        Debug.Log(string.Format("Player current life : {0}", this.currentLife));
         if (currentLife <= 0)
             Death();
     }
