@@ -14,15 +14,13 @@ public class EnemyBehaviour : MonoBehaviour
 
     void Awake()
     {
-        Init();
-        path = new NavMeshPath();
-        MoveToDestination();
+        Init();   
     }
 
     // Start is called before the first frame update
-    void Start()
+    private void OnEnable()
     {
-        //empty
+        MoveToDestination();
     }
 
     // Update is called once per frame
@@ -37,6 +35,7 @@ public class EnemyBehaviour : MonoBehaviour
         m_EnemyData.Init();
 
         agent = GetComponent<NavMeshAgent>();
+        path = new NavMeshPath();
     }
     
     public void MoveToDestination()

@@ -5,29 +5,42 @@ using UnityEngine;
 public class EnemyData : MonoBehaviour
 {
     private int spawnNo;
+    private int waveNum;
+
     public int reward;
     public int damage;
 
-    public string desc;
     public EnemyStatSystem Stats;
     public EColorSystem EColorSys = new EColorSystem();
     public WaveSystem WaveSys = new WaveSystem();
 
+
+    private void Update()
+    {
+        Stats.Tick();
+    }
 
     public void Init()
     {
         Stats.Init(this);
     }
 
-    void Awake()
+    // Update is called once per frame
+    
+
+    public int GetWaveNum()
     {
-        
+        return this.waveNum;
     }
 
-    // Update is called once per frame
-    void Update()
+    public void SetWaveNum(int waveNum)
     {
-        Stats.Tick();
+        this.waveNum = waveNum;
+    }
+
+    public void ApplyWaveSystem()
+    {
+        WaveSys.ApplyWaveSystem(this);
     }
 
     public void Death()

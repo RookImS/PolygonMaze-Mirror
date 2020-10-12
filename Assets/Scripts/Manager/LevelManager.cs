@@ -2,12 +2,37 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
+using System.Threading;
 using UnityEngine;
 using UnityEngine.AI;
 
 public class LevelManager : MonoBehaviour
 {
     public static LevelManager instance { get; private set; }
+    public class EnemyWave
+    {
+        public List<GameObject> oneWaveEnemies;
+        public float enemySpawnDuration;
+
+        public enum NextWaveTrigger
+        {
+            EnemyExterminated, // 해당 wave에서 마지막 적이 등장
+            FirstEnemyDead, // 해당 wave의 첫번째 적이 사망
+            HalfOfEnemyDead, // 해당 wave의 절반의 적이 사망
+            LastEnemyDead, // 해당 wave의 마지막 적이 사망
+            Timer // 특정 시간(timer)이 지난 이후
+        }
+
+        public NextWaveTrigger nextWaveTrigger;
+
+        public float timer;
+        public float breakTime;
+        public int activeNum;
+    }
+
+    private Vector3 spawnerPosition;
+    private GameObject waves;
+    private List<EnemyWave> enemyWaveList;
 
     [Header("Preserved Variables")]
     public GameObject stageGameObject;
@@ -38,30 +63,45 @@ public class LevelManager : MonoBehaviour
     public GameObject ellipseEnemyPrefab;
     public GameObject ringEnemyPrefab;
 
-
     private void Awake()
     {
-        instance = this;
-        PlayerControl.Instance.playerData.SetPlayer(this.stageData.startCost, this.stageData.playerLife);
+        Init();
         LoadStage();
     }
+
+    private void Start()
+    {
+        StartCoroutine(StartStage());
+    }
+
+
+    public void Init()
+    {
+        instance = this;
+
+        PlayerControl.Instance.playerData.SetPlayer(this.stageData.startCost, this.stageData.playerLife);
+    }
+
 
     /* LoadStage
      * 1. Load obstacles.
      * 2. Load spawner and destination & Set active of overlabed wall to false.
      * 3. Bake enemy navmesh surface and checker navmesh surface.
+     * 4. Load checker.
+     * 5. Load wave.
      */
     public void LoadStage()
     {
         LoadObstacles();
-        LoadBlank();
+        LoadBlanks();
         BakeNavMeshSurfaces();
         LoadChecker();
+        LoadWaves();
     }
 
     /* LoadObstacles
      * 1. Load obstacles.
-     * 2. Etc..
+     * 2. Etc...
      */
     public void LoadObstacles()
     {
@@ -74,14 +114,14 @@ public class LevelManager : MonoBehaviour
 
         foreach (StageScriptableObject.ObstacleInfo info in this.stageData.baseObstacles)
         {
-            if (StageScriptableObject.ObstacleInfo.ObstacleSpecific.Triangle
-                == info.obstacleSpecific)
+            if (info.obstacleSpecific
+                == StageScriptableObject.ObstacleInfo.ObstacleSpecific.Triangle)
                 prefab = this.triangleObstaclePrefab;
-            else if (StageScriptableObject.ObstacleInfo.ObstacleSpecific.Square
-                == info.obstacleSpecific)
+            else if (info.obstacleSpecific
+                == StageScriptableObject.ObstacleInfo.ObstacleSpecific.Square)
                 prefab = this.squareObstaclePrefab;
-            else if (StageScriptableObject.ObstacleInfo.ObstacleSpecific.Pentagon
-                == info.obstacleSpecific)
+            else if (info.obstacleSpecific
+                == StageScriptableObject.ObstacleInfo.ObstacleSpecific.Pentagon)
                 prefab = this.pentagonObstaclePrefab;
             else // Hexagon
                 prefab = this.hexagonObstaclePrefab;
@@ -91,15 +131,16 @@ public class LevelManager : MonoBehaviour
     }
 
     /* LoadBlank
-     * 1. Load spawner and destination
+     * 1. Load spawner and destination.
      * 2. Set active of overlabed wall to false.
-     * 3. Etc..
+     * 3. Etc...
      */
-    public void LoadBlank()
+    public void LoadBlanks()
     {
-        StageScriptableObject.BlankInfo info = null; 
-        GameObject prefab = null;
+        StageScriptableObject.BlankInfo info = null;
         GameObject spawner = null;
+        GameObject prefab = null;
+        
         GameObject destination = null;
         
 
@@ -107,6 +148,7 @@ public class LevelManager : MonoBehaviour
         info = this.stageData.spawnerInfo;
         prefab = this.spawnerPrefab;
         spawner = GameObject.Instantiate(prefab, info.position, info.rotation, this.stageGameObject.transform);
+        this.spawnerPosition = info.position;
         SelectBlankMesh(spawner, info);
 
 
@@ -122,26 +164,26 @@ public class LevelManager : MonoBehaviour
     }
 
     /* SelectBlankMesh
-     * 1. Set active of a appropriate mesh to true
-     * 2. Set active of a appropriate mesh to false
+     * 1. Set active of a appropriate mesh to true.
+     * 2. Set active of a appropriate mesh to false.
      */
     public void SelectBlankMesh(GameObject blank, StageScriptableObject.BlankInfo blankInfo)
     {
-        if (StageScriptableObject.BlankInfo.BlankMeshType.Mesh1
-            == blankInfo.blankMeshType)
+        if (blankInfo.blankMeshType 
+            == StageScriptableObject.BlankInfo.BlankMeshType.Mesh1)
         {
             blank.transform.GetChild(0).gameObject.SetActive(true);
             blank.transform.GetChild(1).gameObject.SetActive(false);
             blank.transform.GetChild(2).gameObject.SetActive(false);
         }
-        else if (StageScriptableObject.BlankInfo.BlankMeshType.Mesh1
-            == blankInfo.blankMeshType)
+        else if (blankInfo.blankMeshType
+            == StageScriptableObject.BlankInfo.BlankMeshType.Mesh2)
         {
             blank.transform.GetChild(0).gameObject.SetActive(false);
             blank.transform.GetChild(1).gameObject.SetActive(true);
             blank.transform.GetChild(2).gameObject.SetActive(false);
         }
-        else
+        else // Mesh3
         {
             blank.transform.GetChild(0).gameObject.SetActive(false);
             blank.transform.GetChild(1).gameObject.SetActive(false);
@@ -150,8 +192,8 @@ public class LevelManager : MonoBehaviour
     }
 
     /* SetWallActiveToFalse
-     * 1. Check if the wall overlabs with blank(spawner or destination)
-     * 2. Set active of wall to false if overlabed
+     * 1. Check if the wall overlabs with blank(spawner or destination).
+     * 2. Set active of wall to false if overlabed.
      */
     public void SetWallActiveToFalse(GameObject overlabedBlank)
     {
@@ -196,7 +238,6 @@ public class LevelManager : MonoBehaviour
         }
     }
 
-
     /* BakeNavMeshSurfaces
      * 1. Bake enemy navmesh surface.
      * 2. Bake checker navmesh surface.
@@ -209,14 +250,169 @@ public class LevelManager : MonoBehaviour
     }
 
     /* LoadChecker
-     * 1. Load Checker
+     * 1. Load Checker.
      */
     public void LoadChecker()
     {
+        
         StageScriptableObject.BlankInfo info = null;
 
         info = this.stageData.spawnerInfo;
-        GameObject.Instantiate(this.checkerPrefab, info.position, info.rotation, this.stageGameObject.transform);  
+        GameObject.Instantiate(this.checkerPrefab, info.position, info.rotation, this.stageGameObject.transform);
+        
     }
 
+    /* StartStage
+     * 1. Create waves.
+     * 2. Create Enemies in one wave.
+     * 3. repeat 2.
+     * 4. etc...
+     */
+    public void LoadWaves()
+    {
+        GameObject wave = null;
+
+        EnemyWave enemyWave = null;
+        GameObject enemyPrefab = null;
+        GameObject enemy = null;   
+
+        int waveValue = 1;
+        int i = 0;
+
+
+        this.waves = new GameObject("Waves");
+        this.waves.transform.SetParent(this.gameObject.transform);
+
+        this.enemyWaveList = new List<EnemyWave>();
+
+        foreach (StageScriptableObject.EnemyWaveInfo enemyWaveInfo in this.stageData.baseEnemyWaves)
+        {
+            wave = new GameObject(string.Format("Wave{0}", waveValue));
+            wave.transform.SetParent(this.waves.transform);
+
+            enemyWave = new EnemyWave();
+            enemyWave.oneWaveEnemies = new List<GameObject>();
+            this.enemyWaveList.Add(enemyWave);
+
+            enemyWave.enemySpawnDuration = enemyWaveInfo.enemySpawnDuration;
+            enemyWave.nextWaveTrigger = (LevelManager.EnemyWave.NextWaveTrigger)enemyWaveInfo.nextWaveTrigger;
+            enemyWave.timer = enemyWaveInfo.timer;
+            enemyWave.breakTime = enemyWaveInfo.breakTime;
+            enemyWave.activeNum = 0;
+
+            foreach (StageScriptableObject.EnemyInfo enemyInfo in enemyWaveInfo.enemyInfoList)
+            {
+                for (i = 0; i < enemyInfo.count; i++)
+                {
+                    if (enemyInfo.enemySpecific
+                    == StageScriptableObject.EnemyInfo.EnemySpecific.Circle)
+                        enemyPrefab = this.circleEnemyPrefab;
+                    else if (enemyInfo.enemySpecific
+                        == StageScriptableObject.EnemyInfo.EnemySpecific.SemiCircle)
+                        enemyPrefab = this.semiCircleEnemyPrefab;
+                    else if (enemyInfo.enemySpecific
+                        == StageScriptableObject.EnemyInfo.EnemySpecific.Sector)
+                        enemyPrefab = this.sectorEnemyPrefab;
+                    else if (enemyInfo.enemySpecific
+                        == StageScriptableObject.EnemyInfo.EnemySpecific.Ellipse)
+                        enemyPrefab = this.ellipseEnemyPrefab;
+                    else // Ring
+                        enemyPrefab = this.ringEnemyPrefab;
+
+                    enemy = GameObject.Instantiate(enemyPrefab, spawnerPosition, Quaternion.identity, wave.transform);
+                    enemy.GetComponent<EnemyData>().SetWaveNum(waveValue);
+                    enemy.GetComponent<EnemyData>().ApplyWaveSystem();
+
+                    enemyWave.oneWaveEnemies.Add(enemy);
+                }
+            }
+
+            waveValue++;
+        }
+    }
+
+    /* StartStage
+     * 1. TakeBreakTime 1 & StartWave 1.
+     * 2. TakeBreakTime 2 & StartWave 2.
+     * 3. ...
+     */
+    private IEnumerator StartStage()
+    {
+        int waveValue = 1;
+
+        foreach (EnemyWave enemyWave in this.enemyWaveList)
+        {
+            yield return StartCoroutine(TakeBreakTime(enemyWave.breakTime));
+
+            StartCoroutine(StartWave(enemyWave));
+            
+            while (enemyWave.activeNum < enemyWave.oneWaveEnemies.Count)
+            {
+                yield return null;
+            }
+
+            waveValue++;
+
+            /*
+            if(enemyWaveInfo.nextWaveTrigger
+                == StageScriptableObject.EnemyWaveInfo.NextWaveTrigger.EnemyExterminated)
+            {
+                StartCoroutine(StartWave(enemyWaveInfo, waveValue));
+
+                currentWaveEnemyNum = GetCurrentWaveEnemyNum(enemyWaveInfo);
+                while (!(this.enemyWaveList[waveValue - 1].oneWaveEnemyList.Count == currentWaveEnemyNum))
+                    break;   
+            }
+            else if (enemyWaveInfo.nextWaveTrigger
+                == StageScriptableObject.EnemyWaveInfo.NextWaveTrigger.FirstEnemyDead)
+            {
+                StartCoroutine(StartWave(enemyWaveInfo, waveValue));
+
+                while (!(this.enemyWaveList[waveValue - 1].oneWaveEnemyList[0] == null))
+                    break;
+            }
+            else if (enemyWaveInfo.nextWaveTrigger
+                == StageScriptableObject.EnemyWaveInfo.NextWaveTrigger.FirstEnemyDead)
+            {
+
+            }
+            */
+
+
+        }
+    }
+
+    /* TakeBreakTime
+     * 1. Take breaktime beafore the wave 
+     */
+    private IEnumerator TakeBreakTime(float breakTime)
+    {
+        while (true)
+        {
+            if (Mathf.Floor(breakTime) <= 0)
+                break;
+            else
+            {
+                breakTime -= Time.deltaTime;
+
+                //Change Debug.Log to UI.text in UI system!
+                Debug.Log(string.Format("Timer: {0}", Mathf.Floor(breakTime)));
+            }
+
+            yield return null;
+        }
+    }
+
+    /* StartWave
+     * 1. Start a wave 
+     */
+    private IEnumerator StartWave(EnemyWave enemyWave)
+    {
+        foreach(GameObject enemy in enemyWave.oneWaveEnemies)
+        {
+            enemy.SetActive(true);
+            enemyWave.activeNum++;
+            yield return new WaitForSeconds(enemyWave.enemySpawnDuration);
+        }
+    }
 }

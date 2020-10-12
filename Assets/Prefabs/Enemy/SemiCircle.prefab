@@ -20,7 +20,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1305009841147989740
 Transform:
   m_ObjectHideFlags: 0
@@ -62,12 +62,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   reward: 20
   damage: 1
-  desc: Semi-Circle
   Stats:
     baseStats:
-      hp: 1000
+      hp: 2000
       speed: 3
       def: 5
+    baseStatModifier:
+      ModifierMode: 1
+      Stats:
+        hp: 500
+        speed: 0
+        def: 0
 --- !u!65 &8099589086724157262
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -118,7 +123,7 @@ NavMeshAgent:
   m_Height: 1
   m_BaseOffset: 0.5
   m_WalkableMask: 4294967295
-  m_ObstacleAvoidanceType: 4
+  m_ObstacleAvoidanceType: 0
 --- !u!1001 &4094018284658108670
 PrefabInstance:
   m_ObjectHideFlags: 0

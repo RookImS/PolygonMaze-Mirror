@@ -70,41 +70,22 @@ MonoBehaviour:
     blankMeshType: 2
     position: {x: 8.7, y: 0, z: 3.875}
     rotation: {x: 0, y: 0.70710677, z: 0, w: 0.70710677}
-  baseEnemyPhases:
+  baseEnemyWaves:
   - enemyInfoList:
     - enemySpecific: 0
-      count: 10
+      count: 30
     - enemySpecific: 1
-      count: 5
-    enemySpawnDuration: 0.5
-    nextPhaseTrigger: 3
+      count: 30
+    enemySpawnDuration: 0.1
+    nextWaveTrigger: 0
     timer: 0
     breakTime: 5
   - enemyInfoList:
-    - enemySpecific: 0
-      count: 4
-    - enemySpecific: 2
-      count: 2
-    - enemySpecific: 0
-      count: 6
     - enemySpecific: 4
-      count: 1
-    enemySpawnDuration: 0.5
-    nextPhaseTrigger: 3
-    timer: 0
-    breakTime: 5
-  - enemyInfoList:
-    - enemySpecific: 0
-      count: 5
-    - enemySpecific: 1
-      count: 5
-    - enemySpecific: 2
-      count: 5
+      count: 30
     - enemySpecific: 3
-      count: 5
-    - enemySpecific: 4
-      count: 5
-    enemySpawnDuration: 0.5
-    nextPhaseTrigger: 3
+      count: 30
+    enemySpawnDuration: 0.1
+    nextWaveTrigger: 0
     timer: 0
     breakTime: 5

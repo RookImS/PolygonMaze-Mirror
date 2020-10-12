@@ -69,34 +69,36 @@ public class StageScriptableObject : ScriptableObject
     }
 
     [Serializable]
-    public class EnemyPhaseInfo
+    public class EnemyWaveInfo
     {
         [Header("1페이즈 당 적 정보")]
         public List<EnemyInfo> enemyInfoList;
 
         [Header("적 생성 주기")]
         public float enemySpawnDuration = 0.5f;
+
         [Serializable]
-        public enum NextPhaseTrigger
+        public enum NextWaveTrigger
         {
-            EnemyExterminated, // 적이 모두 등장
+            EnemyExterminated, // 해당 wave에서 마지막 적이 등장
             FirstEnemyDead, // 해당 wave의 첫번째 적이 사망
             HalfOfEnemyDead, // 해당 wave의 절반의 적이 사망
             LastEnemyDead, // 해당 wave의 마지막 적이 사망
             Timer // 특정 시간(timer)이 지난 이후
         }
+
         [Header("다음 페이즈 실행 조건")]
-        public NextPhaseTrigger nextPhaseTrigger;
+        public NextWaveTrigger nextWaveTrigger;
 
         [Header("페이즈 실행 조건이 Timer일 때 Setting")]
-        public int timer = 0;
+        public float timer = 0f;
 
-        [Header("다음 페이즈 실행 전까지 휴식 시간")]
+        [Header("이번 페이즈 실행 전까지 휴식 시간")]
         public float breakTime = 5.0f;
     }
 
     [Header("적 페이즈 정보")]
-    public List<EnemyPhaseInfo> baseEnemyPhases;
+    public List<EnemyWaveInfo> baseEnemyWaves;
 
 
 }

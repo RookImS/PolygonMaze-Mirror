@@ -75,6 +75,8 @@ public class EnemyStatSystem
     }
 
     public Stats baseStats;
+    public StatModifier baseStatModifier;
+
     public Stats stats { get; set; } = new Stats();
 
 
