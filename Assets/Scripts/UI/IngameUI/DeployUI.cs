@@ -35,7 +35,7 @@ public class DeployUI : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
 
     private void UpdateTowerCostText()
     {
-        if (realTower.GetComponent<TowerData>().cost > PlayerControl.Instance.playerData.cost)
+        if (realTower.GetComponent<TowerData>().cost > PlayerControl.Instance.playerData.currentCost)
             isDeployable = false;
         else
             isDeployable = true;

@@ -4,48 +4,44 @@ using UnityEngine;
 
 public class PlayerData
 {
-    public int cost;
-    public int life;
+    public int currentCost;
+    public int maxLife;
     public int currentLife;
 
-    public bool Init()
+    public void Init()
     {
-        this.cost = 500;
-        this.life = 50;
-        this.currentLife = this.life;
-
-        // 파일 정보 불러오기
-
-        return true;
+        currentCost = 0;
+        maxLife = 0;
+        currentLife = 0;
     }
+
     public void SetPlayer(int cost, int life)
     {
-        this.cost = cost;
-        this.life = life;
-        this.currentLife = this.life;
+        currentCost = cost;
+        maxLife = life;
+        currentLife = maxLife;
 
         // 컬러덱?
     }
 
-
     public bool ChangeCost(int cost)
     {
         
-        if (this.cost + cost < 0)
+        if (currentCost + cost < 0)
             return false;
 
-        this.cost += cost;
+        currentCost += cost;
 
         return true;
     }
 
     public void ChangeLife(int life)
     {
-        this.currentLife = Mathf.Clamp(this.currentLife + life, 0, this.life);
+        currentLife = Mathf.Clamp(currentLife + life, 0, maxLife);
+        
         if (currentLife <= 0)
             Death();
     }
-
 
     public void Death()
     {

@@ -20,6 +20,7 @@ public class EnemyBehaviour : MonoBehaviour
     // Start is called before the first frame update
     private void OnEnable()
     {
+        ChangeAgentSpeed(m_EnemyData.Stats.stats.speed);
         agent.SetDestination(destination.transform.position);
     }
 
@@ -28,8 +29,9 @@ public class EnemyBehaviour : MonoBehaviour
         m_EnemyData = GetComponent<EnemyData>();
         m_EnemyData.Init();
 
+        destination = GameObject.FindWithTag("Destination");
+
         agent = GetComponent<NavMeshAgent>();
-        agent.SetDestination(destination.transform.position);
     }
 
     public void Damage(int damage)

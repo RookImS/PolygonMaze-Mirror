@@ -35,13 +35,13 @@ public class StatusUI : MonoBehaviour
 
     void UpdateStatus()
     {
-        currentCost = PlayerControl.Instance.playerData.cost;
-        currentLife = PlayerControl.Instance.playerData.life;
+        currentCost = PlayerControl.Instance.playerData.currentCost;
+        currentLife = PlayerControl.Instance.playerData.currentLife;
 
         if (preCost != currentCost)
-            costText.text = PlayerControl.Instance.playerData.cost.ToString();
+            costText.text = PlayerControl.Instance.playerData.currentCost.ToString();
         if (preLife != currentLife)
-            lifeText.text = PlayerControl.Instance.playerData.life.ToString();
+            lifeText.text = PlayerControl.Instance.playerData.currentLife.ToString();
 
         preCost = currentCost;
         preLife = currentLife;
