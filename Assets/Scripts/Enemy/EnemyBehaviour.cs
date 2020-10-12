@@ -14,18 +14,14 @@ public class EnemyBehaviour : MonoBehaviour
 
     void Awake()
     {
-        Init();
-        path = new NavMeshPath();
-        destination = GameObject.FindWithTag("Destination");
-        
+        Init();   
     }
 
-    void Start()
+    // Start is called before the first frame update
+    private void OnEnable()
     {
-        ChangeAgentSpeed(m_EnemyData.Stats.stats.speed);
         agent.SetDestination(destination.transform.position);
     }
-
 
     void Init()
     {
@@ -33,25 +29,8 @@ public class EnemyBehaviour : MonoBehaviour
         m_EnemyData.Init();
 
         agent = GetComponent<NavMeshAgent>();
+        agent.SetDestination(destination.transform.position);
     }
-    
-    //public void MoveToDestination()
-    //{
-    //    destination = GameObject.FindWithTag("Destination");
-    //    agent.CalculatePath(destination.transform.position, path);
-    //    ChangeAgentSpeed(m_EnemyData.Stats.stats.speed);
-
-    //    if (path.status == NavMeshPathStatus.PathPartial)
-    //    {
-    //        //Debug.Log("Invalid path");
-    //    }
-    //    else
-    //    {
-    //        agent.SetPath(path);
-    //        //Debug.Log("valid path");
-    //    }
-        
-    //}
 
     public void Damage(int damage)
     {

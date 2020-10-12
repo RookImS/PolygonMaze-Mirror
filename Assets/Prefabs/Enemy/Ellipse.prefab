@@ -20,7 +20,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &4421627279371852161
 Transform:
   m_ObjectHideFlags: 0
@@ -62,12 +62,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   reward: 25
   damage: 1
-  desc: Elipse
   Stats:
     baseStats:
-      hp: 750
+      hp: 1500
       speed: 2
       def: 50
+    baseStatModifier:
+      ModifierMode: 1
+      Stats:
+        hp: 300
+        speed: 0
+        def: 0
 --- !u!65 &5850620350833123655
 BoxCollider:
   m_ObjectHideFlags: 0

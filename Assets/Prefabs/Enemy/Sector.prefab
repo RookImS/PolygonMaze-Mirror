@@ -20,7 +20,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &566694899878196549
 Transform:
   m_ObjectHideFlags: 0
@@ -62,12 +62,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   reward: 15
   damage: 1
-  desc: Sector
   Stats:
     baseStats:
-      hp: 500
+      hp: 1000
       speed: 4.5
       def: 0
+    baseStatModifier:
+      ModifierMode: 1
+      Stats:
+        hp: 200
+        speed: 0
+        def: 0
 --- !u!65 &7217041635517532021
 BoxCollider:
   m_ObjectHideFlags: 0
