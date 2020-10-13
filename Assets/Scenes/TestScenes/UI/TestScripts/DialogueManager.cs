@@ -47,7 +47,7 @@ public class DialogueManager : MonoSingleton<DialogueManager>
     void EndDialogue()
     {
         Debug.Log("EndDialogue");
-        TutorialManager.Instance.OnEndDialogue();
+        TutorialManager.Instance.OnNextTutorial();
     }
     // Update is called once per frame
     void Update()

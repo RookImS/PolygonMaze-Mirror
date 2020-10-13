@@ -27,11 +27,7 @@ public class PauseUI : MonoBehaviour
     public void RestartGame()
     {
         //PlayerControl.Instance.Init();
-        objs = GameObject.FindGameObjectsWithTag("Enemy");
-        foreach(GameObject obj in objs)
-        {
-            Destroy(obj);
-        }
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
 
     }
 

@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class TutorialManager : MonoSingleton<TutorialManager>
@@ -25,22 +23,40 @@ public class TutorialManager : MonoSingleton<TutorialManager>
     public GameObject NeutralTower;
     public GameObject NTAnim;
 
-
-
+    [Header("EndTutorial")]
+    public GameObject TutorialEnd;
 
     private void Awake()
     {
-        EndDialogue += SpawnerDestinationTutorial;
+        NextTutorial += SpawnerDestinationTutorial;
     }
+
     private void Start()
     {
-        EndDialogue();
+        NextTutorial();
     }
+
+    public void FirstTutorial()
+    {
+        if (GameManager.Instance.EnemyDeathCount == 1)
+        {
+            OnNextTutorial();
+            GameManager.Instance.InitCount();
+        }
+    }
+
+    public event Action NextTutorial;
+
+    public void OnNextTutorial()
+    {
+        NextTutorial?.Invoke();
+    }
+
     public void SpawnerDestinationTutorial()
     {
         SpawnerDestination.GetComponent<DialogueTrigger>().TriggerDialogue();
         SDAnim.SetActive(true);
-        EndDialogue += LifeTutorial;
+        NextTutorial += LifeTutorial;
     }
 
     public void LifeTutorial()
@@ -49,33 +65,42 @@ public class TutorialManager : MonoSingleton<TutorialManager>
         Life.GetComponent<DialogueTrigger>().TriggerDialogue();
         SDAnim.SetActive(false);
         LifeAnim.SetActive(true);
-        EndDialogue -= LifeTutorial;
-        EndDialogue += RemainEnemyTutorial;
+        NextTutorial -= LifeTutorial;
+        NextTutorial += RemainEnemyTutorial;
     }
 
     public void RemainEnemyTutorial()
     {
         RemainEnemy.GetComponent<DialogueTrigger>().TriggerDialogue();
         LifeAnim.SetActive(false);
-        LifeAnim.SetActive(true);
-        EndDialogue -= RemainEnemyTutorial;
-        EndDialogue += TowerDeployTutorial;
+        //REAnim.SetActive(true);
+        NextTutorial -= RemainEnemyTutorial;
+        NextTutorial += TowerDeployTutorial;
     }
 
     public void TowerDeployTutorial()
     {
         TowerDeployUI.GetComponent<DialogueTrigger>().TriggerDialogue();
+        //REAnim.SetActive(false);
+        TDAnim.SetActive(true);
+        NextTutorial -= TowerDeployTutorial;
+        NextTutorial += NeutralTowerTutoral;
     }
 
     public void NeutralTowerTutoral()
     {
         NeutralTower.GetComponent<DialogueTrigger>().TriggerDialogue();
+        TDAnim.SetActive(false);
+        NTAnim.SetActive(true);
+        NextTutorial -= NeutralTowerTutoral;
+        NextTutorial += EndTutorial;
     }
-
-    public event Action EndDialogue;
-
-    public void OnEndDialogue()
+    public void EndTutorial()
     {
-        EndDialogue?.Invoke();
+        TutorialEnd.GetComponent<DialogueTrigger>().TriggerDialogue();
+        NTAnim.SetActive(false);
+        NextTutorial -= EndTutorial;
     }
+    
+
 }
