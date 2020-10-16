@@ -15,6 +15,7 @@ public class LevelEditor : MonoBehaviour
 
     public static LevelEditor instance { get; private set; }
     private StageData stageData;
+
     private int playerLife;
     private int startCost;
     private List<GameObject> obstacleList;
@@ -191,7 +192,7 @@ public class LevelEditor : MonoBehaviour
     public void AddEnemyWaveInfoList(StageData.EnemyWaveInfo enemyWaveInfo)
     {
         this.enemyWaveInfoList.Add(enemyWaveInfo);
-        foreach(StageData.EnemyInfo enemyInfo in enemyWaveInfo.enemyInfos)
+        foreach(StageData.Enemies enemyInfo in enemyWaveInfo.enemyOneWave)
         {
             this.enemyNum += enemyInfo.count;
         }
@@ -200,7 +201,7 @@ public class LevelEditor : MonoBehaviour
     public void DeleteEnemyWaveInfoList(StageData.EnemyWaveInfo enemyWaveInfo)
     {
         this.enemyWaveInfoList.Remove(enemyWaveInfo);
-        foreach (StageData.EnemyInfo enemyInfo in enemyWaveInfo.enemyInfos)
+        foreach (StageData.Enemies enemyInfo in enemyWaveInfo.enemyOneWave)
         {
             this.enemyNum -= enemyInfo.count;
         }

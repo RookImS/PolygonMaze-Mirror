@@ -8,25 +8,10 @@ public class StageData
 {
     public string stageName;
     public int stageLevel;
+
     public int playerLife;
-    public int startMoney;
+    public int startCost;
 
-    [Serializable]
-    public class ObstacleInfo
-    {
-        public enum ObstacleSpecific
-        {
-            Triangle,
-            Square,
-            Pentagon,
-            Hexagon
-        }
-        public ObstacleSpecific obstacleSpecific;
-
-        public Vector3 position;
-        public Quaternion rotation;
-    }
-    public List<ObstacleInfo> baseObstacles;
 
     [Serializable]
     public class BlankInfo
@@ -43,11 +28,30 @@ public class StageData
         public Quaternion rotation;
     }
 
-    public List<BlankInfo> spawnerInfos;
-    public List<BlankInfo> destinationInfos;
+    public BlankInfo spawnerInfo;
+    public BlankInfo destinationInfo;
+
 
     [Serializable]
-    public class EnemyInfo
+    public class ObstacleInfo
+    {
+        public enum ObstacleSpecific
+        {
+            Triangle,
+            Square,
+            Pentagon,
+            Hexagon
+        }
+        public ObstacleSpecific obstacleSpecific;
+
+        public Vector3 position;
+        public Quaternion rotation;
+    }
+    public List<ObstacleInfo> obstacles;
+
+
+    [Serializable]
+    public class Enemies
     {
         public enum EnemySpecific
         {
@@ -64,7 +68,7 @@ public class StageData
     [Serializable]
     public class EnemyWaveInfo
     {
-        public List<EnemyInfo> enemyInfos;
+        public List<Enemies> enemyOneWave;
         public float enemySpawnDuration;
         [Serializable]
         public enum NextPhaseTrigger
@@ -73,22 +77,21 @@ public class StageData
             FirstEnemyDead, // 해당 wave의 첫번째 적이 사망
             HalfOfEnemyDead, // 해당 wave의 절반의 적이 사망
             LastEnemyDead, // 해당 wave의 마지막 적이 사망
-            Timer // 특정 시간이 지난 이후
         }
         public NextPhaseTrigger nextPhaseTrigger;
 
-        public int timer = 0;
         public float breakTime;
     }
-    public List<EnemyWaveInfo> baseEnemyWaveInfos;
+
+    public List<EnemyWaveInfo> enemyWaveInfos;
     public int enenmyNum;
 
     public StageData()
     {
-        baseObstacles = new List<ObstacleInfo>();
-        spawnerInfos = new List<BlankInfo>();
-        destinationInfos = new List<BlankInfo>();
-        baseEnemyWaveInfos = new List<EnemyWaveInfo>();
+        obstacles = new List<ObstacleInfo>();
+        spawnerInfo = null;
+        destinationInfo = null;
+        enemyWaveInfos = new List<EnemyWaveInfo>();
     }
 
     public void UpdateObstacleInfo(List<GameObject> gameObjectList)
@@ -109,7 +112,7 @@ public class StageData
             obstacleInfo.position = obj.transform.position;
             obstacleInfo.rotation = obj.transform.rotation;
 
-            baseObstacles.Add(obstacleInfo);
+            obstacles.Add(obstacleInfo);
         }
     }
 
@@ -129,9 +132,9 @@ public class StageData
             blankInfo.rotation = obj.transform.rotation;
 
             if (temp.blank.tag == "Spawner")
-                spawnerInfos.Add(blankInfo);
+                spawnerInfo = blankInfo;
             else if (temp.blank.tag == "Destination")
-                destinationInfos.Add(blankInfo);
+                destinationInfo = blankInfo;
         }
     }
 
@@ -139,7 +142,7 @@ public class StageData
     {
         foreach (EnemyWaveInfo obj in enemyWaveInfoList)
         {
-            baseEnemyWaveInfos.Add(obj);
+            enemyWaveInfos.Add(obj);
         }
     }
 

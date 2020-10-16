@@ -6,38 +6,43 @@ using UnityEngine.UI;
 
 public class PlayerSettingUISystem : MonoBehaviour
 {
+    private int playerLife;
+    private int startCost;
+    
     [Header("Player Setting Panel")]
     public GameObject playerSettingPanel;
     public GameObject playerLifeInputField;
     public GameObject startCostInputField;
 
+    private void Awake()
+    {
+        this.playerLife = -1;
+        this.startCost = -1;
+    }
+
     public void OnClickSaveButtonInPlayerSettingPanel()
     {
-        int playerLife = 0;
-        int startCost = 0;
-
-        if (!int.TryParse(this.playerLifeInputField.GetComponent<TMP_InputField>().text, out playerLife)
-            && !int.TryParse(this.startCostInputField.GetComponent<TMP_InputField>().text, out startCost))
+        if (!int.TryParse(this.playerLifeInputField.GetComponent<TMP_InputField>().text, out this.playerLife)
+            && !int.TryParse(this.startCostInputField.GetComponent<TMP_InputField>().text, out this.startCost))
         {
             StartCoroutine(LevelEditorUISystem.instance.ShowMessage(0));
-            this.playerLifeInputField.GetComponent<TMP_InputField>().text = "";
-            this.startCostInputField.GetComponent<TMP_InputField>().text = "";
+            this.playerLife = -1;
+            this.startCost = -1;
         }
-        else if (!int.TryParse(this.playerLifeInputField.GetComponent<TMP_InputField>().text, out playerLife))
+        else if (!int.TryParse(this.playerLifeInputField.GetComponent<TMP_InputField>().text, out this.playerLife))
         {
-            Debug.Log(playerLife);
             StartCoroutine(LevelEditorUISystem.instance.ShowMessage(1));
-            this.playerLifeInputField.GetComponent<TMP_InputField>().text = "";
+            this.playerLife = -1;
         }
-        else if (!int.TryParse(this.startCostInputField.GetComponent<TMP_InputField>().text, out startCost))
+        else if (!int.TryParse(this.startCostInputField.GetComponent<TMP_InputField>().text, out this.startCost))
         {
             StartCoroutine(LevelEditorUISystem.instance.ShowMessage(2));
-            this.playerLifeInputField.GetComponent<TMP_InputField>().text = "";
+            this.startCost = -1;
         }
         else
         {
-            LevelEditor.instance.SetPlayerLife(playerLife);
-            LevelEditor.instance.SetStartCost(startCost);
+            LevelEditor.instance.SetPlayerLife(this.playerLife);
+            LevelEditor.instance.SetStartCost(this.startCost);
 
             StartCoroutine(LevelEditorUISystem.instance.ShowMessage(3));
             this.playerSettingPanel.SetActive(false);
@@ -46,36 +51,42 @@ public class PlayerSettingUISystem : MonoBehaviour
                 LevelEditorUISystem.instance.ChangeButtonColor(LevelEditorUISystem.SettingUISystemSpecific.PlayerSetting,
                     LevelEditorUISystem.ButtonColor.ReadyColor);
         }
+
+        if(this.playerLife == -1)
+            this.playerLifeInputField.GetComponent<TMP_InputField>().text = "";
+        if(this.startCost == -1)
+            this.startCostInputField.GetComponent<TMP_InputField>().text = "";
     }
 
     public void OnClickResetButtonInPlayerSettingPanel()
     {
-        LevelEditor.instance.SetPlayerLife(-1);
-        LevelEditor.instance.SetStartCost(-1);
+        this.playerLife = -1;
+        this.startCost = -1;
 
-        this.playerLifeInputField.GetComponent<TMP_InputField>().text = "";
-        this.startCostInputField.GetComponent<TMP_InputField>().text = "";
+        if (this.playerLife == -1)
+            this.playerLifeInputField.GetComponent<TMP_InputField>().text = "";
+        if (this.startCost == -1)
+            this.startCostInputField.GetComponent<TMP_InputField>().text = "";
 
-        if(LevelEditor.instance.GetPlayerLife() == -1 && LevelEditor.instance.GetStartCost() == -1)
+        LevelEditor.instance.SetPlayerLife(this.playerLife);
+        LevelEditor.instance.SetStartCost(this.startCost);
+        
+        if (LevelEditor.instance.GetPlayerLife() == -1 && LevelEditor.instance.GetStartCost() == -1)
             LevelEditorUISystem.instance.ChangeButtonColor(LevelEditorUISystem.SettingUISystemSpecific.PlayerSetting,
                 LevelEditorUISystem.ButtonColor.NotReadyColor);
     }
 
     public void OnClickCancelButton()
     {
-        int playerLife = 0;
-        int startCost = 0;
-
-        if (this.playerLifeInputField.GetComponent<TMP_InputField>().text == ""
-            && this.startCostInputField.GetComponent<TMP_InputField>().text == "")
+        if (this.playerLife == -1 && this.startCost == -1)
             this.playerSettingPanel.SetActive(false);
         else
         {
-            if (int.TryParse(this.playerLifeInputField.GetComponent<TMP_InputField>().text, out playerLife)
-                && int.TryParse(this.startCostInputField.GetComponent<TMP_InputField>().text, out startCost))
+            if (int.TryParse(this.playerLifeInputField.GetComponent<TMP_InputField>().text, out this.playerLife)
+                && int.TryParse(this.startCostInputField.GetComponent<TMP_InputField>().text, out this.startCost))
             {
-                if (LevelEditor.instance.GetPlayerLife() == playerLife
-                    && LevelEditor.instance.GetStartCost() == startCost)
+                if (LevelEditor.instance.GetPlayerLife() == this.playerLife
+                    && LevelEditor.instance.GetStartCost() == this.startCost)
                     this.playerSettingPanel.SetActive(false);
                 else
                     LevelEditorUISystem.instance.ShowWarningPanel(this.playerSettingPanel);
@@ -94,7 +105,7 @@ public class PlayerSettingUISystem : MonoBehaviour
     {
         OnEndInputField(this.startCostInputField, 2);
     }
-
+     
     private void OnEndInputField(GameObject inputField, int flag)
     {
         int num = 0;
@@ -102,27 +113,41 @@ public class PlayerSettingUISystem : MonoBehaviour
         if (!int.TryParse(inputField.GetComponent<TMP_InputField>().text, out num))
         {
             StartCoroutine(LevelEditorUISystem.instance.ShowMessage(flag));
+            if (flag == 1)
+                this.playerLife = -1;
+            else
+                this.startCost = -1;
+            
             inputField.GetComponent<TMP_InputField>().text = "";
         }
         else
         {
-            if (flag == 1) // playerLife
-            {
+            if (flag == 1)
+            { // playerLife
                 if (!((1 <= num) && (num <= 20)))
                 {
+                    this.playerLife = -1;
                     StartCoroutine(LevelEditorUISystem.instance.ShowMessage(flag));
-                    inputField.GetComponent<TMP_InputField>().text = "";
                 }
+
+                this.playerLife = num;
             }
-            else if (flag == 2) // costStart
-            {
+            else if (flag == 2)
+            { // costStart
                 if (!((50 <= num) && (num <= 2000)))
                 {
+                    this.startCost = -1;
                     StartCoroutine(LevelEditorUISystem.instance.ShowMessage(flag));
-                    inputField.GetComponent<TMP_InputField>().text = "";
                 }
+                this.startCost = num;
             }
         }
+
+        if (this.playerLife == -1)
+            this.playerLifeInputField.GetComponent<TMP_InputField>().text = "";
+        if (this.startCost == -1)
+            this.startCostInputField.GetComponent<TMP_InputField>().text = "";
+
     }
 
 }

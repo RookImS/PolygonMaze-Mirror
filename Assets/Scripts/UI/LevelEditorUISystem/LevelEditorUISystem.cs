@@ -25,8 +25,8 @@ public class LevelEditorUISystem : MonoBehaviour
     }
 
     private bool coroutineFlag;
-    private Color32 readyColor;
-    private Color32 notReadyColor;
+    private static Color32 readyColor = new Color32(127, 255, 193, 255);
+    private static Color32 notReadyColor = new Color32(255, 255, 255, 255);
 
 
     //UI System
@@ -53,10 +53,12 @@ public class LevelEditorUISystem : MonoBehaviour
     private void Awake()
     {
         instance = this;
+        Init();
+    }
 
+    private void Init()
+    {
         coroutineFlag = false;
-        readyColor = new Color32(127, 255, 193, 255);
-        notReadyColor = new Color32(255, 255, 255, 255);
 
         playerSettingUISystem = this.gameObject.transform.GetComponent<PlayerSettingUISystem>();
         blankSettingUISystem = this.gameObject.transform.GetComponent<BlankSettingUISystem>();

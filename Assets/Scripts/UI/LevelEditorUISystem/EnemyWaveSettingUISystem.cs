@@ -14,20 +14,19 @@ public class EnemyWaveSettingUISystem : MonoBehaviour
     }
 
     private List<EnemyWaveUI> enemyWaveUIList;
-    private string waveStatTextFormat;
-    private string waveTextForamt;
+    private static string waveStatTextFormat = "Wave: {0} / {1}";
+    private static string waveTextForamt = "Wave{0}";
 
     [Header("Enemy Wave Setting")]
     public GameObject enemyWaveSettingMainPanel;
     public GameObject enemyWaveListPanel;
     public TextMeshProUGUI waveStatText;
     public GameObject enemyWaveSettingPanel;
-    public GameObject enemyListPanel;
 
     [Header("Preserved Prefabs")]
-    public GameObject waveButtonPrefab;
+    public GameObject commonButtonPrefab;
     public GameObject enemyWaveOptionalSettingPanelPrefab;
-    public GameObject enemyWaveInfosPanelPrefab;
+    public GameObject enemyOneWavePanelPrefab;
 
     [Header("Preserved values")]
     public float waveButtonOffset = 20f;
@@ -36,24 +35,25 @@ public class EnemyWaveSettingUISystem : MonoBehaviour
     private void Awake()
     {
         enemyWaveUIList = new List<EnemyWaveUI>();
-        waveStatTextFormat = "Wave: {0} / {1}";
-        waveTextForamt = "Wave{0}";
     }
 
     public void OnClickCancelButtonInEnemyWaveSettingMainPanel() { }
 
     public void OnClickAddWaveButton(GameObject waveAddButton)
     {
-        int waveNum = this.enemyWaveListPanel.transform.childCount - 1;
         RectTransform waveAddButtonRect = waveAddButton.GetComponent<RectTransform>();
         GameObject newWaveButton = null;
+        GameObject removeButton = null;
         EnemyWaveUI enemyWaveUI = null;
 
-        this.waveStatText.text = string.Format(this.waveStatTextFormat, waveNum, maxWaveNum);
+        
+        int waveNum = this.enemyWaveUIList.Count + 1;   
+
+        waveStatText.text = string.Format(waveStatTextFormat, waveNum, maxWaveNum);
 
         //creat waveButton
-        newWaveButton = GameObject.Instantiate(waveButtonPrefab, this.enemyWaveListPanel.transform);
-        newWaveButton.transform.GetChild(0).GetComponent<TMP_Text>().text = string.Format(this.waveTextForamt, waveNum);
+        newWaveButton = GameObject.Instantiate(commonButtonPrefab, this.enemyWaveListPanel.transform);
+        newWaveButton.transform.GetChild(0).GetComponent<TMP_Text>().text = string.Format(waveTextForamt, waveNum);
 
         newWaveButton.GetComponent<RectTransform>().anchoredPosition = waveAddButtonRect.anchoredPosition;
 
@@ -64,8 +64,23 @@ public class EnemyWaveSettingUISystem : MonoBehaviour
             = new Vector2(waveAddButtonRect.anchoredPosition.x,
             waveAddButtonRect.anchoredPosition.y - waveAddButtonRect.rect.height - waveButtonOffset);
 
+
         if (waveNum == maxWaveNum)
+        {
+            newWaveButton = GameObject.Instantiate(commonButtonPrefab, this.enemyWaveListPanel.transform);
+            newWaveButton.transform.GetChild(0).GetComponent<TMP_Text>().text = "Remove";
+
+            newWaveButton.GetComponent<RectTransform>().anchoredPosition = waveAddButtonRect.anchoredPosition;
+
+            newWaveButton.transform.GetComponent<Button>().onClick.AddListener(() => OnClickRemoveButton());
+
+            //move addWaveButton
+            waveAddButtonRect.anchoredPosition
+                = new Vector2(waveAddButtonRect.anchoredPosition.x,
+                waveAddButtonRect.anchoredPosition.y - waveAddButtonRect.rect.height - waveButtonOffset);
+
             Destroy(waveAddButton);
+        }
 
 
         enemyWaveUI = new EnemyWaveUI();
@@ -74,7 +89,7 @@ public class EnemyWaveSettingUISystem : MonoBehaviour
             = new Vector2(0, 0);
         enemyWaveUI.enemyWaveOptionalSettingPanel.SetActive(false);
 
-        enemyWaveUI.enemyWaveInfoPanel = GameObject.Instantiate(enemyWaveInfosPanelPrefab, this.enemyWaveSettingPanel.transform);
+        enemyWaveUI.enemyWaveInfoPanel = GameObject.Instantiate(enemyOneWavePanelPrefab, this.enemyWaveSettingPanel.transform);
         enemyWaveUI.enemyWaveInfoPanel.GetComponent<RectTransform>().anchoredPosition
             = new Vector2(enemyWaveUI.enemyWaveInfoPanel.GetComponent<RectTransform>().rect.width * 2, 0);
         enemyWaveUI.enemyWaveInfoPanel.SetActive(false);
@@ -131,6 +146,11 @@ public class EnemyWaveSettingUISystem : MonoBehaviour
             this.enemyWaveUIList[index].enemyWaveOptionalSettingPanel.SetActive(true);
             this.enemyWaveUIList[index].enemyWaveInfoPanel.SetActive(true);
         }
+    }
+
+    private void OnClickRemoveButton()
+    {
+        
     }
 
     private void OnClickCancelWaveButton(EnemyWaveUI enemyWaveUI)
