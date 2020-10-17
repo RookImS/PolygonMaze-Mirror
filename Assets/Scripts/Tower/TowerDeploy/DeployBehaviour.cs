@@ -156,6 +156,7 @@ public class DeployBehaviour : MonoBehaviour
         if (TagManager.Instance.isNotDeployableTag(other.gameObject.tag))
         {
             isDeployEnable = false;
+            Debug.Log(isDeployEnable);
         }
     }
 

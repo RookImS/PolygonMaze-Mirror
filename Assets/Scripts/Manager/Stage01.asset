@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   stageName: Tutorial
   stageLevel: 1
-  startCost: 200
+  startCost: 500
   playerLife: 10
   baseObstacles:
   - obstacleSpecific: 1
@@ -33,7 +33,7 @@ MonoBehaviour:
     position: {x: -4.07, y: 0, z: 1.69}
     rotation: {x: 0, y: 0, z: 0, w: 0}
   - obstacleSpecific: 1
-    position: {x: 4.21, y: 0, z: 0.1}
+    position: {x: 0, y: 0, z: 0.1}
     rotation: {x: 0, y: 0, z: 0, w: 0}
   - obstacleSpecific: 1
     position: {x: 0, y: 0, z: 1.1}
@@ -73,19 +73,19 @@ MonoBehaviour:
   baseEnemyWaves:
   - enemyInfoList:
     - enemySpecific: 0
-      count: 30
+      count: 5
     - enemySpecific: 1
-      count: 30
-    enemySpawnDuration: 0.1
+      count: 5
+    enemySpawnDuration: 1
     nextWaveTrigger: 0
     timer: 0
     breakTime: 5
   - enemyInfoList:
     - enemySpecific: 4
-      count: 30
+      count: 5
     - enemySpecific: 3
-      count: 30
-    enemySpawnDuration: 0.1
+      count: 5
+    enemySpawnDuration: 1
     nextWaveTrigger: 0
     timer: 0
     breakTime: 5

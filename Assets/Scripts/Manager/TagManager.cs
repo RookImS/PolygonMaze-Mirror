@@ -11,6 +11,7 @@ public class TagManager : MonoSingleton<TagManager>
     {
         buildingObjectTagList = new List<string>();
         enemyTagList = new List<string>();
+        Init();
     }
 
     public void Init()

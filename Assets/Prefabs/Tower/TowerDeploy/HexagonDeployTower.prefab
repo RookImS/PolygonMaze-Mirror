@@ -47,7 +47,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6da820c75eae8c348849b8510fef56c8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  realTower: {fileID: 7793056633140174654, guid: 28f744ba59eca824eb5c633def5f481b, type: 3}
   layerMask:
     serializedVersion: 2
     m_Bits: 512
@@ -149,6 +148,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: 235b18feb5dc56646865244610155d83, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 44f8a261ab4cd6244898ee3997a62815, type: 2}
     - target: {fileID: 919132149155446097, guid: 235b18feb5dc56646865244610155d83, type: 3}
       propertyPath: m_Name
       value: 1.01Hexagon

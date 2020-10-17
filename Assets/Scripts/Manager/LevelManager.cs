@@ -396,7 +396,7 @@ public class LevelManager : MonoBehaviour
                 breakTime -= Time.deltaTime;
 
                 //Change Debug.Log to UI.text in UI system!
-                Debug.Log(string.Format("Timer: {0}", Mathf.Floor(breakTime)));
+                //Debug.Log(string.Format("Timer: {0}", Mathf.Floor(breakTime)));
             }
 
             yield return null;
