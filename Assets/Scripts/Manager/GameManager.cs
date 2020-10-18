@@ -68,7 +68,6 @@ public class GameManager : MonoBehaviour
         DeployTower += TimeRestore;
         Debug.Log("start");
 
-        _EnemyDeathCount++;
     }
     public static Stack<int> stack = new Stack<int>();  //BackKey 기능을 위해 씬 Buildindex를 저장하는 스택
 
@@ -111,6 +110,17 @@ public class GameManager : MonoBehaviour
         Debug.Log("로드된 scene buildindex: " + scene.buildIndex);
         Debug.Log("OnSceneLoaded : " + scene.name);
     }
+    public void ReturnToMain()
+    {
+        SceneManager.LoadScene("MainScene");
+    }
+
+    public void RestartGame()
+    {
+        //PlayerControl.Instance.Init();
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+    }
+
     public void SlowTime()
     {
         Time.timeScale = 0.5f;
@@ -150,7 +160,7 @@ public class GameManager : MonoBehaviour
         get{ return _DeployTowerCount;}
     }
 
-    public void InitCount()
+    public void InitCounter()
     {
         _EnemyDeathCount = 0;
         _EnemyEscapeCount = 0;
@@ -163,6 +173,7 @@ public class GameManager : MonoBehaviour
     }
     public void OnDeployTower()
     {
+        _DeployTowerCount++;
         DeployTower?.Invoke();
     }
     public void OnEnemyDeath()
@@ -170,9 +181,21 @@ public class GameManager : MonoBehaviour
         _EnemyDeathCount++;
         EnemyDeath?.Invoke();
     }
+    public void OnEnemyEscape()
+    {
+        _EnemyEscapeCount++;
+        EnemyEscape?.Invoke();
+    }
     public void OnPlayerDeath()
     {
+        PanelUISystem.Instance.BackGroundPanel.SetActive(true);
+        PanelUISystem.Instance.GameOverPanel.SetActive(true);
         PlayerDeath?.Invoke();
+    }
+    public void OnStageClear()
+    {
+        PanelUISystem.Instance.BackGroundPanel.SetActive(true);
+        PanelUISystem.Instance.GameClearPanel.SetActive(true);
     }
 
 

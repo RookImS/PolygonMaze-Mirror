@@ -10,7 +10,7 @@ public class PlayerData
 
     public bool Init()
     {
-        this.cost = 150;
+        this.cost = 99999;
         this.life = 50;
         this.currentLife = this.life;
 

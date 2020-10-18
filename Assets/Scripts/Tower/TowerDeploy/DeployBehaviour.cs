@@ -143,6 +143,7 @@ public class DeployBehaviour : MonoBehaviour
                 checker.ApplyPath();
 
                 PlayerControl.Instance.Call();
+                GameManager.Instance.OnDeployTower();
             }
             else
             {

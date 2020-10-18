@@ -6,9 +6,6 @@ using UnityEngine.SceneManagement;
 
 public class PauseUI : MonoBehaviour
 {
-    // Start is called before the first frame update
-    GameObject[] objs;
-
     public void Pause()
     {
         Time.timeScale = 0f;
@@ -26,9 +23,7 @@ public class PauseUI : MonoBehaviour
 
     public void RestartGame()
     {
-        //PlayerControl.Instance.Init();
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
-
     }
 
 }

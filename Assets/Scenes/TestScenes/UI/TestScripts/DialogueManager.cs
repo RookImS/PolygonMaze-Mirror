@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -7,9 +8,10 @@ public class DialogueManager : MonoSingleton<DialogueManager>
 {
     public TextMeshProUGUI name;
     public TextMeshProUGUI dialogueText;
+
     public GameObject NextDialoguePanel;
     private Queue<string> sentences;
-
+    
     // Start is called before the first frame update
     void Awake()
     {
@@ -18,6 +20,7 @@ public class DialogueManager : MonoSingleton<DialogueManager>
 
     public void StartDialogue (Dialogue dialogue)
     {
+        NextDialoguePanel.SetActive(true);
         Debug.Log("Starting" + dialogue.name);
 
         sentences.Clear();
@@ -34,25 +37,21 @@ public class DialogueManager : MonoSingleton<DialogueManager>
     {
         if(sentences.Count == 0)
         {
-            EndDialogue();
+            OnEndDialogue();
             return;
         }
         string sentence = sentences.Dequeue();
-
+        //Coroutine a = StartCoroutine(TypeSentence(sentence));
+        //StopCoroutine(a);
         StopAllCoroutines();
         StartCoroutine(TypeSentence(sentence));
-
     }
-
-    void EndDialogue()
+    public event Action EndDialogue;
+    public void OnEndDialogue()
     {
         Debug.Log("EndDialogue");
-        TutorialManager.Instance.OnNextTutorial();
-    }
-    // Update is called once per frame
-    void Update()
-    {
-        
+        NextDialoguePanel.SetActive(false);
+        EndDialogue?.Invoke();
     }
 
     IEnumerator TypeSentence(string sentence)
