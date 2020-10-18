@@ -65,7 +65,7 @@ MonoBehaviour:
   Stats:
     baseStats:
       hp: 1000
-      speed: 3
+      speed: 2
       def: 5
     baseStatModifier:
       ModifierMode: 1
@@ -84,7 +84,7 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.75, y: 1, z: 0.75}
+  m_Size: {x: 0.71, y: 1, z: 0.71}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!195 &5597580354566801672
 NavMeshAgent:

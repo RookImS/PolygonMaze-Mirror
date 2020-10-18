@@ -8,7 +8,6 @@ public class TowerData : MonoBehaviour
     public string TowerDescription;
 
     public TowerStatSystem Stats;
-    public int cost;
     public List<GameObject> neighbor;
     
     public TColor color;    // public x

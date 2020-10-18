@@ -24,6 +24,14 @@ public class PlayerData
         // 컬러덱?
     }
 
+    public bool CheckCost(int cost)
+    {
+        if (currentCost + cost < 0)
+            return false;
+
+        return true;
+    }
+
     public bool ChangeCost(int cost)
     {
         

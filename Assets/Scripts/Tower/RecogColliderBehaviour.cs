@@ -1,16 +1,12 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class RecogColliderBehaviour : MonoBehaviour
 {
     public TowerBehaviour parentTowerBehaviour;
-    private List<int> nullIndexList;
-
-    private void Awake()
-    {
-        nullIndexList = new List<int>();
-    }
+    public List<int> nullIndexList;
 
     private void Update()
     {
@@ -19,18 +15,18 @@ public class RecogColliderBehaviour : MonoBehaviour
 
     private void CheckNull()
     {
+        nullIndexList = new List<int>();
+
         for (int i = 0; i < parentTowerBehaviour.targetList.Count; i++)
         {
             if (parentTowerBehaviour.targetList[i] == null)
                 nullIndexList.Add(i);
         }
 
-        foreach (int i in nullIndexList)
+        for(int i = nullIndexList.Count - 1; i >= 0; i--)
         {
             parentTowerBehaviour.targetList.RemoveAt(i);
         }
-
-        nullIndexList.Clear();
     }
 
     private void OnTriggerEnter(Collider other)
@@ -40,6 +36,7 @@ public class RecogColliderBehaviour : MonoBehaviour
             parentTowerBehaviour.targetList.Add(other.gameObject);
         }
     }
+
     private void OnTriggerExit(Collider other)
     {
         if (TagManager.Instance.isEnemyTag(other.gameObject.tag))

@@ -44,7 +44,6 @@ public class TowerBehaviour : MonoBehaviour
             fireCountDown = 1f / m_TowerData.Stats.stats.attackRate;
         }
         fireCountDown -= Time.deltaTime;
-        Debug.Log("cooldown : " + fireCountDown);
     }
 
     public void Init()

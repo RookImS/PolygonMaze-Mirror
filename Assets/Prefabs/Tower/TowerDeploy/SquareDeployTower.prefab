@@ -50,7 +50,9 @@ MonoBehaviour:
   layerMask:
     serializedVersion: 2
     m_Bits: 512
+  cost: 50
   innerRadius: 0.5
+  renderer: {fileID: 2667019962612411333}
 --- !u!64 &6091049852292420747
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -165,5 +167,10 @@ PrefabInstance:
 --- !u!4 &3839323467539058858 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 1b6e096804499e741ac7041fd35fcb6d, type: 3}
+  m_PrefabInstance: {fileID: 3657693824102299457}
+  m_PrefabAsset: {fileID: 0}
+--- !u!23 &2667019962612411333 stripped
+MeshRenderer:
+  m_CorrespondingSourceObject: {fileID: -7511558181221131132, guid: 1b6e096804499e741ac7041fd35fcb6d, type: 3}
   m_PrefabInstance: {fileID: 3657693824102299457}
   m_PrefabAsset: {fileID: 0}

@@ -1,6 +1,7 @@
 ﻿using JetBrains.Annotations;
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.Remoting.Lifetime;
 using System.Threading;
 using UnityEngine;
 using UnityEngine.AI;
@@ -13,7 +14,9 @@ public class DeployBehaviour : MonoBehaviour
     private NavMeshSurface checkerNav;
     private NavMeshSurface enemyNav;
 
+    public int cost;
     public float innerRadius;
+    public Renderer renderer;
 
     private bool isDeployEnable;
     private bool isProperLocate;
@@ -36,6 +39,8 @@ public class DeployBehaviour : MonoBehaviour
     private void Update()
     {
         isPathEnable = CheckPath();
+        isDeployEnable = CheckDeployEnable();
+        isSkipFrame = CheckSkipFrame();
     }
 
     public GameObject LocateTower(Vector3 mousePos)
@@ -61,23 +66,10 @@ public class DeployBehaviour : MonoBehaviour
 
             isProperLocate = true;
 
-            // check path
-            if (isPathEnable)
-            {
-                isDeployEnable = true;
-                return objectHit.gameObject.GetComponent<SideColliderBehavior>().parentObject;
-            }
-            else
-            {
-                isDeployEnable = false;
-                return null;
-            }
+            return objectHit.gameObject.GetComponent<SideColliderBehavior>().parentObject;
         }
         else
         {
-            // rotate tower to origin angle
-            isDeployEnable = false;
-
             // update checker navMesh
             GetComponent<NavMeshModifier>().ignoreFromBuild = true;
             checkerNav.UpdateNavMesh(checkerNav.navMeshData);
@@ -100,7 +92,7 @@ public class DeployBehaviour : MonoBehaviour
         transform.position = pos.position + targetPoint;
     }
 
-    public bool CheckPath()
+    private bool CheckPath()
     {
         bool temp;
 
@@ -109,39 +101,73 @@ public class DeployBehaviour : MonoBehaviour
             temp = checker.CalculatePath();
             if (isSkipFrame)
             {
-                isSkipFrame = false;
                 return false;
             }
             else
                 return temp;
         }
-        else
-            isSkipFrame = true;
 
         return false;
     }
 
-    public void DeployTower(GameObject neighborObject, GameObject realTower)
+    private bool CheckDeployEnable()
     {
-
-        if (isDeployEnable)
+        if (PlayerControl.Instance.CheckCost(cost))
         {
-            if (PlayerControl.Instance.UseCost(realTower.GetComponent<TowerData>().cost))
-            { 
-                GameObject newTower = Instantiate(realTower, transform.position, transform.rotation);
+            if (isPathEnable && isProperLocate && !isOverlapped)
+            {
+                renderer.material.color = new Color(1f, 1f, 1f, 85 / 255f);
 
-                if (!neighborObject.CompareTag("Obstacle"))
-                    neighborObject.GetComponent<TowerBehaviour>().SetNeighbor(newTower);
-                newTower.GetComponent<TowerBehaviour>().SetNeighbor(neighborObject);
-
-                // update enemy navMesh
-                enemyNav.UpdateNavMesh(enemyNav.navMeshData);
-                checker.ApplyPath();
+                return true;
             }
             else
             {
-                //부족하다고 알리는 트리거
+                if (isProperLocate)
+                {
+                    if (!isSkipFrame)
+                    {
+                        renderer.material.color = new Color(1f, 170 / 255f, 170 / 255f, 85 / 255f);
+                    }
+                }
+                else
+                {
+                    renderer.material.color = new Color(1f, 1f, 1f, 85 / 255f);
+                }
+
+                return false;
             }
+        }
+        else
+        {
+            renderer.material.color = new Color(1f, 170 / 255f, 170 / 255f, 85 / 255f);
+            return false;
+        }
+    }
+
+    private bool CheckSkipFrame()
+    {
+        if (isProperLocate)
+            return false;
+        else
+            return true;
+    }
+
+    public void DeployTower(GameObject neighborObject, GameObject realTower)
+    {
+        if (isDeployEnable)
+        {
+            PlayerControl.Instance.UseCost(cost);
+
+            GameObject newTower = Instantiate(realTower, transform.position, transform.rotation);
+
+            if (!neighborObject.CompareTag("Obstacle"))
+                neighborObject.GetComponent<TowerBehaviour>().SetNeighbor(newTower);
+            newTower.GetComponent<TowerBehaviour>().SetNeighbor(neighborObject);
+
+            // update enemy navMesh
+            enemyNav.UpdateNavMesh(enemyNav.navMeshData);
+            checker.ApplyPath();
+
         }
 
         // update checker navMesh
@@ -155,8 +181,16 @@ public class DeployBehaviour : MonoBehaviour
     {
         if (TagManager.Instance.isNotDeployableTag(other.gameObject.tag))
         {
-            isDeployEnable = false;
-            Debug.Log(isDeployEnable);
+            if (isProperLocate)
+                isOverlapped = true;
+        }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (TagManager.Instance.isNotDeployableTag(other.gameObject.tag))
+        {
+            isOverlapped = false;
         }
     }
 

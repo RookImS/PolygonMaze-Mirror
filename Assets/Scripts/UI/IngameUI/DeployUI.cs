@@ -29,13 +29,13 @@ public class DeployUI : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
 
     private void Init()
     {
-        towerCostText.text = realTower.GetComponent<TowerData>().cost.ToString();
+        towerCostText.text = deployTower.GetComponent<DeployBehaviour>().cost.ToString();
         isDeployable = false;
     }
 
     private void UpdateTowerCostText()
     {
-        if (realTower.GetComponent<TowerData>().cost > PlayerControl.Instance.playerData.currentCost)
+        if (deployTower.GetComponent<DeployBehaviour>().cost > PlayerControl.Instance.playerData.currentCost)
             isDeployable = false;
         else
             isDeployable = true;
