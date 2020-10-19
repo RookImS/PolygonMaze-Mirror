@@ -4,9 +4,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+
 public class DialogueManager : MonoSingleton<DialogueManager>
 {
-    public TextMeshProUGUI name;
     public TextMeshProUGUI dialogueText;
 
     public GameObject NextDialoguePanel;

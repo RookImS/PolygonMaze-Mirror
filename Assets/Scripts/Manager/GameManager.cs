@@ -14,9 +14,8 @@ public class GameManager : MonoBehaviour
     public static PlayerData playerdata;
     public static TowerData towerdata;
     public static EnemyData enemydata;
-    public static DeployBehaviour deploybehavior;
+    public static DeployBehaviour deploybehaviour;
     public static TowerBehaviour towerbehaviour;
-    public static UISystem uisystem;
 
     public GameState currentGameState;
     bool isGameOver;
@@ -121,9 +120,9 @@ public class GameManager : MonoBehaviour
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 
-    public void SlowTime()
+    public void SlowTime(float scale)
     {
-        Time.timeScale = 0.5f;
+        Time.timeScale = scale;
     }
     public void TimeRestore()
     {

@@ -126,6 +126,7 @@ public class TutorialManager : MonoSingleton<TutorialManager>
         SetPanel(0, 0);
         SpawnerDestination.GetComponent<DialogueTrigger>().TriggerDialogue();
         DialogueManager.Instance.EndDialogue += SDTutorialEnd;
+        DialogueManager.Instance.EndDialogue += OnNextTutorial;
     }
     public void SDTutorialEnd()
     {
@@ -135,7 +136,7 @@ public class TutorialManager : MonoSingleton<TutorialManager>
         {
             Tower.SetActive(true);
         }
-        StartCoroutine(TowerDeployChecker(1));
+        //StartCoroutine(TowerDeployChecker(1));
         DialogueManager.Instance.EndDialogue -= SDTutorialEnd;
     }
 
