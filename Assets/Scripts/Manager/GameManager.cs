@@ -65,7 +65,6 @@ public class GameManager : MonoBehaviour
         GameStart += StartGame;
 
         DeployTower += TimeRestore;
-        Debug.Log("start");
 
     }
     public static Stack<int> stack = new Stack<int>();  //BackKey 기능을 위해 씬 Buildindex를 저장하는 스택
@@ -92,22 +91,22 @@ public class GameManager : MonoBehaviour
 
     private void OnEnable() //GameManager 활성화시 sceneLoaded 이벤트에 OnSceneLoaded 함수 추가
     {
-        Debug.Log("활성화");
+        //Debug.Log("활성화");
         SceneManager.sceneLoaded += OnSceneLoaded;
     }
 
     private void OnDisable()    //GameManager 비활성화시 sceneLoaded 이벤트에서 OnSceneLoaded 함수 제거(비활성화 될 일이 있나?)
     {
-        Debug.Log("비활성화");
+        //Debug.Log("비활성화");
         SceneManager.sceneLoaded -= OnSceneLoaded;
     }
 
     void OnSceneLoaded(Scene scene, LoadSceneMode mode) //씬이 로드되면 로드된 씬의 buildindex를 스택에 저장.
     {
-        Debug.Log("씬이동");
+        //Debug.Log("씬이동");
         stack.Push(scene.buildIndex);
-        Debug.Log("로드된 scene buildindex: " + scene.buildIndex);
-        Debug.Log("OnSceneLoaded : " + scene.name);
+        //Debug.Log("로드된 scene buildindex: " + scene.buildIndex);
+        //Debug.Log("OnSceneLoaded : " + scene.name);
     }
     public void ReturnToMain()
     {

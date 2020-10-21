@@ -651,7 +651,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &148472574
 RectTransform:
   m_ObjectHideFlags: 0
@@ -659,12 +659,12 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 148472573}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 1739927861}
-  m_RootOrder: 0
+  m_Father: {fileID: 264969561}
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -688,13 +688,13 @@ MonoBehaviour:
     callback:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 0}
-          m_TargetAssemblyTypeName: 
-          m_MethodName: 
+        - m_Target: {fileID: 2054193942}
+          m_TargetAssemblyTypeName: Stage1, Assembly-CSharp
+          m_MethodName: InvokeNextTutorial
           m_Mode: 1
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: 
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
             m_IntArgument: 0
             m_FloatArgument: 0
             m_StringArgument: 
@@ -1420,6 +1420,7 @@ RectTransform:
   - {fileID: 376805161}
   - {fileID: 1684162189}
   - {fileID: 1739927861}
+  - {fileID: 148472574}
   m_Father: {fileID: 425910109}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -5734,6 +5735,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1739927861}
+  - component: {fileID: 1739927862}
   m_Layer: 5
   m_Name: DialogueUI
   m_TagString: Untagged
@@ -5751,8 +5753,7 @@ RectTransform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children:
-  - {fileID: 148472574}
+  m_Children: []
   m_Father: {fileID: 264969561}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -5761,6 +5762,21 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1739927862
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1739927860}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 000a93763c52ede4ba6e872d7c651f3a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  invokePanel: {fileID: 148472573}
+  textPanel: {fileID: 5317914029332152831, guid: b9bd6392e5bf3694fbc79ef7efc1afa3, type: 3}
+  TMProtext: {fileID: 509898620331599262, guid: f672699ea3f19e94495228952d8dacd6, type: 3}
 --- !u!1 &1750736112
 GameObject:
   m_ObjectHideFlags: 0
@@ -6347,8 +6363,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2054193941}
+  - component: {fileID: 2054193942}
   m_Layer: 0
-  m_Name: Tutorial1
+  m_Name: Tutorial
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6368,6 +6385,21 @@ Transform:
   m_Father: {fileID: 425910109}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2054193942
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2054193940}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c787eb6988381054eb12b7292c99a6c2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  inGameUI: {fileID: 264969560}
+  tutorial: {fileID: 11400000, guid: 0e397efc5afea0646b66768d7d0ebd18, type: 2}
+  dialogueUI: {fileID: 1739927862}
 --- !u!1001 &5162274923121101771
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -6377,7 +6409,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 786983151131462667, guid: 131b2868bd49c8140af1cdfcfd739e4a, type: 3}
       propertyPath: m_VoxelSize
-      value: 0.11666667
+      value: 0.1
       objectReference: {fileID: 0}
     - target: {fileID: 786983151131462667, guid: 131b2868bd49c8140af1cdfcfd739e4a, type: 3}
       propertyPath: m_NavMeshData
@@ -6437,7 +6469,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7223117734520093806, guid: 131b2868bd49c8140af1cdfcfd739e4a, type: 3}
       propertyPath: m_VoxelSize
-      value: 0.11666667
+      value: 0.1
       objectReference: {fileID: 0}
     - target: {fileID: 7223117734520093806, guid: 131b2868bd49c8140af1cdfcfd739e4a, type: 3}
       propertyPath: m_NavMeshData
