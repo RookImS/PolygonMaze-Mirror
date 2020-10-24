@@ -184,17 +184,17 @@ public class GameManager : MonoBehaviour
         _EnemyEscapeCount++;
         EnemyEscape?.Invoke();
     }
-    public void OnPlayerDeath()
-    {
-        PanelUISystem.Instance.BackGroundPanel.SetActive(true);
-        PanelUISystem.Instance.GameOverPanel.SetActive(true);
-        PlayerDeath?.Invoke();
-    }
-    public void OnStageClear()
-    {
-        PanelUISystem.Instance.BackGroundPanel.SetActive(true);
-        PanelUISystem.Instance.GameClearPanel.SetActive(true);
-    }
+    //public void OnPlayerDeath()
+    //{
+    //    PanelUISystem.Instance.BackGroundPanel.SetActive(true);
+    //    PanelUISystem.Instance.GameOverPanel.SetActive(true);
+    //    PlayerDeath?.Invoke();
+    //}
+    //public void OnStageClear()
+    //{
+    //    PanelUISystem.Instance.BackGroundPanel.SetActive(true);
+    //    PanelUISystem.Instance.GameClearPanel.SetActive(true);
+    //}
 
 
     //void test()

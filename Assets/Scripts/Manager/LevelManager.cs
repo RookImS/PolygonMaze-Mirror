@@ -49,6 +49,12 @@ public class LevelManager : MonoBehaviour
     public GameObject pentagonObstaclePrefab;
     public GameObject hexagonObstaclePrefab;
 
+    [Header("Preserved Tower Prefabs")]
+    public GameObject triangleTowerPrefab;
+    public GameObject squareTowerPrefab;
+    public GameObject pentagonTowerPrefab;
+    public GameObject hexagonTowerPrefab;
+
     [Header("Preserved Spawner & Destination Prefabs")]
     public GameObject spawnerPrefab;
     public GameObject destinationPrefab;
@@ -93,6 +99,7 @@ public class LevelManager : MonoBehaviour
     public void LoadStage()
     {
         LoadObstacles();
+        LoadTowers();
         LoadBlanks();
         BakeNavMeshSurfaces();
         LoadChecker();
@@ -128,6 +135,37 @@ public class LevelManager : MonoBehaviour
 
             GameObject.Instantiate(prefab, info.position, info.rotation, obstacles.transform);
         }
+    }
+
+    /* LoadTowers
+     * 1. Load towers.
+     * 2. Etc...
+     */
+    public void LoadTowers()
+    {
+        GameObject towers = null;
+        GameObject prefab = null;
+
+
+        towers = new GameObject("Towers");
+        towers.transform.SetParent(this.stageGameObject.transform);
+
+        //foreach (StageScriptableObject.TowerInfo info in this.stageData.baseTowers)
+        //{
+        //    if (info.towerSpecific
+        //        == StageScriptableObject.ObstacleInfo.TowerSpecific.Triangle)
+        //        prefab = this.triangleObstaclePrefab;
+        //    else if (info.towerSpecific
+        //        == StageScriptableObject.ObstacleInfo.TowerSpecific.Square)
+        //        prefab = this.squareObstaclePrefab;
+        //    else if (info.towerSpecific
+        //        == StageScriptableObject.ObstacleInfo.TowerSpecific.Pentagon)
+        //        prefab = this.pentagonObstaclePrefab;
+        //    else // Hexagon
+        //        prefab = this.hexagonObstaclePrefab;
+
+        //    GameObject.Instantiate(prefab, info.position, info.rotation, towers.transform);
+        //}
     }
 
     /* LoadBlank

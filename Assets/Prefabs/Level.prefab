@@ -55,6 +55,10 @@ MonoBehaviour:
   squareObstaclePrefab: {fileID: 473488529774513135, guid: baeac571ebcd13f47bc9ced6aa28830a, type: 3}
   pentagonObstaclePrefab: {fileID: 8811219413331195968, guid: aff5fd265d44f784f879c1832ee35158, type: 3}
   hexagonObstaclePrefab: {fileID: 3828187391709597441, guid: f87cb2e2b2a258747bf34d6a41488266, type: 3}
+  triangleTowerPrefab: {fileID: 346010008869247008, guid: 240e68458cec7ef41b7cce2a9eaeed4e, type: 3}
+  squareTowerPrefab: {fileID: 7271484921240024667, guid: 74c8413134add1641be9e2920c61074c, type: 3}
+  pentagonTowerPrefab: {fileID: 8996109028398955742, guid: 839d106aeeab58f46bd7583d20639abd, type: 3}
+  hexagonTowerPrefab: {fileID: 7793056633140174654, guid: 28f744ba59eca824eb5c633def5f481b, type: 3}
   spawnerPrefab: {fileID: 4546852089631936315, guid: 7df10d63958ab0e4588c29bbc1daf156, type: 3}
   destinationPrefab: {fileID: 7480299383816322787, guid: 20d93f3818eb2d54b84e0e1c3a5f0921, type: 3}
   checkerPrefab: {fileID: 1314094695183363131, guid: a0e49eec94a0b6d43a801c1861760481, type: 3}

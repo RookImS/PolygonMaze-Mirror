@@ -50,6 +50,7 @@ MonoBehaviour:
   layerMask:
     serializedVersion: 2
     m_Bits: 512
+  level: {fileID: 5162274923920270625, guid: 131b2868bd49c8140af1cdfcfd739e4a, type: 3}
   cost: 50
   innerRadius: 0.5
   renderer: {fileID: 2667019962612411333}

@@ -10,7 +10,8 @@ public class DeployBehaviour : MonoBehaviour
 {
     public LayerMask layerMask;
 
-    private CheckerBehaviour checker;
+    private GameObject towersGameObject;
+        private CheckerBehaviour checker;
     private NavMeshSurface checkerNav;
     private NavMeshSurface enemyNav;
 
@@ -30,6 +31,7 @@ public class DeployBehaviour : MonoBehaviour
         checkerNav = GameObject.Find("CheckerNavMeshSurface").GetComponent<NavMeshSurface>();
         enemyNav = GameObject.Find("EnemyNavMeshSurface").GetComponent<NavMeshSurface>();
         checker = GameObject.FindGameObjectWithTag("Checker").GetComponent<CheckerBehaviour>();
+        towersGameObject = GameObject.Find("Towers");
 
         isDeployEnable = false;
         isProperLocate = false;
@@ -158,7 +160,7 @@ public class DeployBehaviour : MonoBehaviour
         {
             PlayerControl.Instance.UseCost(cost);
 
-            GameObject newTower = Instantiate(realTower, transform.position, transform.rotation);
+            GameObject newTower = Instantiate(realTower, transform.position, transform.rotation, towersGameObject.transform);
 
             if (!neighborObject.CompareTag("Obstacle"))
                 neighborObject.GetComponent<TowerBehaviour>().SetNeighbor(newTower);

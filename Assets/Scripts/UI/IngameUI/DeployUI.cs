@@ -9,8 +9,9 @@ public class DeployUI : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
 {
     public GameObject deployTower;
     public GameObject realTower;
+
     private GameObject newObject;
-    private GameObject hitObject;
+    public GameObject hitObject;
 
     private bool isDeployable;
     public TextMeshProUGUI towerCostText;
@@ -65,5 +66,8 @@ public class DeployUI : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
         newObject.GetComponent<DeployBehaviour>().DeployTower(hitObject, realTower);
 
         Time.timeScale = 1f;
+
+        newObject = null;
+        hitObject = null;
     }
 }

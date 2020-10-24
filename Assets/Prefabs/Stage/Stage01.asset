@@ -18,7 +18,7 @@ MonoBehaviour:
   playerLife: 10
   baseObstacles:
   - obstacleSpecific: 1
-    position: {x: -4.07, y: 0, z: -2.31}
+    position: {x: -2.07, y: 0, z: -0.31}
     rotation: {x: 0, y: 0, z: 0, w: 0}
   - obstacleSpecific: 1
     position: {x: -4.07, y: 0, z: -1.31}
@@ -30,7 +30,7 @@ MonoBehaviour:
     position: {x: -4.07, y: 0, z: 0.69}
     rotation: {x: 0, y: 0, z: 0, w: 0}
   - obstacleSpecific: 1
-    position: {x: -4.07, y: 0, z: 1.69}
+    position: {x: -5.07, y: 0, z: 1.69}
     rotation: {x: 0, y: 0, z: 0, w: 0}
   - obstacleSpecific: 1
     position: {x: 0, y: 0, z: 0.1}
@@ -48,10 +48,10 @@ MonoBehaviour:
     position: {x: 0, y: 0, z: 4.1}
     rotation: {x: 0, y: 0, z: 0, w: 0}
   - obstacleSpecific: 1
-    position: {x: 4.21, y: 0, z: 1.69}
+    position: {x: 3.21, y: 0, z: 1.69}
     rotation: {x: 0, y: 0, z: 0, w: 0}
   - obstacleSpecific: 1
-    position: {x: 4.21, y: 0, z: 0.69}
+    position: {x: 5.21, y: 0, z: 0.69}
     rotation: {x: 0, y: 0, z: 0, w: 0}
   - obstacleSpecific: 1
     position: {x: 4.21, y: 0, z: -0.31}

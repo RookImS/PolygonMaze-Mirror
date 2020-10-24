@@ -7,7 +7,7 @@ public class SideColliderBehavior : MonoBehaviour
 {
     public GameObject parentObject;
 
-    private void OnTriggerEnter(Collider other)
+    private void OnTriggerStay(Collider other)
     {
         if (TagManager.Instance.isBuildingObjectTag(other.gameObject.tag))
         {

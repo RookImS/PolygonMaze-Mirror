@@ -1691,6 +1691,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   deployTower: {fileID: 5264608207721149302, guid: 5a9bb0fdafd46944bb35c3abf6e2ad21, type: 3}
   realTower: {fileID: 8996109028398955742, guid: 839d106aeeab58f46bd7583d20639abd, type: 3}
+  hitObject: {fileID: 0}
   towerCostText: {fileID: 197109122}
 --- !u!1 &509596827
 GameObject:
@@ -2207,6 +2208,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   deployTower: {fileID: 8354616233345671571, guid: a6c6f251a4ab24740b0ef114c7501be6, type: 3}
   realTower: {fileID: 7793056633140174654, guid: 28f744ba59eca824eb5c633def5f481b, type: 3}
+  hitObject: {fileID: 0}
   towerCostText: {fileID: 1036383723}
 --- !u!1 &708506425
 GameObject:
@@ -3391,6 +3393,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   deployTower: {fileID: 5236856615102263578, guid: 1180fd0464711dc49ba9d6a5c76b52eb, type: 3}
   realTower: {fileID: 7271484921240024667, guid: 74c8413134add1641be9e2920c61074c, type: 3}
+  hitObject: {fileID: 0}
   towerCostText: {fileID: 94559635}
 --- !u!1 &1128341099
 GameObject:
@@ -6315,6 +6318,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   deployTower: {fileID: 582418218246560157, guid: 728dd5e2b833a684ca47158bf01bcd5d, type: 3}
   realTower: {fileID: 346010008869247008, guid: 240e68458cec7ef41b7cce2a9eaeed4e, type: 3}
+  hitObject: {fileID: 0}
   towerCostText: {fileID: 1285357345}
 --- !u!114 &1932320229
 MonoBehaviour:
@@ -6467,6 +6471,22 @@ PrefabInstance:
       propertyPath: m_Name
       value: Level
       objectReference: {fileID: 0}
+    - target: {fileID: 5162274923920270631, guid: 131b2868bd49c8140af1cdfcfd739e4a, type: 3}
+      propertyPath: triangleTowerPrefab
+      value: 
+      objectReference: {fileID: 346010008869247008, guid: 240e68458cec7ef41b7cce2a9eaeed4e, type: 3}
+    - target: {fileID: 5162274923920270631, guid: 131b2868bd49c8140af1cdfcfd739e4a, type: 3}
+      propertyPath: squareTowerPrefab
+      value: 
+      objectReference: {fileID: 7271484921240024667, guid: 74c8413134add1641be9e2920c61074c, type: 3}
+    - target: {fileID: 5162274923920270631, guid: 131b2868bd49c8140af1cdfcfd739e4a, type: 3}
+      propertyPath: pentagonTowerPrefab
+      value: 
+      objectReference: {fileID: 8996109028398955742, guid: 839d106aeeab58f46bd7583d20639abd, type: 3}
+    - target: {fileID: 5162274923920270631, guid: 131b2868bd49c8140af1cdfcfd739e4a, type: 3}
+      propertyPath: hexagonTowerPrefab
+      value: 
+      objectReference: {fileID: 7793056633140174654, guid: 28f744ba59eca824eb5c633def5f481b, type: 3}
     - target: {fileID: 7223117734520093806, guid: 131b2868bd49c8140af1cdfcfd739e4a, type: 3}
       propertyPath: m_VoxelSize
       value: 0.1

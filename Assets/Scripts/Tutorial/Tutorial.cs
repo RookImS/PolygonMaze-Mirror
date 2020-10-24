@@ -10,8 +10,9 @@ public class Tutorial : MonoBehaviour
     public DialogueUI dialogueUI;
 
     private List<TutorialObject.Tutorial> tutorialList;
+    private TutorialChecker tutorialChecker;
     private int phase;          // 튜토리얼 중 몇 번째 챕터인가를 나타냄
-    private int phaseLength;
+    private int phaseLength;    // 튜토리얼이 몇 챕터로 이루어져있는지 나타냄
     private int chapterLength;  // 튜토리얼 현재 챕터의 길이
     private int chapterOrder;   // 튜토리얼 현재 챕터내에서 몇 번째 동작을 하는 중인지 나타냄
 
@@ -32,6 +33,7 @@ public class Tutorial : MonoBehaviour
     }
     private void Start()
     {
+        tutorialChecker = Instantiate(tutorial.tutorialChecker, this.transform).GetComponent<TutorialChecker>();
         phaseLength = tutorialList.Count;
         nextTutorialChapter?.Invoke();
     }
@@ -48,7 +50,7 @@ public class Tutorial : MonoBehaviour
         if (dialogueUI.GetRemainSentencesCount() == 0)
         {
             dialogueUI.EndDialogue();
-
+            tutorialChecker.StartSetting(phase);
             StartCoroutine(PhaseChecker());
         }
         else
@@ -67,8 +69,6 @@ public class Tutorial : MonoBehaviour
                         GameObject tempAniObject = Instantiate(ani.obj, inGameUI.transform);
                         tempAniObject.GetComponent<RectTransform>().anchoredPosition = new Vector2(ani.posX, ani.posY);
                         StartCoroutine(DestroyAniObject(tempAniObject, chapterOrder + ani.length));
-
-                        //aniObjectList.Add(tempAniObject);
                     }
                 }
             }
@@ -78,8 +78,10 @@ public class Tutorial : MonoBehaviour
 
     private IEnumerator PhaseChecker()
     {
-        while (!tutorial.tutorialChecker.StartCheck(phase))
+        while (!tutorialChecker.StartCheck(phase))
             yield return new WaitForSeconds(0.1f);
+
+        tutorialChecker.SettingRestore(phase);
 
         phase++; 
         if (phase == phaseLength)
@@ -94,7 +96,9 @@ public class Tutorial : MonoBehaviour
 
     private IEnumerator DestroyAniObject(GameObject aniObject, int endOrder)
     {
-        while (!(dialogueUI.GetRemainSentencesCount() == 0 || chapterOrder >= endOrder))
+        int appearPhase = phase;
+
+        while (!(appearPhase != phase || chapterOrder >= endOrder))
             yield return new WaitForSecondsRealtime(0.1f);
 
         Destroy(aniObject);
