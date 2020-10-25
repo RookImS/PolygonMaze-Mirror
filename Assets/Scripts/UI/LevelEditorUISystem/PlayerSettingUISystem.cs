@@ -108,7 +108,7 @@ public class PlayerSettingUISystem : MonoBehaviour
      
     private void OnEndInputField(GameObject inputField, int flag)
     {
-        int num = 0;
+        int num = -1;
 
         if (!int.TryParse(inputField.GetComponent<TMP_InputField>().text, out num))
         {
@@ -117,8 +117,6 @@ public class PlayerSettingUISystem : MonoBehaviour
                 this.playerLife = -1;
             else
                 this.startCost = -1;
-            
-            inputField.GetComponent<TMP_InputField>().text = "";
         }
         else
         {
@@ -128,9 +126,10 @@ public class PlayerSettingUISystem : MonoBehaviour
                 {
                     this.playerLife = -1;
                     StartCoroutine(LevelEditorUISystem.instance.ShowMessage(flag));
+                    inputField.GetComponent<TMP_InputField>().text = "";
                 }
-
-                this.playerLife = num;
+                else
+                    this.playerLife = num;
             }
             else if (flag == 2)
             { // costStart
@@ -138,16 +137,12 @@ public class PlayerSettingUISystem : MonoBehaviour
                 {
                     this.startCost = -1;
                     StartCoroutine(LevelEditorUISystem.instance.ShowMessage(flag));
+                    inputField.GetComponent<TMP_InputField>().text = "";
                 }
-                this.startCost = num;
+                else
+                    this.startCost = num;
             }
         }
-
-        if (this.playerLife == -1)
-            this.playerLifeInputField.GetComponent<TMP_InputField>().text = "";
-        if (this.startCost == -1)
-            this.startCostInputField.GetComponent<TMP_InputField>().text = "";
-
     }
 
 }

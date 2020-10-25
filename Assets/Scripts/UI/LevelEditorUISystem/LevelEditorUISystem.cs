@@ -21,12 +21,14 @@ public class LevelEditorUISystem : MonoBehaviour
     public enum ButtonColor
     {
         ReadyColor,
-        NotReadyColor
+        NotReadyColor,
+        SelectColor
     }
 
     private bool coroutineFlag;
-    private static Color32 readyColor = new Color32(127, 255, 193, 255);
-    private static Color32 notReadyColor = new Color32(255, 255, 255, 255);
+    private Color32 readyColor;
+    private Color32 notReadyColor;
+    private Color32 selectColor;
 
 
     //UI System
@@ -59,6 +61,9 @@ public class LevelEditorUISystem : MonoBehaviour
     private void Init()
     {
         coroutineFlag = false;
+        readyColor = new Color32(127, 255, 193, 255);
+        notReadyColor = new Color32(255, 255, 255, 255);
+        selectColor = new Color32(156, 255, 244, 255);
 
         playerSettingUISystem = this.gameObject.transform.GetComponent<PlayerSettingUISystem>();
         blankSettingUISystem = this.gameObject.transform.GetComponent<BlankSettingUISystem>();
@@ -91,10 +96,8 @@ public class LevelEditorUISystem : MonoBehaviour
     {
         if (panel.Equals(this.playerSettingUISystem.playerSettingPanel))
             playerSettingUISystem.OnClickCancelButton();
-        /*
-        else if (panel.Equals(this.enemyWaveSettingMainPanel))
-            OnClickCancelButtonInEnemyWaveSettingMainPanel();
-        */
+        else if (panel.Equals(this.enemyWaveSettingUISystem.enemyWaveSettingMainPanel))
+            enemyWaveSettingUISystem.OnClickCancelButtonInEnemyWaveSettingMainPanel();
     }
 
     public IEnumerator ShowMessage(int flag)
@@ -109,7 +112,7 @@ public class LevelEditorUISystem : MonoBehaviour
                 message = "Please correct the value in player life input field as integer between 1 and 20!";
             else if (flag == 2)
                 message = "Please correct the value in start cost input field as integer between 50 and 2000!";
-            else
+            else if (flag == 3)
                 message = string.Format("Saved success\nPlayer life: {0}\nStart cost: {1}"
                     ,LevelEditor.instance.GetPlayerLife(), LevelEditor.instance.GetStartCost());
 
@@ -132,6 +135,11 @@ public class LevelEditorUISystem : MonoBehaviour
         Debug.Log("Show Warning Panel");
     }
 
+    public void ShowRemovePanel(GameObject relatedPanel)
+    {
+
+    }
+
     public void ChangeButtonColor(SettingUISystemSpecific settingUISystem, ButtonColor color)
     {
         GameObject settingButton = null;
@@ -149,9 +157,20 @@ public class LevelEditorUISystem : MonoBehaviour
 
         if (color == ButtonColor.ReadyColor)
             settingButton.GetComponent<Image>().color = readyColor;
-        else
+        else if (color == ButtonColor.NotReadyColor)
             settingButton.GetComponent<Image>().color = notReadyColor;
+        else
+            settingButton.GetComponent<Image>().color = selectColor;
     }
-
+    
+    public void ChangeButtonColor(GameObject button, ButtonColor color)
+    {
+        if (color == ButtonColor.ReadyColor)
+            button.GetComponent<Image>().color = readyColor;
+        else if (color == ButtonColor.NotReadyColor)
+            button.GetComponent<Image>().color = notReadyColor;
+        else
+            button.GetComponent<Image>().color = selectColor;
+    }
 }
 
