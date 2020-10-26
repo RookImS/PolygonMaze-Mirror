@@ -50,10 +50,9 @@ MonoBehaviour:
   layerMask:
     serializedVersion: 2
     m_Bits: 512
-  level: {fileID: 5162274923920270625, guid: 131b2868bd49c8140af1cdfcfd739e4a, type: 3}
   cost: 120
   innerRadius: 0.688
-  renderer: {fileID: 8163457915769697458}
+  rend: {fileID: 8163457915769697458}
 --- !u!64 &387785620365507434
 MeshCollider:
   m_ObjectHideFlags: 0

@@ -5,12 +5,8 @@ using UnityEngine;
 public class HitColliderBehaviour : MonoBehaviour
 {
     public BulletBehaviour parentBulletBehaviour;
-    private List<int> nullIndexList;
 
-    private void Awake()
-    {
-        
-    }
+    private List<int> nullIndexList;
 
     private void Update()
     {
@@ -40,7 +36,6 @@ public class HitColliderBehaviour : MonoBehaviour
             parentBulletBehaviour.enemyList.Add(other.gameObject);
         }
     }
-
     private void OnTriggerExit(Collider other)
     {
         if(TagManager.Instance.isEnemyTag(other.gameObject.tag))

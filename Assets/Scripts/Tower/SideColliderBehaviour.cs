@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEditorInternal;
 using UnityEngine;
 
-public class SideColliderBehavior : MonoBehaviour
+public class SideColliderBehaviour : MonoBehaviour
 {
     public GameObject parentObject;
 

@@ -9,25 +9,34 @@ using UnityEngine.AI;
 public class DeployBehaviour : MonoBehaviour
 {
     public LayerMask layerMask;
+    public int cost;
+    public float innerRadius;
+    public Renderer rend;
 
     private GameObject towersGameObject;
-        private CheckerBehaviour checker;
+    private CheckerBehaviour checker;
     private NavMeshSurface checkerNav;
     private NavMeshSurface enemyNav;
 
-    public int cost;
-    public float innerRadius;
-    public Renderer renderer;
-
     private bool isDeployEnable;
     private bool isProperLocate;
-    private bool isSkipFrame;
     private bool isPathEnable;
     private bool isOverlapped;
+    private bool isSkipFrame;
 
     private void Awake()
     {
-        // connect navMesh
+        Init();
+    }
+    private void Update()
+    {
+        isPathEnable = CheckPath();
+        isDeployEnable = CheckDeployEnable();
+        isSkipFrame = CheckSkipFrame();
+    }
+
+    private void Init()
+    {
         checkerNav = GameObject.Find("CheckerNavMeshSurface").GetComponent<NavMeshSurface>();
         enemyNav = GameObject.Find("EnemyNavMeshSurface").GetComponent<NavMeshSurface>();
         checker = GameObject.FindGameObjectWithTag("Checker").GetComponent<CheckerBehaviour>();
@@ -38,11 +47,74 @@ public class DeployBehaviour : MonoBehaviour
         isSkipFrame = true;
     }
 
-    private void Update()
+    private bool CheckPath()
     {
-        isPathEnable = CheckPath();
-        isDeployEnable = CheckDeployEnable();
-        isSkipFrame = CheckSkipFrame();
+        bool temp;
+
+        if (isProperLocate)
+        {
+            temp = checker.CalculatePath();
+            if (isSkipFrame)
+            {
+                return false;
+            }
+            else
+                return temp;
+        }
+
+        return false;
+    }
+
+    private bool CheckSkipFrame()
+    {
+        if (isProperLocate)
+            return false;
+        else
+            return true;
+    }
+
+    private bool CheckDeployEnable()
+    {
+        if (PlayerControl.Instance.CheckCost(cost))
+        {
+            if (isPathEnable && isProperLocate && !isOverlapped)
+            {
+                rend.material.color = new Color(1f, 1f, 1f, 85 / 255f);
+
+                return true;
+            }
+            else
+            {
+                if (isProperLocate)
+                {
+                    if (!isSkipFrame)
+                    {
+                        rend.material.color = new Color(1f, 170 / 255f, 170 / 255f, 85 / 255f);
+                    }
+                }
+                else
+                {
+                    rend.material.color = new Color(1f, 1f, 1f, 85 / 255f);
+                }
+
+                return false;
+            }
+        }
+        else
+        {
+            rend.material.color = new Color(1f, 170 / 255f, 170 / 255f, 85 / 255f);
+            return false;
+        }
+    }
+
+    private void locateProperPos(Transform pos)
+    {
+        Vector3 rotateAngle = new Vector3(0f, (pos.rotation.eulerAngles.y + 180) % 360, 0f);
+        transform.eulerAngles = rotateAngle;
+
+        Vector3 direction = transform.rotation * Vector3.back;
+        Vector3 targetPoint = direction * ((innerRadius) - 0.1f);
+        transform.position = pos.position + targetPoint;
     }
 
     public GameObject LocateTower(Vector3 mousePos)
@@ -68,7 +140,7 @@ public class DeployBehaviour : MonoBehaviour
 
             isProperLocate = true;
 
-            return objectHit.gameObject.GetComponent<SideColliderBehavior>().parentObject;
+            return objectHit.gameObject.GetComponent<SideColliderBehaviour>().parentObject;
         }
         else
         {
@@ -80,78 +152,6 @@ public class DeployBehaviour : MonoBehaviour
 
             return null;
         }
-
-
-    }
-
-    private void locateProperPos(Transform pos)
-    {
-        Vector3 rotateAngle = new Vector3(0f, (pos.rotation.eulerAngles.y + 180) % 360, 0f);
-        transform.eulerAngles = rotateAngle;
-
-        Vector3 direction = transform.rotation * Vector3.back;
-        Vector3 targetPoint = direction * ((innerRadius) - 0.1f);
-        transform.position = pos.position + targetPoint;
-    }
-
-    private bool CheckPath()
-    {
-        bool temp;
-
-        if (isProperLocate)
-        {
-            temp = checker.CalculatePath();
-            if (isSkipFrame)
-            {
-                return false;
-            }
-            else
-                return temp;
-        }
-
-        return false;
-    }
-
-    private bool CheckDeployEnable()
-    {
-        if (PlayerControl.Instance.CheckCost(cost))
-        {
-            if (isPathEnable && isProperLocate && !isOverlapped)
-            {
-                renderer.material.color = new Color(1f, 1f, 1f, 85 / 255f);
-
-                return true;
-            }
-            else
-            {
-                if (isProperLocate)
-                {
-                    if (!isSkipFrame)
-                    {
-                        renderer.material.color = new Color(1f, 170 / 255f, 170 / 255f, 85 / 255f);
-                    }
-                }
-                else
-                {
-                    renderer.material.color = new Color(1f, 1f, 1f, 85 / 255f);
-                }
-
-                return false;
-            }
-        }
-        else
-        {
-            renderer.material.color = new Color(1f, 170 / 255f, 170 / 255f, 85 / 255f);
-            return false;
-        }
-    }
-
-    private bool CheckSkipFrame()
-    {
-        if (isProperLocate)
-            return false;
-        else
-            return true;
     }
 
     public void DeployTower(GameObject neighborObject, GameObject realTower)

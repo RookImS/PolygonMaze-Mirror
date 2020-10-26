@@ -10,7 +10,7 @@ public class EnemyBehaviour : MonoBehaviour
     private NavMeshPath path;
     private GameObject destination; // test code
 
-    EnemyData m_EnemyData;
+    private EnemyData m_EnemyData;
 
     void Awake()
     {

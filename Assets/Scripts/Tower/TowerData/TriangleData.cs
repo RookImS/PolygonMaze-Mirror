@@ -8,10 +8,9 @@ public class TriangleData : TowerData
     public int bulletNumber;
     public float bulletAngle;
 
-    List<GameObject> bulletInstanceList;
     public override void Shoot(Transform muzzle)
     {
-        bulletInstanceList = new List<GameObject>();
+        List<GameObject> bulletInstanceList = new List<GameObject>();
 
         float eachBulletAngle = bulletAngle / (bulletNumber-1);
         Vector3 rotateAngle = new Vector3(0f, eachBulletAngle, 0f);

@@ -4,23 +4,19 @@ using UnityEngine;
 
 public class TowerBehaviour : MonoBehaviour
 {
-    TowerData m_TowerData;
-
-    public Transform target;
-    public List<GameObject> targetList;
-
     public Transform muzzle;
-    float fireCountDown;
 
-    void Awake()
+    [HideInInspector] public GameObject target;
+    [HideInInspector] public List<GameObject> targetList;
+
+    private TowerData m_TowerData;
+    private float fireCountDown;
+
+    private void Awake()
     {
         Init();
     }
-    void Start()
-    {
-        fireCountDown = 0f;
-    }
-    void Update()
+    private void Update()
     {
         if (targetList.Count > 0)
         {
@@ -31,14 +27,14 @@ public class TowerBehaviour : MonoBehaviour
         }
         if (target == null)
         {
-            if(fireCountDown != 0f)
+            if (fireCountDown != 0f)
                 fireCountDown -= Time.deltaTime;
             return;
         }
 
         SetDirection();
 
-        if(fireCountDown <= 0f)
+        if (fireCountDown <= 0f)
         {
             Invoke("Attack", m_TowerData.Stats.stats.aheadDelay);
             fireCountDown = 1f / m_TowerData.Stats.stats.attackRate;
@@ -46,26 +42,27 @@ public class TowerBehaviour : MonoBehaviour
         fireCountDown -= Time.deltaTime;
     }
 
-    public void Init()
+    private void Init()
     {
-        m_TowerData = GetComponent<TowerData>();
-        m_TowerData.Init();
         targetList = new List<GameObject>();
         target = null;
+
+        m_TowerData = GetComponent<TowerData>();
+        m_TowerData.Init();
+        fireCountDown = 0f;
 
         muzzle.GetComponent<SphereCollider>().radius = m_TowerData.Stats.stats.recogRange;
     }
 
-    public void SetNeighbor(GameObject obj)
+    private void SetDirection()
     {
-        m_TowerData.neighbor.Add(obj);
+        muzzle.LookAt(target.transform.position);
     }
-
-    public void SetTarget()
+    private void SetTarget()
     {
         GameObject nearestEnemy = null;
         float shortestDistance = Mathf.Infinity;
-        
+
         foreach (GameObject Enemy in targetList)
         {
             if (Enemy == null)
@@ -80,7 +77,7 @@ public class TowerBehaviour : MonoBehaviour
         }
         if (nearestEnemy != null)
         {
-            target = nearestEnemy.transform;
+            target = nearestEnemy;
         }
         else
         {
@@ -88,20 +85,18 @@ public class TowerBehaviour : MonoBehaviour
         }
     }
 
-    public void SetDirection()
-    {
-        muzzle.LookAt(target.position);
-    }
-
-    public void Attack()
+    private void Attack()
     {
         m_TowerData.Shoot(muzzle);
+    }
+
+    public void SetNeighbor(GameObject obj)
+    {
+        m_TowerData.neighbor.Add(obj);
     }
 
     public void DeleteTarget()
     {
         target = null;
     }
-
-
 }

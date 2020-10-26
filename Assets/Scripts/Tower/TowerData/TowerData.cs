@@ -6,12 +6,12 @@ public class TowerData : MonoBehaviour
 {
     public string TowerName;
     public string TowerDescription;
-
+    public GameObject bullet;
     public TowerStatSystem Stats;
-    public List<GameObject> neighbor;
+
+    [HideInInspector]public List<GameObject> neighbor;
     
     public TColor color;    // public x
-    public GameObject bullet;
 
     public virtual void Init()
     {

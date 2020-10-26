@@ -6,7 +6,8 @@ using UnityEngine;
 public class RecogColliderBehaviour : MonoBehaviour
 {
     public TowerBehaviour parentTowerBehaviour;
-    public List<int> nullIndexList;
+
+    private List<int> nullIndexList;
 
     private void Update()
     {
@@ -36,16 +37,14 @@ public class RecogColliderBehaviour : MonoBehaviour
             parentTowerBehaviour.targetList.Add(other.gameObject);
         }
     }
-
     private void OnTriggerExit(Collider other)
     {
         if (TagManager.Instance.isEnemyTag(other.gameObject.tag))
         {
             parentTowerBehaviour.targetList.Remove(other.gameObject);
-            if (parentTowerBehaviour.target.gameObject == other.gameObject)
+            if (parentTowerBehaviour.target == other.gameObject)
             {
                 parentTowerBehaviour.DeleteTarget();
-                parentTowerBehaviour.SetTarget();
             }
         }
     }
