@@ -169,7 +169,6 @@ public class DeployBehaviour : MonoBehaviour
             // update enemy navMesh
             enemyNav.UpdateNavMesh(enemyNav.navMeshData);
             checker.ApplyPath();
-
         }
 
         // update checker navMesh

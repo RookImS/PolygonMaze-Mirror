@@ -5,20 +5,54 @@ using UnityEngine.AI;
 
 public class CheckerBehaviour : MonoBehaviour
 {
+    public GameObject pathTrackerAgent;
+    public float trackerDuration;
+
+    private GameObject pathTrackerObject;
     private NavMeshAgent agent;
     private NavMeshPath path;
     private NavMeshPath tempPath;
     private GameObject destination;
 
-    void Awake()
+    private GameObject m_pathTrackerAgent;
+    private float countDown;
+
+    private void Awake()
     {
-        agent = GetComponent<NavMeshAgent>();
+        Init();
     }
 
-    void Start()
+    private void Start()
     {
+        pathTrackerObject = GameObject.Find("PathTracker");
         CalculatePath();
         ApplyPath();
+    }
+
+    private void Update()
+    {
+        if (pathTrackerObject.transform.childCount == 0)
+        {
+            m_pathTrackerAgent = null;
+        }
+
+        if (m_pathTrackerAgent == null)
+        {
+            if (countDown <= 0f)
+            {
+                m_pathTrackerAgent = Instantiate(pathTrackerAgent, transform.position, transform.rotation, pathTrackerObject.transform);
+                countDown = trackerDuration;
+            }
+            
+            countDown -= Time.deltaTime;
+        }
+    }
+
+    private void Init()
+    {
+        agent = GetComponent<NavMeshAgent>();
+        m_pathTrackerAgent = null;
+        countDown = 0f;
     }
 
     public bool CalculatePath()
@@ -40,5 +74,12 @@ public class CheckerBehaviour : MonoBehaviour
     public void ApplyPath()
     {
         path = tempPath;
+
+        if (pathTrackerObject.transform.childCount != 0)
+        {
+            Destroy(m_pathTrackerAgent);
+            m_pathTrackerAgent = null;
+            countDown = 0;
+        }
     }
 }

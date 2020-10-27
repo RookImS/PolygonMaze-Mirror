@@ -53,7 +53,6 @@ public class PlayerData
 
     public void Death()
     {
-        Debug.Log("player death");
         // 죽었을 시 걸리는 트리거
     }
 

@@ -216,7 +216,6 @@ public class EnemyStatSystem
     public void Changehp(int amount)
     {
         currentHp = Mathf.Clamp(currentHp + amount, 0, stats.hp);
-        //Debug.Log(string.Format("enemy currenthp : {0}", currentHp));
         if (currentHp <= 0)
             m_Owner.Death();
     }
