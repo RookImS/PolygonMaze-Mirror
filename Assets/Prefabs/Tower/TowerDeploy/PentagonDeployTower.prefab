@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 8989813896959315471}
   m_Layer: 0
   m_Name: PentagonDeployTower
-  m_TagString: Untagged
+  m_TagString: DeployUI
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

@@ -33,6 +33,8 @@ public class LevelManager : MonoBehaviour
     private Vector3 spawnerPosition;
     private GameObject waves;
     private List<EnemyWave> enemyWaveList;
+    [HideInInspector] public bool isWaveSystemOn;
+    [HideInInspector] public bool isWaveComplete;
 
     [Header("Preserved Variables")]
     public GameObject stageGameObject;
@@ -98,12 +100,15 @@ public class LevelManager : MonoBehaviour
      */
     public void LoadStage()
     {
+
         LoadObstacles();
         LoadTowers();
         LoadBlanks();
         BakeNavMeshSurfaces();
         LoadChecker();
         LoadWaves();
+        LoadTutorial();
+        isWaveComplete = true;
     }
 
     /* LoadObstacles
@@ -178,9 +183,9 @@ public class LevelManager : MonoBehaviour
         StageScriptableObject.BlankInfo info = null;
         GameObject spawner = null;
         GameObject prefab = null;
-        
+
         GameObject destination = null;
-        
+
 
         //Load Spawner
         info = this.stageData.spawnerInfo;
@@ -207,7 +212,7 @@ public class LevelManager : MonoBehaviour
      */
     public void SelectBlankMesh(GameObject blank, StageScriptableObject.BlankInfo blankInfo)
     {
-        if (blankInfo.blankMeshType 
+        if (blankInfo.blankMeshType
             == StageScriptableObject.BlankInfo.BlankMeshType.Mesh1)
         {
             blank.transform.GetChild(0).gameObject.SetActive(true);
@@ -259,7 +264,7 @@ public class LevelManager : MonoBehaviour
 
         foreach (Transform wallLineTs in this.castle.GetComponentInChildren<Transform>())
         {
-            foreach(Transform wallTs in wallLineTs.gameObject.GetComponentInChildren<Transform>())
+            foreach (Transform wallTs in wallLineTs.gameObject.GetComponentInChildren<Transform>())
             {
                 if (isOverlabCheck(overlabedBlank.transform.position, wallTs.position))
                 {
@@ -271,7 +276,7 @@ public class LevelManager : MonoBehaviour
 
                 if (breakFlag)
                     break;
-                    
+
             }
         }
     }
@@ -292,12 +297,15 @@ public class LevelManager : MonoBehaviour
      */
     public void LoadChecker()
     {
-        
+
         StageScriptableObject.BlankInfo info = null;
 
         info = this.stageData.spawnerInfo;
-        GameObject.Instantiate(this.checkerPrefab, info.position, info.rotation, this.stageGameObject.transform);
-        
+
+        Vector3 backward = info.rotation * Vector3.back;
+        Vector3 positionVector = backward * 1.5f;
+
+        GameObject.Instantiate(this.checkerPrefab, info.position + positionVector, info.rotation, this.stageGameObject.transform);
     }
 
     /* StartStage
@@ -312,7 +320,7 @@ public class LevelManager : MonoBehaviour
 
         EnemyWave enemyWave = null;
         GameObject enemyPrefab = null;
-        GameObject enemy = null;   
+        GameObject enemy = null;
 
         int waveValue = 1;
         int i = 0;
@@ -365,10 +373,25 @@ public class LevelManager : MonoBehaviour
                 }
             }
 
-            waveValue++;
+
+            //if(enemyWaveInfo.isTutorialWave == false)
+                waveValue++;
         }
     }
 
+    public void LoadTutorial()
+    {
+        Transform tutorial = this.transform.Find("Tutorial");
+        if (tutorial)
+        {
+            isWaveSystemOn = false;
+            tutorial.gameObject.SetActive(true);
+        }
+        else
+        {
+            isWaveSystemOn = true;
+        }
+    }
     /* StartStage
      * 1. TakeBreakTime 1 & StartWave 1.
      * 2. TakeBreakTime 2 & StartWave 2.
@@ -380,17 +403,24 @@ public class LevelManager : MonoBehaviour
 
         foreach (EnemyWave enemyWave in this.enemyWaveList)
         {
+            while (!(isWaveSystemOn && isWaveComplete))
+            {
+                yield return new WaitForSeconds(0.1f);
+            }
+
+            isWaveComplete = false;
+
             yield return StartCoroutine(TakeBreakTime(enemyWave.breakTime));
 
             StartCoroutine(StartWave(enemyWave));
-            
+
             while (enemyWave.activeNum < enemyWave.oneWaveEnemies.Count)
             {
-                yield return null;
+                yield return new WaitForSeconds(0.1f);
             }
 
             waveValue++;
-
+            isWaveComplete = true;
             /*
             if(enemyWaveInfo.nextWaveTrigger
                 == StageScriptableObject.EnemyWaveInfo.NextWaveTrigger.EnemyExterminated)
@@ -413,9 +443,7 @@ public class LevelManager : MonoBehaviour
                 == StageScriptableObject.EnemyWaveInfo.NextWaveTrigger.FirstEnemyDead)
             {
 
-            }
-            */
-
+            }*/
 
         }
     }
@@ -446,7 +474,7 @@ public class LevelManager : MonoBehaviour
      */
     private IEnumerator StartWave(EnemyWave enemyWave)
     {
-        foreach(GameObject enemy in enemyWave.oneWaveEnemies)
+        foreach (GameObject enemy in enemyWave.oneWaveEnemies)
         {
             enemy.SetActive(true);
             enemyWave.activeNum++;

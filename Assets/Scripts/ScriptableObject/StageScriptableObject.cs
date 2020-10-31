@@ -95,6 +95,8 @@ public class StageScriptableObject : ScriptableObject
 
         [Header("이번 페이즈 실행 전까지 휴식 시간")]
         public float breakTime = 5.0f;
+
+        //public bool isTutorialWave = false;
     }
 
     [Header("적 페이즈 정보")]

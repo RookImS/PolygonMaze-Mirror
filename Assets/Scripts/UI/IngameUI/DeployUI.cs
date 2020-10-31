@@ -16,6 +16,8 @@ public class DeployUI : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
     private bool isDeployable;
     public TextMeshProUGUI towerCostText;
 
+    public bool isProgressDeploy;
+
     Vector3 mousePos;
 
     private void Awake()
@@ -32,6 +34,7 @@ public class DeployUI : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
     {
         towerCostText.text = deployTower.GetComponent<DeployBehaviour>().cost.ToString();
         isDeployable = false;
+        isProgressDeploy = false;
     }
 
     private void UpdateTowerCostText()
@@ -49,6 +52,10 @@ public class DeployUI : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
 
     public void OnBeginDrag(PointerEventData eventData)
     {
+        newObject = null;
+        hitObject = null;
+
+        isProgressDeploy = true;
         mousePos = Input.mousePosition;
 
         newObject = Instantiate(deployTower, mousePos, deployTower.transform.rotation);
@@ -67,7 +74,9 @@ public class DeployUI : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
 
         Time.timeScale = 1f;
 
-        newObject = null;
-        hitObject = null;
+        isProgressDeploy = false;
+
+        Debug.Log(hitObject);
+        Debug.Log(isProgressDeploy);
     }
 }

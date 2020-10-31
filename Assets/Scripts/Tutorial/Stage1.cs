@@ -12,6 +12,7 @@ public class Stage1 : TutorialChecker
     private GameObject phase9Tower1, phase9Tower2;
     private MeshCollider phase9Checker1, phase9Checker2;
     private GameObject phase11Tower;
+    private DeployUI phase11DeployUI;
 
     public override void StartSetting(int phase)
     {
@@ -32,7 +33,7 @@ public class Stage1 : TutorialChecker
     }
     public override bool StartCheck(int phase)
     {
-        switch(phase)
+        switch (phase)
         {
             case 6:
                 return Phase6Checker();
@@ -137,16 +138,16 @@ public class Stage1 : TutorialChecker
         const int towerNo = 10;
 
         phase11Tower = obstacles.transform.GetChild(towerNo).gameObject;
-        
+        phase11DeployUI = deployUI.transform.GetChild(3).GetComponent<DeployUI>();
         activeList.Add(phase11Tower);
 
         DisableSCinExceptIndex(phase11Tower, 3);
-
+        
         DisableSCExceptGameObject();
     }
     private bool Phase11Checker()
     {
-        if (phase11Tower.Equals(deployUI.transform.GetChild(3).GetComponent<DeployUI>().hitObject))
+        if (phase11Tower.Equals(phase11DeployUI.hitObject) && !phase11DeployUI.isProgressDeploy)
             return true;
         else
             return false;

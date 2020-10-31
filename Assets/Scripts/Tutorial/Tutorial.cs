@@ -20,6 +20,17 @@ public class Tutorial : MonoBehaviour
 
     private void Awake()
     {
+        Init();
+    }
+    private void Start()
+    {
+        tutorialChecker = Instantiate(tutorial.tutorialChecker, this.transform).GetComponent<TutorialChecker>();
+        phaseLength = tutorialList.Count;
+        nextTutorialChapter?.Invoke();
+    }
+
+    private void Init()
+    {
         phase = 0;
         phaseLength = 0;
         chapterLength = 0;
@@ -31,15 +42,9 @@ public class Tutorial : MonoBehaviour
 
         nextTutorialChapter += StartPhase;
     }
-    private void Start()
-    {
-        tutorialChecker = Instantiate(tutorial.tutorialChecker, this.transform).GetComponent<TutorialChecker>();
-        phaseLength = tutorialList.Count;
-        nextTutorialChapter?.Invoke();
-    }
-
     private void StartPhase()
     {
+        LevelManager.instance.isWaveSystemOn = false;
         chapterLength = tutorialList[phase].dialogue.sentences.Count;
         dialogueUI.StartDialogue(tutorialList[phase].dialogue);
         InvokeNextTutorial();
@@ -87,7 +92,7 @@ public class Tutorial : MonoBehaviour
         if (phase == phaseLength)
         {
             nextTutorialChapter -= StartPhase;
-            // 게임시작 코드
+            LevelManager.instance.isWaveSystemOn = true;
         }
 
         nextTutorialChapter?.Invoke();

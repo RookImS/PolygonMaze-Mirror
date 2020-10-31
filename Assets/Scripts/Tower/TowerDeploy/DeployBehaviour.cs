@@ -137,6 +137,7 @@ public class DeployBehaviour : MonoBehaviour
             // update checker navMesh
             GetComponent<NavMeshModifier>().ignoreFromBuild = false;
             checkerNav.UpdateNavMesh(checkerNav.navMeshData);
+            checker.FixPosition();
 
             isProperLocate = true;
 
@@ -144,7 +145,7 @@ public class DeployBehaviour : MonoBehaviour
         }
         else
         {
-            // update checker navMesh
+            //update checker navMesh
             GetComponent<NavMeshModifier>().ignoreFromBuild = true;
             checkerNav.UpdateNavMesh(checkerNav.navMeshData);
 
@@ -174,6 +175,8 @@ public class DeployBehaviour : MonoBehaviour
         // update checker navMesh
         GetComponent<NavMeshModifier>().ignoreFromBuild = true;
         checkerNav.UpdateNavMesh(checkerNav.navMeshData);
+
+        checker.FixPosition();
 
         Destroy(this.gameObject);
     }

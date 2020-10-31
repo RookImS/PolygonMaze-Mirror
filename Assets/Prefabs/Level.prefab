@@ -92,7 +92,7 @@ MonoBehaviour:
   hexagonTowerPrefab: {fileID: 7793056633140174654, guid: 28f744ba59eca824eb5c633def5f481b, type: 3}
   spawnerPrefab: {fileID: 4546852089631936315, guid: 7df10d63958ab0e4588c29bbc1daf156, type: 3}
   destinationPrefab: {fileID: 7480299383816322787, guid: 20d93f3818eb2d54b84e0e1c3a5f0921, type: 3}
-  checkerPrefab: {fileID: 1314094695183363131, guid: a0e49eec94a0b6d43a801c1861760481, type: 3}
+  checkerPrefab: {fileID: 7805583091822359371, guid: 69127f3dd05cec448be7523ae3080a06, type: 3}
   circleEnemyPrefab: {fileID: 3350396553093369702, guid: 9dfa5bafdf521d3448f47e83dae12726, type: 3}
   semiCircleEnemyPrefab: {fileID: 2794680669866632871, guid: b5f6c68c082fbf14f9775ea583abbf37, type: 3}
   sectorEnemyPrefab: {fileID: 474593776622616134, guid: 47e5a2504444b29468ba4a30c8bbb9e8, type: 3}
@@ -339,11 +339,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6076538662229912458, guid: e343e60abc0f801418a85becdafcb63f, type: 3}
       propertyPath: m_LocalScale.x
-      value: 19
+      value: 18
       objectReference: {fileID: 0}
     - target: {fileID: 6076538662229912458, guid: e343e60abc0f801418a85becdafcb63f, type: 3}
       propertyPath: m_LocalScale.z
-      value: 9
+      value: 8.5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e343e60abc0f801418a85becdafcb63f, type: 3}

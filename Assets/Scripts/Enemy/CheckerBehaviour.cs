@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
@@ -8,7 +9,8 @@ public class CheckerBehaviour : MonoBehaviour
     public GameObject pathTrackerAgent;
     public float trackerDuration;
 
-    Vector3[] c;
+    private Vector3 basePosition;
+    private Vector3[] c;    // trash value for error correct
     private GameObject pathTrackerObject;
     private NavMeshAgent agent;
     private NavMeshPath path;
@@ -25,6 +27,10 @@ public class CheckerBehaviour : MonoBehaviour
 
     private void Start()
     {
+        basePosition.x = Mathf.Round(transform.position.x * 100f) / 100f;
+        basePosition.y = Mathf.Round(transform.position.y * 100f) / 100f;
+        basePosition.z = Mathf.Round(transform.position.z * 100f) / 100f;
+
         pathTrackerObject = GameObject.Find("PathTracker");
         CalculatePath();
         path = tempPath;
@@ -57,7 +63,7 @@ public class CheckerBehaviour : MonoBehaviour
         countDown = 0f;
     }
 
-    private bool checkPathChange(Vector3[] c1, Vector3[] c2)
+    private bool CheckPathChange(Vector3[] c1, Vector3[] c2)
     {
         if (c1.Length != c2.Length)
         {
@@ -67,9 +73,9 @@ public class CheckerBehaviour : MonoBehaviour
         {
             for (int i = 0; i < c1.Length; i++)
             {
-                if (c1[i].x != c2[i].x
-                   || c1[i].y != c2[i].y
-                   || c1[i].z != c2[i].z)
+                if (Mathf.Round(c1[i].x * 100f) / 100f != Math.Round(c2[i].x * 100f) / 100f
+                   || Math.Round(c1[i].y * 100f) / 100f != Math.Round(c2[i].y * 100f) / 100f
+                   || Math.Round(c1[i].z * 100f) / 100f != Math.Round(c2[i].z * 100f) / 100f)
                     return true;
             }
         }
@@ -97,7 +103,7 @@ public class CheckerBehaviour : MonoBehaviour
     {
         if (pathTrackerObject.transform.childCount != 0)
         {
-            if (checkPathChange(path.corners, tempPath.corners))
+            if (CheckPathChange(path.corners, tempPath.corners))
             {
                 Debug.Log("Change");
                 m_pathTrackerAgent.GetComponent<PathTracker>().DestroyTrace();
@@ -107,5 +113,13 @@ public class CheckerBehaviour : MonoBehaviour
         }
 
         path = tempPath;
+    }
+
+    public void FixPosition()
+    {
+        if (Mathf.Round(transform.position.x * 100f) / 100f != basePosition.x
+           || Math.Round(transform.position.y * 100f) / 100f != basePosition.y
+           || Math.Round(transform.position.z * 100f) / 100f != basePosition.z)
+            agent.Warp(basePosition);
     }
 }
