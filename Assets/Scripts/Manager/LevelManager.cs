@@ -104,7 +104,6 @@ public class LevelManager : MonoBehaviour
         LoadObstacles();
         LoadTowers();
         LoadBlanks();
-        BakeNavMeshSurfaces();
         LoadChecker();
         LoadWaves();
         LoadTutorial();
@@ -281,22 +280,12 @@ public class LevelManager : MonoBehaviour
         }
     }
 
-    /* BakeNavMeshSurfaces
-     * 1. Bake enemy navmesh surface.
-     * 2. Bake checker navmesh surface.
-     * 3. Etc..
-     */
-    public void BakeNavMeshSurfaces()
-    {
-        this.enemyNavMeshSurface.BuildNavMesh();
-        this.checkerNavMeshSurface.BuildNavMesh();
-    }
-
     /* LoadChecker
      * 1. Load Checker.
      */
     public void LoadChecker()
     {
+        GameObject checker;
 
         StageScriptableObject.BlankInfo info = null;
 
@@ -305,7 +294,22 @@ public class LevelManager : MonoBehaviour
         Vector3 backward = info.rotation * Vector3.back;
         Vector3 positionVector = backward * 1.5f;
 
-        GameObject.Instantiate(this.checkerPrefab, info.position + positionVector, info.rotation, this.stageGameObject.transform);
+        checker = GameObject.Instantiate(this.checkerPrefab, info.position + positionVector, info.rotation, this.stageGameObject.transform).transform.Find("Checker").gameObject;
+
+        BakeNavMeshSurfaces();
+
+        checker.SetActive(true);
+    }
+
+    /* BakeNavMeshSurfaces
+     * 1. Bake enemy navmesh surface.
+     * 2. Bake checker navmesh surface.
+     * 3. Etc..
+    */
+    public void BakeNavMeshSurfaces()
+    {
+        this.enemyNavMeshSurface.BuildNavMesh();
+        this.checkerNavMeshSurface.BuildNavMesh();
     }
 
     /* StartStage

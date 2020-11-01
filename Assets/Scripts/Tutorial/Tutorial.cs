@@ -6,6 +6,7 @@ using UnityEngine;
 public class Tutorial : MonoBehaviour
 {
     public GameObject inGameUI;
+    public GameObject fieldUI;
     public TutorialObject tutorial;
     public DialogueUI dialogueUI;
 
@@ -73,6 +74,21 @@ public class Tutorial : MonoBehaviour
                         ani.enable = true;
                         GameObject tempAniObject = Instantiate(ani.obj, inGameUI.transform);
                         tempAniObject.GetComponent<RectTransform>().anchoredPosition = new Vector2(ani.posX, ani.posY);
+                        tempAniObject.GetComponent<RectTransform>().localRotation = Quaternion.Euler(0f, 0f, ani.rotation);
+                        StartCoroutine(DestroyAniObject(tempAniObject, chapterOrder + ani.length));
+                    }
+                }
+            }
+            foreach (AniObject ani in tutorialList[phase].fieldAnimationList)
+            {
+                if (!ani.enable)
+                {
+                    if (ani.order == chapterOrder)
+                    {
+                        ani.enable = true;
+                        GameObject tempAniObject = Instantiate(ani.obj, fieldUI.transform);
+                        tempAniObject.GetComponent<RectTransform>().anchoredPosition = new Vector2(ani.posX, ani.posY);
+                        tempAniObject.GetComponent<RectTransform>().localRotation = Quaternion.Euler(0f, 0f, ani.rotation);
                         StartCoroutine(DestroyAniObject(tempAniObject, chapterOrder + ani.length));
                     }
                 }
@@ -101,7 +117,7 @@ public class Tutorial : MonoBehaviour
 
     private IEnumerator DestroyAniObject(GameObject aniObject, int endOrder)
     {
-        int appearPhase = phase;
+        int appearPhase = phase;    // 애니메이션 실행된 phase
 
         while (!(appearPhase != phase || chapterOrder >= endOrder))
             yield return new WaitForSecondsRealtime(0.1f);

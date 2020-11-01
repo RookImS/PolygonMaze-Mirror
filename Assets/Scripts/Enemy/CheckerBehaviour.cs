@@ -8,7 +8,7 @@ public class CheckerBehaviour : MonoBehaviour
 {
     public GameObject pathTrackerAgent;
     public float trackerDuration;
-
+     
     private Vector3 basePosition;
     private Vector3[] c;    // trash value for error correct
     private GameObject pathTrackerObject;
@@ -27,9 +27,9 @@ public class CheckerBehaviour : MonoBehaviour
 
     private void Start()
     {
-        basePosition.x = Mathf.Round(transform.position.x * 100f) / 100f;
-        basePosition.y = Mathf.Round(transform.position.y * 100f) / 100f;
-        basePosition.z = Mathf.Round(transform.position.z * 100f) / 100f;
+        basePosition.x = Mathf.Round(transform.position.x * 10f) / 10f;
+        basePosition.y = Mathf.Round(transform.position.y * 10f) / 10f;
+        basePosition.z = Mathf.Round(transform.position.z * 10f) / 10f;
 
         pathTrackerObject = GameObject.Find("PathTracker");
         CalculatePath();
@@ -67,15 +67,16 @@ public class CheckerBehaviour : MonoBehaviour
     {
         if (c1.Length != c2.Length)
         {
+            Debug.Log("check");
             return true;
         }
         else
         {
             for (int i = 0; i < c1.Length; i++)
             {
-                if (Mathf.Round(c1[i].x * 100f) / 100f != Math.Round(c2[i].x * 100f) / 100f
-                   || Math.Round(c1[i].y * 100f) / 100f != Math.Round(c2[i].y * 100f) / 100f
-                   || Math.Round(c1[i].z * 100f) / 100f != Math.Round(c2[i].z * 100f) / 100f)
+                if (Mathf.Round(c1[i].x * 10f) / 10f != Mathf.Round(c2[i].x * 10f) / 10f
+                   || Mathf.Round(c1[i].y * 10f) / 10f != Mathf.Round(c2[i].y * 10f) / 10f
+                   || Mathf.Round(c1[i].z * 10f) / 10f != Mathf.Round(c2[i].z * 10f) / 10f)
                     return true;
             }
         }
@@ -117,9 +118,9 @@ public class CheckerBehaviour : MonoBehaviour
 
     public void FixPosition()
     {
-        if (Mathf.Round(transform.position.x * 100f) / 100f != basePosition.x
-           || Math.Round(transform.position.y * 100f) / 100f != basePosition.y
-           || Math.Round(transform.position.z * 100f) / 100f != basePosition.z)
+        if (Mathf.Round(transform.position.x * 10f) / 10f != basePosition.x
+           || Mathf.Round(transform.position.y * 10f) / 10f != basePosition.y
+           || Mathf.Round(transform.position.z * 10f) / 10f != basePosition.z)
             agent.Warp(basePosition);
     }
 }

@@ -11,6 +11,7 @@ public class AniObject
         length = a.length;
         posX = a.posX;
         posY = a.posY;
+        rotation = a.rotation;
         obj = a.obj;
         enable = a.enable;
     }
@@ -27,6 +28,7 @@ public class AniObject
     [SerializeField]
     public float posX;
     public float posY;
+    public float rotation;
 
     [HideInInspector]public bool enable = false;
 }

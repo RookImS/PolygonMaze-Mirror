@@ -16,10 +16,15 @@ public class TutorialObject : ScriptableObject
             animationList = new List<AniObject>();
             foreach (AniObject temp in t.animationList)
                 animationList.Add(new AniObject(temp));
+
+            fieldAnimationList = new List<AniObject>();
+            foreach (AniObject temp in t.fieldAnimationList)
+                fieldAnimationList.Add(new AniObject(temp));
         }
 
         public Dialogue dialogue;
         public List<AniObject> animationList;
+        public List<AniObject> fieldAnimationList;
     }
 
     public List<Tutorial> tutorialList;

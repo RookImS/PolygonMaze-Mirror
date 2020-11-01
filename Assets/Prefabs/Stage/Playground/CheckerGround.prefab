@@ -182,6 +182,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Checker
       objectReference: {fileID: 0}
+    - target: {fileID: 1314094695183363131, guid: a0e49eec94a0b6d43a801c1861760481, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a0e49eec94a0b6d43a801c1861760481, type: 3}
 --- !u!4 &2728159522124255971 stripped

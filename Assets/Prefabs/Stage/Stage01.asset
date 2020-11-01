@@ -18,57 +18,60 @@ MonoBehaviour:
   playerLife: 10
   baseObstacles:
   - obstacleSpecific: 1
-    position: {x: -2.07, y: 0, z: -0.31}
+    position: {x: -5.495, y: 0, z: -1.295}
     rotation: {x: 0, y: 0, z: 0, w: 0}
   - obstacleSpecific: 1
-    position: {x: -4.07, y: 0, z: -1.31}
-    rotation: {x: 0, y: 0, z: 0, w: 0}
+    position: {x: -5.495, y: 0, z: -0.295}
+    rotation: {x: 0, y: 1, z: 0, w: -0.00000004371139}
   - obstacleSpecific: 1
-    position: {x: -4.07, y: 0, z: -0.31}
-    rotation: {x: 0, y: 0, z: 0, w: 0}
+    position: {x: -5.495, y: 0, z: 0.705}
+    rotation: {x: 0, y: 1, z: 0, w: -0.00000004371139}
   - obstacleSpecific: 1
-    position: {x: -4.07, y: 0, z: 0.69}
-    rotation: {x: 0, y: 0, z: 0, w: 0}
+    position: {x: -5.495, y: 0, z: 1.705}
+    rotation: {x: 0, y: 1, z: 0, w: -0.00000004371139}
+  - obstacleSpecific: 0
+    position: {x: -4.706, y: 0, z: -0.295}
+    rotation: {x: 0, y: 0.70710677, z: 0, w: -0.70710677}
   - obstacleSpecific: 1
-    position: {x: -5.07, y: 0, z: 1.69}
-    rotation: {x: 0, y: 0, z: 0, w: 0}
+    position: {x: -1.38275, y: 0, z: 1.095}
+    rotation: {x: 0, y: 0, z: 0, w: 1}
   - obstacleSpecific: 1
-    position: {x: 0, y: 0, z: 0.1}
-    rotation: {x: 0, y: 0, z: 0, w: 0}
+    position: {x: -1.38275, y: 0, z: 2.095}
+    rotation: {x: 0, y: 0, z: 0, w: 1}
   - obstacleSpecific: 1
-    position: {x: 0, y: 0, z: 1.1}
-    rotation: {x: 0, y: 0, z: 0, w: 0}
+    position: {x: -1.38275, y: 0, z: 3.095}
+    rotation: {x: 0, y: 0, z: 0, w: 1}
   - obstacleSpecific: 1
-    position: {x: 0, y: 0, z: 2.1}
-    rotation: {x: 0, y: 0, z: 0, w: 0}
+    position: {x: -1.38275, y: 0, z: 4.095}
+    rotation: {x: 0, y: 0, z: 0, w: 1}
   - obstacleSpecific: 1
-    position: {x: 0, y: 0, z: 3.1}
-    rotation: {x: 0, y: 0, z: 0, w: 0}
+    position: {x: 1.9425, y: 0, z: 1.705}
+    rotation: {x: 0, y: 0.70710677, z: 0, w: 0.70710677}
   - obstacleSpecific: 1
-    position: {x: 0, y: 0, z: 4.1}
-    rotation: {x: 0, y: 0, z: 0, w: 0}
+    position: {x: 2.9425, y: 0, z: 1.705}
+    rotation: {x: 0, y: 0.70710677, z: 0, w: 0.70710677}
   - obstacleSpecific: 1
-    position: {x: 3.21, y: 0, z: 1.69}
-    rotation: {x: 0, y: 0, z: 0, w: 0}
+    position: {x: 3.9425, y: 0, z: -1.295}
+    rotation: {x: 0, y: 0, z: 0, w: 1}
   - obstacleSpecific: 1
-    position: {x: 5.21, y: 0, z: 0.69}
-    rotation: {x: 0, y: 0, z: 0, w: 0}
+    position: {x: 3.9425, y: 0, z: -0.295}
+    rotation: {x: 0, y: 1, z: 0, w: -0.00000004371139}
   - obstacleSpecific: 1
-    position: {x: 4.21, y: 0, z: -0.31}
-    rotation: {x: 0, y: 0, z: 0, w: 0}
+    position: {x: 3.9425, y: 0, z: 0.705}
+    rotation: {x: 0, y: 1, z: 0, w: -0.00000004371139}
   - obstacleSpecific: 1
-    position: {x: 4.21, y: 0, z: -1.31}
-    rotation: {x: 0, y: 0, z: 0, w: 0}
+    position: {x: 3.9425, y: 0, z: 1.705}
+    rotation: {x: 0, y: 1, z: 0, w: -0.00000004371139}
   - obstacleSpecific: 1
-    position: {x: 4.21, y: 0, z: -2.31}
-    rotation: {x: 0, y: 0, z: 0, w: 0}
+    position: {x: 7.995, y: 0, z: 3.5}
+    rotation: {x: 0, y: 0, z: 0, w: 1}
   spawnerInfo:
     blankMeshType: 2
     position: {x: -8.7, y: 0, z: -2.075}
     rotation: {x: 0, y: 0.70710677, z: 0, w: 0.70710677}
   destinationInfo:
     blankMeshType: 2
-    position: {x: 8.7, y: 0, z: 3.875}
+    position: {x: 8.7, y: 0, z: -2.075}
     rotation: {x: 0, y: 0.70710677, z: 0, w: 0.70710677}
   baseEnemyWaves:
   - enemyInfoList:
