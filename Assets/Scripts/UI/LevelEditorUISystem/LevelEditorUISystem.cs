@@ -22,13 +22,19 @@ public class LevelEditorUISystem : MonoBehaviour
     {
         ReadyColor,
         NotReadyColor,
-        SelectColor
+        SelectColor,
+        RemoveSelectColor
     }
 
     private bool coroutineFlag;
+    /*
+     * color prioirity
+     * removeSelectColor > selectColor > readyColor = notReadyColor
+     */
     private Color32 readyColor;
     private Color32 notReadyColor;
     private Color32 selectColor;
+    private Color32 removeSelectColor;
 
 
     //UI System
@@ -51,7 +57,6 @@ public class LevelEditorUISystem : MonoBehaviour
     [Header("Preserved Prefabs")]
     public GameObject warningMessagePrefab;
 
-
     private void Awake()
     {
         instance = this;
@@ -64,6 +69,7 @@ public class LevelEditorUISystem : MonoBehaviour
         readyColor = new Color32(127, 255, 193, 255);
         notReadyColor = new Color32(255, 255, 255, 255);
         selectColor = new Color32(156, 255, 244, 255);
+        removeSelectColor = new Color32(255, 0, 0, 255);
 
         playerSettingUISystem = this.gameObject.transform.GetComponent<PlayerSettingUISystem>();
         blankSettingUISystem = this.gameObject.transform.GetComponent<BlankSettingUISystem>();
@@ -106,15 +112,7 @@ public class LevelEditorUISystem : MonoBehaviour
 
         if (!this.coroutineFlag)
         {
-            if (flag == 0)
-                message = "Please correct the values in player life input field and the start cost of input field to normal integers";
-            else if (flag == 1)
-                message = "Please correct the value in player life input field as integer between 1 and 20!";
-            else if (flag == 2)
-                message = "Please correct the value in start cost input field as integer between 50 and 2000!";
-            else if (flag == 3)
-                message = string.Format("Saved success\nPlayer life: {0}\nStart cost: {1}"
-                    ,LevelEditor.instance.GetPlayerLife(), LevelEditor.instance.GetStartCost());
+            message = CreateMessage(flag, 0, 0);
 
             GameObject warningMessage = GameObject.Instantiate(warningMessagePrefab, this.gameObject.transform);
             warningMessage.GetComponent<TMP_Text>().text = message;
@@ -130,15 +128,126 @@ public class LevelEditorUISystem : MonoBehaviour
 
     }
 
-    public void ShowWarningPanel(GameObject relatedPanel)
+    public IEnumerator ShowMessage(int flag, int min, int max)
     {
-        Debug.Log("Show Warning Panel");
+        string message = "";
+
+        if (!this.coroutineFlag)
+        {
+            message = CreateMessage(flag, min, max);
+
+            GameObject warningMessage = GameObject.Instantiate(warningMessagePrefab, this.gameObject.transform);
+            warningMessage.GetComponent<TMP_Text>().text = message;
+
+            this.coroutineFlag = true;
+
+            yield return new WaitForSeconds(2);
+
+            this.coroutineFlag = false;
+
+            Destroy(warningMessage);
+        }
+
     }
 
-    public void ShowRemovePanel(GameObject relatedPanel)
+    public IEnumerator ShowMessage(int flag, float min, float max)
     {
+        string message = "";
+
+        if (!this.coroutineFlag)
+        {
+            message = CreateMessage(flag, min, max);
+
+            GameObject warningMessage = GameObject.Instantiate(warningMessagePrefab, this.gameObject.transform);
+            warningMessage.GetComponent<TMP_Text>().text = message;
+
+            this.coroutineFlag = true;
+
+            yield return new WaitForSeconds(2);
+
+            this.coroutineFlag = false;
+
+            Destroy(warningMessage);
+        }
 
     }
+
+    public string CreateMessage(int flag, int min, int max)
+    {
+        string message = "";
+
+        if (flag == 0)
+            message = string.Format("Please correct the value in player life " +
+                "input field as integer between {0} and {1]!", min, max);
+        else if (flag == 1)
+            message = string.Format("Please correct the value in start cost " +
+                "input field as integer between {0} and {1]!", min, max);
+        else if (flag == 2)
+            message = string.Format("Saved success\nPlayer life: {0}\nStart cost: {1}"
+                , LevelEditor.instance.GetPlayerLife(), LevelEditor.instance.GetStartCost());
+        else if (flag == 3)
+            message = string.Format("Please correct the value in enemies count " +
+                "input field as integer between {0} and {1}", min, max);
+        else if (flag == 4)
+            message = "Saved success enemies setting!";
+        else if (flag == 5)
+            message = string.Format("Please correct the value in enemy spawn duration " +
+                "input field as the number between {0} and {1}!", min, max);
+        else if (flag == 6)
+            message = string.Format("Please correct the value in break time " +
+                "input field as the number between {0} and {1}!", min, max);
+        else if (flag == 7)
+            message = "Please add at least one enemies and fill in input field!";
+        else if (flag == 8)
+            message = "Please finish all enemies setting!";
+        else if (flag == 9)
+            message = "Saved succes one enemy wave setting";
+        else if (flag == 10)
+            message = "Please add at least one wave and finish one wave setting";
+        else if (flag == 11)
+            message = "Please finish all waves setting!";
+        else if (flag == 12)
+            message = " Saved success enemy waves setting.";
+
+        return message;
+    }
+
+    public string CreateMessage(int flag, float min, float max)
+    {
+        string message = "";
+
+        if (flag == 0)
+            message = "Please correct the values in player life input field and the start cost of input field to normal integers";
+        else if (flag == 1)
+            message = string.Format("Please correct the value in player life " +
+                "input field as integer between {0} and {1]!", min, max);
+        else if (flag == 2)
+            message = string.Format("Please correct the value in start cost " +
+                "input field as integer between {0} and {1]!", min, max);
+        else if (flag == 3)
+            message = string.Format("Saved success\nPlayer life: {0}\nStart cost: {1}"
+                , LevelEditor.instance.GetPlayerLife(), LevelEditor.instance.GetStartCost());
+        else if (flag == 4)
+            message = string.Format("Please correct the value in enemies count " +
+                "input field as integer between {0} and {1}", min, max);
+        else if (flag == 5)
+            message = "Please add at least one  enemies and fill in input field!";
+        else if (flag == 6)
+            message = string.Format("Please correct the value in enemy spawn duration " +
+                "input field as the number between {0} and {1}!", min, max);
+        else if (flag == 7)
+            message = string.Format("Please correct the value in break time " +
+                "input field as the number between {0} and {1}!", min, max);
+        else if (flag == 8)
+            message = "Please finish setting all the waves!";
+        else if (flag == 9)
+            message = "Please add at least one wave!";
+        else if (flag == 10)
+            message = "Saved success enemy waves setting!";
+
+        return message;
+    }
+
 
     public void ChangeButtonColor(SettingUISystemSpecific settingUISystem, ButtonColor color)
     {
@@ -169,8 +278,22 @@ public class LevelEditorUISystem : MonoBehaviour
             button.GetComponent<Image>().color = readyColor;
         else if (color == ButtonColor.NotReadyColor)
             button.GetComponent<Image>().color = notReadyColor;
-        else
+        else if (color == ButtonColor.SelectColor)
             button.GetComponent<Image>().color = selectColor;
+        else if (color == ButtonColor.RemoveSelectColor)
+            button.GetComponent<Image>().color = removeSelectColor;
+    }
+
+    public void ChangeButtonColor(GameObject button, ButtonColor stateButtonColor, bool isSelected, bool isRemoveSelected)
+    {
+        if (isRemoveSelected == true)
+            button.GetComponent<Image>().color = removeSelectColor;
+        else if (isSelected == true)
+            button.GetComponent<Image>().color = selectColor;
+        else if (stateButtonColor == ButtonColor.ReadyColor)
+            button.GetComponent<Image>().color = readyColor;
+        else if (stateButtonColor == ButtonColor.NotReadyColor)
+            button.GetComponent<Image>().color = notReadyColor;
     }
 }
 

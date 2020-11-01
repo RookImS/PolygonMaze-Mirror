@@ -18,26 +18,27 @@ public class LevelEditor : MonoBehaviour
 
     private int playerLife;
     private int startCost;
-    private List<GameObject> obstacleList;
     private List<BlankTempInfo> spawnerList;
     private List<BlankTempInfo> destinationList;
+    private List<GameObject> obstacleList;
     private List<StageData.EnemyWaveInfo> enemyWaveInfoList;
     private int enemyNum;
 
     public void Awake()
     {
         Init();
+        Application.targetFrameRate = 60; //temp
     }
 
     public void Init()
     {
         instance = this;
         stageData = new StageData();
-        playerLife = -1;
-        startCost = -1;
-        obstacleList = new List<GameObject>();
+        playerLife = 0;
+        startCost = 0;
         spawnerList = new List<BlankTempInfo>();
         destinationList = new List<BlankTempInfo>();
+        obstacleList = new List<GameObject>();
         enemyWaveInfoList = new List<StageData.EnemyWaveInfo>();
         enemyNum = 0;
     }
@@ -72,6 +73,16 @@ public class LevelEditor : MonoBehaviour
     public List<BlankTempInfo> GetDestinationList()
     {
         return destinationList;
+    }
+
+    public List<GameObject> GetObstacleList()
+    {
+        return obstacleList;
+    }
+
+    public List<StageData.EnemyWaveInfo> GetEnemyWaveInfoList()
+    {
+        return enemyWaveInfoList;
     }
 
     public void AddObstacle(GameObject obstacle)
