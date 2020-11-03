@@ -4,15 +4,12 @@ using UnityEngine;
 
 public class BulletData : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    public string bulletName;
+    public BulletStatSystem stats;
 
-    // Update is called once per frame
-    void Update()
+    public void Init(TowerStatSystem t_stat)
     {
-        
+        stats.SetBaseStat(t_stat);
+        stats.Init(this);
     }
 }

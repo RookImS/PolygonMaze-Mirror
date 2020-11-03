@@ -4,11 +4,18 @@
 TagManager:
   serializedVersion: 2
   tags:
-  - Wall
-  - WallCornerSide1
-  - WallCornerSide2
-  - Spawner
   - Destination
+  - Spawner
+  - Wall
+  - Obstacle
+  - SideCollider
+  - Tower
+  - Neutral
+  - Enemy
+  - Hit
+  - Bullet
+  - Checker
+  - DeployUI
   layers:
   - Default
   - TransparentFX
@@ -18,11 +25,11 @@ TagManager:
   - UI
   - 
   - 
-  - 
-  - 
-  - WallCollidor
-  - 
-  - 
+  - Tower
+  - SideCollider
+  - WallCollider
+  - Stage
+  - DeployUI
   - 
   - 
   - 

@@ -1,0 +1,257 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a29239bdc67fa5a47a090a7ffe79f7be, type: 3}
+  m_Name: Tutorial01
+  m_EditorClassIdentifier: 
+  tutorialList:
+  - dialogue:
+      name: 0_SpawnDestDesc
+      sentences:
+      - "\uCD08\uB85D\uC0C9 \uBD80\uBD84\uC740 \uC801\uC774 \uC0DD\uC131\uB418\uB294
+        \uC785\uAD6C\uC785\uB2C8\uB2E4."
+      - "\uBE68\uAC04\uC0C9 \uBD80\uBD84\uC740 \uC801\uC774 \uD0C8\uCD9C\uD558\uB294
+        \uCD9C\uAD6C\uC785\uB2C8\uB2E4."
+      posX: -280
+      posY: 340
+      width: 1200
+      height: 250
+    animationList:
+    - obj: {fileID: 9206189686154152021, guid: fdc3ea6c83d188e4e98380216bcea866, type: 3}
+      order: 1
+      length: 1
+      posX: -900
+      posY: -250
+      rotation: 0
+      enable: 0
+    - obj: {fileID: 9206189686154152021, guid: 4c9394379ab8ecd43a855fb16f7ae51e, type: 3}
+      order: 2
+      length: 1
+      posX: 900
+      posY: -250
+      rotation: 0
+      enable: 0
+    fieldAnimationList: []
+  - dialogue:
+      name: 1_LifeDesc
+      sentences:
+      - "\uB77C\uC774\uD504\uC785\uB2C8\uB2E4. \uC801\uC774 \uCD9C\uAD6C\uB97C \uD1B5\uD574
+        \uD0C8\uCD9C\uD558\uBA74 \uAC10\uC18C\uD569\uB2C8\uB2E4."
+      - "\uB9CC\uC57D \uB77C\uC774\uD504\uAC00 0\uC774 \uB418\uBA74 \uAC8C\uC784\uC5D0\uC11C
+        \uD328\uBC30\uD569\uB2C8\uB2E4."
+      posX: -280
+      posY: 340
+      width: 1200
+      height: 250
+    animationList:
+    - obj: {fileID: 9206189686154152021, guid: d5cc5e9a7891ce84e99e9bf24b033cc8, type: 3}
+      order: 1
+      length: 2
+      posX: 615
+      posY: -325
+      rotation: 0
+      enable: 0
+    fieldAnimationList: []
+  - dialogue:
+      name: 2_EnemyDesc
+      sentences:
+      - "\uB0A8\uC740 \uC801\uC758 \uC218\uC785\uB2C8\uB2E4."
+      - "\uC2A4\uD14C\uC774\uC9C0\uC758 \uC801\uC744 \uBAA8\uB450 \uBB3C\uB9AC\uCCD0
+        \uB0A8\uC740 \uC801\uC758 \uC218\uAC00 0\uC774 \uB418\uBA74 \uC2A4\uD14C\uC774\uC9C0\uB97C
+        \uD074\uB9AC\uC5B4\uD560 \uC218 \uC788\uC2B5\uB2C8\uB2E4."
+      posX: -280
+      posY: 340
+      width: 1200
+      height: 250
+    animationList:
+    - obj: {fileID: 9206189686154152021, guid: d5cc5e9a7891ce84e99e9bf24b033cc8, type: 3}
+      order: 1
+      length: 2
+      posX: 860
+      posY: -325
+      rotation: 0
+      enable: 0
+    fieldAnimationList: []
+  - dialogue:
+      name: 3_ObstacleDesc
+      sentences:
+      - "\uAC8C\uC784 \uC2DC\uC791\uC2DC \uAE30\uBCF8\uC801\uC73C\uB85C \uC124\uCE58\uB418\uC5B4
+        \uC788\uB294 \uC7A5\uC560\uBB3C\uC785\uB2C8\uB2E4. \uC7A5\uC560\uBB3C\uC740
+        \uD68C\uC0C9\uC73C\uB85C \uCE60\uD574\uC838\uC788\uC2B5\uB2C8\uB2E4."
+      posX: -280
+      posY: 340
+      width: 1200
+      height: 250
+    animationList:
+    - obj: {fileID: 9206189686154152021, guid: fdc3ea6c83d188e4e98380216bcea866, type: 3}
+      order: 1
+      length: 1
+      posX: -550
+      posY: -175
+      rotation: 0
+      enable: 0
+    fieldAnimationList: []
+  - dialogue:
+      name: 4_CostDesc
+      sentences:
+      - "\uD604\uC7AC \uAC00\uC9C0\uACE0 \uC788\uB294 \uCF54\uC2A4\uD2B8\uC785\uB2C8\uB2E4."
+      - "\uD0C0\uC6CC\uB97C \uBC30\uCE58\uD560 \uB54C \uC0AC\uC6A9\uD558\uAC8C \uB429\uB2C8\uB2E4."
+      posX: -280
+      posY: 340
+      width: 1200
+      height: 250
+    animationList:
+    - obj: {fileID: 9206189686154152021, guid: d5cc5e9a7891ce84e99e9bf24b033cc8, type: 3}
+      order: 1
+      length: 2
+      posX: 615
+      posY: -425
+      rotation: 0
+      enable: 0
+    fieldAnimationList: []
+  - dialogue:
+      name: 5_DeployDesc
+      sentences:
+      - "\uD0C0\uC6CC \uC544\uC774\uCF58\uC744 \uB4DC\uB798\uADF8\uD558\uBA74 \uD0C0\uC6CC\uB97C
+        \uBC30\uCE58\uD560 \uC218 \uC788\uC2B5\uB2C8\uB2E4."
+      - "\uD0C0\uC6CC\uC758 \uC124\uCE58\uB294 \uC7A5\uC560\uBB3C\uC774\uB098 \uC774\uBBF8
+        \uC124\uCE58\uD55C \uD0C0\uC6CC\uC758 \uBCC0\uC5D0 \uB9DE\uB2FF\uC544\uC57C
+        \uC124\uCE58\uD560 \uC218 \uC788\uC2B5\uB2C8\uB2E4."
+      posX: -280
+      posY: 340
+      width: 1200
+      height: 250
+    animationList: []
+    fieldAnimationList: []
+  - dialogue:
+      name: 6_TriangleDesc
+      sentences:
+      - "\uD45C\uC2DC\uB41C \uC704\uCE58\uC5D0 \uC0BC\uAC01\uD615 \uD0C0\uC6CC\uB97C
+        \uBC30\uCE58\uD558\uC138\uC694."
+      posX: -280
+      posY: 340
+      width: 1200
+      height: 250
+    animationList: []
+    fieldAnimationList:
+    - obj: {fileID: 5889517342648953037, guid: 51554605c8a9ee5438765a985678efaa, type: 3}
+      order: 1
+      length: 2
+      posX: -470.3
+      posY: -98
+      rotation: 30
+      enable: 0
+  - dialogue:
+      name: 7_GainDesc
+      sentences:
+      - "\uC801\uC744 \uCC98\uCE58\uD558\uBA74 \uCF54\uC2A4\uD2B8\uB97C \uC5BB\uC744
+        \uC218 \uC788\uC2B5\uB2C8\uB2E4."
+      posX: -280
+      posY: 340
+      width: 1200
+      height: 250
+    animationList:
+    - obj: {fileID: 9206189686154152021, guid: d5cc5e9a7891ce84e99e9bf24b033cc8, type: 3}
+      order: 1
+      length: 1
+      posX: 615
+      posY: -425
+      rotation: 0
+      enable: 0
+    fieldAnimationList: []
+  - dialogue:
+      name: 8_PathDesc
+      sentences:
+      - "\uD0C0\uC6CC\uB294 \uC801\uC744 \uACF5\uACA9\uD560 \uC218\uB3C4 \uC788\uC9C0\uB9CC
+        \uC801\uC758 \uACBD\uB85C\uB97C \uBCC0\uACBD\uD560 \uC218\uB3C4 \uC788\uC2B5\uB2C8\uB2E4."
+      posX: -280
+      posY: 340
+      width: 1200
+      height: 250
+    animationList: []
+    fieldAnimationList: []
+  - dialogue:
+      name: 9_SquareDesc
+      sentences:
+      - "\uD45C\uC2DC\uB41C \uC704\uCE58\uC5D0 \uC0AC\uAC01\uD615 \uD0C0\uC6CC\uB97C
+        \uBC30\uCE58\uD558\uC138\uC694."
+      posX: -280
+      posY: 340
+      width: 1200
+      height: 250
+    animationList: []
+    fieldAnimationList:
+    - obj: {fileID: 4293294981893517376, guid: 9966b84660736d84091a5e5a3119ea47, type: 3}
+      order: 1
+      length: 2
+      posX: -593.5
+      posY: -248.5
+      rotation: 0
+      enable: 0
+    - obj: {fileID: 4293294981893517376, guid: 9966b84660736d84091a5e5a3119ea47, type: 3}
+      order: 1
+      length: 2
+      posX: 425.5
+      posY: -248.5
+      rotation: 0
+      enable: 0
+  - dialogue:
+      name: 10_PathCheckDesc
+      sentences:
+      - "\uC0AC\uAC01\uD615 \uD0C0\uC6CC\uC758 \uBC30\uCE58\uB85C \uC778\uD574 \uC801\uC758
+        \uACBD\uB85C\uAC00 \uBC14\uB010 \uAC83\uC744 \uD655\uC778\uD560 \uC218 \uC788\uC2B5\uB2C8\uB2E4."
+      posX: -280
+      posY: 340
+      width: 1200
+      height: 250
+    animationList: []
+    fieldAnimationList: []
+  - dialogue:
+      name: 11_NoDeployDesc
+      sentences:
+      - "\uC774 \uACF3\uC5D0 \uB3C4\uD615 \uBC30\uCE58\uB97C \uC2DC\uB3C4\uD574\uBCF4\uC138\uC694."
+      posX: -280
+      posY: -145
+      width: 1200
+      height: 250
+    animationList: []
+    fieldAnimationList:
+    - obj: {fileID: 8391835449026218188, guid: dbdc66d33e8c5374a8520b35d2bacd36, type: 3}
+      order: 1
+      length: 2
+      posX: 317.8
+      posY: 331.6
+      rotation: 0
+      enable: 0
+  - dialogue:
+      name: 12_NoDeployDesc2
+      sentences:
+      - "\uC774 \uC704\uCE58\uB294 \uC801\uC774 \uCD9C\uAD6C\uB85C \uD5A5\uD558\uB294
+        \uAE38\uC744 \uBAA8\uB450 \uCC28\uB2E8\uD558\uB294 \uC704\uCE58\uC774\uAE30\uB54C\uBB38\uC5D0
+        \uBC30\uCE58\uD560 \uC218 \uC5C6\uC2B5\uB2C8\uB2E4."
+      posX: -280
+      posY: 340
+      width: 1200
+      height: 250
+    animationList: []
+    fieldAnimationList: []
+  - dialogue:
+      name: 13_Continue
+      sentences:
+      - "\uAC8C\uC784\uC744 \uACC4\uC18D \uC9C4\uD589\uD558\uC5EC \uAC8C\uC784\uC744
+        \uD074\uB9AC\uC5B4\uD574\uBCF4\uC138\uC694!"
+      posX: -280
+      posY: 340
+      width: 1200
+      height: 250
+    animationList: []
+    fieldAnimationList: []
+  tutorialChecker: {fileID: 3565427586884206454, guid: 4819b34b03d6c954faebbca3a8cbfd67, type: 3}

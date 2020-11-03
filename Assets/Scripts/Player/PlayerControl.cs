@@ -2,17 +2,43 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerControl : MonoBehaviour
+public class PlayerControl : MonoSingleton<PlayerControl>
 {
-    // Start is called before the first frame update
-    void Start()
+    public PlayerData playerData;
+
+    private void Awake()
     {
-        
+        playerData = new PlayerData();
+        Init();
     }
 
-    // Update is called once per frame
-    void Update()
+    public void Init()
     {
-        
+        playerData.Init();
     }
+
+    public void SetPlayer(int cost, int life)
+    {
+        playerData.SetPlayer(cost, life);
+    }
+
+    public void GainCost(int reward)
+    {
+        playerData.ChangeCost(reward);
+    }
+
+    public bool CheckCost(int cost)
+    {
+        return playerData.CheckCost(-cost);
+    }
+    public bool UseCost(int cost)
+    {
+        return playerData.ChangeCost(-cost);
+    }
+
+    public void Damage(int life)
+    {
+        playerData.ChangeLife(-life);
+    }
+
 }

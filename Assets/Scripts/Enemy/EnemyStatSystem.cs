@@ -75,6 +75,8 @@ public class EnemyStatSystem
     }
 
     public Stats baseStats;
+    public StatModifier baseStatModifier;
+
     public Stats stats { get; set; } = new Stats();
 
 
@@ -214,6 +216,8 @@ public class EnemyStatSystem
     public void Changehp(int amount)
     {
         currentHp = Mathf.Clamp(currentHp + amount, 0, stats.hp);
+        if (currentHp <= 0)
+            m_Owner.Death();
     }
 
     void UpdateFinalStats()
@@ -247,14 +251,11 @@ public class EnemyStatSystem
         }
     }
 
-  
-    /*
-    public void Damage(BulletData.AttackData attackData)
+    public void Damage(int damage)
     {
-        int totalDamage = attackData.GetFullDamage();
+        int totalDamage = damage - stats.def;
 
         Changehp(-totalDamage);
-        DamageUI.Instance.NewDamage(totalDamage, m_Owner.transform.position);
+        //DamageUI.Instance.NewDamage(totalDamage, m_Owner.transform.position);
     }
-    */
 }

@@ -4,15 +4,29 @@ using UnityEngine;
 
 public class BulletBehaviour : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    protected BulletData m_BulletData;
+    public List<GameObject> enemyList;
+    public GameObject hitCollider;
+
+    protected void Awake()
+    {
+        m_BulletData = GetComponent<BulletData>();
+        enemyList = new List<GameObject>();
+    }
+
+    public virtual void Init(TowerStatSystem t_stat)
+    {
+
+    }
+
+    public virtual void Init(TowerStatSystem t_stat, int ticRate, float attackDuration)
+    {
+
+    }
+
+    protected virtual void Attack()
     {
         
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 }

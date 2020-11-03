@@ -5,34 +5,48 @@ using UnityEngine;
 public class EnemyData : MonoBehaviour
 {
     private int spawnNo;
+    private int waveNum;
+
     public int reward;
     public int damage;
 
-    public string desc;
     public EnemyStatSystem Stats;
     public EColorSystem EColorSys = new EColorSystem();
     public WaveSystem WaveSys = new WaveSystem();
 
+
+    private void Update()
+    {
+        Stats.Tick();
+    }
 
     public void Init()
     {
         Stats.Init(this);
     }
 
-    void Awake()
+    // Update is called once per frame
+    
+
+    public int GetWaveNum()
     {
-        
+        return this.waveNum;
     }
 
-    // Update is called once per frame
-    void Update()
+    public void SetWaveNum(int waveNum)
     {
-        Stats.Tick();
+        this.waveNum = waveNum;
+    }
+
+    public void ApplyWaveSystem()
+    {
+        WaveSys.ApplyWaveSystem(this);
     }
 
     public void Death()
     {
         Stats.Death();
+        PlayerControl.Instance.GainCost(this.reward);
         Destroy(this.gameObject);
     }
 
@@ -43,7 +57,7 @@ public class EnemyData : MonoBehaviour
     /// <param name="target">The CharacterData you want to attack</param>
     public void Attack()
     {
-        //PlayerControl.Instance.Damage(this.damage);
+        PlayerControl.Instance.Damage(this.damage);
     }
 
     /// <summary>
@@ -52,12 +66,9 @@ public class EnemyData : MonoBehaviour
     /// manually when writing special elemental effect)
     /// </summary>
     /// <param name="attackData"></param>
-    /*
-    public void Damage(BulletData.AttackData attackData)
+ 
+    public void Damage(int damage)
     {
-        Stats.Damage(attackData);
-
-        OnDamage.Invoke();
+        Stats.Damage(damage);
     }
-    */
 }
