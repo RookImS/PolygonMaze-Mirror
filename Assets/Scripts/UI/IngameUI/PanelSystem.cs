@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -7,9 +8,15 @@ public class PanelSystem : MonoBehaviour
 {
     public GameObject backGroundPanel;
     public GameObject pausePanel;
-    public GameObject gameClearPanel;
+    public GameObject stageClearPanel;
     public GameObject gameOverPanel;
 
+    public void SetPanel(GameObject panel)
+    {
+        backGroundPanel.SetActive(true);
+        panel.SetActive(true);
+        GameManager.Instance.TimeStop();
+    }
     public void Resume()
     {
         backGroundPanel.SetActive(false);

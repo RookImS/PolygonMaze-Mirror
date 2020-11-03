@@ -67,7 +67,6 @@ public class CheckerBehaviour : MonoBehaviour
     {
         if (c1.Length != c2.Length)
         {
-            Debug.Log("check");
             return true;
         }
         else
@@ -106,7 +105,6 @@ public class CheckerBehaviour : MonoBehaviour
         {
             if (CheckPathChange(path.corners, tempPath.corners))
             {
-                Debug.Log("Change");
                 m_pathTrackerAgent.GetComponent<PathTracker>().DestroyTrace();
                 m_pathTrackerAgent = null;
                 countDown = 0f;

@@ -53,7 +53,7 @@ public class PlayerData
 
     public void Death()
     {
-        // 죽었을 시 걸리는 트리거
+        GameManager.Instance.GameOver();
     }
 
 }

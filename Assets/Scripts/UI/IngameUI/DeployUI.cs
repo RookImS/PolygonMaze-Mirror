@@ -75,8 +75,5 @@ public class DeployUI : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
         Time.timeScale = 1f;
 
         isProgressDeploy = false;
-
-        Debug.Log(hitObject);
-        Debug.Log(isProgressDeploy);
     }
 }

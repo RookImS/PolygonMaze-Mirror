@@ -378,9 +378,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eb56c68cab439eb47889d6c2ebdb2b8f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  muzzle: {fileID: 5861573579347852341}
   target: {fileID: 0}
   targetList: []
-  muzzle: {fileID: 5861573579347852341}
 --- !u!114 &8996109028398955740
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -395,18 +395,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   TowerName: PentagonTower
   TowerDescription: 
+  bullet: {fileID: 7246983010072267271, guid: e1f2e22bd4c371249ae9143191777865, type: 3}
   Stats:
     baseStats:
-      damage: 200
+      damage: 150
       aheadDelay: 0.05
       attackRate: 0.75
       recogRange: 2
       attackRange: 2
       splashRange: 0.05
-  cost: 120
   neighbor: []
   color: {fileID: 0}
-  bullet: {fileID: 7246983010072267271, guid: e1f2e22bd4c371249ae9143191777865, type: 3}
 --- !u!64 &4210448959316779622
 MeshCollider:
   m_ObjectHideFlags: 0

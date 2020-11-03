@@ -60,7 +60,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2117414a62b000f4e8490b3b39745a7c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  reward: 15
+  reward: 25
   damage: 1
   Stats:
     baseStats:

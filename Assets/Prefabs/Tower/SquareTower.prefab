@@ -259,9 +259,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eb56c68cab439eb47889d6c2ebdb2b8f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  muzzle: {fileID: 4910982772904957612}
   target: {fileID: 0}
   targetList: []
-  muzzle: {fileID: 4910982772904957612}
 --- !u!114 &7271484921240024665
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -276,18 +276,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   TowerName: SquareTower
   TowerDescription: 
+  bullet: {fileID: 1007396303048527707, guid: 90c0b8b02e7e7284586127861642ef77, type: 3}
   Stats:
     baseStats:
       damage: 100
       aheadDelay: 0
-      attackRate: 1
+      attackRate: 1.5
       recogRange: 2
       attackRange: 3
       splashRange: 0.1
-  cost: 50
   neighbor: []
   color: {fileID: 0}
-  bullet: {fileID: 1007396303048527707, guid: 90c0b8b02e7e7284586127861642ef77, type: 3}
 --- !u!64 &3418494697665572859
 MeshCollider:
   m_ObjectHideFlags: 0

@@ -5,8 +5,8 @@ using UnityEngine;
 
 public class Tutorial : MonoBehaviour
 {
-    public GameObject inGameUI;
-    public GameObject fieldUI;
+    public GameObject aniUI;
+    public GameObject fieldAniUI;
     public TutorialObject tutorial;
     public DialogueUI dialogueUI;
 
@@ -72,7 +72,7 @@ public class Tutorial : MonoBehaviour
                     if (ani.order == chapterOrder)
                     {
                         ani.enable = true;
-                        GameObject tempAniObject = Instantiate(ani.obj, inGameUI.transform);
+                        GameObject tempAniObject = Instantiate(ani.obj, aniUI.transform);
                         tempAniObject.GetComponent<RectTransform>().anchoredPosition = new Vector2(ani.posX, ani.posY);
                         tempAniObject.GetComponent<RectTransform>().localRotation = Quaternion.Euler(0f, 0f, ani.rotation);
                         StartCoroutine(DestroyAniObject(tempAniObject, chapterOrder + ani.length));
@@ -86,7 +86,7 @@ public class Tutorial : MonoBehaviour
                     if (ani.order == chapterOrder)
                     {
                         ani.enable = true;
-                        GameObject tempAniObject = Instantiate(ani.obj, fieldUI.transform);
+                        GameObject tempAniObject = Instantiate(ani.obj, fieldAniUI.transform);
                         tempAniObject.GetComponent<RectTransform>().anchoredPosition = new Vector2(ani.posX, ani.posY);
                         tempAniObject.GetComponent<RectTransform>().localRotation = Quaternion.Euler(0f, 0f, ani.rotation);
                         StartCoroutine(DestroyAniObject(tempAniObject, chapterOrder + ani.length));

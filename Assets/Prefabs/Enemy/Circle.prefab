@@ -60,12 +60,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2117414a62b000f4e8490b3b39745a7c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  reward: 10
+  reward: 15
   damage: 1
   Stats:
     baseStats:
-      hp: 1000
-      speed: 2
+      hp: 750
+      speed: 1.5
       def: 5
     baseStatModifier:
       ModifierMode: 1

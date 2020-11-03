@@ -71,6 +71,8 @@ public class LevelManager : MonoBehaviour
     public GameObject ellipseEnemyPrefab;
     public GameObject ringEnemyPrefab;
 
+    [HideInInspector] public int m_enemyCount;
+
     private void Awake()
     {
         Init();
@@ -82,14 +84,32 @@ public class LevelManager : MonoBehaviour
         StartCoroutine(StartStage());
     }
 
-
     public void Init()
     {
         instance = this;
 
         PlayerControl.Instance.playerData.SetPlayer(this.stageData.startCost, this.stageData.playerLife);
+        m_enemyCount = 0;
     }
 
+    public int UpdateEnemyCount()
+    {
+        int enemyCount = 0;
+
+        for(int i = 0; i< waves.transform.childCount; i++)
+        {
+            enemyCount += waves.transform.GetChild(i).childCount;
+        }
+
+        m_enemyCount = enemyCount;
+
+        if (m_enemyCount <= 0 && PlayerControl.Instance.playerData.currentLife > 0)
+        {
+            GameManager.Instance.StageClear();
+        }
+
+        return m_enemyCount;
+    }
 
     /* LoadStage
      * 1. Load obstacles.

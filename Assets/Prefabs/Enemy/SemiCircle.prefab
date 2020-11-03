@@ -64,7 +64,7 @@ MonoBehaviour:
   damage: 1
   Stats:
     baseStats:
-      hp: 2000
+      hp: 1500
       speed: 2
       def: 5
     baseStatModifier:

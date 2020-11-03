@@ -14,6 +14,10 @@ public class StatusUI : MonoBehaviour
     private int currentLife;
     public TextMeshProUGUI lifeText;
 
+    private int preEnemyCount;
+    private int currentEnemyCount;
+    public TextMeshProUGUI enemyCountText;
+
     private void Awake()
     {
         Init();
@@ -37,13 +41,17 @@ public class StatusUI : MonoBehaviour
     {
         currentCost = PlayerControl.Instance.playerData.currentCost;
         currentLife = PlayerControl.Instance.playerData.currentLife;
+        currentEnemyCount = LevelManager.instance.UpdateEnemyCount();
 
         if (preCost != currentCost)
             costText.text = PlayerControl.Instance.playerData.currentCost.ToString();
         if (preLife != currentLife)
             lifeText.text = PlayerControl.Instance.playerData.currentLife.ToString();
+        if (preEnemyCount != currentEnemyCount)
+            enemyCountText.text = LevelManager.instance.m_enemyCount.ToString();
 
         preCost = currentCost;
         preLife = currentLife;
+        preEnemyCount = currentEnemyCount;
     }
 }

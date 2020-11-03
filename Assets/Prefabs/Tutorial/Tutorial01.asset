@@ -55,8 +55,8 @@ MonoBehaviour:
     - obj: {fileID: 9206189686154152021, guid: d5cc5e9a7891ce84e99e9bf24b033cc8, type: 3}
       order: 1
       length: 2
-      posX: 735
-      posY: -425
+      posX: 615
+      posY: -325
       rotation: 0
       enable: 0
     fieldAnimationList: []
@@ -71,7 +71,14 @@ MonoBehaviour:
       posY: 340
       width: 1200
       height: 250
-    animationList: []
+    animationList:
+    - obj: {fileID: 9206189686154152021, guid: d5cc5e9a7891ce84e99e9bf24b033cc8, type: 3}
+      order: 1
+      length: 2
+      posX: 860
+      posY: -325
+      rotation: 0
+      enable: 0
     fieldAnimationList: []
   - dialogue:
       name: 3_ObstacleDesc
@@ -83,7 +90,14 @@ MonoBehaviour:
       posY: 340
       width: 1200
       height: 250
-    animationList: []
+    animationList:
+    - obj: {fileID: 9206189686154152021, guid: fdc3ea6c83d188e4e98380216bcea866, type: 3}
+      order: 1
+      length: 1
+      posX: -550
+      posY: -175
+      rotation: 0
+      enable: 0
     fieldAnimationList: []
   - dialogue:
       name: 4_CostDesc
@@ -98,15 +112,15 @@ MonoBehaviour:
     - obj: {fileID: 9206189686154152021, guid: d5cc5e9a7891ce84e99e9bf24b033cc8, type: 3}
       order: 1
       length: 2
-      posX: 735
-      posY: -325
+      posX: 615
+      posY: -425
       rotation: 0
       enable: 0
     fieldAnimationList: []
   - dialogue:
       name: 5_DeployDesc
       sentences:
-      - "\uD0C0 \uC544\uC774\uCF58\uC744 \uB4DC\uB798\uADF8\uD558\uBA74 \uD0C0\uC6CC\uB97C
+      - "\uD0C0\uC6CC \uC544\uC774\uCF58\uC744 \uB4DC\uB798\uADF8\uD558\uBA74 \uD0C0\uC6CC\uB97C
         \uBC30\uCE58\uD560 \uC218 \uC788\uC2B5\uB2C8\uB2E4."
       - "\uD0C0\uC6CC\uC758 \uC124\uCE58\uB294 \uC7A5\uC560\uBB3C\uC774\uB098 \uC774\uBBF8
         \uC124\uCE58\uD55C \uD0C0\uC6CC\uC758 \uBCC0\uC5D0 \uB9DE\uB2FF\uC544\uC57C
@@ -132,8 +146,8 @@ MonoBehaviour:
       order: 1
       length: 2
       posX: -470.3
-      posY: -74.5
-      rotation: -30
+      posY: -98
+      rotation: 30
       enable: 0
   - dialogue:
       name: 7_GainDesc
@@ -148,8 +162,8 @@ MonoBehaviour:
     - obj: {fileID: 9206189686154152021, guid: d5cc5e9a7891ce84e99e9bf24b033cc8, type: 3}
       order: 1
       length: 1
-      posX: 725
-      posY: -325
+      posX: 615
+      posY: -425
       rotation: 0
       enable: 0
     fieldAnimationList: []
@@ -214,7 +228,7 @@ MonoBehaviour:
       order: 1
       length: 2
       posX: 317.8
-      posY: 331.7
+      posY: 331.6
       rotation: 0
       enable: 0
   - dialogue:

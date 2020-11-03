@@ -49,9 +49,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eb56c68cab439eb47889d6c2ebdb2b8f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  muzzle: {fileID: 2918727955211445950}
   target: {fileID: 0}
   targetList: []
-  muzzle: {fileID: 2918727955211445950}
 --- !u!114 &346010008869247010
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -66,18 +66,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   TowerName: TriangleTower
   TowerDescription: 
+  bullet: {fileID: 1007396303048527707, guid: 90c0b8b02e7e7284586127861642ef77, type: 3}
   Stats:
     baseStats:
-      damage: 20
+      damage: 15
       aheadDelay: 0
-      attackRate: 1.5
+      attackRate: 2
       recogRange: 2
       attackRange: 3
       splashRange: 0.1
-  cost: 40
   neighbor: []
   color: {fileID: 0}
-  bullet: {fileID: 1007396303048527707, guid: 90c0b8b02e7e7284586127861642ef77, type: 3}
   bulletNumber: 5
   bulletAngle: 60
 --- !u!64 &2853318671207645204

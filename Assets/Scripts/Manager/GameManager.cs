@@ -7,67 +7,39 @@ using UnityEngine.Events;
 using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
-public class GameManager : MonoBehaviour
+public class GameManager : MonoSingleton<GameManager>
 {
-    private static GameManager instance;
+    [HideInInspector] public GameObject inGameUI;
 
-    public static PlayerData playerdata;
-    public static TowerData towerdata;
-    public static EnemyData enemydata;
-    public static DeployBehaviour deploybehaviour;
-    public static TowerBehaviour towerbehaviour;
+    public event Action gameStart;
+    public event Action deployTower;
+    public event Action enemyEscape;
+    public event Action exit;
+    public event Action gameOver;
+    public event Action stageClear;
+    public event Action enemyDeath;
 
     public GameState currentGameState;
-    bool isGameOver;
-
-    public static GameManager Instance
-    {
-        get
-        {
-            if (instance == null)
-            {
-                var obj = FindObjectOfType<GameManager>();
-                if (obj != null)
-                {
-                    instance = obj;
-                }
-                else
-                {
-                    GameObject gobj = new GameObject("GameManager");
-                    var temp = gobj.AddComponent<GameManager>();
-                    instance = temp;
-                }
-            }
-            return instance;
-        }
-        private set
-        {
-            instance = value;
-        }
-    }
 
     private void Awake()
     {
-        var objs = FindObjectsOfType<GameManager>();
-        if (objs.Length != 1)
-        {
-            Destroy(gameObject);
-            return;
-        }
-        DontDestroyOnLoad(gameObject);
+        inGameUI = GameObject.Find("InGameUI");
+        Init();
     }
 
     void Start()
     {
         currentGameState = GameState.menu;
 
-        GameStart += PlayerControl.Instance.Init;
-        GameStart += StartGame;
+        //GameStart += PlayerControl.Instance.Init;
+        //GameStart += StartGame;
 
-        DeployTower += TimeRestore;
+        //DeployTower += TimeRestore;
 
     }
     public static Stack<int> stack = new Stack<int>();  //BackKey 기능을 위해 씬 Buildindex를 저장하는 스택
+
+    
 
     public enum GameState
     {
@@ -76,6 +48,10 @@ public class GameManager : MonoBehaviour
         gameOver
     }
 
+    private void Init()
+    {
+
+    }
     void SetGameState (GameState newGameState)  //현재 게임플레이 상태 지정
     {
         if(newGameState == GameState.menu) { 
@@ -132,12 +108,6 @@ public class GameManager : MonoBehaviour
         Time.timeScale = 0f;
     }
 
-    public event Action GameStart;
-    public event Action DeployTower;
-    public event Action EnemyEscape;
-    public event Action Exit;
-    public event Action PlayerDeath;
-    public event Action EnemyDeath;
 
     private int _EnemyDeathCount = 0;
     private int _EnemyEscapeCount = 0;
@@ -169,32 +139,37 @@ public class GameManager : MonoBehaviour
     {
 
     }
-    public void OnDeployTower()
-    {
-        _DeployTowerCount++;
-        DeployTower?.Invoke();
-    }
-    public void OnEnemyDeath()
-    {
-        _EnemyDeathCount++;
-        EnemyDeath?.Invoke();
-    }
-    public void OnEnemyEscape()
-    {
-        _EnemyEscapeCount++;
-        EnemyEscape?.Invoke();
-    }
-    //public void OnPlayerDeath()
+    //public void OnDeployTower()
     //{
-    //    PanelUISystem.Instance.BackGroundPanel.SetActive(true);
-    //    PanelUISystem.Instance.GameOverPanel.SetActive(true);
-    //    PlayerDeath?.Invoke();
+    //    _DeployTowerCount++;
+    //    DeployTower?.Invoke();
     //}
-    //public void OnStageClear()
+    //public void OnEnemyDeath()
     //{
-    //    PanelUISystem.Instance.BackGroundPanel.SetActive(true);
-    //    PanelUISystem.Instance.GameClearPanel.SetActive(true);
+    //    _EnemyDeathCount++;
+    //    EnemyDeath?.Invoke();
     //}
+    //public void OnEnemyEscape()
+    //{
+    //    _EnemyEscapeCount++;
+    //    EnemyEscape?.Invoke();
+    //}
+
+    private void LoadStage()
+    {
+        inGameUI = GameObject.Find("InGameUI");
+    }
+    public void GameOver()
+    {
+        PanelSystem panelSys = inGameUI.transform.Find("IngamePanel").gameObject.GetComponent<PanelSystem>();
+        panelSys.SetPanel(panelSys.gameOverPanel);
+    }
+
+    public void StageClear()
+    {
+        PanelSystem panelSys = inGameUI.transform.Find("IngamePanel").gameObject.GetComponent<PanelSystem>();
+        panelSys.SetPanel(panelSys.stageClearPanel);
+    }
 
 
     //void test()
