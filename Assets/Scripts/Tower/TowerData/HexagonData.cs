@@ -11,6 +11,7 @@ public class HexagonData : TowerData
     {
         Stats.Init(this);
         Stats.stats.attackRate = 1f / (1f / Stats.stats.attackRate + attackDuration);
+        towerSkill = null;
     }
     public override void Shoot(Transform muzzle)
     {

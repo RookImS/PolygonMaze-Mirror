@@ -33,6 +33,8 @@ public class LevelManager : MonoBehaviour
     private Vector3 spawnerPosition;
     private GameObject waves;
     private List<EnemyWave> enemyWaveList;
+    [HideInInspector] public bool isWaveSystemOn;
+    [HideInInspector] public bool isWaveComplete;
 
     [Header("Preserved Variables")]
     public GameObject stageGameObject;
@@ -49,6 +51,12 @@ public class LevelManager : MonoBehaviour
     public GameObject pentagonObstaclePrefab;
     public GameObject hexagonObstaclePrefab;
 
+    [Header("Preserved Tower Prefabs")]
+    public GameObject triangleTowerPrefab;
+    public GameObject squareTowerPrefab;
+    public GameObject pentagonTowerPrefab;
+    public GameObject hexagonTowerPrefab;
+
     [Header("Preserved Spawner & Destination Prefabs")]
     public GameObject spawnerPrefab;
     public GameObject destinationPrefab;
@@ -63,6 +71,8 @@ public class LevelManager : MonoBehaviour
     public GameObject ellipseEnemyPrefab;
     public GameObject ringEnemyPrefab;
 
+    [HideInInspector] public int m_enemyCount;
+
     private void Awake()
     {
         Init();
@@ -74,14 +84,32 @@ public class LevelManager : MonoBehaviour
         StartCoroutine(StartStage());
     }
 
-
     public void Init()
     {
         instance = this;
 
         PlayerControl.Instance.playerData.SetPlayer(this.stageData.startCost, this.stageData.playerLife);
+        m_enemyCount = 0;
     }
 
+    public int UpdateEnemyCount()
+    {
+        int enemyCount = 0;
+
+        for(int i = 0; i< waves.transform.childCount; i++)
+        {
+            enemyCount += waves.transform.GetChild(i).childCount;
+        }
+
+        m_enemyCount = enemyCount;
+
+        if (m_enemyCount <= 0 && PlayerControl.Instance.playerData.currentLife > 0)
+        {
+            GameManager.Instance.StageClear();
+        }
+
+        return m_enemyCount;
+    }
 
     /* LoadStage
      * 1. Load obstacles.
@@ -92,11 +120,14 @@ public class LevelManager : MonoBehaviour
      */
     public void LoadStage()
     {
+
         LoadObstacles();
+        LoadTowers();
         LoadBlanks();
-        BakeNavMeshSurfaces();
         LoadChecker();
         LoadWaves();
+        LoadTutorial();
+        isWaveComplete = true;
     }
 
     /* LoadObstacles
@@ -130,6 +161,37 @@ public class LevelManager : MonoBehaviour
         }
     }
 
+    /* LoadTowers
+     * 1. Load towers.
+     * 2. Etc...
+     */
+    public void LoadTowers()
+    {
+        GameObject towers = null;
+        GameObject prefab = null;
+
+
+        towers = new GameObject("Towers");
+        towers.transform.SetParent(this.stageGameObject.transform);
+
+        //foreach (StageScriptableObject.TowerInfo info in this.stageData.baseTowers)
+        //{
+        //    if (info.towerSpecific
+        //        == StageScriptableObject.ObstacleInfo.TowerSpecific.Triangle)
+        //        prefab = this.triangleObstaclePrefab;
+        //    else if (info.towerSpecific
+        //        == StageScriptableObject.ObstacleInfo.TowerSpecific.Square)
+        //        prefab = this.squareObstaclePrefab;
+        //    else if (info.towerSpecific
+        //        == StageScriptableObject.ObstacleInfo.TowerSpecific.Pentagon)
+        //        prefab = this.pentagonObstaclePrefab;
+        //    else // Hexagon
+        //        prefab = this.hexagonObstaclePrefab;
+
+        //    GameObject.Instantiate(prefab, info.position, info.rotation, towers.transform);
+        //}
+    }
+
     /* LoadBlank
      * 1. Load spawner and destination.
      * 2. Set active of overlabed wall to false.
@@ -140,9 +202,9 @@ public class LevelManager : MonoBehaviour
         StageScriptableObject.BlankInfo info = null;
         GameObject spawner = null;
         GameObject prefab = null;
-        
+
         GameObject destination = null;
-        
+
 
         //Load Spawner
         info = this.stageData.spawnerInfo;
@@ -169,7 +231,7 @@ public class LevelManager : MonoBehaviour
      */
     public void SelectBlankMesh(GameObject blank, StageScriptableObject.BlankInfo blankInfo)
     {
-        if (blankInfo.blankMeshType 
+        if (blankInfo.blankMeshType
             == StageScriptableObject.BlankInfo.BlankMeshType.Mesh1)
         {
             blank.transform.GetChild(0).gameObject.SetActive(true);
@@ -221,7 +283,7 @@ public class LevelManager : MonoBehaviour
 
         foreach (Transform wallLineTs in this.castle.GetComponentInChildren<Transform>())
         {
-            foreach(Transform wallTs in wallLineTs.gameObject.GetComponentInChildren<Transform>())
+            foreach (Transform wallTs in wallLineTs.gameObject.GetComponentInChildren<Transform>())
             {
                 if (isOverlabCheck(overlabedBlank.transform.position, wallTs.position))
                 {
@@ -233,20 +295,9 @@ public class LevelManager : MonoBehaviour
 
                 if (breakFlag)
                     break;
-                    
+
             }
         }
-    }
-
-    /* BakeNavMeshSurfaces
-     * 1. Bake enemy navmesh surface.
-     * 2. Bake checker navmesh surface.
-     * 3. Etc..
-     */
-    public void BakeNavMeshSurfaces()
-    {
-        this.enemyNavMeshSurface.BuildNavMesh();
-        this.checkerNavMeshSurface.BuildNavMesh();
     }
 
     /* LoadChecker
@@ -254,12 +305,31 @@ public class LevelManager : MonoBehaviour
      */
     public void LoadChecker()
     {
-        
+        GameObject checker;
+
         StageScriptableObject.BlankInfo info = null;
 
         info = this.stageData.spawnerInfo;
-        GameObject.Instantiate(this.checkerPrefab, info.position, info.rotation, this.stageGameObject.transform);
-        
+
+        Vector3 backward = info.rotation * Vector3.back;
+        Vector3 positionVector = backward * 1.5f;
+
+        checker = GameObject.Instantiate(this.checkerPrefab, info.position + positionVector, info.rotation, this.stageGameObject.transform).transform.Find("Checker").gameObject;
+
+        BakeNavMeshSurfaces();
+
+        checker.SetActive(true);
+    }
+
+    /* BakeNavMeshSurfaces
+     * 1. Bake enemy navmesh surface.
+     * 2. Bake checker navmesh surface.
+     * 3. Etc..
+    */
+    public void BakeNavMeshSurfaces()
+    {
+        this.enemyNavMeshSurface.BuildNavMesh();
+        this.checkerNavMeshSurface.BuildNavMesh();
     }
 
     /* StartStage
@@ -274,7 +344,7 @@ public class LevelManager : MonoBehaviour
 
         EnemyWave enemyWave = null;
         GameObject enemyPrefab = null;
-        GameObject enemy = null;   
+        GameObject enemy = null;
 
         int waveValue = 1;
         int i = 0;
@@ -327,10 +397,25 @@ public class LevelManager : MonoBehaviour
                 }
             }
 
-            waveValue++;
+
+            //if(enemyWaveInfo.isTutorialWave == false)
+                waveValue++;
         }
     }
 
+    public void LoadTutorial()
+    {
+        Transform tutorial = this.transform.Find("Tutorial");
+        if (tutorial)
+        {
+            isWaveSystemOn = false;
+            tutorial.gameObject.SetActive(true);
+        }
+        else
+        {
+            isWaveSystemOn = true;
+        }
+    }
     /* StartStage
      * 1. TakeBreakTime 1 & StartWave 1.
      * 2. TakeBreakTime 2 & StartWave 2.
@@ -342,17 +427,24 @@ public class LevelManager : MonoBehaviour
 
         foreach (EnemyWave enemyWave in this.enemyWaveList)
         {
+            while (!(isWaveSystemOn && isWaveComplete))
+            {
+                yield return new WaitForSeconds(0.1f);
+            }
+
+            isWaveComplete = false;
+
             yield return StartCoroutine(TakeBreakTime(enemyWave.breakTime));
 
             StartCoroutine(StartWave(enemyWave));
-            
+
             while (enemyWave.activeNum < enemyWave.oneWaveEnemies.Count)
             {
-                yield return null;
+                yield return new WaitForSeconds(0.1f);
             }
 
             waveValue++;
-
+            isWaveComplete = true;
             /*
             if(enemyWaveInfo.nextWaveTrigger
                 == StageScriptableObject.EnemyWaveInfo.NextWaveTrigger.EnemyExterminated)
@@ -375,9 +467,7 @@ public class LevelManager : MonoBehaviour
                 == StageScriptableObject.EnemyWaveInfo.NextWaveTrigger.FirstEnemyDead)
             {
 
-            }
-            */
-
+            }*/
 
         }
     }
@@ -396,7 +486,7 @@ public class LevelManager : MonoBehaviour
                 breakTime -= Time.deltaTime;
 
                 //Change Debug.Log to UI.text in UI system!
-                Debug.Log(string.Format("Timer: {0}", Mathf.Floor(breakTime)));
+                //Debug.Log(string.Format("Timer: {0}", Mathf.Floor(breakTime)));
             }
 
             yield return null;
@@ -408,7 +498,7 @@ public class LevelManager : MonoBehaviour
      */
     private IEnumerator StartWave(EnemyWave enemyWave)
     {
-        foreach(GameObject enemy in enemyWave.oneWaveEnemies)
+        foreach (GameObject enemy in enemyWave.oneWaveEnemies)
         {
             enemy.SetActive(true);
             enemyWave.activeNum++;

@@ -68,7 +68,7 @@ public class TowerStatSystem
     public Stats baseStats;
     public Stats stats { get; set; } = new Stats();
 
-    TowerData m_Owner;
+    private TowerData m_Owner;
 
    // List<StatModifier> m_ModifiersStack = new List<StatModifier>();
 

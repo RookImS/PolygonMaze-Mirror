@@ -1,5 +1,35 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &414899373196182232
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1204975805361533832}
+  m_Layer: 0
+  m_Name: PathTracker
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1204975805361533832
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 414899373196182232}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 5162274923920270624}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &5162274923920270625
 GameObject:
   m_ObjectHideFlags: 0
@@ -31,6 +61,7 @@ Transform:
   - {fileID: 5162274924202231866}
   - {fileID: 786983151131462666}
   - {fileID: 7223117734520093807}
+  - {fileID: 1204975805361533832}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -55,9 +86,13 @@ MonoBehaviour:
   squareObstaclePrefab: {fileID: 473488529774513135, guid: baeac571ebcd13f47bc9ced6aa28830a, type: 3}
   pentagonObstaclePrefab: {fileID: 8811219413331195968, guid: aff5fd265d44f784f879c1832ee35158, type: 3}
   hexagonObstaclePrefab: {fileID: 3828187391709597441, guid: f87cb2e2b2a258747bf34d6a41488266, type: 3}
+  triangleTowerPrefab: {fileID: 346010008869247008, guid: 240e68458cec7ef41b7cce2a9eaeed4e, type: 3}
+  squareTowerPrefab: {fileID: 7271484921240024667, guid: 74c8413134add1641be9e2920c61074c, type: 3}
+  pentagonTowerPrefab: {fileID: 8996109028398955742, guid: 839d106aeeab58f46bd7583d20639abd, type: 3}
+  hexagonTowerPrefab: {fileID: 7793056633140174654, guid: 28f744ba59eca824eb5c633def5f481b, type: 3}
   spawnerPrefab: {fileID: 4546852089631936315, guid: 7df10d63958ab0e4588c29bbc1daf156, type: 3}
   destinationPrefab: {fileID: 7480299383816322787, guid: 20d93f3818eb2d54b84e0e1c3a5f0921, type: 3}
-  checkerPrefab: {fileID: 1314094695183363131, guid: a0e49eec94a0b6d43a801c1861760481, type: 3}
+  checkerPrefab: {fileID: 7805583091822359371, guid: 69127f3dd05cec448be7523ae3080a06, type: 3}
   circleEnemyPrefab: {fileID: 3350396553093369702, guid: 9dfa5bafdf521d3448f47e83dae12726, type: 3}
   semiCircleEnemyPrefab: {fileID: 2794680669866632871, guid: b5f6c68c082fbf14f9775ea583abbf37, type: 3}
   sectorEnemyPrefab: {fileID: 474593776622616134, guid: 47e5a2504444b29468ba4a30c8bbb9e8, type: 3}
@@ -304,11 +339,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6076538662229912458, guid: e343e60abc0f801418a85becdafcb63f, type: 3}
       propertyPath: m_LocalScale.x
-      value: 19
+      value: 18
       objectReference: {fileID: 0}
     - target: {fileID: 6076538662229912458, guid: e343e60abc0f801418a85becdafcb63f, type: 3}
       propertyPath: m_LocalScale.z
-      value: 9.5
+      value: 8.5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e343e60abc0f801418a85becdafcb63f, type: 3}
@@ -371,7 +406,7 @@ PrefabInstance:
     - target: {fileID: 2565291461840274773, guid: 368aa0e0e90fcc44da187843fcb0b721, type: 3}
       propertyPath: m_NavMeshData
       value: 
-      objectReference: {fileID: 23800000, guid: f2d0ddcdf0386b14f9432266cdca92c2, type: 2}
+      objectReference: {fileID: 0}
     - target: {fileID: 2565291461840274773, guid: 368aa0e0e90fcc44da187843fcb0b721, type: 3}
       propertyPath: m_LayerMask.m_Bits
       value: 7424

@@ -24,6 +24,14 @@ public class PlayerData
         // 컬러덱?
     }
 
+    public bool CheckCost(int cost)
+    {
+        if (currentCost + cost < 0)
+            return false;
+
+        return true;
+    }
+
     public bool ChangeCost(int cost)
     {
         
@@ -45,8 +53,7 @@ public class PlayerData
 
     public void Death()
     {
-        Debug.Log("player death");
-        // 죽었을 시 걸리는 트리거
+        GameManager.Instance.GameOver();
     }
 
 }

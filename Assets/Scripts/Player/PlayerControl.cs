@@ -27,6 +27,10 @@ public class PlayerControl : MonoSingleton<PlayerControl>
         playerData.ChangeCost(reward);
     }
 
+    public bool CheckCost(int cost)
+    {
+        return playerData.CheckCost(-cost);
+    }
     public bool UseCost(int cost)
     {
         return playerData.ChangeCost(-cost);

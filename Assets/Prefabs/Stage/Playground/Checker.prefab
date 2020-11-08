@@ -66,3 +66,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ce37880b84678af4dac17fd056d5f2be, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  pathTrackerAgent: {fileID: 58675148353150262, guid: c16c808fa0797e449a6041da610b44ee, type: 3}
+  trackerDuration: 3

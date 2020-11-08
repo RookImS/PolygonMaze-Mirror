@@ -15,6 +15,7 @@ TagManager:
   - Hit
   - Bullet
   - Checker
+  - DeployUI
   layers:
   - Default
   - TransparentFX

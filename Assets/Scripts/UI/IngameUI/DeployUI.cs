@@ -9,11 +9,14 @@ public class DeployUI : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
 {
     public GameObject deployTower;
     public GameObject realTower;
+
     private GameObject newObject;
-    private GameObject hitObject;
+    public GameObject hitObject;
 
     private bool isDeployable;
     public TextMeshProUGUI towerCostText;
+
+    public bool isProgressDeploy;
 
     Vector3 mousePos;
 
@@ -29,13 +32,14 @@ public class DeployUI : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
 
     private void Init()
     {
-        towerCostText.text = realTower.GetComponent<TowerData>().cost.ToString();
+        towerCostText.text = deployTower.GetComponent<DeployBehaviour>().cost.ToString();
         isDeployable = false;
+        isProgressDeploy = false;
     }
 
     private void UpdateTowerCostText()
     {
-        if (realTower.GetComponent<TowerData>().cost > PlayerControl.Instance.playerData.currentCost)
+        if (deployTower.GetComponent<DeployBehaviour>().cost > PlayerControl.Instance.playerData.currentCost)
             isDeployable = false;
         else
             isDeployable = true;
@@ -48,6 +52,10 @@ public class DeployUI : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
 
     public void OnBeginDrag(PointerEventData eventData)
     {
+        newObject = null;
+        hitObject = null;
+
+        isProgressDeploy = true;
         mousePos = Input.mousePosition;
 
         newObject = Instantiate(deployTower, mousePos, deployTower.transform.rotation);
@@ -65,5 +73,7 @@ public class DeployUI : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
         newObject.GetComponent<DeployBehaviour>().DeployTower(hitObject, realTower);
 
         Time.timeScale = 1f;
+
+        isProgressDeploy = false;
     }
 }

@@ -6,33 +6,13 @@ using UnityEngine.SceneManagement;
 
 public class PauseUI : MonoBehaviour
 {
-    // Start is called before the first frame update
-    GameObject[] objs;
+    public GameObject backgroundPanel;
+    public GameObject pausePanel;
 
     public void Pause()
     {
-        Time.timeScale = 0f;
+        backgroundPanel.SetActive(true);
+        pausePanel.SetActive(true);
+        GameManager.Instance.TimeStop();
     }
-
-    public void Resume()
-    {
-        Time.timeScale = 1f;
-    }
-
-    public void ReturnToMain()
-    {
-        SceneManager.LoadScene("MainScene");
-    }
-
-    public void RestartGame()
-    {
-        //PlayerControl.Instance.Init();
-        objs = GameObject.FindGameObjectsWithTag("Enemy");
-        foreach(GameObject obj in objs)
-        {
-            Destroy(obj);
-        }
-
-    }
-
 }

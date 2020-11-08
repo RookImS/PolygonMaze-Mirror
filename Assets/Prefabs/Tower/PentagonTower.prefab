@@ -378,9 +378,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eb56c68cab439eb47889d6c2ebdb2b8f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  muzzle: {fileID: 5861573579347852341}
   target: {fileID: 0}
   targetList: []
-  muzzle: {fileID: 5861573579347852341}
 --- !u!114 &8996109028398955740
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -395,18 +395,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   TowerName: PentagonTower
   TowerDescription: 
+  bullet: {fileID: 7246983010072267271, guid: e1f2e22bd4c371249ae9143191777865, type: 3}
   Stats:
     baseStats:
-      damage: 200
+      damage: 150
       aheadDelay: 0.05
       attackRate: 0.75
       recogRange: 2
       attackRange: 2
       splashRange: 0.05
-  cost: 120
   neighbor: []
   color: {fileID: 0}
-  bullet: {fileID: 7246983010072267271, guid: e1f2e22bd4c371249ae9143191777865, type: 3}
 --- !u!64 &4210448959316779622
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -415,7 +414,7 @@ MeshCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8996109028398955742}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 4
   m_Convex: 1
@@ -547,6 +546,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: e0c7836d32e8afc46b089001804c31fd, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 80a6d405e35983d4a9e077a06dddab36, type: 2}
     - target: {fileID: 919132149155446097, guid: e0c7836d32e8afc46b089001804c31fd, type: 3}
       propertyPath: m_Name
       value: 1.01Pentagon
