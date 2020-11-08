@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TColorSystem : MonoBehaviour
+public class FieldSkill : Skill
 {
     // Start is called before the first frame update
     void Start()

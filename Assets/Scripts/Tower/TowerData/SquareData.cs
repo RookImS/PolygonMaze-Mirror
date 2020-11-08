@@ -8,5 +8,7 @@ public class SquareData : TowerData
     {
          GameObject bulletInstance = Instantiate(bullet, muzzle.position, muzzle.rotation);
          bulletInstance.GetComponent<BulletBehaviour>().Init(Stats);
+
+
     }
 }
