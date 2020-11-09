@@ -17,9 +17,9 @@ public class NormalBulletBehaviour : BulletBehaviour
 
     }
 
-    public override void Init(TowerStatSystem t_stat)
+    public override void Init(TowerStatSystem t_stat, TowerSkill t_skill)
     {
-        m_BulletData.Init(t_stat);
+        m_BulletData.Init(t_stat, t_skill);
         hitCollider.GetComponent<SphereCollider>().radius = m_BulletData.stats.stats.splashRange;
     }
 

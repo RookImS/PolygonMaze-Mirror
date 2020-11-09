@@ -14,12 +14,12 @@ public class BulletBehaviour : MonoBehaviour
         enemyList = new List<GameObject>();
     }
 
-    public virtual void Init(TowerStatSystem t_stat)
+    public virtual void Init(TowerStatSystem t_stat, TowerSkill t_skill)
     {
 
     }
 
-    public virtual void Init(TowerStatSystem t_stat, int ticRate, float attackDuration)
+    public virtual void Init(TowerStatSystem t_stat, TowerSkill t_skill, int ticRate, float attackDuration)
     {
 
     }
