@@ -28,9 +28,9 @@ public class EnemyStatSystem
         {
             if (modifier.ModifierMode == StatModifier.Mode.Percentage)
             {
-                hp += Mathf.FloorToInt(hp * (modifier.Stats.hp / 100.0f));
+                hp += Mathf.FloorToInt(hp * ((float)modifier.Stats.hp / 100.0f));
                 speed += Mathf.FloorToInt(speed * (modifier.Stats.speed / 100.0f));
-                def += Mathf.FloorToInt(def * (modifier.Stats.def / 100.0f));
+                def += Mathf.FloorToInt(def * ((float)modifier.Stats.def / 100.0f));
             }
             else
             {
@@ -76,9 +76,7 @@ public class EnemyStatSystem
 
     public Stats baseStats;
     public StatModifier baseStatModifier;
-
     public Stats stats { get; set; } = new Stats();
-
 
     public int currentHp { get; private set; }
     //public List<BaseElementalEffect> ElementalEffects => m_ElementalEffects;
@@ -177,6 +175,7 @@ public class EnemyStatSystem
 
     public void Tick()
     {
+        Debug.Log("check");
         bool needUpdate = false;
 
         for (int i = 0; i < m_TimedModifierStack.Count; ++i)

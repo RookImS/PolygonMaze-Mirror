@@ -79,7 +79,7 @@ public class DeployBehaviour : MonoBehaviour
         {
             if (isPathEnable && isProperLocate && !isOverlapped)
             {
-                rend.material.color = new Color(1f, 1f, 1f, 85 / 255f);
+                rend.material.color = new Color(1f, 1f, 1f, 170 / 255f);
 
                 return true;
             }
@@ -89,12 +89,12 @@ public class DeployBehaviour : MonoBehaviour
                 {
                     if (!isSkipFrame)
                     {
-                        rend.material.color = new Color(1f, 170 / 255f, 170 / 255f, 85 / 255f);
+                        rend.material.color = new Color(1f, 170 / 255f, 170 / 255f, 170 / 255f);
                     }
                 }
                 else
                 {
-                    rend.material.color = new Color(1f, 1f, 1f, 85 / 255f);
+                    rend.material.color = new Color(1f, 1f, 1f, 170 / 255f);
                 }
 
                 return false;
@@ -102,7 +102,7 @@ public class DeployBehaviour : MonoBehaviour
         }
         else
         {
-            rend.material.color = new Color(1f, 170 / 255f, 170 / 255f, 85 / 255f);
+            rend.material.color = new Color(1f, 170 / 255f, 170 / 255f, 170 / 255f);
             return false;
         }
     }

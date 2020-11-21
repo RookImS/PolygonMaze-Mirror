@@ -16,7 +16,6 @@ public class BulletData : MonoBehaviour
 
         if(towerSkill != null)
         {
-            Debug.Log("check");
             gameObject.AddComponent(towerSkill.GetType());
         }
     }

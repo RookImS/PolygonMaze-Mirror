@@ -4,8 +4,13 @@ using UnityEngine;
 
 public class FieldSkill : Skill
 {
-    public override void UseSkill(Vector3 mousePos)
+    private void OnTriggerStay(Collider other)
     {
-
+        if (applyCountDown <= 0f)
+        {
+            if (other.gameObject.CompareTag("Enemy"))
+                ApplySkill(other.gameObject);
+            applyCountDown = applyInterval;
+        }
     }
 }

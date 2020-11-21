@@ -4,8 +4,15 @@ using UnityEngine;
 
 public class TowerSkill : Skill
 {
-    public override void UseSkill(Vector3 mousePos)
+    private void OnTriggerStay(Collider other)
     {
-        
+        if (other.gameObject.CompareTag("Tower"))
+        {
+            if (applyCountDown <= 0f)
+            {
+                ApplySkill(other.gameObject);
+                applyCountDown = applyInterval;
+            }
+        }
     }
 }

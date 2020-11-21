@@ -12,6 +12,11 @@ public class TowerData : MonoBehaviour
     [HideInInspector] public List<GameObject> neighbor;
     [HideInInspector] public TowerSkill towerSkill;
 
+    private void Update()
+    {
+        Stats.Tick();
+    }
+
     public virtual void Init()
     {
         Stats.Init(this);

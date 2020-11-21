@@ -28,7 +28,7 @@ public class SkillUI : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragH
 
     private void Init()
     {
-        skillCostText.text = skill.GetComponent<DeployBehaviour>().cost.ToString();
+        skillCostText.text = skill.GetComponent<Skill>().cost.ToString();
     }
 
     private void UpdateSkillCostText()
@@ -62,7 +62,7 @@ public class SkillUI : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragH
     }
     public void OnEndDrag(PointerEventData eventData)
     {
-        newObject.GetComponent<Skill>().UseSkill(mousePos); 
+        newObject.GetComponent<Skill>().UseSkill(); 
 
         Time.timeScale = 1f;
     }
