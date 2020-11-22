@@ -11,14 +11,14 @@ public class DeployUI : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
     public GameObject realTower;
 
     private GameObject newObject;
-    public GameObject hitObject;
+    [HideInInspector] public GameObject hitObject;
 
     private bool isDeployable;
     public TextMeshProUGUI towerCostText;
 
-    public bool isProgressDeploy;
+    [HideInInspector] public bool isProgressDeploy;
 
-    Vector3 mousePos;
+    private Vector3 mousePos;
 
     private void Awake()
     {

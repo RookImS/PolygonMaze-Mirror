@@ -1,16 +1,11 @@
 ﻿using System;
-using System.IO;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Events;
-using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
-using UnityEngine.UI;
 public class GameManager : MonoSingleton<GameManager>
 {
     [HideInInspector] public GameObject inGameUI;
-
+    //[HideInInspector] public GameObject BackKey;
     public event Action gameStart;
     public event Action deployTower;
     public event Action enemyEscape;
@@ -20,26 +15,30 @@ public class GameManager : MonoSingleton<GameManager>
     public event Action enemyDeath;
 
     public GameState currentGameState;
+    public List<Skill> PlayableDeck;
 
     private void Awake()
     {
         inGameUI = GameObject.Find("InGameUI");
         Init();
+        Debug.Log("gameAwake");
+        //Deckmake();
     }
 
     void Start()
     {
+        Debug.Log("gameStart");
         currentGameState = GameState.menu;
-
         //GameStart += PlayerControl.Instance.Init;
         //GameStart += StartGame;
-
         //DeployTower += TimeRestore;
-
+        Deckmake();
     }
-    public static Stack<int> stack = new Stack<int>();  //BackKey 기능을 위해 씬 Buildindex를 저장하는 스택
-
-    
+    public static Stack<int> stack = new Stack<int>();  //BackKey 기능을 위해 씬 Buildindex를 저장하는 스택 
+    public static List<List<Skill>> DeckList = new List<List<Skill>>();
+    public static List<Skill> Deck = new List<Skill>();
+    public static List<Skill> Deck_2 = new List<Skill>();
+    public static List<Skill> Deck_3 = new List<Skill>();
 
     public enum GameState
     {
@@ -48,10 +47,29 @@ public class GameManager : MonoSingleton<GameManager>
         gameOver
     }
 
-    private void Init()
+    public void Init()
     {
 
     }
+    public void Deckmake()
+    {
+        for (int i = 0; i <= 3; i++)
+        {
+            Deck.Add(null);
+        }
+        for (int i = 0; i <= 3; i++)
+        {
+            Deck_2.Add(null);
+        }
+        for (int i = 0; i <= 3; i++)
+        {
+            Deck_3.Add(null);
+        }
+        DeckList.Add(Deck);
+        DeckList.Add(Deck_2);
+        DeckList.Add(Deck_3);
+    }
+
     void SetGameState (GameState newGameState)  //현재 게임플레이 상태 지정
     {
         if(newGameState == GameState.menu) { 
@@ -79,11 +97,12 @@ public class GameManager : MonoSingleton<GameManager>
 
     void OnSceneLoaded(Scene scene, LoadSceneMode mode) //씬이 로드되면 로드된 씬의 buildindex를 스택에 저장.
     {
-        //Debug.Log("씬이동");
+        Debug.Log("씬이동");
         stack.Push(scene.buildIndex);
         //Debug.Log("로드된 scene buildindex: " + scene.buildIndex);
         //Debug.Log("OnSceneLoaded : " + scene.name);
     }
+
     public void ReturnToMain()
     {
         SceneManager.LoadScene("MainScene");
