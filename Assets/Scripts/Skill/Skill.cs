@@ -5,17 +5,17 @@ using UnityEngine.EventSystems;
 
 public class Skill : MonoBehaviour
 {
-    public float skillDuration;
-    public float applyInterval;
-    public float applyDuration;
+    public float skillDuration;     // 스킬 자체의 유지시간
+
+    public float applyDuration;     // 걸린 스킬의 유지시간
 
     public string id;
     public float range;
     public int cost;
     public Sprite skillSprite;
 
+    [HideInInspector] public float applyInterval;     // 스킬이 적용되는 간격
     [HideInInspector] public float applyCountDown;
-    [HideInInspector] public TowerStatSystem.StatModifier modifier;
 
     private void Awake()
     {
@@ -23,10 +23,6 @@ public class Skill : MonoBehaviour
         applyCountDown = 0f;
     }
 
-    private void Start()
-    {
-        StartCoroutine("CheckSkillDuration");
-    }
     private void Update()
     {
         if (applyCountDown > 0)
@@ -39,6 +35,7 @@ public class Skill : MonoBehaviour
     {
         transform.localScale = new Vector3(range, range, range);
         applyCountDown = 0f;
+        applyInterval = 0.1f;
     }
 
     public void LocateSkill(Vector3 mousePos)
@@ -59,6 +56,7 @@ public class Skill : MonoBehaviour
             GetComponent<SphereCollider>().enabled = true;
             transform.Find("Range").gameObject.SetActive(false);
             transform.Find("Effect").gameObject.SetActive(true);
+            StartCoroutine("CheckSkillDuration");
         }
     }
 

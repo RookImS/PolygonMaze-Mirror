@@ -20,7 +20,6 @@ public class PlayerData
         currentCost = cost;
         maxLife = life;
         currentLife = maxLife;
-
         // 컬러덱?
     }
 

@@ -34,11 +34,11 @@ public class TowerStatSystem
             if (modifier.ModifierMode == StatModifier.Mode.Percentage)
             {
                 damage += Mathf.FloorToInt(damage * ((float)modifier.Stats.damage / 100.0f));
-                aheadDelay += Mathf.Floor(aheadDelay * (modifier.Stats.aheadDelay / 100.0f));
-                attackRate += Mathf.Floor(attackRate * (modifier.Stats.attackRate / 100.0f));
-                recogRange += Mathf.Floor(recogRange * (modifier.Stats.recogRange / 100.0f));
-                attackRange += Mathf.Floor(attackRange * (modifier.Stats.attackRange / 100.0f));
-                splashRange += Mathf.Floor(splashRange * (modifier.Stats.splashRange / 100.0f));
+                aheadDelay += aheadDelay * (modifier.Stats.aheadDelay / 100.0f);
+                attackRate += attackRate * (modifier.Stats.attackRate / 100.0f);
+                recogRange += recogRange * (modifier.Stats.recogRange / 100.0f);
+                attackRange += attackRange * (modifier.Stats.attackRange / 100.0f);
+                splashRange += splashRange * (modifier.Stats.splashRange / 100.0f);
             }
             else
             {

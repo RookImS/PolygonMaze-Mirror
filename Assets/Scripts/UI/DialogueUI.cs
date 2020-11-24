@@ -61,7 +61,7 @@ public class DialogueUI : MonoBehaviour
     }
     private void MakeDialoguePanel()
     {
-        m_textPanel = Instantiate(textPanel, this.transform);
+        m_textPanel = Instantiate(textPanel, invokePanel.transform);
         m_textPanel.GetComponent<RectTransform>().anchoredPosition = new Vector2(m_dialogue.posX, m_dialogue.posY);
         m_textPanel.GetComponent<RectTransform>().sizeDelta = new Vector2(m_dialogue.width, m_dialogue.height);
 

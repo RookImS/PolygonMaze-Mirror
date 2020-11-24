@@ -4,13 +4,14 @@ using UnityEngine;
 
 public class FieldSkill : Skill
 {
+    [HideInInspector] public EnemyStatSystem.StatModifier modifier;
+
     private void OnTriggerStay(Collider other)
     {
-        if (applyCountDown <= 0f)
+        if (other.gameObject.CompareTag("Enemy"))
         {
-            if (other.gameObject.CompareTag("Enemy"))
                 ApplySkill(other.gameObject);
-            applyCountDown = applyInterval;
+                applyCountDown = applyInterval;
         }
     }
 }

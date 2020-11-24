@@ -90,6 +90,7 @@ public class LevelManager : MonoBehaviour
 
         PlayerControl.Instance.playerData.SetPlayer(this.stageData.startCost, this.stageData.playerLife);
         m_enemyCount = 0;
+        GameManager.Instance.Init();
     }
 
     public int UpdateEnemyCount()
@@ -408,8 +409,8 @@ public class LevelManager : MonoBehaviour
         Transform tutorial = this.transform.Find("Tutorial");
         if (tutorial)
         {
-            isWaveSystemOn = false;
-            tutorial.gameObject.SetActive(true);
+            isWaveSystemOn = true;
+            //tutorial.gameObject.SetActive(true);
         }
         else
         {
@@ -501,6 +502,7 @@ public class LevelManager : MonoBehaviour
         foreach (GameObject enemy in enemyWave.oneWaveEnemies)
         {
             enemy.SetActive(true);
+            enemy.GetComponent<EnemyData>().hpBar.m_hpBar.SetActive(true);
             enemyWave.activeNum++;
             yield return new WaitForSeconds(enemyWave.enemySpawnDuration);
         }

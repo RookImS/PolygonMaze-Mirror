@@ -10,8 +10,8 @@ public class WaveSystem
         
         for (i = 0; i < enemyData.GetWaveNum() - 1; i++)
         {
-            enemyData.Stats.baseStats.Modify(enemyData.Stats.baseStatModifier);
+            enemyData.Stats.baseStats.Modify(enemyData.Stats.baseStatModifier, enemyData);
         }
-        enemyData.Init();
+        enemyData.Stats.Init(enemyData);
     }
 }

@@ -10,25 +10,23 @@ using UnityEngine.UI;
 public class GameManager : MonoSingleton<GameManager>
 {
     [HideInInspector] public GameObject inGameUI;
+    [HideInInspector] public bool isGameOver;
+    [HideInInspector] public bool isStageClear;
 
-    public event Action gameStart;
-    public event Action deployTower;
-    public event Action enemyEscape;
-    public event Action exit;
-    public event Action gameOver;
-    public event Action stageClear;
-    public event Action enemyDeath;
+
+    //public event Action gameStart;
+    //public event Action deployTower;
+    //public event Action enemyEscape;
+    //public event Action exit;
+    //public event Action gameOver;
+    //public event Action stageClear;
+    //public event Action enemyDeath;
 
     public GameState currentGameState;
 
-    private void Awake()
+    private void Start()
     {
-        inGameUI = GameObject.Find("InGameUI");
-        Init();
-    }
-
-    void Start()
-    {
+        
         currentGameState = GameState.menu;
 
         //GameStart += PlayerControl.Instance.Init;
@@ -48,10 +46,13 @@ public class GameManager : MonoSingleton<GameManager>
         gameOver
     }
 
-    private void Init()
+    public void Init()
     {
-
+        isGameOver = false;
+        isStageClear = false;
+        inGameUI = GameObject.Find("InGameUI");
     }
+
     void SetGameState (GameState newGameState)  //현재 게임플레이 상태 지정
     {
         if(newGameState == GameState.menu) { 
@@ -161,12 +162,14 @@ public class GameManager : MonoSingleton<GameManager>
     }
     public void GameOver()
     {
+        isGameOver = true;
         PanelSystem panelSys = inGameUI.transform.Find("IngamePanel").gameObject.GetComponent<PanelSystem>();
         panelSys.SetPanel(panelSys.gameOverPanel);
     }
 
     public void StageClear()
     {
+        isStageClear = true;
         PanelSystem panelSys = inGameUI.transform.Find("IngamePanel").gameObject.GetComponent<PanelSystem>();
         panelSys.SetPanel(panelSys.stageClearPanel);
     }

@@ -26,7 +26,8 @@ public class StatusUI : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        UpdateStatus();
+        if(!GameManager.Instance.isStageClear)
+            UpdateStatus();
     }
 
     private void Init()
