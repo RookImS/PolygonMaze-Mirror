@@ -900,10 +900,6 @@ PrefabInstance:
       propertyPath: checkerPrefab
       value: 
       objectReference: {fileID: 7805583091822359371, guid: 69127f3dd05cec448be7523ae3080a06, type: 3}
-    - target: {fileID: 5162274923920270631, guid: 131b2868bd49c8140af1cdfcfd739e4a, type: 3}
-      propertyPath: checkerWithGroundPrefab
-      value: 
-      objectReference: {fileID: 7805583091822359371, guid: 69127f3dd05cec448be7523ae3080a06, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 131b2868bd49c8140af1cdfcfd739e4a, type: 3}
 --- !u!1 &206078758

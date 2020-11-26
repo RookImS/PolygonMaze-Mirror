@@ -18,9 +18,18 @@ public class PlayerSettingUISystem : MonoBehaviour
     public TMP_InputField playerLifeInputField;
     public TMP_InputField startCostInputField;
 
+    public void Init()
+    {
+        playerLifeInputField.text = "";
+        startCostInputField.text = "";
+
+        LevelEditorUISystem.instance.ChangeButtonColor(LevelEditorUISystem.SettingUISystemSpecific.PlayerSetting,
+                LevelEditorUISystem.ButtonColor.NotReadyColor);
+    }
+
     /* void OnClickResetButtonInPlayerSettingPanel()
-     * 1. Initialize player life and start cost to 0 in LevelEditor.
-     * 2. Initialize the text in the input field of player life and input field of start cost to "".
+     * 1. Level Editor의 player life와 start cost를 0으로 초기화한다.
+     * 2. player life와 start cost의 input field의 text를 ""으로 초기화한다.
      * 3. Change the color of the player setting button to NotReadyColor.
      */
     public void OnClickResetButtonInPlayerSettingPanel()
@@ -34,26 +43,25 @@ public class PlayerSettingUISystem : MonoBehaviour
             this.startCostInputField.text = "";
 
         if (LevelEditor.instance.GetPlayerLife() == 0 && LevelEditor.instance.GetStartCost() == 0)
+        {
             LevelEditorUISystem.instance.ChangeButtonColor(LevelEditorUISystem.SettingUISystemSpecific.PlayerSetting,
                 LevelEditorUISystem.ButtonColor.NotReadyColor);
+
+            LevelEditorUISystem.instance.ChangeReadyFlag(LevelEditorUISystem.SettingUISystemSpecific.PlayerSetting
+                , false);
+
+        }
         
     }
 
-    /* void OnClickCancelButton()
-     * 1. close player setting panel.
-     */
-    public void OnClickCancelButton()
-    {
-        playerSettingPanel.SetActive(false);
-    }
 
     /* void OnEndInPlayerLifeInputField()
-     * 1. if the value in player life input field is a valid value,
-     *    player life in LevelEditor become the value.
-     *    else player life in LevelEditor become 0.
-     * 2. if player life in LevelEditor is 0,
-     *    Text of player life input field become "".
-     * 3. check if the player setting is complete.
+     * 1. 만약 inputf field의 player life 값이 유효한 값이면
+     *    LevelEditor의 player life 값이 해당 player life 값이 되고,
+     *    유효하지 않은 값이라면, LevelEditor의 player life 값이 0이 된다.
+     * 2. 만약 LevelEditor의 player life 값이 0이면,
+     *    player life의 input field의 text가 ""이 된다.
+     * 3. player setting이 완료되었는지 확인한다.
      */
     public void OnEndInPlayerLifeInputField()
     {
@@ -76,13 +84,13 @@ public class PlayerSettingUISystem : MonoBehaviour
         CheckSettingComplete();
     }
 
-    /* void OnEndInPlayerLifeInputField()
-     * 1. if the value in start cost input field is a valid value,
-     *    start cost in LevelEditor become the value.
-     *    else start cost in LevelEditor become 0.
-     * 2. if start cost in LevelEditor is 0,
-     *    Text of start cost input field become "".
-     * 3. check if the player setting is complete.
+    /* void OnEndInStartCostInputField()
+     * 1. 만약 inputf field의 start cost 값이 유효한 값이면
+     *    LevelEditor의 start cost 값이 해당 start cost 값이 되고,
+     *    유효하지 않은 값이라면, LevelEditor의 start cost 값이 0이 된다.
+     * 2. 만약 LevelEditor의 start cost 값이 0이면,
+     *    start cost의 input field의 text가 ""이 된다.
+     * 3. player setting이 완료되었는지 확인한다.
      */
     public void OnEndInStartCostInputField()
     {
@@ -106,12 +114,13 @@ public class PlayerSettingUISystem : MonoBehaviour
     }
 
     /* void CheckSettingComplete()
-     * 1. if player life and start cost in LevelEditor are 0, show message(0).
-     *    else if player life in LevelEditor is 0, show message(1).
-     *    else if start cost in LevelEditor is 0, show message(2).
-     *    else show message(3).
+     * 1. LevelEditor의 player life가 0이면, message(0)을 보여준다.
+     *    LevelEditor의 start cost가 0이면, message(1)를 보여준다.
+     *    그리고, player setting의 readyFlag를 false로 만든다.
+     *    
+     * 2. readyFlag가 false면, player setting이 아직 준비가 되지 않았다고 설정한다.
+     *    readyFlag가 true면, player setting이 준비되었다고 설정한다.
      */
-
     public void CheckSettingComplete()
     {
         bool readyFlag = true;
@@ -133,6 +142,9 @@ public class PlayerSettingUISystem : MonoBehaviour
         {
             LevelEditorUISystem.instance.ChangeButtonColor(LevelEditorUISystem.SettingUISystemSpecific.PlayerSetting,
                 LevelEditorUISystem.ButtonColor.NotReadyColor);
+
+            LevelEditorUISystem.instance.ChangeReadyFlag(LevelEditorUISystem.SettingUISystemSpecific.PlayerSetting
+                , false);
         }
         else
         {
@@ -140,6 +152,24 @@ public class PlayerSettingUISystem : MonoBehaviour
 
             LevelEditorUISystem.instance.ChangeButtonColor(LevelEditorUISystem.SettingUISystemSpecific.PlayerSetting,
                 LevelEditorUISystem.ButtonColor.ReadyColor);
+
+            LevelEditorUISystem.instance.ChangeReadyFlag(LevelEditorUISystem.SettingUISystemSpecific.PlayerSetting
+                , true);
         }
+    }
+
+    public void Load()
+    {
+        if (LevelEditor.instance.GetPlayerLife() > 0)
+            playerLifeInputField.text = "";
+        else
+            playerLifeInputField.text = LevelEditor.instance.GetStageChapter().ToString();
+
+        if (LevelEditor.instance.GetStartCost() > 0)
+            startCostInputField.text = "";
+        else
+            startCostInputField.text = LevelEditor.instance.GetStageLevel().ToString();
+
+        CheckSettingComplete();
     }
 }

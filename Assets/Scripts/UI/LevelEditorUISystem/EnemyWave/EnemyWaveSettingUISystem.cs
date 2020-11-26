@@ -7,6 +7,9 @@ using UnityEditor.ShaderGraph.Internal;
 
 public class EnemyWaveSettingUISystem : MonoBehaviour
 {
+    /* class EnemyWaveUI
+     * 한개의 enemy wave를 관리하는 UI class
+     */
     public class EnemyWaveUI
     {
         public GameObject enemyWaveButton;
@@ -22,6 +25,9 @@ public class EnemyWaveSettingUISystem : MonoBehaviour
         public List<EnemiesUI> enemiesUIList;
     }
 
+    /* class EnemiesUI
+     * 특정 wave의 한 enemies를 관리하는 UI class
+     */
     public class EnemiesUI
     {
         public GameObject enemiesPanel;
@@ -69,6 +75,27 @@ public class EnemyWaveSettingUISystem : MonoBehaviour
 
     private void Awake()
     {
+        Init();
+    }
+
+    /* void Init()
+     * 1. EnemyWaveSettingUISystem의 variable을 초기화.
+     */
+    public void Init()
+    {
+        if (enemyWaveUIList != null)
+        {
+            foreach (EnemyWaveUI enemyWaveUI in enemyWaveUIList)
+            {
+                if (enemyWaveUI != null)
+                {
+                    Destroy(enemyWaveUI.enemyWaveButton);
+                    Destroy(enemyWaveUI.enemyWaveOptionalSettingPanel);
+                    Destroy(enemyWaveUI.enemyOneWavePanel);
+                    Destroy(enemyWaveUI.enemiesRemovePanel);
+                }
+            }
+        }
         enemyWaveUIList = new List<EnemyWaveUI>();
         selectedWaveUIList = new List<EnemyWaveUI>();
         selectedWaveInfoList = new List<StageData.EnemyWaveInfo>();
@@ -76,27 +103,42 @@ public class EnemyWaveSettingUISystem : MonoBehaviour
         selectedEnemiesList = new List<StageData.Enemies>();
     }
 
-    public void OnClickCancelButtonInEnemyWaveSettingMainPanel()
-    {
-        enemyWaveSettingMainPanel.SetActive(false);
-    }
-
+    /* void OnClickAddWaveButtonInListPanel()
+     * 1. enemy wave 한개를 추가하고, 이와 관련된 처리를 진행한다.
+     */
     public void OnClickAddWaveButtonInListPanel()
     {
-        EnemyWaveUI enemyWaveUI = new EnemyWaveUI();
+        
         StageData.EnemyWaveInfo enemyWaveInfo = new StageData.EnemyWaveInfo();
-
-        TMP_InputField spawnerDurationInputField = null;
-        TMP_Dropdown nextPhaseTrigger = null;
-        TMP_InputField endInBreakTimeInputField = null;
-
         int index = this.enemyWaveUIList.Count;
         int waveNum = index + 1;
+
 
         //wave stat text
         waveStatText.text = string.Format(waveStatTextFormat, waveNum);
 
         //creat waveButton
+        CreateEnemyWaveUI();
+
+
+        enemyWaveInfo.enemyOneWave = new List<StageData.Enemies>();
+        enemyWaveInfo.breakTime = 0f;
+        enemyWaveInfo.nextWaveTrigger = StageData.EnemyWaveInfo.NextWaveTrigger.EnemyExterminated;
+        enemyWaveInfo.enemySpawnDuration = 0f;
+        LevelEditor.instance.AddEnemyWaveInfo(enemyWaveInfo);
+
+    }
+
+    public void CreateEnemyWaveUI()
+    {
+        EnemyWaveUI enemyWaveUI = new EnemyWaveUI();
+        int index = this.enemyWaveUIList.Count;
+        int waveNum = index + 1;
+
+        TMP_InputField spawnerDurationInputField = null;
+        TMP_Dropdown nextPhaseTrigger = null;
+        TMP_InputField endInBreakTimeInputField = null;
+
         enemyWaveUI
             .enemyWaveButton
             = GameObject.Instantiate(commonButtonPrefab, this.waveButtons.transform);
@@ -161,7 +203,7 @@ public class EnemyWaveSettingUISystem : MonoBehaviour
         endInBreakTimeInputField
             .onEndEdit
             .AddListener((_) => OnEndInBreakTimeInputField(enemyWaveUI));
-        
+
         enemyWaveUI.enemyOneWavePanel = GameObject.Instantiate(enemyOneWavePanelPrefab, this.enemyWaveSettingPanel.transform);
         enemyWaveUI.enemyOneWavePanel.GetComponent<RectTransform>().anchoredPosition
             = new Vector2(enemyWaveUI.enemyWaveOptionalSettingPanel.GetComponent<RectTransform>().rect.width, 0);
@@ -211,16 +253,11 @@ public class EnemyWaveSettingUISystem : MonoBehaviour
 
         enemyWaveUI.enemiesUIList = new List<EnemiesUI>();
         this.enemyWaveUIList.Add(enemyWaveUI);
-
-
-        LevelEditor.instance.GetEnemyWaveInfoList().Add(enemyWaveInfo);
-        enemyWaveInfo.enemyOneWave = new List<StageData.Enemies>();
-        enemyWaveInfo.breakTime = 0f;
-        enemyWaveInfo.nextPhaseTrigger = StageData.EnemyWaveInfo.NextPhaseTrigger.EnemyExterminated;
-        enemyWaveInfo.enemySpawnDuration = 0f;
-   
     }
 
+    /* void OnClickRemoveButtonInListPanel()
+     * 1. enemy wave를 삭제할 수 있는 삭제 패널을 연다.
+     */
     public void OnClickRemoveButtonInListPanel()
     {
         if(waveRemovePanel.activeSelf == false)
@@ -229,6 +266,12 @@ public class EnemyWaveSettingUISystem : MonoBehaviour
             OnClickCancleButtonInWaveRemovePanel();
     }
 
+    /* void OnClickWaveButton(EnemyWaveUI enemyWaveUI)
+     * 1. enemy wave를 삭제할 수 있는 삭제 패널이 열려있는 경우,
+     *    삭제할 wave로 선택된다.
+     * 2. enemy wave를 삭제할 수 있는 삭제 패널이 열려있지 않은 경우
+     *    해당 wave를 편집할 수 있는 패널이 열린다.
+     */
     private void OnClickWaveButton(EnemyWaveUI enemyWaveUI)
     {
         int index = enemyWaveUIList.IndexOf(enemyWaveUI);
@@ -338,12 +381,18 @@ public class EnemyWaveSettingUISystem : MonoBehaviour
         }
     }
 
+    /* void OnClickCancelWaveButton(EnemyWaveUI enemyWaveUI)
+     * 1. 한 개의 enemy wave를 편집할 수 있는 setting 패널을 닫는다.
+     */
     private void OnClickCancelWaveButton(EnemyWaveUI enemyWaveUI)
     {
         enemyWaveUI.enemyWaveOptionalSettingPanel.SetActive(false);
         enemyWaveUI.enemyOneWavePanel.SetActive(false);
     }
 
+    /* void OnClickRemoveButtonInWaveRemovePanel()
+     * 1. 현재 선택된 wave를 삭제한다.
+     */
     public void OnClickRemoveButtonInWaveRemovePanel()
     {
         //Remove enemy wave UI
@@ -358,7 +407,7 @@ public class EnemyWaveSettingUISystem : MonoBehaviour
         }
 
         foreach (StageData.EnemyWaveInfo enemyWaveInfo in selectedWaveInfoList)
-            LevelEditor.instance.GetEnemyWaveInfoList().Remove(enemyWaveInfo);
+            LevelEditor.instance.DeleteEnemyWaveInfo(enemyWaveInfo);
 
 
         //Processing after deletion
@@ -385,6 +434,9 @@ public class EnemyWaveSettingUISystem : MonoBehaviour
         waveRemovePanel.SetActive(false);
     }
 
+    /* void OnClickCancleButtonInWaveRemovePanel()
+     * 1. wave를 삭제할 수 있는 패널을 닫는다.
+     */
     public void OnClickCancleButtonInWaveRemovePanel()
     {
         //change color to current state color
@@ -400,6 +452,14 @@ public class EnemyWaveSettingUISystem : MonoBehaviour
         waveRemovePanel.SetActive(false);
     }
 
+    /* void OnEndInEnemySpawnerDurationInputField(EnemyWaveUI enemyWaveUI)
+     * 1. 만약 inputf field의 enemy spawner duration 값이 유효한 값이면
+     *    LevelEditor의 enemy spawner duration 값이 해당 enemy spawner duration 값이 되고,
+     *    유효하지 않은 값이라면, LevelEditor의 enemy spawner duration 값이 0이 된다.
+     * 2. 만약 LevelEditor의 enemy spawner duration 값이 0이면,
+     *    해당 enemy spawner duration의 input field의 text가 ""이 된다.
+     * 3. 한 개의 enemy wave setting이 완료되었는지 확인한다.
+     */
     public void OnEndInEnemySpawnerDurationInputField(EnemyWaveUI enemyWaveUI)
     {
         int index = enemyWaveUIList.IndexOf(enemyWaveUI);
@@ -430,6 +490,10 @@ public class EnemyWaveSettingUISystem : MonoBehaviour
         
     }
 
+    /* void OnValueChangedNextPhaseTrigger(EnemyWaveUI enemyWaveUI)
+     * 1. next phase trigger 값이 변경되면, 해당 값을 level editor의 next phase trigger 값에 적용해준다.
+     * 2. 한 개의 enemy wave setting이 완료되었는지 확인한다.
+     */
     public void OnValueChangedNextPhaseTrigger(EnemyWaveUI enemyWaveUI)
     {
         int index = enemyWaveUIList.IndexOf(enemyWaveUI);
@@ -443,12 +507,20 @@ public class EnemyWaveSettingUISystem : MonoBehaviour
             .GetChild(4)
             .GetComponent<TMP_Dropdown>();
 
-        enemyWaveInfo.nextPhaseTrigger = (StageData.EnemyWaveInfo.NextPhaseTrigger)dropdown.value;
+        enemyWaveInfo.nextWaveTrigger = (StageData.EnemyWaveInfo.NextWaveTrigger)dropdown.value;
 
         IsCompleteOneWaveSetting(enemyWaveUI);
         
     }
 
+    /* void OnEndInBreakTimeInputField(EnemyWaveUI enemyWaveUI)
+     * 1. 만약 inputf field의 enemy break time 값이 유효한 값이면
+     *    LevelEditor의 enemy break time 값이 해당 enemy break time 값이 되고,
+     *    유효하지 않은 값이라면, LevelEditor의 enemy break time 값이 0이 된다.
+     * 2. 만약 LevelEditor의 enemy break time 값이 0이면,
+     *    해당 enemy break time의 input field의 text가 ""이 된다.
+     * 3. 한 개의 enemy wave setting이 완료되었는지 확인한다.
+     */
     public void OnEndInBreakTimeInputField(EnemyWaveUI enemyWaveUI)
     {
         int index = enemyWaveUIList.IndexOf(enemyWaveUI);
@@ -480,20 +552,34 @@ public class EnemyWaveSettingUISystem : MonoBehaviour
         
     }
 
+    /* void OnClickAddButtonInOneWavePanel(EnemyWaveUI enemyWaveUI)
+     * 1. 특정 enemy wave setting에서 하나의 enemies를 추가한다.
+     */
     public void OnClickAddButtonInOneWavePanel(EnemyWaveUI enemyWaveUI)
     {
         int wIndex = enemyWaveUIList.IndexOf(enemyWaveUI);
         StageData.EnemyWaveInfo enemyWaveInfo = LevelEditor.instance.GetEnemyWaveInfoList()[wIndex];
-
-        EnemiesUI enemiesUI = new EnemiesUI();
-        Button enemiesButton;
-        TMP_Dropdown enemiesDropdown;
-        TMP_InputField enemiesCountInputField;
+     
         int eIndex = enemyWaveUI.enemiesUIList.Count;
         int enemiesNum = eIndex + 1;
 
         StageData.Enemies enemies = new StageData.Enemies();
-        
+
+        CreateEnemiesUI(enemyWaveUI);
+
+        enemyWaveInfo.enemyOneWave.Add(enemies);
+    }
+
+    public void CreateEnemiesUI(EnemyWaveUI enemyWaveUI)
+    {
+        EnemiesUI enemiesUI = new EnemiesUI();
+        Button enemiesButton;
+        TMP_Dropdown enemiesDropdown;
+        TMP_InputField enemiesCountInputField;
+
+        int eIndex = enemyWaveUI.enemiesUIList.Count;
+        int enemiesNum = eIndex + 1;
+
         enemyWaveUI
             .enemyOneWavePanel
             .transform
@@ -551,11 +637,12 @@ public class EnemyWaveSettingUISystem : MonoBehaviour
         enemiesUI.isSelected = false;
         enemiesUI.isRemoveSelected = false;
         enemyWaveUI.enemiesUIList.Add(enemiesUI);
-
-
-        enemyWaveInfo.enemyOneWave.Add(enemies);
     }
 
+
+    /* void OnClickRemoveButtonInOneWavePanel(EnemyWaveUI enemyWaveUI)
+     * 1. 특정 enemy wave에서 enemies들을 삭제할 수 있는 삭제 패널을 연다.
+     */
     public void OnClickRemoveButtonInOneWavePanel(EnemyWaveUI enemyWaveUI)
     {
         if (enemyWaveUI.enemiesRemovePanel.activeSelf == false)
@@ -567,6 +654,9 @@ public class EnemyWaveSettingUISystem : MonoBehaviour
             OnClickCancleButtonInEnemiesRemovePanel(enemyWaveUI);
     }
 
+    /* void OnClickRemoveButtonInEnemiesRemovePanel(EnemyWaveUI enemyWaveUI)
+     * 1. 특정 enemy wave에서 삭제하려고 선택한 enemies를 삭제한다.
+     */
     public void OnClickRemoveButtonInEnemiesRemovePanel(EnemyWaveUI enemyWaveUI)
     {
         int index = enemyWaveUIList.IndexOf(enemyWaveUI);
@@ -613,6 +703,9 @@ public class EnemyWaveSettingUISystem : MonoBehaviour
         enemyWaveUI.removePanelActive = false;
     }
 
+    /* void OnClickCancleButtonInEnemiesRemovePanel(EnemyWaveUI enemyWaveUI)
+     * 1. 특정 enemy wave setting에서 enemies를 삭제할 수 있는 패널을 닫는다.
+     */
     public void OnClickCancleButtonInEnemiesRemovePanel(EnemyWaveUI enemyWaveUI)
     {
         GameObject EnemiesButton = null;
@@ -633,6 +726,10 @@ public class EnemyWaveSettingUISystem : MonoBehaviour
         enemyWaveUI.removePanelActive = false;
     }
 
+    /* void OnClickEnemiesButton(EnemyWaveUI enemyWaveUI, EnemiesUI enemiesUI)
+     * 1. enemies 삭제 패널이 열려 있으면,
+     *    삭제할 enemies가 선택된다.
+     */
     public void OnClickEnemiesButton(EnemyWaveUI enemyWaveUI, EnemiesUI enemiesUI)
     {
         int wIndex = enemyWaveUIList.IndexOf(enemyWaveUI);
@@ -673,6 +770,10 @@ public class EnemyWaveSettingUISystem : MonoBehaviour
         }
     }
 
+    /* void OnValueChangedEnemySpecific(EnemyWaveUI enemyWaveUI, EnemiesUI enemiesUI)
+     * 1. 특정한 하나의 enemy wave setting의 enemies의 specefic 값이 변경되면,
+     *    해당 변경 사항을 LevelEditor에 적용해준다.
+     */
     public void OnValueChangedEnemySpecific(EnemyWaveUI enemyWaveUI, EnemiesUI enemiesUI)
     {
         int wIndex = enemyWaveUIList.IndexOf(enemyWaveUI);
@@ -694,6 +795,14 @@ public class EnemyWaveSettingUISystem : MonoBehaviour
         IsCompleteEnemiesSetting(enemyWaveUI, enemiesUI);
     }
 
+    /* void OnEndInEnemiesCountInputField(EnemyWaveUI enemyWaveUI, EnemiesUI enemiesUI)
+     * 1. 만약 inputf field의 enemy break time 값이 유효한 값이면
+     *    LevelEditor의 enemy break time 값이 해당 enemy break time 값이 되고,
+     *    유효하지 않은 값이라면, LevelEditor의 enemy break time 값이 0이 된다.
+     * 2. 만약 LevelEditor의 enemy break time 값이 0이면,
+     *    해당 enemy break time의 input field의 text가 ""이 된다.
+     * 3. 한 개의 enemy wave setting이 완료되었는지 확인한다.
+     */
     public void OnEndInEnemiesCountInputField(EnemyWaveUI enemyWaveUI, EnemiesUI enemiesUI)
     {
         int wIndex = enemyWaveUIList.IndexOf(enemyWaveUI);
@@ -727,7 +836,9 @@ public class EnemyWaveSettingUISystem : MonoBehaviour
         IsCompleteEnemiesSetting(enemyWaveUI, enemiesUI);
     }
 
-
+    /* void IsCompleteEnemiesSetting(EnemyWaveUI enemyWaveUI, EnemiesUI enemiesUI)
+     * 1. 특정 하나의 enemy wave setting에서 하나의 enemies setting의 setting이 완료상태인지 확인한다.
+     */
     public void IsCompleteEnemiesSetting(EnemyWaveUI enemyWaveUI, EnemiesUI enemiesUI)
     {
         int wIndex = enemyWaveUIList.IndexOf(enemyWaveUI);
@@ -767,6 +878,9 @@ public class EnemyWaveSettingUISystem : MonoBehaviour
         IsCompleteOneWaveSetting(enemyWaveUI);
     }
 
+    /* void IsCompleteOneWaveSetting(EnemyWaveUI enemyWaveUI
+     * 1. 특정 하나의 enemy wave setting의 setting이 완료상태인지 확인한다.
+     */
     public void IsCompleteOneWaveSetting(EnemyWaveUI enemyWaveUI)
     {
         int index = enemyWaveUIList.IndexOf(enemyWaveUI);
@@ -825,6 +939,9 @@ public class EnemyWaveSettingUISystem : MonoBehaviour
         IsCompleteWavesSetting();
     }
 
+    /* void IsCompleteWavesSetting()
+     * 1. 한 stage의 enemy wave setting의 setting이 전부 완료되었는지 확인한다.
+     */
     public void IsCompleteWavesSetting()
     {
         bool readyFlag = true;
@@ -854,6 +971,9 @@ public class EnemyWaveSettingUISystem : MonoBehaviour
                 .instance
                 .ChangeButtonColor(LevelEditorUISystem.SettingUISystemSpecific.EnemyWaveSetting
                 , LevelEditorUISystem.ButtonColor.NotReadyColor);
+
+            LevelEditorUISystem.instance.ChangeReadyFlag(LevelEditorUISystem.SettingUISystemSpecific.EnemyWaveSetting
+                , false);
         }
         else
         {
@@ -863,6 +983,54 @@ public class EnemyWaveSettingUISystem : MonoBehaviour
                 .instance
                 .ChangeButtonColor(LevelEditorUISystem.SettingUISystemSpecific.EnemyWaveSetting
                 , LevelEditorUISystem.ButtonColor.ReadyColor);
+
+            LevelEditorUISystem.instance.ChangeReadyFlag(LevelEditorUISystem.SettingUISystemSpecific.EnemyWaveSetting
+                , true);
+        }
+    }
+
+    public void Load()
+    {
+        List<StageData.EnemyWaveInfo> enemyWaveInfoList
+            = LevelEditor.instance.GetEnemyWaveInfoList();
+
+        for(int i = 0; i < enemyWaveInfoList.Count; i++)
+        {
+            CreateEnemyWaveUI();
+
+            this.enemyWaveUIList[i]
+                .enemyWaveOptionalSettingPanel
+                .transform.GetChild(2)
+                .GetComponent<TMP_InputField>().text = enemyWaveInfoList[i].enemySpawnDuration.ToString();
+
+            this.enemyWaveUIList[i]
+                .enemyWaveOptionalSettingPanel
+                .transform.GetChild(4)
+                .GetComponent<TMP_Dropdown>().value = (int)enemyWaveInfoList[i].nextWaveTrigger;
+
+            this.enemyWaveUIList[i]
+                .enemyWaveOptionalSettingPanel
+                .transform.GetChild(6)
+                .GetComponent<TMP_InputField>().text = enemyWaveInfoList[i].breakTime.ToString();
+
+            for(int j = 0; j < enemyWaveInfoList[i].enemyOneWave.Count; j++)
+            {
+                CreateEnemiesUI(this.enemyWaveUIList[i]);
+
+                this.enemyWaveUIList[i]
+                    .enemiesUIList[j]
+                    .enemiesPanel
+                    .transform.GetChild(1)
+                    .GetComponent<TMP_Dropdown>().value = (int)enemyWaveInfoList[i].enemyOneWave[j].enemySpecific;
+
+                this.enemyWaveUIList[i]
+                    .enemiesUIList[j]
+                    .enemiesPanel
+                    .transform.GetChild(2)
+                    .GetComponent<TMP_InputField>().text = enemyWaveInfoList[i].enemyOneWave[j].count.ToString();
+
+                IsCompleteEnemiesSetting(this.enemyWaveUIList[i], this.enemyWaveUIList[i].enemiesUIList[j]);
+            }
         }
     }
 }

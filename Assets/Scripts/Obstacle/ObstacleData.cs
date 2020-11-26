@@ -1,19 +1,23 @@
-﻿using System.Collections;
+﻿    using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class ObstacleData : MonoBehaviour
 {
     public int lineNum;
-    // Start is called before the first frame update
-    void Start()
+
+    
+    public class Neighbor
     {
-        
+        public GameObject obj;
+        public Collider collider;
     }
 
-    // Update is called once per frame
-    void Update()
+    [HideInInspector]
+    public List<Neighbor> NeighborList;
+
+    private void Awake()
     {
-        
+        this.NeighborList = new List<Neighbor>();
     }
 }

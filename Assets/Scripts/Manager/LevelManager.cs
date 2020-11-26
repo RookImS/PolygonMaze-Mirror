@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
@@ -30,6 +31,8 @@ public class LevelManager : MonoBehaviour
         public int activeNum;
     }
 
+    private StageData stageData;
+
     private Vector3 spawnerPosition;
     private GameObject waves;
     private List<EnemyWave> enemyWaveList;
@@ -41,9 +44,6 @@ public class LevelManager : MonoBehaviour
     public GameObject castle;
     public NavMeshSurface enemyNavMeshSurface;
     public NavMeshSurface checkerNavMeshSurface;
-
-    [Header("Preserved StageData")]
-    public StageScriptableObject stageData;
 
     [Header("Preserved Obstacle Prefabs")]
     public GameObject triangleObstaclePrefab;
@@ -62,7 +62,7 @@ public class LevelManager : MonoBehaviour
     public GameObject destinationPrefab;
 
     [Header("Preserved Checker Prefabs")]
-    public GameObject checkerPrefab;
+    public GameObject checkerWithGroundPrefab;
 
     [Header("Preserved Enemy Prefabs")]
     public GameObject circleEnemyPrefab;
@@ -76,7 +76,18 @@ public class LevelManager : MonoBehaviour
     private void Awake()
     {
         Init();
-        LoadStage();
+
+        if (GameManager.Instance.GetLoadStageChapter() != 0
+            && GameManager.Instance.GetLoadStageLevel() != 0)
+        {
+            if (LoadStageData())
+                LoadStage();
+            else
+                Debug.Log("Stage Load Fail!");
+
+            GameManager.Instance.SetLoadStageChapter(0);
+            GameManager.Instance.SetLoadStageLevel(0);
+        }
     }
 
     private void Start()
@@ -88,7 +99,6 @@ public class LevelManager : MonoBehaviour
     {
         instance = this;
 
-        PlayerControl.Instance.playerData.SetPlayer(this.stageData.startCost, this.stageData.playerLife);
         m_enemyCount = 0;
     }
 
@@ -111,6 +121,68 @@ public class LevelManager : MonoBehaviour
         return m_enemyCount;
     }
 
+    public bool LoadStageData()
+    {
+        int loadStageChapter = GameManager.Instance.GetLoadStageChapter();
+        int loadStageLevel = GameManager.Instance.GetLoadStageLevel();
+
+        string path = string.Format("Assets/StageData/{0}-{1}.json", loadStageChapter, loadStageLevel);
+        System.IO.FileInfo file = new System.IO.FileInfo(path);
+
+        try
+        {
+            if (File.Exists(path))
+            {
+                string jsonData = File.ReadAllText(path);
+                this.stageData = JsonUtility.FromJson<StageData>(jsonData);
+
+                if (StageLoadChecker())
+                    return true;
+                else
+                    return false;
+            }
+            else
+            {
+                // 동일이름의 파일 존재하지 않음
+                // 재입력 event
+
+                return false;
+            }
+        }
+        catch (System.ArgumentException e1)
+        {
+            Debug.Log(e1.Message);
+            // stage name 재입력 event
+
+            return false;
+        }
+        catch (System.Exception e2)
+        {
+            Debug.Log(e2.Message);
+            // IOException or UnauthorizedAccessException
+
+            return false;
+        }
+
+        
+    }
+
+    public bool StageLoadChecker()
+    {
+        if (this.stageData.playerLife == 0 || stageData.startCost == 0)
+            return false;
+        else if (this.stageData.obstacles.Count == 0)
+            return false;
+        else if (this.stageData.spawnerInfo == null)
+            return false;
+        else if (this.stageData.destinationInfo == null)
+            return false;
+        else if (this.stageData.enemyWaveInfos.Count == 0)
+            return false;
+        else
+            return true;
+    }
+
     /* LoadStage
      * 1. Load obstacles.
      * 2. Load spawner and destination & Set active of overlabed wall to false.
@@ -120,7 +192,7 @@ public class LevelManager : MonoBehaviour
      */
     public void LoadStage()
     {
-
+        LoadPlayerLifeAndStartCost();
         LoadObstacles();
         LoadTowers();
         LoadBlanks();
@@ -128,6 +200,11 @@ public class LevelManager : MonoBehaviour
         LoadWaves();
         LoadTutorial();
         isWaveComplete = true;
+    }
+
+    public void LoadPlayerLifeAndStartCost()
+    {
+        PlayerControl.Instance.playerData.SetPlayer(this.stageData.startCost, this.stageData.playerLife);
     }
 
     /* LoadObstacles
@@ -139,20 +216,22 @@ public class LevelManager : MonoBehaviour
         GameObject obstacles = null;
         GameObject prefab = null;
 
+        if (obstacles != null)
+            Destroy(obstacles);
 
         obstacles = new GameObject("Obstacles");
         obstacles.transform.SetParent(this.stageGameObject.transform);
 
-        foreach (StageScriptableObject.ObstacleInfo info in this.stageData.baseObstacles)
+        foreach (StageData.ObstacleInfo info in this.stageData.obstacles)
         {
             if (info.obstacleSpecific
-                == StageScriptableObject.ObstacleInfo.ObstacleSpecific.Triangle)
+                == StageData.ObstacleInfo.ObstacleSpecific.Triangle)
                 prefab = this.triangleObstaclePrefab;
             else if (info.obstacleSpecific
-                == StageScriptableObject.ObstacleInfo.ObstacleSpecific.Square)
+                == StageData.ObstacleInfo.ObstacleSpecific.Square)
                 prefab = this.squareObstaclePrefab;
             else if (info.obstacleSpecific
-                == StageScriptableObject.ObstacleInfo.ObstacleSpecific.Pentagon)
+                == StageData.ObstacleInfo.ObstacleSpecific.Pentagon)
                 prefab = this.pentagonObstaclePrefab;
             else // Hexagon
                 prefab = this.hexagonObstaclePrefab;
@@ -199,7 +278,7 @@ public class LevelManager : MonoBehaviour
      */
     public void LoadBlanks()
     {
-        StageScriptableObject.BlankInfo info = null;
+        StageData.BlankInfo info = null;
         GameObject spawner = null;
         GameObject prefab = null;
 
@@ -229,17 +308,17 @@ public class LevelManager : MonoBehaviour
      * 1. Set active of a appropriate mesh to true.
      * 2. Set active of a appropriate mesh to false.
      */
-    public void SelectBlankMesh(GameObject blank, StageScriptableObject.BlankInfo blankInfo)
+    public void SelectBlankMesh(GameObject blank, StageData.BlankInfo blankInfo)
     {
         if (blankInfo.blankMeshType
-            == StageScriptableObject.BlankInfo.BlankMeshType.Mesh1)
+            == StageData.BlankInfo.BlankMeshType.Mesh1)
         {
             blank.transform.GetChild(0).gameObject.SetActive(true);
             blank.transform.GetChild(1).gameObject.SetActive(false);
             blank.transform.GetChild(2).gameObject.SetActive(false);
         }
         else if (blankInfo.blankMeshType
-            == StageScriptableObject.BlankInfo.BlankMeshType.Mesh2)
+            == StageData.BlankInfo.BlankMeshType.Mesh2)
         {
             blank.transform.GetChild(0).gameObject.SetActive(false);
             blank.transform.GetChild(1).gameObject.SetActive(true);
@@ -261,9 +340,9 @@ public class LevelManager : MonoBehaviour
     {
         bool breakFlag = false;
 
-        Func<Vector3, Vector3, bool> isOverlabCheck = (blank, wall) =>
+        Func<Vector3, Vector3, bool> isOverlapCheck = (blank, wall) =>
         {
-            Func<float, float, bool> isOverlabCheckSpecificAxis = (blankX, wallX) =>
+            Func<float, float, bool> isOverlapCheckSpecificAxis = (blankX, wallX) =>
             {
                 float error = 0.05f;
                 if (wallX - error < blankX && blankX < wallX + error)
@@ -272,9 +351,9 @@ public class LevelManager : MonoBehaviour
                 return false;
             };
 
-            if (isOverlabCheckSpecificAxis(blank.x, wall.x)
-            && isOverlabCheckSpecificAxis(blank.y, wall.y)
-            && isOverlabCheckSpecificAxis(blank.z, wall.z))
+            if (isOverlapCheckSpecificAxis(blank.x, wall.x)
+            && isOverlapCheckSpecificAxis(blank.y, wall.y)
+            && isOverlapCheckSpecificAxis(blank.z, wall.z))
                 return true;
 
             return false;
@@ -285,7 +364,7 @@ public class LevelManager : MonoBehaviour
         {
             foreach (Transform wallTs in wallLineTs.gameObject.GetComponentInChildren<Transform>())
             {
-                if (isOverlabCheck(overlabedBlank.transform.position, wallTs.position))
+                if (isOverlapCheck(overlabedBlank.transform.position, wallTs.position))
                 {
                     wallTs.gameObject.SetActive(false);
                     breakFlag = true;
@@ -305,16 +384,21 @@ public class LevelManager : MonoBehaviour
      */
     public void LoadChecker()
     {
+        GameObject checkerWithGround;
         GameObject checker;
 
-        StageScriptableObject.BlankInfo info = null;
+        StageData.BlankInfo info = null;
 
         info = this.stageData.spawnerInfo;
 
         Vector3 backward = info.rotation * Vector3.back;
         Vector3 positionVector = backward * 1.5f;
 
-        checker = GameObject.Instantiate(this.checkerPrefab, info.position + positionVector, info.rotation, this.stageGameObject.transform).transform.Find("Checker").gameObject;
+        checkerWithGround
+            = GameObject
+            .Instantiate(this.checkerWithGroundPrefab, info.position + positionVector, info.rotation, this.stageGameObject.transform);
+
+        checker = checkerWithGround.transform.GetChild(0).gameObject;
 
         BakeNavMeshSurfaces();
 
@@ -355,7 +439,7 @@ public class LevelManager : MonoBehaviour
 
         this.enemyWaveList = new List<EnemyWave>();
 
-        foreach (StageScriptableObject.EnemyWaveInfo enemyWaveInfo in this.stageData.baseEnemyWaves)
+        foreach (StageData.EnemyWaveInfo enemyWaveInfo in this.stageData.enemyWaveInfos)
         {
             wave = new GameObject(string.Format("Wave{0}", waveValue));
             wave.transform.SetParent(this.waves.transform);
@@ -366,25 +450,24 @@ public class LevelManager : MonoBehaviour
 
             enemyWave.enemySpawnDuration = enemyWaveInfo.enemySpawnDuration;
             enemyWave.nextWaveTrigger = (LevelManager.EnemyWave.NextWaveTrigger)enemyWaveInfo.nextWaveTrigger;
-            enemyWave.timer = enemyWaveInfo.timer;
             enemyWave.breakTime = enemyWaveInfo.breakTime;
             enemyWave.activeNum = 0;
 
-            foreach (StageScriptableObject.EnemyInfo enemyInfo in enemyWaveInfo.enemyInfoList)
+            foreach (StageData.Enemies enemyInfo in enemyWaveInfo.enemyOneWave)
             {
                 for (i = 0; i < enemyInfo.count; i++)
                 {
                     if (enemyInfo.enemySpecific
-                    == StageScriptableObject.EnemyInfo.EnemySpecific.Circle)
+                    == StageData.Enemies.EnemySpecific.Circle)
                         enemyPrefab = this.circleEnemyPrefab;
                     else if (enemyInfo.enemySpecific
-                        == StageScriptableObject.EnemyInfo.EnemySpecific.SemiCircle)
+                        == StageData.Enemies.EnemySpecific.SemiCircle)
                         enemyPrefab = this.semiCircleEnemyPrefab;
                     else if (enemyInfo.enemySpecific
-                        == StageScriptableObject.EnemyInfo.EnemySpecific.Sector)
+                        == StageData.Enemies.EnemySpecific.Sector)
                         enemyPrefab = this.sectorEnemyPrefab;
                     else if (enemyInfo.enemySpecific
-                        == StageScriptableObject.EnemyInfo.EnemySpecific.Ellipse)
+                        == StageData.Enemies.EnemySpecific.Ellipse)
                         enemyPrefab = this.ellipseEnemyPrefab;
                     else // Ring
                         enemyPrefab = this.ringEnemyPrefab;

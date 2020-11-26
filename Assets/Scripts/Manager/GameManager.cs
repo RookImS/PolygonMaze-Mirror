@@ -21,6 +21,9 @@ public class GameManager : MonoSingleton<GameManager>
 
     public GameState currentGameState;
 
+    private int loadStageChapter;
+    private int loadStageLevel;
+
     private void Awake()
     {
         inGameUI = GameObject.Find("InGameUI");
@@ -50,8 +53,30 @@ public class GameManager : MonoSingleton<GameManager>
 
     private void Init()
     {
-
+        loadStageChapter = 0;
+        loadStageLevel = 0;
     }
+
+    public int GetLoadStageChapter()
+    {
+        return this.loadStageChapter;
+    }
+
+    public void SetLoadStageChapter(int loadStageChapter)
+    {
+        this.loadStageChapter = loadStageChapter;
+    }
+
+    public int GetLoadStageLevel()
+    {
+        return this.loadStageLevel;
+    }
+
+    public void SetLoadStageLevel(int loadStageLevel)
+    {
+        this.loadStageLevel = loadStageLevel;
+    }
+
     void SetGameState (GameState newGameState)  //현재 게임플레이 상태 지정
     {
         if(newGameState == GameState.menu) { 
