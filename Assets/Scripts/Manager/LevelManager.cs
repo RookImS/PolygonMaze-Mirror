@@ -36,6 +36,7 @@ public class LevelManager : MonoBehaviour
     private Vector3 spawnerPosition;
     private GameObject waves;
     private List<EnemyWave> enemyWaveList;
+    private bool isSuccessStageLoad;
     [HideInInspector] public bool isWaveSystemOn;
     [HideInInspector] public bool isWaveComplete;
 
@@ -80,7 +81,7 @@ public class LevelManager : MonoBehaviour
         if (GameManager.Instance.GetLoadStageChapter() != 0
             && GameManager.Instance.GetLoadStageLevel() != 0)
         {
-            if (LoadStageData())
+            if (isSuccessStageLoad = LoadStageData())
                 LoadStage();
             else
                 Debug.Log("Stage Load Fail!");
@@ -92,7 +93,8 @@ public class LevelManager : MonoBehaviour
 
     private void Start()
     {
-        StartCoroutine(StartStage());
+        if(isSuccessStageLoad)
+            StartCoroutine(StartStage());
     }
 
     public void Init()
@@ -219,7 +221,8 @@ public class LevelManager : MonoBehaviour
         if (obstacles != null)
             Destroy(obstacles);
 
-        obstacles = new GameObject("Obstacles");
+        if(obstacles == null)
+            obstacles = new GameObject("Obstacles");
         obstacles.transform.SetParent(this.stageGameObject.transform);
 
         foreach (StageData.ObstacleInfo info in this.stageData.obstacles)
@@ -289,6 +292,7 @@ public class LevelManager : MonoBehaviour
         info = this.stageData.spawnerInfo;
         prefab = this.spawnerPrefab;
         spawner = GameObject.Instantiate(prefab, info.position, info.rotation, this.stageGameObject.transform);
+        Destroy(spawner.GetComponent<SpawnerBehaviour>());
         this.spawnerPosition = info.position;
         SelectBlankMesh(spawner, info);
 
@@ -297,6 +301,7 @@ public class LevelManager : MonoBehaviour
         info = this.stageData.destinationInfo;
         prefab = this.destinationPrefab;
         destination = GameObject.Instantiate(prefab, info.position, info.rotation, this.stageGameObject.transform);
+        Destroy(destination.GetComponent<DestinationBehaviour>());
         SelectBlankMesh(destination, info);
 
         //Set active of overlabed wall to false
@@ -499,6 +504,7 @@ public class LevelManager : MonoBehaviour
             isWaveSystemOn = true;
         }
     }
+
     /* StartStage
      * 1. TakeBreakTime 1 & StartWave 1.
      * 2. TakeBreakTime 2 & StartWave 2.

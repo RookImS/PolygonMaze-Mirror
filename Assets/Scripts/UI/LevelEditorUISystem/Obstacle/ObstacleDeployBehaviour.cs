@@ -137,7 +137,7 @@ public class ObstacleDeployBehaviour : MonoBehaviour
 
             isProperLocate = true;
 
-            return objectHit.gameObject.GetComponent<SideColliderBehaviour>().parentObject;
+            return objectHit.gameObject.GetComponent<LevelEditorSideColliderBehaviour>().parentObject;
         }
         else
         {

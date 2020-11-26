@@ -2375,8 +2375,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ee831bdb06a0d9f4f8f96b4b452e16ee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  SceneToLoad: Stage1
-  Stage1Button: {fileID: 1143207463}
+  sceneToLoad: StageScene
+  stageButton: {fileID: 1143207463}
+  stageChapter: 1
+  stageLevel: 1
 --- !u!1 &1216488881
 GameObject:
   m_ObjectHideFlags: 0

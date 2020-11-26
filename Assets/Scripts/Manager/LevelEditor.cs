@@ -50,8 +50,6 @@ public class LevelEditor : MonoBehaviour
     {
         instance = this;
         Init();
-
-        Application.targetFrameRate = 60; //temp
     }
 
 
@@ -274,6 +272,7 @@ public class LevelEditor : MonoBehaviour
     public void UpdateObstacleInfo()
     {
         this.stageData.UpdateObstacleInfo(this.obstacleList);
+        this.stageData.SortObstacleInfo();
     }
 
     /*

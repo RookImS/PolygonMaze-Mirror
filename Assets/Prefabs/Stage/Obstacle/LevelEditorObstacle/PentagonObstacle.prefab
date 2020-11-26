@@ -45,7 +45,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1302196105134418314}
   - component: {fileID: 7057971145817015094}
-  - component: {fileID: 3744199867954874637}
+  - component: {fileID: 678056056082074178}
   m_Layer: 9
   m_Name: 216SideCollider
   m_TagString: SideCollider
@@ -81,7 +81,7 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: 8112057884165552105, guid: e53309aaa78cd0a4780428420a995fb5, type: 3}
---- !u!114 &3744199867954874637
+--- !u!114 &678056056082074178
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -90,7 +90,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 2794733357929734837}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7a1736ebd5b36d54f8a7f9d5d72266d3, type: 3}
+  m_Script: {fileID: 11500000, guid: 2ad1bf6a4a53f684dae98dac783a5d51, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   parentObject: {fileID: 8811219413331195968}
@@ -104,7 +104,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3803329168610053596}
   - component: {fileID: 413028749246223782}
-  - component: {fileID: 2421112534555094580}
+  - component: {fileID: 8610973100022239872}
   m_Layer: 9
   m_Name: 144SideCollider
   m_TagString: SideCollider
@@ -140,7 +140,7 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: 8112057884165552105, guid: e53309aaa78cd0a4780428420a995fb5, type: 3}
---- !u!114 &2421112534555094580
+--- !u!114 &8610973100022239872
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -149,7 +149,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 5176936019695225612}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7a1736ebd5b36d54f8a7f9d5d72266d3, type: 3}
+  m_Script: {fileID: 11500000, guid: 2ad1bf6a4a53f684dae98dac783a5d51, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   parentObject: {fileID: 8811219413331195968}
@@ -163,7 +163,7 @@ GameObject:
   m_Component:
   - component: {fileID: 196913891426289688}
   - component: {fileID: 8387554470539803858}
-  - component: {fileID: 4746882137834182826}
+  - component: {fileID: 1005741032602717711}
   m_Layer: 9
   m_Name: 288SideCollider
   m_TagString: SideCollider
@@ -199,7 +199,7 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: 8112057884165552105, guid: e53309aaa78cd0a4780428420a995fb5, type: 3}
---- !u!114 &4746882137834182826
+--- !u!114 &1005741032602717711
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -208,7 +208,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 5339536441273287141}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7a1736ebd5b36d54f8a7f9d5d72266d3, type: 3}
+  m_Script: {fileID: 11500000, guid: 2ad1bf6a4a53f684dae98dac783a5d51, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   parentObject: {fileID: 8811219413331195968}
@@ -222,7 +222,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1318212680339211646}
   - component: {fileID: 4514632511931889540}
-  - component: {fileID: 2768680657947123736}
+  - component: {fileID: 773432056234445165}
   m_Layer: 9
   m_Name: 72SideCollider
   m_TagString: SideCollider
@@ -258,7 +258,7 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: 8112057884165552105, guid: e53309aaa78cd0a4780428420a995fb5, type: 3}
---- !u!114 &2768680657947123736
+--- !u!114 &773432056234445165
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -267,7 +267,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 8192459065100801915}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7a1736ebd5b36d54f8a7f9d5d72266d3, type: 3}
+  m_Script: {fileID: 11500000, guid: 2ad1bf6a4a53f684dae98dac783a5d51, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   parentObject: {fileID: 8811219413331195968}
@@ -281,7 +281,7 @@ GameObject:
   m_Component:
   - component: {fileID: 565172457625718382}
   - component: {fileID: 995145297011585099}
-  - component: {fileID: 1498154138068242277}
+  - component: {fileID: 4563873923768410552}
   m_Layer: 9
   m_Name: 0SideCollider
   m_TagString: SideCollider
@@ -317,7 +317,7 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: 8112057884165552105, guid: e53309aaa78cd0a4780428420a995fb5, type: 3}
---- !u!114 &1498154138068242277
+--- !u!114 &4563873923768410552
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -326,7 +326,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 8715468934397662244}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7a1736ebd5b36d54f8a7f9d5d72266d3, type: 3}
+  m_Script: {fileID: 11500000, guid: 2ad1bf6a4a53f684dae98dac783a5d51, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   parentObject: {fileID: 8811219413331195968}

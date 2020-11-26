@@ -129,10 +129,8 @@ GameObject:
   - component: {fileID: 5210137595178004963}
   - component: {fileID: 7717587538718616020}
   - component: {fileID: 6898091323485912537}
-  - component: {fileID: 7139527373596345753}
-  - component: {fileID: 8537641424191581196}
   m_Layer: 0
-  m_Name: TriangleObstacle
+  m_Name: TriangleObstacle 1
   m_TagString: Obstacle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -184,31 +182,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 126
   m_CollisionDetection: 0
---- !u!114 &7139527373596345753
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5210137595178004960}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3019467e6510de0449066b828388578e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &8537641424191581196
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5210137595178004960}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a1dd3da16c423cc429a7c0e7b8fce61a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  lineNum: 3
 --- !u!1 &7508284868441703146
 GameObject:
   m_ObjectHideFlags: 0

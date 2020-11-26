@@ -77,11 +77,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a3458a91c706f2d4ab44beaf23095ce5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isWaveSystemOn: 0
+  isWaveComplete: 0
   stageGameObject: {fileID: 5162274924202231867}
   castle: {fileID: 6042830156195974178}
   enemyNavMeshSurface: {fileID: 786983151131462667}
   checkerNavMeshSurface: {fileID: 7223117734520093806}
-  stageData: {fileID: 11400000, guid: b54d9e405f3be2841854cabe23f5c0e7, type: 2}
   triangleObstaclePrefab: {fileID: 5210137595178004960, guid: d05e5edd423b10449b9de97a01863b10, type: 3}
   squareObstaclePrefab: {fileID: 473488529774513135, guid: baeac571ebcd13f47bc9ced6aa28830a, type: 3}
   pentagonObstaclePrefab: {fileID: 8811219413331195968, guid: aff5fd265d44f784f879c1832ee35158, type: 3}
@@ -92,12 +93,13 @@ MonoBehaviour:
   hexagonTowerPrefab: {fileID: 7793056633140174654, guid: 28f744ba59eca824eb5c633def5f481b, type: 3}
   spawnerPrefab: {fileID: 4546852089631936315, guid: 7df10d63958ab0e4588c29bbc1daf156, type: 3}
   destinationPrefab: {fileID: 7480299383816322787, guid: 20d93f3818eb2d54b84e0e1c3a5f0921, type: 3}
-  checkerPrefab: {fileID: 7805583091822359371, guid: 69127f3dd05cec448be7523ae3080a06, type: 3}
+  checkerWithGroundPrefab: {fileID: 7805583091822359371, guid: 69127f3dd05cec448be7523ae3080a06, type: 3}
   circleEnemyPrefab: {fileID: 3350396553093369702, guid: 9dfa5bafdf521d3448f47e83dae12726, type: 3}
   semiCircleEnemyPrefab: {fileID: 2794680669866632871, guid: b5f6c68c082fbf14f9775ea583abbf37, type: 3}
   sectorEnemyPrefab: {fileID: 474593776622616134, guid: 47e5a2504444b29468ba4a30c8bbb9e8, type: 3}
   ellipseEnemyPrefab: {fileID: 8823159148962381299, guid: 34eb260e904644442ae2be89ba757e0a, type: 3}
   ringEnemyPrefab: {fileID: 5497063479883312189, guid: e88779b93f1c4c44ea008233069030e7, type: 3}
+  m_enemyCount: 0
 --- !u!1 &5162274924202231867
 GameObject:
   m_ObjectHideFlags: 0

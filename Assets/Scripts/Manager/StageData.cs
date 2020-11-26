@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
+using System.Linq;
 
 public class StageData
 {
@@ -170,6 +171,11 @@ public class StageData
 
             obstacles.Add(obstacleInfo);
         }
+    }
+
+    public void SortObstacleInfo()
+    {
+        obstacles = obstacles.OrderBy(x => x.position.x).ThenBy(x => x.position.z).ToList<ObstacleInfo>();
     }
 
     public void UpdateEnemyWaveInfo(List<EnemyWaveInfo> enemyWaveInfoList)

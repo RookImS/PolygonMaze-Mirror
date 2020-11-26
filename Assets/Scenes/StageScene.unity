@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18028352, g: 0.22571376, b: 0.30692244, a: 1}
+  m_IndirectSpecularColor: {r: 0, g: 0, b: 0, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -900,6 +900,38 @@ PrefabInstance:
       propertyPath: checkerPrefab
       value: 
       objectReference: {fileID: 7805583091822359371, guid: 69127f3dd05cec448be7523ae3080a06, type: 3}
+    - target: {fileID: 5162274923920270631, guid: 131b2868bd49c8140af1cdfcfd739e4a, type: 3}
+      propertyPath: triangleTowerPrefab
+      value: 
+      objectReference: {fileID: 346010008869247008, guid: 240e68458cec7ef41b7cce2a9eaeed4e, type: 3}
+    - target: {fileID: 5162274923920270631, guid: 131b2868bd49c8140af1cdfcfd739e4a, type: 3}
+      propertyPath: squareTowerPrefab
+      value: 
+      objectReference: {fileID: 7271484921240024667, guid: 74c8413134add1641be9e2920c61074c, type: 3}
+    - target: {fileID: 5162274923920270631, guid: 131b2868bd49c8140af1cdfcfd739e4a, type: 3}
+      propertyPath: pentagonTowerPrefab
+      value: 
+      objectReference: {fileID: 8996109028398955742, guid: 839d106aeeab58f46bd7583d20639abd, type: 3}
+    - target: {fileID: 5162274923920270631, guid: 131b2868bd49c8140af1cdfcfd739e4a, type: 3}
+      propertyPath: hexagonTowerPrefab
+      value: 
+      objectReference: {fileID: 7793056633140174654, guid: 28f744ba59eca824eb5c633def5f481b, type: 3}
+    - target: {fileID: 5162274923920270631, guid: 131b2868bd49c8140af1cdfcfd739e4a, type: 3}
+      propertyPath: triangleObstaclePrefab
+      value: 
+      objectReference: {fileID: 5210137595178004960, guid: c12590c8ad28d22468cd83420e3a7fa3, type: 3}
+    - target: {fileID: 5162274923920270631, guid: 131b2868bd49c8140af1cdfcfd739e4a, type: 3}
+      propertyPath: squareObstaclePrefab
+      value: 
+      objectReference: {fileID: 473488529774513135, guid: 703b3142fdb83244e87856ab46930b37, type: 3}
+    - target: {fileID: 5162274923920270631, guid: 131b2868bd49c8140af1cdfcfd739e4a, type: 3}
+      propertyPath: pentagonObstaclePrefab
+      value: 
+      objectReference: {fileID: 8811219413331195968, guid: 611cacc093dc45c468cb943a267887b8, type: 3}
+    - target: {fileID: 5162274923920270631, guid: 131b2868bd49c8140af1cdfcfd739e4a, type: 3}
+      propertyPath: hexagonObstaclePrefab
+      value: 
+      objectReference: {fileID: 3828187391709597441, guid: 2b2917e8297e79543ba9a1d0119b88aa, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 131b2868bd49c8140af1cdfcfd739e4a, type: 3}
 --- !u!1 &206078758
@@ -4515,6 +4547,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   inGameUI: {fileID: 0}
   currentGameState: 0
+  PlayableDeck: []
 --- !u!4 &1673277976
 Transform:
   m_ObjectHideFlags: 0

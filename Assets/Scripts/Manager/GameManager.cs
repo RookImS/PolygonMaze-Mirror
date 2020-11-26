@@ -22,15 +22,14 @@ public class GameManager : MonoSingleton<GameManager>
 
     private void Awake()
     {
+        Application.targetFrameRate = 60; //temp
         inGameUI = GameObject.Find("InGameUI");
         Init();
-        Debug.Log("gameAwake");
         //Deckmake();
     }
 
     void Start()
     {
-        Debug.Log("gameStart");
         currentGameState = GameState.menu;
         //GameStart += PlayerControl.Instance.Init;
         //GameStart += StartGame;
@@ -77,6 +76,7 @@ public class GameManager : MonoSingleton<GameManager>
         DeckList.Add(Deck);
         DeckList.Add(Deck_2);
         DeckList.Add(Deck_3);
+    }
 
     public void SetLoadStageChapter(int loadStageChapter)
     {
@@ -120,7 +120,6 @@ public class GameManager : MonoSingleton<GameManager>
 
     void OnSceneLoaded(Scene scene, LoadSceneMode mode) //씬이 로드되면 로드된 씬의 buildindex를 스택에 저장.
     {
-        Debug.Log("씬이동");
         stack.Push(scene.buildIndex);
         //Debug.Log("로드된 scene buildindex: " + scene.buildIndex);
         //Debug.Log("OnSceneLoaded : " + scene.name);
