@@ -140,7 +140,14 @@ MonoBehaviour:
       posY: 340
       width: 1200
       height: 250
-    animationList: []
+    animationList:
+    - obj: {fileID: 9206189686154152021, guid: fdc3ea6c83d188e4e98380216bcea866, type: 3}
+      order: 1
+      length: 1
+      posX: 0
+      posY: 0
+      rotation: 0
+      enable: 0
     fieldAnimationList:
     - obj: {fileID: 5889517342648953037, guid: 51554605c8a9ee5438765a985678efaa, type: 3}
       order: 1

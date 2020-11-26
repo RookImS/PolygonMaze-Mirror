@@ -99,4 +99,10 @@ public class TowerBehaviour : MonoBehaviour
     {
         target = null;
     }
+
+
+    public void ApplyTowerSkill(TowerSkill towerSkill)
+    {
+        m_TowerData.ApplyTowerSkill(towerSkill);
+    }
 }

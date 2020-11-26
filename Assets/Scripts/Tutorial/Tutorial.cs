@@ -56,6 +56,7 @@ public class Tutorial : MonoBehaviour
         if (dialogueUI.GetRemainSentencesCount() == 0)
         {
             dialogueUI.EndDialogue();
+            chapterOrder = chapterLength - dialogueUI.GetRemainSentencesCount() + 1;
             tutorialChecker.StartSetting(phase);
             StartCoroutine(PhaseChecker());
         }
