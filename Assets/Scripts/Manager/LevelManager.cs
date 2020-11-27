@@ -202,6 +202,7 @@ public class LevelManager : MonoBehaviour
         LoadWaves();
         LoadTutorial();
         isWaveComplete = true;
+        GameManager.Instance.isWaveComplete = isWaveComplete;
     }
 
     public void LoadPlayerLifeAndStartCost()
@@ -494,7 +495,8 @@ public class LevelManager : MonoBehaviour
     public void LoadTutorial()
     {
         Transform tutorial = this.transform.Find("Tutorial");
-        if (tutorial)
+        if (tutorial.GetComponent<Tutorial>().tutorial.chapter == GameManager.Instance.GetLoadStageChapter()
+            && tutorial.GetComponent<Tutorial>().tutorial.level == GameManager.Instance.GetLoadStageLevel())
         {
             isWaveSystemOn = false;
             tutorial.gameObject.SetActive(true);
@@ -512,7 +514,6 @@ public class LevelManager : MonoBehaviour
      */
     private IEnumerator StartStage()
     {
-        int waveValue = 1;
 
         foreach (EnemyWave enemyWave in this.enemyWaveList)
         {
@@ -532,7 +533,6 @@ public class LevelManager : MonoBehaviour
                 yield return new WaitForSeconds(0.1f);
             }
 
-            waveValue++;
             isWaveComplete = true;
             /*
             if(enemyWaveInfo.nextWaveTrigger

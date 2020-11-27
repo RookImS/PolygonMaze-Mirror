@@ -6,16 +6,20 @@ using UnityEngine.UI;
 
 public class Menu : MonoBehaviour
 {
+    public GameObject menu;
     public string sceneToLoad;
     public Button stageButton;
-    public int stageChapter;
-    public int stageLevel;
 
     public void LoadGame()
     {
-        GameManager.Instance.SetLoadStageChapter(this.stageChapter);
-        GameManager.Instance.SetLoadStageLevel(this.stageLevel);
         SceneManager.LoadScene(sceneToLoad);
+    }
+
+    public void OnClickCancleButton()
+    {
+        GameManager.Instance.SetLoadStageChapter(0);
+        GameManager.Instance.SetLoadStageLevel(0);
+        menu.SetActive(false);
     }
 
     void Start()

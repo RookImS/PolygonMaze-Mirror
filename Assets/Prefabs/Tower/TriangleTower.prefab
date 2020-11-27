@@ -69,16 +69,16 @@ MonoBehaviour:
   bullet: {fileID: 1007396303048527707, guid: 90c0b8b02e7e7284586127861642ef77, type: 3}
   Stats:
     baseStats:
-      damage: 15
+      damage: 25
       aheadDelay: 0
       attackRate: 2
       recogRange: 2
       attackRange: 3
       splashRange: 0.1
   neighbor: []
-  color: {fileID: 0}
+  towerSkill: {fileID: 0}
   bulletNumber: 5
-  bulletAngle: 60
+  bulletAngle: 20
 --- !u!64 &2853318671207645204
 MeshCollider:
   m_ObjectHideFlags: 0

@@ -18,13 +18,14 @@ public class ObstacleDeleteUISystem : MonoBehaviour
 
     public void OnClickObstacle(GameObject selectedObstacle)
     {
-        if (LevelEditorUISystem.instance.GetCurrentPanel() == null)
+        GameObject panel = obstacleRemovePanel;
+        GameObject canvas = LevelEditorUISystem.instance.gameObject;
+
+        if (LevelEditorUISystem.instance.GetCurrentPanel() == null
+            && panel.activeSelf == false)
         {
             if (selectedObstacle.CompareTag("Obstacle"))
             {
-                GameObject panel = obstacleRemovePanel;
-                GameObject canvas = LevelEditorUISystem.instance.gameObject;
-
                 this.selectedObstacle = selectedObstacle;
                 float obstaclePanelMaxPositionX = canvas.GetComponent<RectTransform>().rect.width
                     - panel.GetComponent<RectTransform>().rect.width;

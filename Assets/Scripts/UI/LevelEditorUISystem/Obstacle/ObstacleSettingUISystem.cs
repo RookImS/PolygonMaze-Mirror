@@ -27,12 +27,10 @@ public class ObstacleSettingUISystem : MonoBehaviour
 
     public void OnClickResetButton()
     {
-        List<GameObject> Obstacles = LevelEditor.instance.GetObstacleList();
+        List<GameObject> obstacles = LevelEditor.instance.GetObstacleList();
 
-        foreach (GameObject obj in Obstacles)
-            Destroy(obj);
-
-        Obstacles.Clear();
+        for(int i = obstacles.Count - 1; i >=0; i--)
+            LevelEditor.instance.DeleteObstacle(obstacles[i]);
 
         if (LevelEditor.instance.GetObstacleList().Count <= 0)
         {

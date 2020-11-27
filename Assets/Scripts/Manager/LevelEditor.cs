@@ -333,15 +333,7 @@ public class LevelEditor : MonoBehaviour
 
         try
         {
-            if (File.Exists(path))
-            {
-                // 동일이름의 파일 존재
-                // 덮어씌우실? 마실? 재입력 event
-            }
-            else
-            {
-                File.WriteAllText(file.FullName, jsonData);
-            }
+            File.WriteAllText(file.FullName, jsonData);
         }
         catch (System.ArgumentException e1)
         {

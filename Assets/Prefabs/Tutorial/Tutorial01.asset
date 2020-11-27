@@ -12,6 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a29239bdc67fa5a47a090a7ffe79f7be, type: 3}
   m_Name: Tutorial01
   m_EditorClassIdentifier: 
+  chapter: 1
+  level: 1
   tutorialList:
   - dialogue:
       name: 0_SpawnDestDesc

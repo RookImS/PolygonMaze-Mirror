@@ -405,7 +405,7 @@ MonoBehaviour:
       attackRange: 2
       splashRange: 0.05
   neighbor: []
-  color: {fileID: 0}
+  towerSkill: {fileID: 0}
 --- !u!64 &4210448959316779622
 MeshCollider:
   m_ObjectHideFlags: 0

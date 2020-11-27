@@ -19,6 +19,7 @@ public class GameManager : MonoSingleton<GameManager>
 
     private int loadStageChapter;
     private int loadStageLevel;
+    [HideInInspector] public bool isWaveComplete;
 
     private void Awake()
     {

@@ -120,7 +120,7 @@ public class ObstacleDeployBehaviour : MonoBehaviour
         RaycastHit hit;
 
         // locate obstacle at mousePos(realPos)
-        transform.position = new Vector3(realPos.x, 0.25f, realPos.z);
+        transform.position = new Vector3(realPos.x, 0f, realPos.z);
         transform.eulerAngles = new Vector3(0f, 0f, 0f);
 
         if (Physics.Raycast(ray, out hit, Camera.main.transform.position.y * 1.3f, layerMask))

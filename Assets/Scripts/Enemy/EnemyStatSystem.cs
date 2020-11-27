@@ -254,6 +254,8 @@ public class EnemyStatSystem
     public void Damage(int damage)
     {
         int totalDamage = damage - stats.def;
+        if (totalDamage <= 0)
+            totalDamage = 1;
 
         Changehp(-totalDamage);
         //DamageUI.Instance.NewDamage(totalDamage, m_Owner.transform.position);

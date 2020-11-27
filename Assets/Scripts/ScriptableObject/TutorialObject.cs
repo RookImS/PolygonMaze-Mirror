@@ -27,6 +27,8 @@ public class TutorialObject : ScriptableObject
         public List<AniObject> fieldAnimationList;
     }
 
+    public int chapter;
+    public int level;
     public List<Tutorial> tutorialList;
     public TutorialChecker tutorialChecker;
 }
