@@ -163,12 +163,12 @@ public class PlayerSettingUISystem : MonoBehaviour
         if (LevelEditor.instance.GetPlayerLife() < 0)
             playerLifeInputField.text = "";
         else
-            playerLifeInputField.text = LevelEditor.instance.GetStageChapter().ToString();
+            playerLifeInputField.text = LevelEditor.instance.GetPlayerLife().ToString();
 
         if (LevelEditor.instance.GetStartCost() < 0)
             startCostInputField.text = "";
         else
-            startCostInputField.text = LevelEditor.instance.GetStageLevel().ToString();
+            startCostInputField.text = LevelEditor.instance.GetStartCost().ToString();
 
         CheckSettingComplete();
     }
