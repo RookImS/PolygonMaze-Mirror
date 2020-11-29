@@ -227,8 +227,9 @@ MonoBehaviour:
   applyDuration: 0
   id: 2
   range: 3
-  cost: 0
+  cost: 150
   skillSprite: {fileID: 0}
+  rend: {fileID: 5862506055331656244}
   applyInterval: 0
   applyCountDown: 0
   modifier:
@@ -237,4 +238,7 @@ MonoBehaviour:
       hp: 0
       speed: 0
       def: 0
+    damage: 0
+    applyDuration: 0
+    applyTimer: 0
   damage: 200

@@ -154,7 +154,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 151019e83eb14df4f857db67c592d866, type: 3}
-  m_Color: {r: 1, g: 0, b: 0, a: 0.33333334}
+  m_Color: {r: 1, g: 1, b: 0, a: 0.33333334}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 1
@@ -176,7 +176,7 @@ GameObject:
   - component: {fileID: 6415703443579139257}
   - component: {fileID: 8190930635841615817}
   m_Layer: 0
-  m_Name: YellowSkill
+  m_Name: 1_YellowSkill
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -224,12 +224,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   skillDuration: 3
-  applyInterval: 0.1
   applyDuration: 1
   id: 1
   range: 2
-  cost: 0
+  cost: 100
   skillSprite: {fileID: 21300000, guid: 6aa4442a6079b4c43a9a693aa7a06518, type: 3}
+  rend: {fileID: 5862506055331656244}
+  applyInterval: 0.1
   applyCountDown: 0
   modifier:
     ModifierMode: 1

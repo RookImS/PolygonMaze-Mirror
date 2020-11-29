@@ -12,6 +12,7 @@ public class DeployBehaviour : MonoBehaviour
     public int cost;
     public float innerRadius;
     public Renderer rend;
+    public TowerData data;
 
     private GameObject towersGameObject;
     private CheckerBehaviour checker;
@@ -28,6 +29,11 @@ public class DeployBehaviour : MonoBehaviour
     {
         Init();
     }
+
+    private void Start()
+    {
+        transform.Find("Range").localScale = new Vector3(data.Stats.baseStats.recogRange * 2, data.Stats.baseStats.recogRange * 2, 1);
+    }
     private void Update()
     {
         isPathEnable = CheckPath();
@@ -41,7 +47,7 @@ public class DeployBehaviour : MonoBehaviour
         enemyNav = GameObject.Find("EnemyNavMeshSurface").GetComponent<NavMeshSurface>();
         checker = GameObject.FindGameObjectWithTag("Checker").GetComponent<CheckerBehaviour>();
         towersGameObject = GameObject.Find("Towers");
-
+        
         isDeployEnable = false;
         isProperLocate = false;
         isSkipFrame = true;
@@ -124,7 +130,7 @@ public class DeployBehaviour : MonoBehaviour
         RaycastHit hit;
 
         // locate tower at mousePos(realPos)
-        transform.position = new Vector3(realPos.x, 0.25f, realPos.z);
+        transform.position = new Vector3(realPos.x, 0f, realPos.z);
         transform.eulerAngles = new Vector3(0f, 0f, 0f);
 
         if (Physics.Raycast(ray, out hit, Camera.main.transform.position.y * 1.3f, layerMask))

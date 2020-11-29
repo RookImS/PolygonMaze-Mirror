@@ -16,12 +16,14 @@ public class PanelSystem : MonoBehaviour
         backGroundPanel.SetActive(true);
         panel.SetActive(true);
         GameManager.Instance.TimeStop();
+        UIManager.instance.isPanelOn = true;
     }
     public void Resume()
     {
         backGroundPanel.SetActive(false);
         pausePanel.SetActive(false);
         GameManager.Instance.TimeRestore();
+        UIManager.instance.isPanelOn = false;
     }
     public void ReturnToMain()
     {

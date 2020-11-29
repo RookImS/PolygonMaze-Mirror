@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.EventSystems;
 using TMPro;
 
@@ -28,7 +26,8 @@ public class SkillUI : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragH
 
     private void Init()
     {
-        skillCostText.text = skill.GetComponent<Skill>().cost.ToString();
+        SelectNextSkill();
+        //skillCostText.text = skill.GetComponent<Skill>().cost.ToString();
     }
 
     private void UpdateSkillCostText()
@@ -43,10 +42,19 @@ public class SkillUI : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragH
         else
             skillCostText.color = Color.red;
     }
+
+    private void SelectNextSkill()
+    {
+        int randomValue = Random.Range(0, GameManager.Instance.deck.Count);
+        skill = GameManager.Instance.deck[randomValue];
+    }
+
     public void OnBeginDrag(PointerEventData eventData)
     {
         newObject = null;
         hitObject = null;
+        UIManager.instance.infoUI.DisableInfo();
+        UIManager.instance.canvasGroup.blocksRaycasts = false;
 
         mousePos = Input.mousePosition;
 
@@ -62,8 +70,10 @@ public class SkillUI : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragH
     }
     public void OnEndDrag(PointerEventData eventData)
     {
-        newObject.GetComponent<Skill>().UseSkill(); 
+        if (newObject.GetComponent<Skill>().UseSkill())
+            SelectNextSkill();
 
+        UIManager.instance.canvasGroup.blocksRaycasts = true;
         Time.timeScale = 1f;
     }
 }

@@ -13,7 +13,9 @@ public class GameManager : MonoSingleton<GameManager>
     [HideInInspector] public bool isGameOver;
     [HideInInspector] public bool isStageClear;
 
-
+    public SkillsScriptableObject skills;
+    public List<GameObject> m_skills;
+    public List<GameObject> deck;
     //public event Action gameStart;
     //public event Action deployTower;
     //public event Action enemyEscape;
@@ -24,16 +26,26 @@ public class GameManager : MonoSingleton<GameManager>
 
     public GameState currentGameState;
 
+    private void Awake()
+    {
+        deck = new List<GameObject>();
+
+        skills = (SkillsScriptableObject)Resources.Load("SkillList", typeof(SkillsScriptableObject));
+        m_skills = skills.skillList;
+        foreach (GameObject obj in m_skills)
+        {
+            deck.Add(obj);
+        }
+    }
+
     private void Start()
     {
-        
         currentGameState = GameState.menu;
 
         //GameStart += PlayerControl.Instance.Init;
         //GameStart += StartGame;
 
         //DeployTower += TimeRestore;
-
     }
     public static Stack<int> stack = new Stack<int>();  //BackKey 기능을 위해 씬 Buildindex를 저장하는 스택
 

@@ -7,8 +7,6 @@ public class HpUI : MonoBehaviour
 {
     public List<HpBar> hpBarList;
 
-    private List<int> nullIndexList;
-
     private void Awake()
     {
         hpBarList = new List<HpBar>();

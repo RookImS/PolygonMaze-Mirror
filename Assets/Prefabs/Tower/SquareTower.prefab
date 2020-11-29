@@ -163,7 +163,7 @@ GameObject:
   - component: {fileID: 4910982772904957612}
   - component: {fileID: 8915234901356252626}
   - component: {fileID: 5941143138931893524}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: Muzzle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -223,7 +223,7 @@ GameObject:
   - component: {fileID: 7271484921240024665}
   - component: {fileID: 3418494697665572859}
   - component: {fileID: 7704943847818556279}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: SquareTower
   m_TagString: Tower
   m_Icon: {fileID: 0}
@@ -262,6 +262,7 @@ MonoBehaviour:
   muzzle: {fileID: 4910982772904957612}
   target: {fileID: 0}
   targetList: []
+  isClicked: 0
 --- !u!114 &7271484921240024665
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -286,7 +287,7 @@ MonoBehaviour:
       attackRange: 3
       splashRange: 0.1
   neighbor: []
-  color: {fileID: 0}
+  towerSkill: {fileID: 0}
 --- !u!64 &3418494697665572859
 MeshCollider:
   m_ObjectHideFlags: 0

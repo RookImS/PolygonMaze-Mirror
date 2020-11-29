@@ -459,9 +459,9 @@ GameObject:
   - component: {fileID: 7793056633140174641}
   - component: {fileID: 7793056633140174643}
   - component: {fileID: 7793056633140174640}
-  - component: {fileID: 78246184612679481}
-  - component: {fileID: 1216472804744023316}
-  m_Layer: 0
+  - component: {fileID: 2859749270542425981}
+  - component: {fileID: 6678507251877577191}
+  m_Layer: 8
   m_Name: HexagonTower
   m_TagString: Tower
   m_Icon: {fileID: 0}
@@ -497,9 +497,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eb56c68cab439eb47889d6c2ebdb2b8f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  muzzle: {fileID: 7923769811502895132}
   target: {fileID: 0}
   targetList: []
-  muzzle: {fileID: 7923769811502895132}
+  isClicked: 0
 --- !u!114 &7793056633140174640
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -514,6 +515,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   TowerName: HexagonTower
   TowerDescription: 
+  bullet: {fileID: 992987161455152672, guid: 25faefafad040694aba4907b62dc8de3, type: 3}
   Stats:
     baseStats:
       damage: 20
@@ -522,13 +524,11 @@ MonoBehaviour:
       recogRange: 3
       attackRange: 4
       splashRange: 0.75
-  cost: 150
   neighbor: []
-  color: {fileID: 0}
-  bullet: {fileID: 992987161455152672, guid: 25faefafad040694aba4907b62dc8de3, type: 3}
+  towerSkill: {fileID: 0}
   ticRate: 5
   attackDuration: 3
---- !u!64 &78246184612679481
+--- !u!64 &2859749270542425981
 MeshCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -542,7 +542,7 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: -7930688019486453259, guid: 4e99ddccc9f170f49a98cdbf76bfaa6f, type: 3}
---- !u!54 &1216472804744023316
+--- !u!54 &6678507251877577191
 Rigidbody:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

@@ -54,6 +54,8 @@ public class DeployUI : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
     {
         newObject = null;
         hitObject = null;
+        UIManager.instance.infoUI.DisableInfo();
+        UIManager.instance.canvasGroup.blocksRaycasts = false;
 
         isProgressDeploy = true;
         mousePos = Input.mousePosition;
@@ -75,5 +77,6 @@ public class DeployUI : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
         Time.timeScale = 1f;
 
         isProgressDeploy = false;
+        UIManager.instance.canvasGroup.blocksRaycasts = true;
     }
 }
