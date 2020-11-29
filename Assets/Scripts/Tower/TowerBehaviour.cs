@@ -8,6 +8,7 @@ public class TowerBehaviour : MonoBehaviour
 
     [HideInInspector] public GameObject target;
     [HideInInspector] public List<GameObject> targetList;
+    [HideInInspector] public bool isClicked;
 
     private TowerData m_TowerData;
     private float fireCountDown;
@@ -27,7 +28,7 @@ public class TowerBehaviour : MonoBehaviour
         }
         if (target == null)
         {
-            if (fireCountDown != 0f)
+            if (fireCountDown > 0f)
                 fireCountDown -= Time.deltaTime;
             return;
         }
@@ -39,7 +40,8 @@ public class TowerBehaviour : MonoBehaviour
             Invoke("Attack", m_TowerData.Stats.stats.aheadDelay);
             fireCountDown = 1f / m_TowerData.Stats.stats.attackRate;
         }
-        fireCountDown -= Time.deltaTime;
+        if(fireCountDown > 0f)
+            fireCountDown -= Time.deltaTime;
     }
 
     private void Init()
@@ -52,6 +54,8 @@ public class TowerBehaviour : MonoBehaviour
         fireCountDown = 0f;
 
         muzzle.GetComponent<SphereCollider>().radius = m_TowerData.Stats.stats.recogRange;
+
+        isClicked = false;
     }
 
     private void SetDirection()
@@ -105,4 +109,5 @@ public class TowerBehaviour : MonoBehaviour
     {
         m_TowerData.ApplyTowerSkill(towerSkill);
     }
+
 }

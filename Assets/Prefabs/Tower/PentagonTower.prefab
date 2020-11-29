@@ -342,7 +342,7 @@ GameObject:
   - component: {fileID: 8996109028398955740}
   - component: {fileID: 4210448959316779622}
   - component: {fileID: 7040165389425248335}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: PentagonTower
   m_TagString: Tower
   m_Icon: {fileID: 0}
@@ -381,6 +381,7 @@ MonoBehaviour:
   muzzle: {fileID: 5861573579347852341}
   target: {fileID: 0}
   targetList: []
+  isClicked: 0
 --- !u!114 &8996109028398955740
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -405,7 +406,7 @@ MonoBehaviour:
       attackRange: 2
       splashRange: 0.05
   neighbor: []
-  color: {fileID: 0}
+  towerSkill: {fileID: 0}
 --- !u!64 &4210448959316779622
 MeshCollider:
   m_ObjectHideFlags: 0

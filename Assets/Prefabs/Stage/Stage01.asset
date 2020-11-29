@@ -76,15 +76,8 @@ MonoBehaviour:
   baseEnemyWaves:
   - enemyInfoList:
     - enemySpecific: 0
-      count: 10
+      count: 2
     enemySpawnDuration: 1
     nextWaveTrigger: 0
     timer: 0
-    breakTime: 5
-  - enemyInfoList:
-    - enemySpecific: 0
-      count: 15
-    enemySpawnDuration: 1
-    nextWaveTrigger: 0
-    timer: 0
-    breakTime: 5
+    breakTime: 0

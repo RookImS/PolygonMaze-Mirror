@@ -29,48 +29,68 @@ public class TowerStatSystem
             splashRange = other.splashRange;
         }
 
-        //public void Modify(StatModifier modifier)
-        //{
-        //    if (modifier.ModifierMode == StatModifier.Mode.Percentage)
-        //    {
-        //        damage += damage * (modifier.Stats.damage / 100);
-        //        attackDelay += Mathf.Floor(attackDelay * (modifier.Stats.attackDelay / 100.0f));
-        //        attackRate += Mathf.Floor(attackRate * (modifier.Stats.attackRate / 100.0f));
-        //        recogRange += Mathf.Floor(recogRange * (modifier.Stats.recogRange / 100.0f));
-        //        attackRange += Mathf.Floor(attackRange * (modifier.Stats.attackRange / 100.0f));
-        //        splashRange += Mathf.Floor(splashRange * (modifier.Stats.splashRange / 100.0f));
-        //    }
-        //    else
-        //    {
-        //        damage += modifier.Stats.damage;
-        //        attackDelay += modifier.Stats.attackDelay;
-        //        attackRate += modifier.Stats.attackRate;
-        //        recogRange += modifier.Stats.recogRange;
-        //        attackRange += modifier.Stats.attackRange;
-        //        splashRange += modifier.Stats.splashRange;
-        //    }
-        //}
+        public void Modify(StatModifier modifier)
+        {
+            if (modifier.ModifierMode == StatModifier.Mode.Percentage)
+            {
+                damage += Mathf.FloorToInt(damage * ((float)modifier.Stats.damage / 100.0f));
+                aheadDelay += aheadDelay * (modifier.Stats.aheadDelay / 100.0f);
+                attackRate += attackRate * (modifier.Stats.attackRate / 100.0f);
+                recogRange += recogRange * (modifier.Stats.recogRange / 100.0f);
+                attackRange += attackRange * (modifier.Stats.attackRange / 100.0f);
+                splashRange += splashRange * (modifier.Stats.splashRange / 100.0f);
+            }
+            else
+            {
+                damage += modifier.Stats.damage;
+                aheadDelay += modifier.Stats.aheadDelay;
+                attackRate += modifier.Stats.attackRate;
+                recogRange += modifier.Stats.recogRange;
+                attackRange += modifier.Stats.attackRange;
+                splashRange += modifier.Stats.splashRange;
+            }
+        }
     }
 
-    //[System.Serializable]
-    //public class StatModifier
-    //{
-    //    public enum Mode
-    //    {
-    //        Percentage,
-    //        Absolute
-    //    }
+    [System.Serializable]
+    public class StatModifier
+    {
+        public enum Mode
+        {
+            Percentage,
+            Absolute
+        }
 
-    //    public Mode ModifierMode = Mode.Absolute;
-    //    public Stats Stats = new Stats();
-    //}
+        public Mode ModifierMode = Mode.Absolute;
+        public Stats Stats = new Stats();
+    }
+
+    [System.Serializable]
+    public class TimedStatModifier
+    {
+        public string Id;
+        public StatModifier Modifier;
+
+        public Sprite EffectSprite;
+
+        public float Duration;
+        public float Timer;
+
+        public void Reset()
+        {
+            Timer = Duration;
+        }
+    }
 
     public Stats baseStats;
     public Stats stats { get; set; } = new Stats();
 
+    public List<TimedStatModifier> TimedModifierStack => m_TimedModifierStack;
+
     private TowerData m_Owner;
 
-   // List<StatModifier> m_ModifiersStack = new List<StatModifier>();
+    List<StatModifier> m_ModifiersStack = new List<StatModifier>();
+    List<TimedStatModifier> m_TimedModifierStack = new List<TimedStatModifier>();
 
     public void Init(TowerData owner)
     {
@@ -78,39 +98,81 @@ public class TowerStatSystem
         m_Owner = owner;
     }
 
-    //public void AddModifier(StatModifier modifier)
-    //{
-    //    m_ModifiersStack.Add(modifier);
-    //    UpdateFinalStats();
-    //}
+    public void AddModifier(StatModifier modifier)
+    {
+        m_ModifiersStack.Add(modifier);
+        UpdateFinalStats();
+    }
 
-    //public void RemoveModifier(StatModifier modifier)
-    //{
-    //    m_ModifiersStack.Remove(modifier);
-    //    UpdateFinalStats();
-    //}
+    public void RemoveModifier(StatModifier modifier)
+    {
+        m_ModifiersStack.Remove(modifier);
+        UpdateFinalStats();
+    }
 
-    //void UpdateFinalStats()
-    //{
-    //    bool maxdamageChange = false;
-    //    int previousdamage = stats.damage;
+    public void AddTimedModifier(StatModifier modifier, float duration, string id, Sprite sprite)
+    {
+        bool found = false;
+        int index = m_TimedModifierStack.Count;
+        for (int i = 0; i < m_TimedModifierStack.Count; ++i)
+        {
+            if (m_TimedModifierStack[i].Id == id)
+            {
+                found = true;
+                index = i;
+            }
+        }
 
-    //    stats.Copy(baseStats);
+        if (!found)
+        {
+            m_TimedModifierStack.Add(new TimedStatModifier() { Id = id });
+        }
 
-    //    foreach (var modifier in m_ModifiersStack)
-    //    {
-    //        if (modifier.Stats.damage != 0)
-    //            maxdamageChange = true;
+        m_TimedModifierStack[index].EffectSprite = sprite;
+        m_TimedModifierStack[index].Duration = duration;
+        m_TimedModifierStack[index].Modifier = modifier;
+        m_TimedModifierStack[index].Reset();
 
-    //        stats.Modify(modifier);
-    //    }
+        UpdateFinalStats();
+    }
 
-    //    foreach (var timedModifier in m_TimedModifierStack)
-    //    {
-    //        if (timedModifier.Modifier.Stats.damage != 0)
-    //            maxdamageChange = true;
+    public void Tick()
+    {
+        bool needUpdate = false;
 
-    //        stats.Modify(timedModifier.Modifier);
-    //    }
-    //     }
+        for (int i = 0; i < m_TimedModifierStack.Count; ++i)
+        {
+            //permanent modifier will have a timer == -1.0f, so jump over them
+            if (m_TimedModifierStack[i].Timer > 0.0f)
+            {
+                m_TimedModifierStack[i].Timer -= Time.deltaTime;
+                if (m_TimedModifierStack[i].Timer <= 0.0f)
+                {//modifier finished, so we remove it from the stack
+                    m_TimedModifierStack.RemoveAt(i);
+                    i--;
+                    needUpdate = true;
+                }
+            }
+        }
+
+        if (needUpdate)
+        {
+            UpdateFinalStats();
+        }
+    }
+
+    void UpdateFinalStats()
+    {
+        stats.Copy(baseStats);
+
+        foreach (var modifier in m_ModifiersStack)
+        {
+            stats.Modify(modifier);
+        }
+
+        foreach (var timedModifier in m_TimedModifierStack)
+        {
+            stats.Modify(timedModifier.Modifier);
+        }
+    }
 }

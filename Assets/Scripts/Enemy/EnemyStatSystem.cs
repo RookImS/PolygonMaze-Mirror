@@ -1,9 +1,11 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.AI;
 #if UNITY_EDITOR
 using UnityEditor;
+
 #endif
 
 [System.Serializable]
@@ -24,13 +26,13 @@ public class EnemyStatSystem
         }
 
 
-        public void Modify(StatModifier modifier)
+        public void Modify(StatModifier modifier, EnemyData owner)
         {
             if (modifier.ModifierMode == StatModifier.Mode.Percentage)
             {
-                hp += Mathf.FloorToInt(hp * (modifier.Stats.hp / 100.0f));
-                speed += Mathf.FloorToInt(speed * (modifier.Stats.speed / 100.0f));
-                def += Mathf.FloorToInt(def * (modifier.Stats.def / 100.0f));
+                hp += Mathf.FloorToInt(hp * ((float)modifier.Stats.hp / 100.0f));
+                speed += speed * (modifier.Stats.speed / 100.0f);                
+                def += Mathf.FloorToInt(def * ((float)modifier.Stats.def / 100.0f));
             }
             else
             {
@@ -54,6 +56,11 @@ public class EnemyStatSystem
 
         public Mode ModifierMode = Mode.Absolute;
         public Stats Stats = new Stats();
+
+        public int damage = 0;
+
+        public float applyDuration;
+        public float applyTimer = 0;
     }
 
 
@@ -73,12 +80,11 @@ public class EnemyStatSystem
             Timer = Duration;
         }
     }
+    public bool isDead;
 
     public Stats baseStats;
     public StatModifier baseStatModifier;
-
     public Stats stats { get; set; } = new Stats();
-
 
     public int currentHp { get; private set; }
     //public List<BaseElementalEffect> ElementalEffects => m_ElementalEffects;
@@ -95,6 +101,7 @@ public class EnemyStatSystem
         stats.Copy(baseStats);
         currentHp = stats.hp;
         m_Owner = owner;
+        isDead = false;
     }
 
 
@@ -112,7 +119,7 @@ public class EnemyStatSystem
     }
 
 
-    public void AddTimedModifier(StatModifier modifier, float duration, string id, Sprite sprite)
+    public bool AddTimedModifier(StatModifier modifier, float duration, string id, Sprite sprite)
     {
         bool found = false;
         int index = m_TimedModifierStack.Count;
@@ -136,8 +143,9 @@ public class EnemyStatSystem
         m_TimedModifierStack[index].Reset();
 
         UpdateFinalStats();
-    }
 
+        return found;
+    }
 
     /*
     public void AddElementalEffect(BaseElementalEffect effect)
@@ -169,7 +177,9 @@ public class EnemyStatSystem
 
         ElementalEffects.Clear();
         */
-        TimedModifierStack.Clear();
+        //m_TimedModifierStack.Clear();
+
+        isDead = true;
 
         UpdateFinalStats();
     }
@@ -184,7 +194,15 @@ public class EnemyStatSystem
             //permanent modifier will have a timer == -1.0f, so jump over them
             if (m_TimedModifierStack[i].Timer > 0.0f)
             {
+                if (m_TimedModifierStack[i].Modifier.damage != 0 && m_TimedModifierStack[i].Modifier.applyTimer <= 0.0f)
+                {
+                    Changehp(-m_TimedModifierStack[i].Modifier.damage);
+                    m_TimedModifierStack[i].Modifier.applyTimer =
+                        m_TimedModifierStack[i].Timer - (int)(m_TimedModifierStack[i].Timer / m_TimedModifierStack[i].Modifier.applyDuration) * m_TimedModifierStack[i].Modifier.applyDuration;
+                }
+
                 m_TimedModifierStack[i].Timer -= Time.deltaTime;
+                m_TimedModifierStack[i].Modifier.applyTimer -= Time.deltaTime;
                 if (m_TimedModifierStack[i].Timer <= 0.0f)
                 {//modifier finished, so we remove it from the stack
                     m_TimedModifierStack.RemoveAt(i);
@@ -194,8 +212,9 @@ public class EnemyStatSystem
             }
         }
 
-        if (needUpdate)
+        if (needUpdate && !isDead)
             UpdateFinalStats();
+
         /*
         for (int i = 0; i < m_ElementalEffects.Count; ++i)
         {
@@ -212,12 +231,15 @@ public class EnemyStatSystem
         */
     }
 
-    
+
     public void Changehp(int amount)
     {
         currentHp = Mathf.Clamp(currentHp + amount, 0, stats.hp);
+
         if (currentHp <= 0)
             m_Owner.Death();
+
+        m_Owner.hpBar.ApplyHpBar();
     }
 
     void UpdateFinalStats()
@@ -232,7 +254,7 @@ public class EnemyStatSystem
             if (modifier.Stats.hp != 0)
                 maxhpChange = true;
 
-            stats.Modify(modifier);
+            stats.Modify(modifier, m_Owner);
         }
 
         foreach (var timedModifier in m_TimedModifierStack)
@@ -240,15 +262,17 @@ public class EnemyStatSystem
             if (timedModifier.Modifier.Stats.hp != 0)
                 maxhpChange = true;
 
-            stats.Modify(timedModifier.Modifier);
+            stats.Modify(timedModifier.Modifier, m_Owner);
         }
 
         //if we change the max hp we update the current hp to it's new value
         if (maxhpChange)
         {
-            float percentage = currentHp / (float)previoushp;
-            currentHp = Mathf.RoundToInt(percentage * stats.hp);
+            if(stats.hp - previoushp > 0)
+                currentHp += stats.hp - previoushp;
         }
+        m_Owner.gameObject.GetComponent<NavMeshAgent>().speed = stats.speed;
+        m_Owner.hpBar.ApplyHpBar();
     }
 
     public void Damage(int damage)
@@ -258,4 +282,63 @@ public class EnemyStatSystem
         Changehp(-totalDamage);
         //DamageUI.Instance.NewDamage(totalDamage, m_Owner.transform.position);
     }
+
+    //public void Poison(int damage, int number, float duration, string id, Sprite skillSprite)
+    //{
+    //    if (!AddTimedModifier(duration, id, skillSprite))
+    //        StartCoroutine(TickDamge(damage, number, duration));
+
+    //    float attackPeriod = duration / number;
+    //    int tickDamage = damage / number;
+
+    //    while (true)
+    //    {
+    //        bool endPoison = true;
+
+    //        for (int i = 0; i < m_TimedModifierStack.Count; ++i)
+    //        {
+    //            if (m_TimedModifierStack[i].Id == id)
+    //            {
+    //                Changehp(-tickDamage);
+    //                Debug.Log(m_TimedModifierStack[i].Timer);
+    //                endPoison = false;
+    //                yield return new WaitForSeconds(attackPeriod);
+    //                break;
+    //            }
+    //        }
+
+    //        if(endPoison)
+    //            break;
+    //    }
+
+
+    //endPoison:
+    //    yield return null;
+    //}
+        
+    //public IEnumerator TickDamage(int damage, int number, float duration)
+    //{
+    //    float attackPeriod = duration / number;
+    //    int tickDamage = damage / number;
+
+    //    while (true)
+    //    {
+    //        bool endPoison = true;
+
+    //        for (int i = 0; i < m_TimedModifierStack.Count; ++i)
+    //        {
+    //            if (m_TimedModifierStack[i].Id == id)
+    //            {
+    //                Changehp(-tickDamage);
+    //                Debug.Log(m_TimedModifierStack[i].Timer);
+    //                endPoison = false;
+    //                yield return new WaitForSeconds(attackPeriod);
+    //                break;
+    //            }
+    //        }
+
+    //        if (endPoison)
+    //            break;
+    //    }
+    //}
 }

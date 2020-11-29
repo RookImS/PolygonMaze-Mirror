@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class EnemyData : MonoBehaviour
 {
+    public HpBar hpBar;
+
     private int spawnNo;
     private int waveNum;
 
@@ -14,7 +16,6 @@ public class EnemyData : MonoBehaviour
     public EColorSystem EColorSys = new EColorSystem();
     public WaveSystem WaveSys = new WaveSystem();
 
-
     private void Update()
     {
         Stats.Tick();
@@ -23,9 +24,8 @@ public class EnemyData : MonoBehaviour
     public void Init()
     {
         Stats.Init(this);
+        hpBar.Init();
     }
-
-    // Update is called once per frame
     
 
     public int GetWaveNum()
@@ -47,6 +47,8 @@ public class EnemyData : MonoBehaviour
     {
         Stats.Death();
         PlayerControl.Instance.GainCost(this.reward);
+
+        hpBar.DestroyHpBar();
         Destroy(this.gameObject);
     }
 
@@ -58,6 +60,7 @@ public class EnemyData : MonoBehaviour
     public void Attack()
     {
         PlayerControl.Instance.Damage(this.damage);
+        hpBar.DestroyHpBar();
     }
 
     /// <summary>

@@ -15,9 +15,9 @@ public class ExplosionBulletBehaviour : BulletBehaviour
             Attack();
     }
 
-    public override void Init(TowerStatSystem t_stat)
+    public override void Init(TowerStatSystem t_stat, TowerSkill t_skill)
     {
-        m_BulletData.Init(t_stat);
+        m_BulletData.Init(t_stat, t_skill);
         transform.localScale = new Vector3(m_BulletData.stats.stats.attackRange * 2, 1, m_BulletData.stats.stats.attackRange * 2);
     }
     private IEnumerator DestroyWrongAttack()

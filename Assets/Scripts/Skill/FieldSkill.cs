@@ -4,15 +4,14 @@ using UnityEngine;
 
 public class FieldSkill : Skill
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    [HideInInspector] public EnemyStatSystem.StatModifier modifier;
 
-    // Update is called once per frame
-    void Update()
+    private void OnTriggerStay(Collider other)
     {
-        
+        if (other.gameObject.CompareTag("Enemy"))
+        {
+                ApplySkill(other.gameObject);
+                applyCountDown = applyInterval;
+        }
     }
 }

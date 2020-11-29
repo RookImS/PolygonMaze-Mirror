@@ -30,7 +30,7 @@ TagManager:
   - WallCollider
   - Stage
   - DeployUI
-  - 
+  - EmptySelect
   - 
   - 
   - 
@@ -52,4 +52,7 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: Deploy
+    uniqueID: 356635979
     locked: 0
