@@ -6,10 +6,18 @@ public class StageSelectionUI : MonoBehaviour
 {
     public void Deck(int i)
     {
-        GameManager.Instance.PlayableDeck = GameManager.DeckList[i];
-        for (int a=0; a < 4; a++)
+        if (!GameManager.DeckList[i].Contains(null))
         {
-            Debug.Log(GameManager.Instance.PlayableDeck[a].itemName);
+            GameManager.Instance.PlayableDeck = GameManager.DeckList[i];
+            for (int a = 0; a < 4; a++)
+            {
+                Debug.Log(GameManager.Instance.PlayableDeck[a].GetComponent<Skill>().itemName);
+            }
+            Debug.Log("스킬이 등록되었습니다.");
+        }
+        else
+        {
+            Debug.Log("스킬의 수가 부족하다.");
         }
     }
 }

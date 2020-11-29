@@ -17,7 +17,7 @@ public class Menu : MonoBehaviour
     void Start()
     {
         //Debug.Log(Stage1Button.GetComponent<Image>().alphaHitTestMinimumThreshold);
-        Stage1Button.GetComponent<Image>().alphaHitTestMinimumThreshold = 0.1f;
+        //Stage1Button.GetComponent<Image>().alphaHitTestMinimumThreshold = 0.1f;
         //Stage1Button.GetComponent<>().
     }
 

@@ -126,7 +126,7 @@ public class LevelManager : MonoBehaviour
         LoadBlanks();
         LoadChecker();
         LoadWaves();
-        LoadTutorial();
+        //LoadTutorial();
         isWaveComplete = true;
     }
 

@@ -152,8 +152,8 @@ MonoBehaviour:
     - obj: {fileID: 5889517342648953037, guid: 51554605c8a9ee5438765a985678efaa, type: 3}
       order: 1
       length: 2
-      posX: -470.3
-      posY: -98
+      posX: -453
+      posY: -140
       rotation: 30
       enable: 0
   - dialogue:
@@ -199,15 +199,15 @@ MonoBehaviour:
     - obj: {fileID: 4293294981893517376, guid: 9966b84660736d84091a5e5a3119ea47, type: 3}
       order: 1
       length: 2
-      posX: -593.5
-      posY: -248.5
+      posX: -576.5
+      posY: -290.5
       rotation: 0
       enable: 0
     - obj: {fileID: 4293294981893517376, guid: 9966b84660736d84091a5e5a3119ea47, type: 3}
       order: 1
       length: 2
-      posX: 425.5
-      posY: -248.5
+      posX: 442.5
+      posY: -290.5
       rotation: 0
       enable: 0
   - dialogue:
@@ -234,8 +234,8 @@ MonoBehaviour:
     - obj: {fileID: 8391835449026218188, guid: dbdc66d33e8c5374a8520b35d2bacd36, type: 3}
       order: 1
       length: 2
-      posX: 317.8
-      posY: 331.6
+      posX: 334.8
+      posY: 289.6
       rotation: 0
       enable: 0
   - dialogue:

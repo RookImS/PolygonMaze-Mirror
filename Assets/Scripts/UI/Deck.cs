@@ -8,8 +8,8 @@ public class Deck : MonoBehaviour
 {
     public static Deck instance;
 
-    private Skill SelectedSkill;
-    private Skill insertSkill;
+    private GameObject SelectedSkill;
+    private GameObject insertSkill;
     private bool insertcheck = false;
 
     public SkillToopTip ToopTip;
@@ -20,28 +20,27 @@ public class Deck : MonoBehaviour
         instance = this;
         skillAddInit();
     }
-    public void viewPanel(Skill skill)
+    public void viewPanel(GameObject skill)
     {
         SelectedSkill = skill;
-        SelectedPanel.Panelimage.sprite = SelectedSkill.itemImage;
+        SelectedPanel.Panelimage.color = SelectedSkill.GetComponent<Skill>().skillColor; ;
         SelectedPanel.gameObject.SetActive(true);
-        SelectedPanel.transform.SetParent(EventSystem.current.currentSelectedGameObject.transform, false);
+        //SelectedPanel.transform.SetParent(EventSystem.current.currentSelectedGameObject.transform, false);
+        SelectedPanel.transform.position = new Vector2(EventSystem.current.currentSelectedGameObject.transform.position.x, EventSystem.current.currentSelectedGameObject.transform.position.y -33);
     }
-
     public void skillInfo()
     {
         ToopTip.gameObject.SetActive(true);
-        ToopTip.Name.text = SelectedSkill.itemName;
-        ToopTip.Desc.text = SelectedSkill.itemDesc;
-        ToopTip.Skillimage.sprite = SelectedSkill.itemImage;
+        ToopTip.Name.text = SelectedSkill.GetComponent<Skill>().itemName;
+        ToopTip.Desc.text = SelectedSkill.GetComponent<Skill>().itemDesc;
+        ToopTip.Skillimage.color = SelectedSkill.GetComponent<Skill>().skillColor;
     }
-
     void skillAddInit()
     {
         ToopTip.gameObject.SetActive(false);
         ToopTip.Name.text = null;
         ToopTip.Desc.text = null;
-        ToopTip.Skillimage.sprite = null;
+        ToopTip.Skillimage.color = Color.white;
     }
 
     public void Insert()
@@ -60,12 +59,11 @@ public class Deck : MonoBehaviour
                 if (GameManager.Deck[i] == insertSkill)
                 {
                     GameManager.Deck[i] = null;
-                    this.transform.GetChild(i).Find("Image").GetComponent<Image>().sprite = null;
+                    this.transform.GetChild(i).Find("Image").GetComponent<Image>().color = Color.white;
                 }
             }
             GameManager.Deck[num] = insertSkill;
-            this.transform.GetChild(num).Find("Image").GetComponent<Image>().sprite = insertSkill.itemImage;
-
+            this.transform.GetChild(num).Find("Image").GetComponent<Image>().color = insertSkill.GetComponent<Skill>().skillColor;
             insertcheck = false;
         }
         else
