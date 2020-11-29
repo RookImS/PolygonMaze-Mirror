@@ -25,11 +25,17 @@ public class PathTracker : MonoBehaviour
     private void Start()
     {
         destination = GameObject.FindWithTag("Destination");
-        agent.SetDestination(destination.transform.position);
 
-        traceList = new List<GameObject>();
-        traceObject = new GameObject("Trace");
-        traceObject.transform.SetParent(this.transform.parent);
+        if (destination != null)
+        {
+            agent.SetDestination(destination.transform.position);
+
+            traceList = new List<GameObject>();
+            traceObject = new GameObject("Trace");
+            traceObject.transform.SetParent(this.transform.parent);
+        }
+        else
+            Debug.Log("destination is null");
     }
 
     private void Update()
@@ -101,6 +107,7 @@ public class PathTracker : MonoBehaviour
         Destroy(traceObject);
         Destroy(this.gameObject);
     }
+
     void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.CompareTag("Destination"))

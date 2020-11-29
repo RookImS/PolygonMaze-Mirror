@@ -9,10 +9,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2767769afc26cbe43b9215b026d72fec, type: 3}
+  m_Script: {fileID: 11500000, guid: d41f04e7610bff6498ead56f33c8fc02, type: 3}
   m_Name: Stage01
   m_EditorClassIdentifier: 
-  stageName: Tutorial
+  stageName: Stage1
   stageLevel: 1
   startCost: 500
   playerLife: 10
@@ -31,19 +31,19 @@ MonoBehaviour:
     rotation: {x: 0, y: 1, z: 0, w: -0.00000004371139}
   - obstacleSpecific: 0
     position: {x: -4.706, y: 0, z: -0.295}
-    rotation: {x: 0, y: 0.70710677, z: 0, w: -0.70710677}
+    rotation: {x: 0, y: -0.70710677, z: 0, w: 0.70710677}
   - obstacleSpecific: 1
     position: {x: -1.38275, y: 0, z: 1.095}
-    rotation: {x: 0, y: 0, z: 0, w: 1}
+    rotation: {x: 0, y: 0, z: 0, w: 0}
   - obstacleSpecific: 1
     position: {x: -1.38275, y: 0, z: 2.095}
-    rotation: {x: 0, y: 0, z: 0, w: 1}
+    rotation: {x: 0, y: 0, z: 0, w: 0}
   - obstacleSpecific: 1
     position: {x: -1.38275, y: 0, z: 3.095}
-    rotation: {x: 0, y: 0, z: 0, w: 1}
+    rotation: {x: 0, y: 0, z: 0, w: 0}
   - obstacleSpecific: 1
     position: {x: -1.38275, y: 0, z: 4.095}
-    rotation: {x: 0, y: 0, z: 0, w: 1}
+    rotation: {x: 0, y: 0, z: 0, w: 0}
   - obstacleSpecific: 1
     position: {x: 1.9425, y: 0, z: 1.705}
     rotation: {x: 0, y: 0.70710677, z: 0, w: 0.70710677}
@@ -52,7 +52,7 @@ MonoBehaviour:
     rotation: {x: 0, y: 0.70710677, z: 0, w: 0.70710677}
   - obstacleSpecific: 1
     position: {x: 3.9425, y: 0, z: -1.295}
-    rotation: {x: 0, y: 0, z: 0, w: 1}
+    rotation: {x: 0, y: 0, z: 0, w: 0}
   - obstacleSpecific: 1
     position: {x: 3.9425, y: 0, z: -0.295}
     rotation: {x: 0, y: 1, z: 0, w: -0.00000004371139}
@@ -64,7 +64,7 @@ MonoBehaviour:
     rotation: {x: 0, y: 1, z: 0, w: -0.00000004371139}
   - obstacleSpecific: 1
     position: {x: 7.995, y: 0, z: 3.5}
-    rotation: {x: 0, y: 0, z: 0, w: 1}
+    rotation: {x: 0, y: 0, z: 0, w: 0}
   spawnerInfo:
     blankMeshType: 2
     position: {x: -8.7, y: 0, z: -2.075}
@@ -76,8 +76,21 @@ MonoBehaviour:
   baseEnemyWaves:
   - enemyInfoList:
     - enemySpecific: 0
-      count: 2
+      count: 5
+    - enemySpecific: 1
+      count: 5
+    - enemySpecific: 2
+      count: 5
     enemySpawnDuration: 1
     nextWaveTrigger: 0
     timer: 0
-    breakTime: 0
+    breakTime: 5
+  - enemyInfoList:
+    - enemySpecific: 0
+      count: 2
+    - enemySpecific: 0
+      count: 3
+    enemySpawnDuration: 3
+    nextWaveTrigger: 0
+    timer: 0
+    breakTime: 5

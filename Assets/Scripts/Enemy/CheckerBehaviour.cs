@@ -39,21 +39,29 @@ public class CheckerBehaviour : MonoBehaviour
 
     private void Update()
     {
-        if (pathTrackerObject.transform.childCount == 0)
+        if (destination != null)
         {
-            m_pathTrackerAgent = null;
-        }
-
-        if (m_pathTrackerAgent == null)
-        {
-            if (countDown <= 0f)
+            if (pathTrackerObject.transform.childCount == 0)
             {
-                m_pathTrackerAgent = Instantiate(pathTrackerAgent, transform.position, transform.rotation, pathTrackerObject.transform);
-                countDown = trackerDuration;
+                m_pathTrackerAgent = null;
             }
 
-            countDown -= Time.deltaTime;
+            if (m_pathTrackerAgent == null)
+            {
+
+                if (countDown <= 0f)
+                {
+                    m_pathTrackerAgent = Instantiate(pathTrackerAgent, transform.position, transform.rotation, pathTrackerObject.transform);
+                    countDown = trackerDuration;
+                }
+
+                countDown -= Time.deltaTime;
+            }
         }
+        /*
+        else
+            Debug.Log("destination is null");
+        */
     }
 
     private void Init()
@@ -86,21 +94,32 @@ public class CheckerBehaviour : MonoBehaviour
     {
         tempPath = new NavMeshPath();
         destination = GameObject.FindWithTag("Destination");
-        agent.CalculatePath(destination.transform.position, tempPath);
 
-        if (tempPath.status == NavMeshPathStatus.PathPartial)
+        if (destination != null)
         {
-            return false;
+            agent.CalculatePath(destination.transform.position, tempPath);
+
+            if (tempPath.status == NavMeshPathStatus.PathPartial)
+            {
+                return false;
+            }
+            else
+            {
+                return true;
+            }
         }
         else
-        {
-            return true;
-        }
+            Debug.Log("destination is null");
+
+        return false;
     }
 
 
     public void ApplyPath()
     {
+        if(pathTrackerObject == null)
+            pathTrackerObject = GameObject.Find("PathTracker");
+
         if (pathTrackerObject.transform.childCount != 0)
         {
             if (CheckPathChange(path.corners, tempPath.corners))

@@ -6,18 +6,26 @@ using UnityEngine.UI;
 
 public class Menu : MonoBehaviour
 {
-    public string SceneToLoad;
-    public Button Stage1Button;
+    public GameObject menu;
+    public string sceneToLoad;
+    public Button stageButton;
 
     public void LoadGame()
     {
-        SceneManager.LoadScene(SceneToLoad);
+        SceneManager.LoadScene(sceneToLoad);
+    }
+
+    public void OnClickCancleButton()
+    {
+        GameManager.Instance.SetLoadStageChapter(0);
+        GameManager.Instance.SetLoadStageLevel(0);
+        menu.SetActive(false);
     }
 
     void Start()
     {
         //Debug.Log(Stage1Button.GetComponent<Image>().alphaHitTestMinimumThreshold);
-        Stage1Button.GetComponent<Image>().alphaHitTestMinimumThreshold = 1f;
+        //stageButton.GetComponent<Image>().alphaHitTestMinimumThreshold = 0.1f;
         //Stage1Button.GetComponent<>().
     }
 

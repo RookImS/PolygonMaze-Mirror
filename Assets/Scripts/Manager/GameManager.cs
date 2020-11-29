@@ -1,12 +1,7 @@
 ﻿using System;
-using System.IO;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Events;
-using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
-using UnityEngine.UI;
 public class GameManager : MonoSingleton<GameManager>
 {
     [HideInInspector] public GameObject inGameUI;
@@ -26,8 +21,18 @@ public class GameManager : MonoSingleton<GameManager>
 
     public GameState currentGameState;
 
+    public List<GameObject> PlayableDeck;
+
+    private int loadStageChapter;
+    private int loadStageLevel;
+    [HideInInspector] public bool isWaveComplete;
+
     private void Awake()
     {
+        Application.targetFrameRate = 60; //temp
+        inGameUI = GameObject.Find("InGameUI");
+        Init();
+        //Deckmake();
         deck = new List<GameObject>();
 
         skills = (SkillsScriptableObject)Resources.Load("SkillList", typeof(SkillsScriptableObject));
@@ -36,20 +41,23 @@ public class GameManager : MonoSingleton<GameManager>
         {
             deck.Add(obj);
         }
+    
     }
 
     private void Start()
     {
         currentGameState = GameState.menu;
-
         //GameStart += PlayerControl.Instance.Init;
         //GameStart += StartGame;
-
         //DeployTower += TimeRestore;
+        Deckmake();
     }
-    public static Stack<int> stack = new Stack<int>();  //BackKey 기능을 위해 씬 Buildindex를 저장하는 스택
+    public static Stack<int> stack = new Stack<int>();  //BackKey 기능을 위해 씬 Buildindex를 저장하는 스택 
+    public static List<List<GameObject>> DeckList = new List<List<GameObject>>();
+    public static List<GameObject> Deck = new List<GameObject>();
+    public static List<GameObject> Deck_2 = new List<GameObject>();
+    public static List<GameObject> Deck_3 = new List<GameObject>();
 
-    
 
     public enum GameState
     {
@@ -60,9 +68,49 @@ public class GameManager : MonoSingleton<GameManager>
 
     public void Init()
     {
+        loadStageChapter = 0;
+        loadStageLevel = 0;
         isGameOver = false;
         isStageClear = false;
         inGameUI = GameObject.Find("InGameUI");
+    }
+
+    public int GetLoadStageChapter()
+    {
+        return this.loadStageChapter;
+    }
+    public void Deckmake()
+    {
+        for (int i = 0; i <= 3; i++)
+        {
+            Deck.Add(null);
+        }
+        for (int i = 0; i <= 3; i++)
+        {
+            Deck_2.Add(null);
+        }
+        for (int i = 0; i <= 3; i++)
+        {
+            Deck_3.Add(null);
+        }
+        DeckList.Add(Deck);
+        DeckList.Add(Deck_2);
+        DeckList.Add(Deck_3);
+    }
+
+    public void SetLoadStageChapter(int loadStageChapter)
+    {
+        this.loadStageChapter = loadStageChapter;
+    }
+
+    public int GetLoadStageLevel()
+    {
+        return this.loadStageLevel;
+    }
+
+    public void SetLoadStageLevel(int loadStageLevel)
+    {
+        this.loadStageLevel = loadStageLevel;
     }
 
     void SetGameState (GameState newGameState)  //현재 게임플레이 상태 지정
@@ -92,11 +140,11 @@ public class GameManager : MonoSingleton<GameManager>
 
     void OnSceneLoaded(Scene scene, LoadSceneMode mode) //씬이 로드되면 로드된 씬의 buildindex를 스택에 저장.
     {
-        //Debug.Log("씬이동");
         stack.Push(scene.buildIndex);
         //Debug.Log("로드된 scene buildindex: " + scene.buildIndex);
         //Debug.Log("OnSceneLoaded : " + scene.name);
     }
+
     public void ReturnToMain()
     {
         SceneManager.LoadScene("MainScene");
