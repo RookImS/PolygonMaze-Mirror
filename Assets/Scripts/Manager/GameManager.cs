@@ -15,7 +15,8 @@ public class GameManager : MonoSingleton<GameManager>
     public event Action enemyDeath;
 
     public GameState currentGameState;
-    public List<Skill> PlayableDeck;
+
+    public List<GameObject> PlayableDeck;
 
     private int loadStageChapter;
     private int loadStageLevel;
@@ -38,10 +39,11 @@ public class GameManager : MonoSingleton<GameManager>
         Deckmake();
     }
     public static Stack<int> stack = new Stack<int>();  //BackKey 기능을 위해 씬 Buildindex를 저장하는 스택 
-    public static List<List<Skill>> DeckList = new List<List<Skill>>();
-    public static List<Skill> Deck = new List<Skill>();
-    public static List<Skill> Deck_2 = new List<Skill>();
-    public static List<Skill> Deck_3 = new List<Skill>();
+    public static List<List<GameObject>> DeckList = new List<List<GameObject>>();
+    public static List<GameObject> Deck = new List<GameObject>();
+    public static List<GameObject> Deck_2 = new List<GameObject>();
+    public static List<GameObject> Deck_3 = new List<GameObject>();
+
 
     public enum GameState
     {

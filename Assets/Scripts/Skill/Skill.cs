@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+
 public class Skill : MonoBehaviour
 {
     public int cost;
@@ -10,6 +11,7 @@ public class Skill : MonoBehaviour
     public int itemPrice;
     public string itemDesc;
     public Sprite itemImage;
+    public Color skillColor;
 
     public void LocateSkill(Vector3 mousePos)
     {
