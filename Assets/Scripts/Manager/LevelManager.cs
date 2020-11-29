@@ -102,7 +102,7 @@ public class LevelManager : MonoBehaviour
         instance = this;
 
         m_enemyCount = 0;
-        GameManager.Instance.Init();
+        GameManager.Instance.InitIngameSetting();
     }
 
     public int UpdateEnemyCount()
@@ -203,7 +203,6 @@ public class LevelManager : MonoBehaviour
         LoadWaves();
         LoadTutorial();
         isWaveComplete = true;
-        GameManager.Instance.isWaveComplete = isWaveComplete;
     }
 
     public void LoadPlayerLifeAndStartCost()
@@ -495,16 +494,14 @@ public class LevelManager : MonoBehaviour
 
     public void LoadTutorial()
     {
+        isWaveSystemOn = true;
         Transform tutorial = this.transform.Find("Tutorial");
+
         if (tutorial.GetComponent<Tutorial>().tutorial.chapter == GameManager.Instance.GetLoadStageChapter()
             && tutorial.GetComponent<Tutorial>().tutorial.level == GameManager.Instance.GetLoadStageLevel())
         {
-            isWaveSystemOn = true;
-            //tutorial.gameObject.SetActive(true);
-        }
-        else
-        {
-            isWaveSystemOn = true;
+            isWaveSystemOn = false;
+            tutorial.gameObject.SetActive(true);
         }
     }
 

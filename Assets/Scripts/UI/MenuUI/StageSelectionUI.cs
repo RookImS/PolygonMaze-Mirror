@@ -10,12 +10,12 @@ public class StageSelectionUI : MonoBehaviour
 
     public void Deck(int i)
     {
-        if (!GameManager.DeckList[i].Contains(null))
+        if (!GameManager.Instance.deckList[i].Contains(null))
         {
-            GameManager.Instance.PlayableDeck = GameManager.DeckList[i];
+            GameManager.Instance.currentDeck = GameManager.Instance.deckList[i];
             for (int a = 0; a < 4; a++)
             {
-                Debug.Log(GameManager.Instance.PlayableDeck[a].GetComponent<Skill>().itemName);
+                Debug.Log(GameManager.Instance.currentDeck[a].GetComponent<Skill>().id);
             }
             Debug.Log("스킬이 등록되었습니다.");
         }
@@ -28,6 +28,7 @@ public class StageSelectionUI : MonoBehaviour
     public void LoadGame()
     {
         SceneManager.LoadScene(sceneToLoad);
+        
     }
 
     public void OnClickStageButton(string stage)

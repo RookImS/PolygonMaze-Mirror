@@ -9,10 +9,12 @@ public class Skill : MonoBehaviour
     public float applyDuration;     // 걸린 스킬의 유지시간
 
     public string id;
+    public string desc;
     public float range;
     public int cost;
     public Sprite skillSprite;
     public Renderer rend;
+    public Color color;
 
     [HideInInspector] public float applyInterval;     // 스킬이 적용되는 간격
     [HideInInspector] public float applyCountDown;

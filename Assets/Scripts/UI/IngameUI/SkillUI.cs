@@ -45,8 +45,8 @@ public class SkillUI : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragH
 
     private void SelectNextSkill()
     {
-        int randomValue = Random.Range(0, GameManager.Instance.deck.Count);
-        skill = GameManager.Instance.deck[randomValue];
+        int randomValue = Random.Range(0, GameManager.Instance.currentDeck.Count);
+        skill = GameManager.Instance.currentDeck[randomValue];
     }
 
     public void OnBeginDrag(PointerEventData eventData)

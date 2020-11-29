@@ -9,7 +9,7 @@ public class SkillSlot : MonoBehaviour
 
     private void Start()
     {
-        this.transform.GetChild(0).GetComponent<Image>().color = Slot.GetComponent<Skill>().skillColor;
+        this.transform.GetChild(0).GetComponent<Image>().color = Slot.GetComponent<Skill>().color;
         this.GetComponent<Button>().onClick.AddListener(InitSlot);
     }
     void InitSlot()

@@ -12,7 +12,7 @@ public class GameUI : MonoBehaviour
     }
     public void PreviousScene()
     {
-        GameManager.stack.Pop();
-        SceneManager.LoadScene(GameManager.stack.Pop());
+        GameManager.Instance.sceneStack.Pop();
+        SceneManager.LoadScene(GameManager.Instance.sceneStack.Pop());
     }
 }
