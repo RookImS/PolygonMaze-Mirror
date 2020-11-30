@@ -12,7 +12,8 @@ public class ObstacleBehaviour : MonoBehaviour
     }
     private void OnMouseDown()
     {
-        LevelEditorUISystem.instance.GetObstacleDeleteUISystem().OnClickObstacle(this.gameObject);
+        if(LevelEditorUISystem.instance != null)
+            LevelEditorUISystem.instance.GetObstacleDeleteUISystem().OnClickObstacle(this.gameObject);
     }
 
     public void SetNeighbor(ObstacleData.Neighbor neighbor)

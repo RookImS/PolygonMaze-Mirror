@@ -8,27 +8,60 @@ public class StageSelectionUI : MonoBehaviour
     public GameObject menu;
     public string sceneToLoad;
 
-    public void Deck(int i)
+    private bool isSelectDeck;
+
+    private void Awake()
     {
-        if (!GameManager.Instance.deckList[i].Contains(null))
+        Init();
+  
+    }
+
+    private void Init()
+    {
+        isSelectDeck = false;
+
+        GameManager.Instance.SetLoadStageChapter(0);
+        GameManager.Instance.SetLoadStageLevel(0);
+    }
+
+    public void SelectDeck(int num)
+    {
+        bool isNull = false;
+
+        for(int i = 0; i< GameManager.Instance.deckList[num].Count; i++)
         {
-            GameManager.Instance.currentDeck = GameManager.Instance.deckList[i];
-            for (int a = 0; a < 4; a++)
+            if (GameManager.Instance.deckList[num][i] == null)
             {
-                Debug.Log(GameManager.Instance.currentDeck[a].GetComponent<Skill>().id);
+                isNull = true;
+                break;
+            }
+        }
+
+        if (!isNull)
+        {
+            GameManager.Instance.currentDeck = GameManager.Instance.deckList[num];
+
+            isSelectDeck = true;
+
+            for(int i = 0; i < GameManager.Instance.deckList[num].Count; i++)
+            {
+                Debug.Log(i + ": " + GameManager.Instance.deckList[num][i]);
             }
             Debug.Log("스킬이 등록되었습니다.");
         }
         else
         {
+            isSelectDeck = false;
             Debug.Log("스킬의 수가 부족하다.");
         }
     }
 
     public void LoadGame()
     {
-        SceneManager.LoadScene(sceneToLoad);
-        
+        if (isSelectDeck)
+            SceneManager.LoadScene(sceneToLoad);
+        else
+            Debug.Log("Deck 없어!");
     }
 
     public void OnClickStageButton(string stage)
@@ -48,9 +81,6 @@ public class StageSelectionUI : MonoBehaviour
             {
                 GameManager.Instance.SetLoadStageChapter(chapter);
                 GameManager.Instance.SetLoadStageLevel(level);
-
-                Debug.Log(GameManager.Instance.GetLoadStageChapter());
-                Debug.Log(GameManager.Instance.GetLoadStageLevel());
             }
             else
             {
@@ -63,8 +93,7 @@ public class StageSelectionUI : MonoBehaviour
 
     public void OnClickCancleButton()
     {
-        GameManager.Instance.SetLoadStageChapter(0);
-        GameManager.Instance.SetLoadStageLevel(0);
+        Init();
         menu.SetActive(false);
     }
 }

@@ -85,9 +85,6 @@ public class LevelManager : MonoBehaviour
                 LoadStage();
             else
                 Debug.Log("Stage Load Fail!");
-
-            GameManager.Instance.SetLoadStageChapter(0);
-            GameManager.Instance.SetLoadStageLevel(0);
         }
     }
 

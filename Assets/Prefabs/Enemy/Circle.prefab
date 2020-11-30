@@ -65,6 +65,7 @@ MonoBehaviour:
   reward: 15
   damage: 1
   Stats:
+    isDead: 0
     baseStats:
       hp: 750
       speed: 1.5
@@ -75,6 +76,9 @@ MonoBehaviour:
         hp: 200
         speed: 0
         def: 0
+      damage: 0
+      applyDuration: 0
+      applyTimer: 0
 --- !u!114 &60666585470947810
 MonoBehaviour:
   m_ObjectHideFlags: 0

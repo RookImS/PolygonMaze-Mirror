@@ -225,11 +225,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   skillDuration: 3
   applyDuration: 1
-  id: 1
+  id: Yellow
+  desc: 
   range: 2
   cost: 100
   skillSprite: {fileID: 21300000, guid: 6aa4442a6079b4c43a9a693aa7a06518, type: 3}
   rend: {fileID: 5862506055331656244}
+  color: {r: 1, g: 1, b: 0, a: 1}
   applyInterval: 0.1
   applyCountDown: 0
   modifier:

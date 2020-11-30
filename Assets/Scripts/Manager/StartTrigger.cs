@@ -11,6 +11,6 @@ public class StartTrigger : MonoBehaviour
 
     private void lnit()
     {
-        GameManager.Instance.Init();
+        GameManager.Instance.isStart = true;
     }
 }

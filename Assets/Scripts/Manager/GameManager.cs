@@ -6,8 +6,6 @@ public class GameManager : MonoSingleton<GameManager>
 {
     public Stack<int> sceneStack = new Stack<int>();  //BackKey 기능을 위해 씬 Buildindex를 저장하는 스택 
 
-
-
     public SkillsScriptableObject skillResource;
     public List<GameObject> skills;
 
@@ -17,9 +15,15 @@ public class GameManager : MonoSingleton<GameManager>
     public List<GameObject> deck3 = new List<GameObject>();
     public List<GameObject> currentDeck;
 
+    public bool isStart;
     private int loadStageChapter;
     private int loadStageLevel;
- 
+
+    private void Awake()
+    {
+        Init();
+    }
+
     public void Init()
     {
         SceneManager.sceneLoaded += OnSceneLoaded;
@@ -53,6 +57,8 @@ public class GameManager : MonoSingleton<GameManager>
                 deckList[i].Add(null);
             }
         }
+
+       
     }
     void OnSceneLoaded(Scene scene, LoadSceneMode mode) //씬이 로드되면 로드된 씬의 buildindex를 스택에 저장.
     {

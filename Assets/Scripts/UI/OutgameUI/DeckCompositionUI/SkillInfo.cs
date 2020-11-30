@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class SkillToopTip : MonoBehaviour
+public class SkillInfo : MonoBehaviour
 {
     public Text Name;
     public Text Desc;

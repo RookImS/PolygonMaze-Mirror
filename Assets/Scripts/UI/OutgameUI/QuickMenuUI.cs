@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
-public class GameUI : MonoBehaviour
+public class QuickMenuUI : MonoBehaviour
 {
     public Button BackKey;
     private void Awake()

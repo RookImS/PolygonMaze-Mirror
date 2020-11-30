@@ -94,7 +94,7 @@ MonoBehaviour:
   spawnerPrefab: {fileID: 4546852089631936315, guid: 7df10d63958ab0e4588c29bbc1daf156, type: 3}
   destinationPrefab: {fileID: 7480299383816322787, guid: 20d93f3818eb2d54b84e0e1c3a5f0921, type: 3}
   checkerWithGroundPrefab: {fileID: 7805583091822359371, guid: 69127f3dd05cec448be7523ae3080a06, type: 3}
-  circleEnemyPrefab: {fileID: 3350396553093369702, guid: 9dfa5bafdf521d3448f47e83dae12726, type: 3}
+  circleEnemyPrefab: {fileID: 5251150792300840301, guid: a4ad8df4fbdf7a64db447bf707c8fbcb, type: 3}
   semiCircleEnemyPrefab: {fileID: 2794680669866632871, guid: b5f6c68c082fbf14f9775ea583abbf37, type: 3}
   sectorEnemyPrefab: {fileID: 474593776622616134, guid: 47e5a2504444b29468ba4a30c8bbb9e8, type: 3}
   ellipseEnemyPrefab: {fileID: 8823159148962381299, guid: 34eb260e904644442ae2be89ba757e0a, type: 3}
