@@ -15,6 +15,6 @@ public class MenuUI : MonoBehaviour
 
     public void SelectMenu()
     {
-        SceneManager.LoadScene(sceneToLoad);
+        GameManager.Instance.LoadScene(sceneToLoad);
     }
 }

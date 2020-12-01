@@ -13,6 +13,6 @@ public class QuickMenuUI : MonoBehaviour
     public void PreviousScene()
     {
         GameManager.Instance.sceneStack.Pop();
-        SceneManager.LoadScene(GameManager.Instance.sceneStack.Pop());
+        GameManager.Instance.LoadScene(GameManager.Instance.sceneStack.Pop());
     }
 }

@@ -59,7 +59,10 @@ public class StageSelectionUI : MonoBehaviour
     public void LoadGame()
     {
         if (isSelectDeck)
+        {
+            SoundManager.Instance.PlayBGM("InGame_BGM");
             SceneManager.LoadScene(sceneToLoad);
+        }
         else
             Debug.Log("Deck 없어!");
     }

@@ -27,13 +27,13 @@ public class PanelSystem : MonoBehaviour
     }
     public void ReturnToMain()
     {
-        SceneManager.LoadScene("MainScene");
+        GameManager.Instance.LoadScene("MainScene");
         GameManager.Instance.TimeRestore();
     }
 
     public void RestartGame()
     {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        GameManager.Instance.LoadScene(SceneManager.GetActiveScene().name);
         GameManager.Instance.TimeRestore();
     }
 }

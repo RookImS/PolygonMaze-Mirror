@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 2664099585814116745}
   - component: {fileID: 6163479956079254677}
   - component: {fileID: 3495301061253644579}
+  - component: {fileID: 7897937925774989833}
   - component: {fileID: 5091053163055222037}
   - component: {fileID: 7662995552247066987}
   - component: {fileID: 4729733316391878624}
@@ -60,7 +61,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2117414a62b000f4e8490b3b39745a7c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hpBar: {fileID: 0}
+  hpBar: {fileID: 7897937925774989833}
   reward: 75
   damage: 1
   Stats:
@@ -78,6 +79,26 @@ MonoBehaviour:
       damage: 0
       applyDuration: 0
       applyTimer: 0
+--- !u!114 &7897937925774989833
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5497063479883312189}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 50511f5e8eceb4049a155208a97a8e78, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hpBar: {fileID: 1851173057697602164, guid: 3a4fa8b3575a2b94e8c24a5fdd8064e5, type: 3}
+  hpUI: {fileID: 0}
+  owner: {fileID: 0}
+  ownerData: {fileID: 0}
+  m_hpBar: {fileID: 0}
+  currentHp: {fileID: 0}
+  changeHp: {fileID: 0}
+  needChange: 0
 --- !u!65 &5091053163055222037
 BoxCollider:
   m_ObjectHideFlags: 0

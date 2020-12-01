@@ -8,5 +8,6 @@ public class PentagonData : TowerData
     {
         GameObject bulletInstance = Instantiate(bullet, muzzle.position, muzzle.rotation);
         bulletInstance.GetComponent<BulletBehaviour>().Init(Stats, towerSkill);
+        SoundManager.Instance.PlaySound(SoundManager.TowerSoundSpecific.PENTAGON, "Pentagon_Attack");
     }
 }

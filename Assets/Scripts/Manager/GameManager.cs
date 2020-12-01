@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 public class GameManager : MonoSingleton<GameManager>
 {
-    public Stack<int> sceneStack = new Stack<int>();  //BackKey 기능을 위해 씬 Buildindex를 저장하는 스택 
+    public Stack<string> sceneStack = new Stack<string>();  //BackKey 기능을 위해 씬 Buildindex를 저장하는 스택 
 
     public SkillsScriptableObject skillResource;
     public List<GameObject> skills;
@@ -60,9 +60,22 @@ public class GameManager : MonoSingleton<GameManager>
 
        
     }
+    
+    public void LoadScene(string sceneName)
+    {
+        Debug.Log("LoadScene in gameManager");
+        SceneManager.LoadScene(sceneName);
+
+        if (sceneName == "StageScene")
+            SoundManager.instance.PlayBGM("InGame_BGM");
+        else
+            SoundManager.instance.PlayBGM("OutGame_BGM");
+
+    }
+
     void OnSceneLoaded(Scene scene, LoadSceneMode mode) //씬이 로드되면 로드된 씬의 buildindex를 스택에 저장.
     {
-        sceneStack.Push(scene.buildIndex);
+        sceneStack.Push(scene.name);
     }
 
     public int GetLoadStageChapter()
