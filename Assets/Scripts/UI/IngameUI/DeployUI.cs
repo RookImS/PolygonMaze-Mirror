@@ -63,6 +63,7 @@ public class DeployUI : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
         newObject = Instantiate(deployTower, mousePos, deployTower.transform.rotation);
 
         Time.timeScale = 0.3f;
+        SoundManager.Instance.PlaySound(SoundManager.SoundSpecific.BUTTON, "Tower_Button");
     }
     public void OnDrag(PointerEventData eventData)
     {

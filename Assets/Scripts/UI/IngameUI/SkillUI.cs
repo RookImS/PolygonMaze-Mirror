@@ -4,7 +4,7 @@ using TMPro;
 
 public class SkillUI : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler
 {
-    public GameObject skill;
+    [HideInInspector]public GameObject skill;
     
     public TextMeshProUGUI skillCostText;
 
@@ -61,6 +61,7 @@ public class SkillUI : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragH
         newObject = Instantiate(skill, mousePos, skill.transform.rotation);
 
         Time.timeScale = 0.3f;
+        SoundManager.Instance.PlaySound(SoundManager.SoundSpecific.BUTTON, "Tower_Button");
     }
     public void OnDrag(PointerEventData eventData)
     {

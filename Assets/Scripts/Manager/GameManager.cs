@@ -63,7 +63,6 @@ public class GameManager : MonoSingleton<GameManager>
     
     public void LoadScene(string sceneName)
     {
-        Debug.Log("LoadScene in gameManager");
         SceneManager.LoadScene(sceneName);
 
         if (sceneName == "StageScene")

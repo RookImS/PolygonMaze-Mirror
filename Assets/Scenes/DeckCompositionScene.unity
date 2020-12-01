@@ -292,6 +292,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 1335661054}
+        m_TargetAssemblyTypeName: UISystem, Assembly-CSharp
+        m_MethodName: PlayCommonButtonSE
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &144921274
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -429,6 +441,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 1335661054}
+        m_TargetAssemblyTypeName: UISystem, Assembly-CSharp
+        m_MethodName: PlayCommonButtonSE
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &161885145
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -553,6 +577,18 @@ MonoBehaviour:
         m_TargetAssemblyTypeName: Deck, Assembly-CSharp
         m_MethodName: InsertDeck
         m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1335661054}
+        m_TargetAssemblyTypeName: UISystem, Assembly-CSharp
+        m_MethodName: PlayCommonButtonSE
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -828,6 +864,103 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 239418978}
   m_CullTransparentMesh: 0
+--- !u!1001 &257885600
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 3897069770413047588, guid: e61540ff58dea3449a90211bb1438ec4, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3897069770413047588, guid: e61540ff58dea3449a90211bb1438ec4, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3897069770413047588, guid: e61540ff58dea3449a90211bb1438ec4, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3897069770413047588, guid: e61540ff58dea3449a90211bb1438ec4, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3897069770413047588, guid: e61540ff58dea3449a90211bb1438ec4, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3897069770413047588, guid: e61540ff58dea3449a90211bb1438ec4, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3897069770413047588, guid: e61540ff58dea3449a90211bb1438ec4, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3897069770413047588, guid: e61540ff58dea3449a90211bb1438ec4, type: 3}
+      propertyPath: m_RootOrder
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3897069770413047588, guid: e61540ff58dea3449a90211bb1438ec4, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3897069770413047588, guid: e61540ff58dea3449a90211bb1438ec4, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3897069770413047588, guid: e61540ff58dea3449a90211bb1438ec4, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3897069770413047588, guid: e61540ff58dea3449a90211bb1438ec4, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3897069770413047588, guid: e61540ff58dea3449a90211bb1438ec4, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3897069770413047588, guid: e61540ff58dea3449a90211bb1438ec4, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3897069770413047588, guid: e61540ff58dea3449a90211bb1438ec4, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3897069770413047588, guid: e61540ff58dea3449a90211bb1438ec4, type: 3}
+      propertyPath: m_AnchorMin.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3897069770413047588, guid: e61540ff58dea3449a90211bb1438ec4, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3897069770413047588, guid: e61540ff58dea3449a90211bb1438ec4, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3897069770413047588, guid: e61540ff58dea3449a90211bb1438ec4, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3897069770413047588, guid: e61540ff58dea3449a90211bb1438ec4, type: 3}
+      propertyPath: m_Pivot.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3897069770413047588, guid: e61540ff58dea3449a90211bb1438ec4, type: 3}
+      propertyPath: m_Pivot.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3897069770413047591, guid: e61540ff58dea3449a90211bb1438ec4, type: 3}
+      propertyPath: m_Name
+      value: HiddenCanvas
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: e61540ff58dea3449a90211bb1438ec4, type: 3}
 --- !u!1 &312515826
 GameObject:
   m_ObjectHideFlags: 0
@@ -1008,6 +1141,18 @@ MonoBehaviour:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 2
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1335661054}
+        m_TargetAssemblyTypeName: UISystem, Assembly-CSharp
+        m_MethodName: PlayCommonButtonSE
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
@@ -1256,7 +1401,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 438803697}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1335661054}
+        m_TargetAssemblyTypeName: UISystem, Assembly-CSharp
+        m_MethodName: PlayCommonButtonSE
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &438803697
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1494,7 +1651,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 643134016}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1335661054}
+        m_TargetAssemblyTypeName: UISystem, Assembly-CSharp
+        m_MethodName: PlayCommonButtonSE
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &643134016
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1794,6 +1963,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 1335661054}
+        m_TargetAssemblyTypeName: UISystem, Assembly-CSharp
+        m_MethodName: PlayCommonButtonSE
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &894440423
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1893,6 +2074,18 @@ MonoBehaviour:
           m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
           m_MethodName: SetActive
           m_Mode: 6
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+        - m_Target: {fileID: 1335661054}
+          m_TargetAssemblyTypeName: UISystem, Assembly-CSharp
+          m_MethodName: PlayCancleButtonSE
+          m_Mode: 1
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
             m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -2525,6 +2718,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 1335661054}
+        m_TargetAssemblyTypeName: UISystem, Assembly-CSharp
+        m_MethodName: PlayCommonButtonSE
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1096329839
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2862,6 +3067,7 @@ GameObject:
   - component: {fileID: 1335661053}
   - component: {fileID: 1335661052}
   - component: {fileID: 1335661051}
+  - component: {fileID: 1335661054}
   m_Layer: 0
   m_Name: EventSystem
   m_TagString: Untagged
@@ -2917,6 +3123,18 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1335661054
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1335661050}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dd54b7dcbcd6610429fd88d3a56bbecc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1496224636
 GameObject:
   m_ObjectHideFlags: 0
@@ -3086,6 +3304,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 1335661054}
+        m_TargetAssemblyTypeName: UISystem, Assembly-CSharp
+        m_MethodName: PlayCommonButtonSE
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1571669199
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3205,7 +3435,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1581784132}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1335661054}
+        m_TargetAssemblyTypeName: UISystem, Assembly-CSharp
+        m_MethodName: PlayCommonButtonSE
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1581784132
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3334,6 +3576,18 @@ MonoBehaviour:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 1
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1335661054}
+        m_TargetAssemblyTypeName: UISystem, Assembly-CSharp
+        m_MethodName: PlayCommonButtonSE
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
@@ -4373,7 +4627,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1983015460}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1335661054}
+        m_TargetAssemblyTypeName: UISystem, Assembly-CSharp
+        m_MethodName: PlayCommonButtonSE
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1983015460
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4797,6 +5063,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 1335661054}
+        m_TargetAssemblyTypeName: UISystem, Assembly-CSharp
+        m_MethodName: PlayCommonButtonSE
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &2046234618
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5017,103 +5295,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2131471579}
   m_CullTransparentMesh: 0
---- !u!1001 &3897069771339844706
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 3897069770413047588, guid: e61540ff58dea3449a90211bb1438ec4, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3897069770413047588, guid: e61540ff58dea3449a90211bb1438ec4, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3897069770413047588, guid: e61540ff58dea3449a90211bb1438ec4, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3897069770413047588, guid: e61540ff58dea3449a90211bb1438ec4, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3897069770413047588, guid: e61540ff58dea3449a90211bb1438ec4, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3897069770413047588, guid: e61540ff58dea3449a90211bb1438ec4, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3897069770413047588, guid: e61540ff58dea3449a90211bb1438ec4, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3897069770413047588, guid: e61540ff58dea3449a90211bb1438ec4, type: 3}
-      propertyPath: m_RootOrder
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 3897069770413047588, guid: e61540ff58dea3449a90211bb1438ec4, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3897069770413047588, guid: e61540ff58dea3449a90211bb1438ec4, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3897069770413047588, guid: e61540ff58dea3449a90211bb1438ec4, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3897069770413047588, guid: e61540ff58dea3449a90211bb1438ec4, type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3897069770413047588, guid: e61540ff58dea3449a90211bb1438ec4, type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3897069770413047588, guid: e61540ff58dea3449a90211bb1438ec4, type: 3}
-      propertyPath: m_SizeDelta.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3897069770413047588, guid: e61540ff58dea3449a90211bb1438ec4, type: 3}
-      propertyPath: m_SizeDelta.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3897069770413047588, guid: e61540ff58dea3449a90211bb1438ec4, type: 3}
-      propertyPath: m_AnchorMin.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3897069770413047588, guid: e61540ff58dea3449a90211bb1438ec4, type: 3}
-      propertyPath: m_AnchorMin.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3897069770413047588, guid: e61540ff58dea3449a90211bb1438ec4, type: 3}
-      propertyPath: m_AnchorMax.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3897069770413047588, guid: e61540ff58dea3449a90211bb1438ec4, type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3897069770413047588, guid: e61540ff58dea3449a90211bb1438ec4, type: 3}
-      propertyPath: m_Pivot.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3897069770413047588, guid: e61540ff58dea3449a90211bb1438ec4, type: 3}
-      propertyPath: m_Pivot.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3897069770413047591, guid: e61540ff58dea3449a90211bb1438ec4, type: 3}
-      propertyPath: m_Name
-      value: HiddenCanvas
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: e61540ff58dea3449a90211bb1438ec4, type: 3}
 --- !u!1001 &4110881647861646614
 PrefabInstance:
   m_ObjectHideFlags: 0

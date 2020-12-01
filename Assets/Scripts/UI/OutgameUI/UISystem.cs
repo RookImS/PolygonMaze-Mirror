@@ -18,4 +18,14 @@ public class UISystem : MonoBehaviour
     {
         SoundManager.Instance.PlaySound(SoundManager.SoundSpecific.BUTTON, "Cancle_Button");
     }
+
+    public void PlayButtonFailSE()
+    {
+        SoundManager.Instance.PlaySound(SoundManager.SoundSpecific.BUTTON, "Button_Fail");
+    }
+
+    public void PlayTowerButtonSE()
+    {
+        SoundManager.Instance.PlaySound(SoundManager.SoundSpecific.BUTTON, "Tower_Button");
+    }
 }

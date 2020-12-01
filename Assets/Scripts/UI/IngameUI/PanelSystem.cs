@@ -17,6 +17,7 @@ public class PanelSystem : MonoBehaviour
         panel.SetActive(true);
         GameManager.Instance.TimeStop();
         UIManager.instance.isPanelOn = true;
+        SoundManager.Instance.PlaySound(SoundManager.SoundSpecific.BUTTON, "Common_Button");
     }
     public void Resume()
     {
@@ -24,16 +25,19 @@ public class PanelSystem : MonoBehaviour
         pausePanel.SetActive(false);
         GameManager.Instance.TimeRestore();
         UIManager.instance.isPanelOn = false;
+        SoundManager.Instance.PlaySound(SoundManager.SoundSpecific.BUTTON, "Common_Button");
     }
     public void ReturnToMain()
     {
         GameManager.Instance.LoadScene("MainScene");
         GameManager.Instance.TimeRestore();
+        SoundManager.Instance.PlaySound(SoundManager.SoundSpecific.BUTTON, "Common_Button");
     }
 
     public void RestartGame()
     {
         GameManager.Instance.LoadScene(SceneManager.GetActiveScene().name);
         GameManager.Instance.TimeRestore();
+        SoundManager.Instance.PlaySound(SoundManager.SoundSpecific.BUTTON, "Common_Button");
     }
 }

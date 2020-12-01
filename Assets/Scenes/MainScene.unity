@@ -1393,9 +1393,11 @@ MonoBehaviour:
   - soundName: Confirm_Button
     clip: {fileID: 8300000, guid: 06d2a2758ef2fb240860fb1c63556f84, type: 3}
   - soundName: Cancle_Button
-    clip: {fileID: 8300000, guid: 3ad4929c2c5e0ab47aedff82adabe5bc, type: 3}
+    clip: {fileID: 8300000, guid: 972736298aadbdb4cb1b27c0a3f1a008, type: 3}
+  - soundName: Button_Fail
+    clip: {fileID: 8300000, guid: b7bb21aebcc712948a87293a560489ee, type: 3}
   - soundName: Tower_Button
-    clip: {fileID: 8300000, guid: 1a99d81f14da83d498f77541edc90c67, type: 3}
+    clip: {fileID: 8300000, guid: 6638a89219f27e64b88dfb0f520f4981, type: 3}
   otherUISounds: []
   enemySounds: []
   towerSounds:
@@ -2991,18 +2993,6 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 700811579}
-        m_TargetAssemblyTypeName: UISystem, Assembly-CSharp
-        m_MethodName: PlayCommonButtonSE
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
 --- !u!114 &428979761
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3267,6 +3257,7 @@ GameObject:
   - component: {fileID: 762908943}
   - component: {fileID: 762908942}
   - component: {fileID: 762908941}
+  - component: {fileID: 762908945}
   m_Layer: 5
   m_Name: WikiButton
   m_TagString: Untagged
@@ -3362,18 +3353,6 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 700811579}
-        m_TargetAssemblyTypeName: UISystem, Assembly-CSharp
-        m_MethodName: PlayCommonButtonSE
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
 --- !u!114 &762908943
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3412,6 +3391,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 762908939}
   m_CullTransparentMesh: 0
+--- !u!225 &762908945
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 762908939}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 0
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!1 &916138724
 GameObject:
   m_ObjectHideFlags: 0
@@ -3756,18 +3747,6 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 700811579}
-        m_TargetAssemblyTypeName: UISystem, Assembly-CSharp
-        m_MethodName: PlayCommonButtonSE
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
 --- !u!114 &970266914
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3819,6 +3798,7 @@ GameObject:
   - component: {fileID: 1157046223}
   - component: {fileID: 1157046222}
   - component: {fileID: 1157046221}
+  - component: {fileID: 1157046225}
   m_Layer: 5
   m_Name: AchievementButton
   m_TagString: Untagged
@@ -3914,18 +3894,6 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 700811579}
-        m_TargetAssemblyTypeName: UISystem, Assembly-CSharp
-        m_MethodName: PlayCommonButtonSE
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
 --- !u!114 &1157046223
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3964,6 +3932,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1157046219}
   m_CullTransparentMesh: 0
+--- !u!225 &1157046225
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1157046219}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 0
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!1 &1169255972
 GameObject:
   m_ObjectHideFlags: 0
