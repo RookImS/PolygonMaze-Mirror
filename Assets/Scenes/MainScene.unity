@@ -1406,7 +1406,7 @@ MonoBehaviour:
   - soundName: Square_Attack
     clip: {fileID: 0}
   - soundName: Pentagone_Attack
-    clip: {fileID: 0}
+    clip: {fileID: 8300000, guid: 99e05dd8df4b67d4db090a2326c52052, type: 3}
   - soundName: Hexagon_Attack
     clip: {fileID: 0}
   yellowSounds: []
