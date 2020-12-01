@@ -2,12 +2,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using TMPro;
 using UnityEngine.UI;
 public class StageSelectionUI : MonoBehaviour
 {
     public GameObject menu;
     public string sceneToLoad;
-
+    public TextMeshProUGUI stageNum;
     private bool isSelectDeck;
 
     private void Awake()
@@ -67,6 +68,7 @@ public class StageSelectionUI : MonoBehaviour
     public void OnClickStageButton(string stage)
     {
         string[] chapterAndLevel = stage.Split('-');
+        stageNum.text = stage;
         int chapter = 0;
         int level = 0;
 
