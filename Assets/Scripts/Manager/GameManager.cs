@@ -1,24 +1,37 @@
 ﻿using System;
+using System.IO;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+
 public class GameManager : MonoSingleton<GameManager>
 {
+    [System.Serializable]
+    public class AllDeckInfo
+    {
+        [System.Serializable]
+        public class DeckInfo
+        {
+            public List<string> deckIDs;
+        }
+
+        public List<DeckInfo> deckInfos;
+
+    }
     public Stack<string> sceneStack = new Stack<string>();  //BackKey 기능을 위해 씬 Buildindex를 저장하는 스택 
 
     public SkillsScriptableObject skillResource;
     public List<GameObject> skills;
 
-    public List<List<GameObject>> deckList = new List<List<GameObject>>();
-    public List<GameObject> deck1 = new List<GameObject>();
-    public List<GameObject> deck2 = new List<GameObject>();
-    public List<GameObject> deck3 = new List<GameObject>();
+    public List<List<GameObject>> deckList;
+    public AllDeckInfo allDeckInfo;
     public List<GameObject> currentDeck;
 
     public bool isStart;
     private int loadStageChapter;
     private int loadStageLevel;
 
+ 
     private void Awake()
     {
         Init();
@@ -27,51 +40,129 @@ public class GameManager : MonoSingleton<GameManager>
     public void Init()
     {
         SceneManager.sceneLoaded += OnSceneLoaded;
-
+        
         loadStageChapter = 0;
         loadStageLevel = 0;
 
         LoadResource();
-        LoadDeck();
+        LoadDeckInfos();
     }
 
     private void LoadResource()
     {
         skillResource = (SkillsScriptableObject)Resources.Load("SkillList", typeof(SkillsScriptableObject));
-        skills = skillResource.skillList;
-
-        Deckmake();
+        skills = skillResource.skillList; 
     }
 
-    private void LoadDeck()
+    private void LoadDeckInfos()
     {
+        MakeEmptyDeck();
 
-    }
-
-    public void SaveDeckData()
-    {
-
-    }
-
-    private void Deckmake()
-    {
-        deck1 = new List<GameObject>();
-        deck2 = new List<GameObject>();
-        deck3 = new List<GameObject>();
-
-        deckList.Add(deck1);
-        deckList.Add(deck2);
-        deckList.Add(deck3);
-
-        for (int i = 0; i < deckList.Count; i++)
+        for (int i = 0; i < 3; i++)
         {
-            for (int j = 0; j < 3; j++)
+            string path = string.Format("Assets/UserData/DeckData/Deck{0}.json", i);
+            System.IO.FileInfo file = new System.IO.FileInfo(path);
+
+            try
             {
-                deckList[i].Add(null);
+                if (File.Exists(path))
+                {
+                    string jsonData = File.ReadAllText(path);
+                    this.allDeckInfo = JsonUtility.FromJson<AllDeckInfo>(jsonData);
+                }
+                else
+                {
+                    return;
+                }
+            }
+            catch (System.ArgumentException e1)
+            {
+                Debug.Log(e1.Message);
+
+            }
+            catch (System.Exception e2)
+            {
+                Debug.Log(e2.Message);
+            }
+
+            for(int j = 0; j < 3; j++)
+            {
+                for(int k = 0; k < skills.Count; k++)
+                {
+                    if (skills[k].GetComponent<Skill>().id
+                        == this.allDeckInfo.deckInfos[i].deckIDs[j])
+                        deckList[i][j] = skills[k];
+                    else if ("space"
+                        == this.allDeckInfo.deckInfos[i].deckIDs[j])
+                        deckList[i][j] = null;
+                }
+            }
+        }
+    }
+
+    private bool CheckSkillNull(List<GameObject> deck)
+    {
+        for (int i = 0; i < deck.Count; i++)
+            if (deck[i] == null)
+                return true;
+        return false;
+    }
+
+    public void SaveDeckInfos(int order)
+    {
+        if (CheckSkillNull(deckList[order]))
+        {
+            for (int i = 0; i < 3; i++)
+            {
+                allDeckInfo.deckInfos[order].deckIDs[i] = "space";
+            }
+        }
+        else
+        {
+            for (int i = 0; i < 3; i++)
+            {
+                allDeckInfo.deckInfos[order].deckIDs[i] = deckList[order][i].GetComponent<Skill>().id;
             }
         }
 
-       
+        string jsonData = JsonUtility.ToJson(allDeckInfo);
+        string path = string.Format("Assets/UserData/DeckData/Deck{0}.json", order);
+
+        System.IO.FileInfo file = new System.IO.FileInfo(path);
+        file.Directory.Create();
+
+        try
+        {
+            File.WriteAllText(file.FullName, jsonData);
+        }
+        catch (System.ArgumentException e1)
+        {
+            Debug.Log(e1.Message);
+            // stage name 재입력 event
+        }
+        catch (System.Exception e2)
+        {
+            Debug.Log(e2.Message);
+            // IOException or UnauthorizedAccessException
+        }
+    }
+
+    private void MakeEmptyDeck()
+    {
+        deckList = new List<List<GameObject>>();
+        allDeckInfo = new AllDeckInfo();
+        allDeckInfo.deckInfos = new List<AllDeckInfo.DeckInfo>();
+        for (int i = 0; i < 3; i++)
+        {
+            deckList.Add(new List<GameObject>());
+            allDeckInfo.deckInfos.Add(new AllDeckInfo.DeckInfo());
+            allDeckInfo.deckInfos[i].deckIDs = new List<string>();
+            for (int j = 0; j < 3; j++)
+            {
+                deckList[i].Add(null);
+                allDeckInfo.deckInfos[i].deckIDs.Add("space");
+            }
+        }
     }
     
     public void LoadScene(string sceneName)

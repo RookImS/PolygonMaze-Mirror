@@ -46,7 +46,7 @@ public class DeckUI : MonoBehaviour
             this.transform.GetChild(num).Find("SkillImage").GetComponent<Image>().color = skillListUI.selectedSkill.GetComponent<Skill>().color;
             
             skillListUI.insertCheck = false;
-            GameManager.Instance.SaveDeckData();
+            GameManager.Instance.SaveDeckInfos(order);
         }
         else
             return;
