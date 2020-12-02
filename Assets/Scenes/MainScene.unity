@@ -1398,21 +1398,39 @@ MonoBehaviour:
     clip: {fileID: 8300000, guid: b7bb21aebcc712948a87293a560489ee, type: 3}
   - soundName: Tower_Button
     clip: {fileID: 8300000, guid: 6638a89219f27e64b88dfb0f520f4981, type: 3}
-  otherUISounds: []
+  otherUISounds:
+  - soundName: Coin_Sound
+    clip: {fileID: 8300000, guid: 173fee6920814cf4199e80cf1d273779, type: 3}
   enemySounds: []
   towerSounds:
   - soundName: Triangle_Attack
-    clip: {fileID: 0}
+    clip: {fileID: 8300000, guid: a09d0db5533cac14eb6069685590b0cd, type: 3}
   - soundName: Square_Attack
-    clip: {fileID: 0}
-  - soundName: Pentagone_Attack
-    clip: {fileID: 8300000, guid: 99e05dd8df4b67d4db090a2326c52052, type: 3}
+    clip: {fileID: 8300000, guid: 4314d21e6ef5cc6459b2e9b43d64b06f, type: 3}
+  - soundName: Pentagon_Attack
+    clip: {fileID: 8300000, guid: 9415ef790972e984db2c8210057373c2, type: 3}
   - soundName: Hexagon_Attack
+    clip: {fileID: 8300000, guid: 04e0499c22b059345b22024114612579, type: 3}
+  yellowSounds:
+  - soundName: Yellow_Ready_Sound
     clip: {fileID: 0}
-  yellowSounds: []
-  redSounds: []
-  greenSounds: []
-  blueSounds: []
+  - soundName: Yellow_Use_Sound
+    clip: {fileID: 0}
+  redSounds:
+  - soundName: Red_Ready_Sound
+    clip: {fileID: 0}
+  - soundName: Red_Use_Sound
+    clip: {fileID: 0}
+  greenSounds:
+  - soundName: Green_Ready_Sound
+    clip: {fileID: 0}
+  - soundName: Green_Use_Sound
+    clip: {fileID: 0}
+  blueSounds:
+  - soundName: Blue_Ready_Sound
+    clip: {fileID: 0}
+  - soundName: Blue_Use_Sound
+    clip: {fileID: 0}
   bgmPlayer: {fileID: 289550471}
   audioPlayer:
   - {fileID: 289550474}

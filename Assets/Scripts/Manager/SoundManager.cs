@@ -28,7 +28,6 @@ public class SoundManager : MonoSingleton<SoundManager>
     [Header("Tower Sound Register")]
     [SerializeField] public Sound[] towerSounds;
 
-    [Header("Skill Sound Register")]
     [Header("Yellow Sound Register")]
     [SerializeField] public Sound[] yellowSounds;
     [Header("Red Sound Register")]

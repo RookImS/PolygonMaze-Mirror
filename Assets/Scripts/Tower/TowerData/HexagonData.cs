@@ -17,5 +17,6 @@ public class HexagonData : TowerData
     {
         GameObject bulletInstance = Instantiate(bullet, muzzle.position, muzzle.rotation);
         bulletInstance.GetComponent<BulletBehaviour>().Init(Stats, towerSkill, ticRate, attackDuration);
+        SoundManager.Instance.PlaySound(SoundManager.TowerSoundSpecific.HEXAGON, "Hexagon_Attack");
     }
 }

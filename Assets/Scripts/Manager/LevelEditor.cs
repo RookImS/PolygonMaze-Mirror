@@ -333,7 +333,7 @@ public class LevelEditor : MonoBehaviour
 
         try
         {
-            File.WriteAllText(file.FullName, jsonData);
+            File.WriteAllText(file.FullName, jsonData);       
         }
         catch (System.ArgumentException e1)
         {
@@ -345,6 +345,8 @@ public class LevelEditor : MonoBehaviour
             Debug.Log(e2.Message);
             // IOException or UnauthorizedAccessException
         }
+
+        this.stageData = new StageData();
     }
 
     public void CreateChecker(GameObject currentBlankObject)

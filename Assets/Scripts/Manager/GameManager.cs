@@ -32,7 +32,9 @@ public class GameManager : MonoSingleton<GameManager>
         loadStageLevel = 0;
 
         LoadResource();
+        LoadDeck();
     }
+
     private void LoadResource()
     {
         skillResource = (SkillsScriptableObject)Resources.Load("SkillList", typeof(SkillsScriptableObject));
@@ -40,6 +42,17 @@ public class GameManager : MonoSingleton<GameManager>
 
         Deckmake();
     }
+
+    private void LoadDeck()
+    {
+
+    }
+
+    public void SaveDeckData()
+    {
+
+    }
+
     private void Deckmake()
     {
         deck1 = new List<GameObject>();

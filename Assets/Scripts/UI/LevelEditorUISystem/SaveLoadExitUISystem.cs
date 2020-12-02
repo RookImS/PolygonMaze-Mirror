@@ -244,9 +244,12 @@ public class SaveLoadExitUISystem : MonoBehaviour
         {
             GameManager.Instance.SetLoadStageChapter(this.loadStageChapter);
             GameManager.Instance.SetLoadStageLevel(this.loadStageLevel);
-            
-            if(LevelEditor.instance.LoadStageData())
+
+            if (LevelEditor.instance.LoadStageData())
+            {
+                Debug.Log("LoadScene");
                 SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+            }
             else
             {
                 GameManager.Instance.SetLoadStageChapter(0);
