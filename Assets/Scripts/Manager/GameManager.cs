@@ -15,23 +15,46 @@ public class GameManager : MonoSingleton<GameManager>
             public List<string> deckIDs;
         }
 
-        public List<DeckInfo> deckInfos;
-
+        public List<DeckInfo> deck;
     }
+
+    [System.Serializable]
+    public class StageClearInfo
+    {
+        [System.Serializable]
+        public class StageLevelInfo
+        {
+            [System.Serializable]
+            public class StageInfo
+            {
+                public bool isClear;
+                public bool achievement1;
+                public bool achievement2;
+                public bool achievement3;
+            }
+            public List<StageInfo> stageLevel;
+        }
+
+        public List<StageLevelInfo> stageChpater;
+    }
+
     public Stack<string> sceneStack = new Stack<string>();  //BackKey 기능을 위해 씬 Buildindex를 저장하는 스택 
 
     public SkillsScriptableObject skillResource;
     public List<GameObject> skills;
-
     public List<List<GameObject>> deckList;
-    public AllDeckInfo allDeckInfo;
     public List<GameObject> currentDeck;
+
+    private AllDeckInfo allDeckInfo;
+    private StageClearInfo stageClearInfo;
 
     public bool isStart;
     private int loadStageChapter;
     private int loadStageLevel;
 
- 
+    private int chapterMax = 10;
+    private int levelMax = 10;
+
     private void Awake()
     {
         Init();
@@ -40,18 +63,19 @@ public class GameManager : MonoSingleton<GameManager>
     public void Init()
     {
         SceneManager.sceneLoaded += OnSceneLoaded;
-        
+
         loadStageChapter = 0;
         loadStageLevel = 0;
 
         LoadResource();
         LoadDeckInfos();
+        LoadStageClearInfo();
     }
 
     private void LoadResource()
     {
         skillResource = (SkillsScriptableObject)Resources.Load("SkillList", typeof(SkillsScriptableObject));
-        skills = skillResource.skillList; 
+        skills = skillResource.skillList;
     }
 
     private void LoadDeckInfos()
@@ -68,7 +92,7 @@ public class GameManager : MonoSingleton<GameManager>
                 if (File.Exists(path))
                 {
                     string jsonData = File.ReadAllText(path);
-                    this.allDeckInfo = JsonUtility.FromJson<AllDeckInfo>(jsonData);
+                    this.allDeckInfo.deck[i] = JsonUtility.FromJson<AllDeckInfo.DeckInfo>(jsonData);
                 }
                 else
                 {
@@ -85,17 +109,35 @@ public class GameManager : MonoSingleton<GameManager>
                 Debug.Log(e2.Message);
             }
 
-            for(int j = 0; j < 3; j++)
+            for (int j = 0; j < 3; j++)
             {
-                for(int k = 0; k < skills.Count; k++)
+                for (int k = 0; k < skills.Count; k++)
                 {
                     if (skills[k].GetComponent<Skill>().id
-                        == this.allDeckInfo.deckInfos[i].deckIDs[j])
+                        == this.allDeckInfo.deck[i].deckIDs[j])
                         deckList[i][j] = skills[k];
                     else if ("space"
-                        == this.allDeckInfo.deckInfos[i].deckIDs[j])
+                        == this.allDeckInfo.deck[i].deckIDs[j])
                         deckList[i][j] = null;
                 }
+            }
+        }
+    }
+
+    private void MakeEmptyDeck()
+    {
+        deckList = new List<List<GameObject>>();
+        allDeckInfo = new AllDeckInfo();
+        allDeckInfo.deck = new List<AllDeckInfo.DeckInfo>();
+        for (int i = 0; i < 3; i++)
+        {
+            deckList.Add(new List<GameObject>());
+            allDeckInfo.deck.Add(new AllDeckInfo.DeckInfo());
+            allDeckInfo.deck[i].deckIDs = new List<string>();
+            for (int j = 0; j < 3; j++)
+            {
+                deckList[i].Add(null);
+                allDeckInfo.deck[i].deckIDs.Add("space");
             }
         }
     }
@@ -114,18 +156,18 @@ public class GameManager : MonoSingleton<GameManager>
         {
             for (int i = 0; i < 3; i++)
             {
-                allDeckInfo.deckInfos[order].deckIDs[i] = "space";
+                allDeckInfo.deck[order].deckIDs[i] = "space";
             }
         }
         else
         {
             for (int i = 0; i < 3; i++)
             {
-                allDeckInfo.deckInfos[order].deckIDs[i] = deckList[order][i].GetComponent<Skill>().id;
+                allDeckInfo.deck[order].deckIDs[i] = deckList[order][i].GetComponent<Skill>().id;
             }
         }
 
-        string jsonData = JsonUtility.ToJson(allDeckInfo);
+        string jsonData = JsonUtility.ToJson(allDeckInfo.deck[order]);
         string path = string.Format("Assets/UserData/DeckData/Deck{0}.json", order);
 
         System.IO.FileInfo file = new System.IO.FileInfo(path);
@@ -147,24 +189,83 @@ public class GameManager : MonoSingleton<GameManager>
         }
     }
 
-    private void MakeEmptyDeck()
+    public void LoadStageClearInfo()
     {
-        deckList = new List<List<GameObject>>();
-        allDeckInfo = new AllDeckInfo();
-        allDeckInfo.deckInfos = new List<AllDeckInfo.DeckInfo>();
-        for (int i = 0; i < 3; i++)
+        MakeEmptyStageClearInfo();
+
+        string path = string.Format("Assets/UserData/StageClearData.json");
+        System.IO.FileInfo file = new System.IO.FileInfo(path);
+
+        try
         {
-            deckList.Add(new List<GameObject>());
-            allDeckInfo.deckInfos.Add(new AllDeckInfo.DeckInfo());
-            allDeckInfo.deckInfos[i].deckIDs = new List<string>();
-            for (int j = 0; j < 3; j++)
+            if (File.Exists(path))
             {
-                deckList[i].Add(null);
-                allDeckInfo.deckInfos[i].deckIDs.Add("space");
+                string jsonData = File.ReadAllText(path);
+                this.stageClearInfo = JsonUtility.FromJson<StageClearInfo>(jsonData);
+            }
+            else
+            {
+                
+            }
+        }
+        catch (System.ArgumentException e1)
+        {
+            Debug.Log(e1.Message);
+
+        }
+        catch (System.Exception e2)
+        {
+            Debug.Log(e2.Message);
+        }
+
+    }
+
+    public void MakeEmptyStageClearInfo()
+    {
+        stageClearInfo = new StageClearInfo();
+        stageClearInfo.stageChpater = new List<StageClearInfo.StageLevelInfo>();
+
+        for (int i = 0; i < chapterMax; i++)
+        {
+            stageClearInfo.stageChpater.Add(new StageClearInfo.StageLevelInfo());
+            stageClearInfo.stageChpater[i].stageLevel = new List<StageClearInfo.StageLevelInfo.StageInfo>();
+
+            for (int j = 0; j < levelMax; j++)
+            {
+                stageClearInfo.stageChpater[i].stageLevel.Add(new StageClearInfo.StageLevelInfo.StageInfo());
+                stageClearInfo.stageChpater[i].stageLevel[j].isClear = false;
+                stageClearInfo.stageChpater[i].stageLevel[j].achievement1 = false;
+                stageClearInfo.stageChpater[i].stageLevel[j].achievement2 = false;
+                stageClearInfo.stageChpater[i].stageLevel[j].achievement3 = false;
             }
         }
     }
-    
+
+    public void SaveStageClearInfo()
+    {
+
+        string jsonData = JsonUtility.ToJson(stageClearInfo);
+        string path = string.Format("Assets/UserData/StageClearData.json");
+
+        System.IO.FileInfo file = new System.IO.FileInfo(path);
+        file.Directory.Create();
+
+        try
+        {
+            File.WriteAllText(file.FullName, jsonData);
+        }
+        catch (System.ArgumentException e1)
+        {
+            Debug.Log(e1.Message);
+            // stage name 재입력 event
+        }
+        catch (System.Exception e2)
+        {
+            Debug.Log(e2.Message);
+            // IOException or UnauthorizedAccessException
+        }
+    }
+
     public void LoadScene(string sceneName)
     {
         SceneManager.LoadScene(sceneName);
@@ -199,6 +300,13 @@ public class GameManager : MonoSingleton<GameManager>
     public void SetLoadStageLevel(int loadStageLevel)
     {
         this.loadStageLevel = loadStageLevel;
+    }
+
+    public void OnApplicationQuit()
+    {
+        SaveStageClearInfo();
+        for (int i = 0; i < 3; i++)
+            SaveDeckInfos(i);
     }
 
     // ---------------------- INGAME ----------------------
@@ -253,5 +361,22 @@ public class GameManager : MonoSingleton<GameManager>
         isStageClear = true;
         PanelSystem panelSys = inGameUI.transform.Find("IngamePanel").gameObject.GetComponent<PanelSystem>();
         panelSys.SetPanel(panelSys.stageClearPanel);
+
+        ProcessStageClear();
+    }
+
+    public void ProcessStageClear()
+    {
+        bool temp = false;
+        stageClearInfo.stageChpater[loadStageChapter].stageLevel[loadStageLevel].isClear = true;
+
+        /* 업적 시스템 추가될 경우
+        if(temp)
+            stageClearInfo.stageChpater[loadStageChapter].stageLevel[loadStageLevel].achievement1 = true;
+        if (temp)
+            stageClearInfo.stageChpater[loadStageChapter].stageLevel[loadStageLevel].achievement2 = true;
+        if (temp)
+            stageClearInfo.stageChpater[loadStageChapter].stageLevel[loadStageLevel].achievement3 = true;
+        */
     }
 }
