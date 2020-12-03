@@ -67,7 +67,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   TowerName: TriangleTower
   TowerDescription: 
-  bullet: {fileID: 1007396303048527707, guid: 90c0b8b02e7e7284586127861642ef77, type: 3}
+  bullet: {fileID: 3965979616598262326, guid: f7d569661b56ba04585bbb294e9f071c, type: 3}
   Stats:
     baseStats:
       damage: 25

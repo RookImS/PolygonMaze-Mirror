@@ -24,38 +24,38 @@ public class TagManager : MonoSingleton<TagManager>
 
         enemyTagList.Add("Enemy");
     }
-    public bool isNotDeployableTag(string tag)
+    public bool isNotDeployableTag(GameObject obj)
     {
-        foreach (string checkTag in buildingObjectTagList)
+        for (int i = 0; i < buildingObjectTagList.Count; i++)
         {
-            if (checkTag.Equals(tag))
+            if (obj.CompareTag(buildingObjectTagList[i]))
                 return true;
         }
 
-        foreach (string checkTag in enemyTagList)
+        for (int i = 0; i < enemyTagList.Count; i++)
         {
-            if (checkTag.Equals(tag))
-                return true;
-        }
-
-        return false;
-    }
-
-    public bool isBuildingObjectTag(string tag)
-    {
-        foreach (string checkTag in buildingObjectTagList)
-        {
-            if (checkTag.Equals(tag))
+            if (obj.CompareTag(enemyTagList[i]))
                 return true;
         }
 
         return false;
     }
-    public bool isEnemyTag(string tag)
+
+    public bool isBuildingObjectTag(GameObject obj)
     {
-        foreach (string checkTag in enemyTagList)
+        for (int i = 0; i < buildingObjectTagList.Count; i++)
         {
-            if (checkTag.Equals(tag))
+            if (obj.CompareTag(buildingObjectTagList[i]))
+                return true;
+        }
+
+        return false;
+    }
+    public bool isEnemyTag(GameObject obj)
+    {
+        for (int i = 0; i < enemyTagList.Count; i++)
+        {
+            if (obj.CompareTag(enemyTagList[i]))
                 return true;
         }
 

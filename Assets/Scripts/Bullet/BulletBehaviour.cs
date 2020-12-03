@@ -8,18 +8,19 @@ public class BulletBehaviour : MonoBehaviour
     public List<GameObject> enemyList;
     public GameObject hitCollider;
 
+    public GameObject VFX;
     protected void Awake()
     {
         m_BulletData = GetComponent<BulletData>();
         enemyList = new List<GameObject>();
     }
 
-    public virtual void Init(TowerStatSystem t_stat, TowerSkill t_skill)
+    public virtual void Init(TowerStatSystem t_stat)
     {
 
     }
 
-    public virtual void Init(TowerStatSystem t_stat, TowerSkill t_skill, int ticRate, float attackDuration)
+    public virtual void Init(TowerStatSystem t_stat, int ticRate, float attackDuration)
     {
 
     }

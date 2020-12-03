@@ -8,7 +8,7 @@ public class LevelEditorSideColliderBehaviour : MonoBehaviour
     private void OnTriggerStay(Collider other)
     {
         ObstacleData.Neighbor neighbor = new ObstacleData.Neighbor();
-        if (TagManager.Instance.isBuildingObjectTag(other.gameObject.tag))
+        if (TagManager.Instance.isBuildingObjectTag(other.gameObject))
         {
             if (!parentObject.Equals(other.gameObject))
             {

@@ -11,7 +11,7 @@ public class TowerSkill : Skill
         if (other.gameObject.CompareTag("Tower"))
         {
                 ApplySkill(other.gameObject);
-                applyCountDown = applyInterval;
+                //applyCountDown = applyInterval;
         }
     }
 }

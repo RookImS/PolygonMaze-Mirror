@@ -7,16 +7,9 @@ public class BulletData : MonoBehaviour
     public string bulletName;
     public BulletStatSystem stats;
     public TowerSkill towerSkill;
-    public void Init(TowerStatSystem t_stat, TowerSkill t_skill)
+    public void Init(TowerStatSystem t_stat)
     {
         stats.SetBaseStat(t_stat);
         stats.Init(this);
-
-        towerSkill = t_skill;
-
-        if(towerSkill != null)
-        {
-            gameObject.AddComponent(towerSkill.GetType());
-        }
     }
 }

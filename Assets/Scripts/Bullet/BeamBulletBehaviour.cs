@@ -26,9 +26,9 @@ public class BeamBulletBehaviour : BulletBehaviour
         ticCountDown -= Time.deltaTime;
     }
 
-    public override void Init(TowerStatSystem t_stat, TowerSkill t_skill, int ticRate, float attackDuration)    
+    public override void Init(TowerStatSystem t_stat, int ticRate, float attackDuration)    
     {
-        m_BulletData.Init(t_stat, t_skill);
+        m_BulletData.Init(t_stat);
         transform.localScale = new Vector3(m_BulletData.stats.stats.splashRange / 5f * 2f, 1, m_BulletData.stats.stats.attackRange);
         this.ticRate = ticRate;
         this.attackDuration = attackDuration;
