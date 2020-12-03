@@ -64,10 +64,14 @@ public class SkillListUI : MonoBehaviour
         skillInfo.Name.text = selectedSkill.GetComponent<Skill>().id;
         skillInfo.Desc.text = selectedSkill.GetComponent<Skill>().desc;
         skillInfo.Skillimage.color = selectedSkill.GetComponent<Skill>().color;
+
+        SoundManager.Instance.PlaySound(SoundManager.SoundSpecific.BUTTON, "Common_Button");
     }
 
     public void GetInsertSkill()
     {
         insertCheck = true;
+
+        SoundManager.Instance.PlaySound(SoundManager.SoundSpecific.BUTTON, "Common_Button");
     }
 }

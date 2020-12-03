@@ -2,12 +2,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using TMPro;
 using UnityEngine.UI;
 public class StageSelectionUI : MonoBehaviour
 {
     public GameObject menu;
     public string sceneToLoad;
-
+    public TextMeshProUGUI stageNum;
     private bool isSelectDeck;
 
     private void Awake()
@@ -54,19 +55,29 @@ public class StageSelectionUI : MonoBehaviour
             isSelectDeck = false;
             Debug.Log("스킬의 수가 부족하다.");
         }
+
+        SoundManager.Instance.PlaySound(SoundManager.SoundSpecific.BUTTON, "Common_Button");
     }
 
     public void LoadGame()
     {
         if (isSelectDeck)
+        {
+            SoundManager.Instance.PlayBGM("InGame_BGM");
             SceneManager.LoadScene(sceneToLoad);
+            SoundManager.Instance.PlaySound(SoundManager.SoundSpecific.BUTTON, "Confirm_Button");
+        }
         else
+        {
             Debug.Log("Deck 없어!");
+            SoundManager.Instance.PlaySound(SoundManager.SoundSpecific.BUTTON, "Button_Fail");
+        }
     }
 
     public void OnClickStageButton(string stage)
     {
         string[] chapterAndLevel = stage.Split('-');
+        stageNum.text = stage;
         int chapter = 0;
         int level = 0;
 
@@ -89,11 +100,13 @@ public class StageSelectionUI : MonoBehaviour
         }
 
         menu.SetActive(true);
+        SoundManager.Instance.PlaySound(SoundManager.SoundSpecific.BUTTON, "Common_Button");
     }
 
     public void OnClickCancleButton()
     {
         Init();
         menu.SetActive(false);
+        SoundManager.Instance.PlaySound(SoundManager.SoundSpecific.BUTTON, "Cancle_Button");
     }
 }

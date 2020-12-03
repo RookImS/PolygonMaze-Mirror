@@ -25,6 +25,7 @@ public class PlayerControl : MonoSingleton<PlayerControl>
     public void GainCost(int reward)
     {
         playerData.ChangeCost(reward);
+        SoundManager.instance.PlaySound(SoundManager.SoundSpecific.OTHERUI, "Coin_Sound");
     }
 
     public bool CheckCost(int cost)

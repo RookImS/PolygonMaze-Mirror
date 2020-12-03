@@ -5,7 +5,7 @@ using TMPro;
 
 public class SkillUI : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler
 {
-    public GameObject skill;
+    [HideInInspector] public GameObject skill;
     public Image skillImage;
     public CanvasGroup canvasGroup;
     public TextMeshProUGUI skillCostText;
@@ -56,6 +56,11 @@ public class SkillUI : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragH
 
         skillCostText.text = skill.GetComponent<Skill>().cost.ToString();
         skillImage.color = skill.GetComponent<Skill>().color;
+    }
+
+    public void OnMouseDown()
+    {
+        SoundManager.Instance.PlaySound(SoundManager.SoundSpecific.BUTTON, "Tower_Button");
     }
 
     public void OnBeginDrag(PointerEventData eventData)

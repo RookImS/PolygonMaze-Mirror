@@ -67,6 +67,11 @@ MonoBehaviour:
   cost: 150
   skillSprite: {fileID: 0}
   color: {r: 0, g: 1, b: 0, a: 1}
+  skillSoundSpecific: 2
+  ready_sound_name: Green_Ready_Sound
+  use_sound_name: Green_Use_Sound
+  effect_sound_name: Green_Effect_Sound
+  apply_sound_name: Green_Apply_Sound
   modifier:
     ModifierMode: 1
     Stats:

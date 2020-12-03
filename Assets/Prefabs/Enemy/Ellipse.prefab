@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 4421627279371852161}
   - component: {fileID: 2267622519217134803}
   - component: {fileID: 7903268670659505694}
-  - component: {fileID: 5343691990308656294}
+  - component: {fileID: 2731136339741662774}
   - component: {fileID: 5850620350833123655}
   - component: {fileID: 1315189123061703426}
   - component: {fileID: 5891084901732780967}
@@ -61,7 +61,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2117414a62b000f4e8490b3b39745a7c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hpBar: {fileID: 0}
+  hpBar: {fileID: 2731136339741662774}
   reward: 35
   damage: 1
   Stats:
@@ -79,7 +79,7 @@ MonoBehaviour:
       damage: 0
       applyDuration: 0
       applyTimer: 0
---- !u!114 &5343691990308656294
+--- !u!114 &2731136339741662774
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

@@ -67,6 +67,10 @@ MonoBehaviour:
   cost: 150
   skillSprite: {fileID: 0}
   color: {r: 1, g: 0, b: 0, a: 1}
+  skillSoundSpecific: 1
+  ready_sound_name: Red_Ready_Sound
+  use_sound_name: Red_Use_Sound
+  effect_sound_name: Space
   modifier:
     ModifierMode: 1
     Stats:

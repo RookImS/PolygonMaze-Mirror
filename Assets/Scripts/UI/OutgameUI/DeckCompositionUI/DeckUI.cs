@@ -27,6 +27,7 @@ public class DeckUI : MonoBehaviour
                 transform.GetChild(i).Find("SkillImage").GetComponent<Image>().color = deck[i].GetComponent<Skill>().color;
         }
     }
+
     public void InsertDeck(int num)
     {
         if (skillListUI.insertCheck)
@@ -45,6 +46,7 @@ public class DeckUI : MonoBehaviour
             this.transform.GetChild(num).Find("SkillImage").GetComponent<Image>().color = skillListUI.selectedSkill.GetComponent<Skill>().color;
             
             skillListUI.insertCheck = false;
+            GameManager.Instance.SaveDeckInfos(order);
         }
         else
             return;
