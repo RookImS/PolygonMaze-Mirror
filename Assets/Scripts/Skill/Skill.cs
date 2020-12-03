@@ -13,13 +13,13 @@ public class Skill : MonoBehaviour
     public float range;
     public int cost;
     public Sprite skillSprite;
-    public Renderer rend;
     public Color color;
 
-    [HideInInspector] public float applyInterval;     // 스킬이 적용되는 간격
-    [HideInInspector] public float applyCountDown;
+    //[HideInInspector] public float applyInterval;     // 스킬이 적용되는 간격
+    //[HideInInspector] public float applyCountDown;
 
     private bool isEnoughMoney;
+    private bool isDeploy;
 
     private void Awake()
     {
@@ -28,30 +28,20 @@ public class Skill : MonoBehaviour
 
     private void Update()
     {
-        if (applyCountDown > 0)
-            applyCountDown -= Time.deltaTime;
-        else
-            applyCountDown = 0;
-
-        isEnoughMoney = PlayerControl.Instance.CheckCost(cost);
-        
-        if(isEnoughMoney)
-        {
-            rend.material.color = new Color(1f, 1f, 1f, 170 / 255f);
-        }
-        else
-        {
-            rend.material.color = new Color(1f, 170 / 255f, 170 / 255f, 170 / 255f);
-        }
+        //if (!isDeploy)
+        //{
+        //    isEnoughMoney = PlayerControl.Instance.CheckCost(cost);
+        //}
     }
 
     private void Init()
     {
         transform.localScale = new Vector3(range, range, range);
-        applyCountDown = 0f;
-        applyInterval = 0.1f;
+        //applyCountDown = 0f;
+        //applyInterval = 0.1f;
 
-        isEnoughMoney = false;
+        //isEnoughMoney = false;
+        isDeploy = false;
     }
 
     public void LocateSkill(Vector3 mousePos)
@@ -63,7 +53,7 @@ public class Skill : MonoBehaviour
 
     public bool UseSkill()
     {
-        if (EventSystem.current.IsPointerOverGameObject() || !isEnoughMoney)
+        if (EventSystem.current.IsPointerOverGameObject()/* || !isEnoughMoney*/)
         {
             Destroy(this.gameObject);
 
@@ -76,6 +66,7 @@ public class Skill : MonoBehaviour
             transform.Find("Range").gameObject.SetActive(false);
             transform.Find("Effect").gameObject.SetActive(true);
             StartCoroutine("CheckSkillDuration");
+            isDeploy = true;
 
             return true;
         }

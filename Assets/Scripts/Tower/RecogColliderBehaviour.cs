@@ -32,14 +32,14 @@ public class RecogColliderBehaviour : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (TagManager.Instance.isEnemyTag(other.gameObject.tag))
+        if (TagManager.Instance.isEnemyTag(other.gameObject))
         {
             parentTowerBehaviour.targetList.Add(other.gameObject);
         }
     }
     private void OnTriggerExit(Collider other)
     {
-        if (TagManager.Instance.isEnemyTag(other.gameObject.tag))
+        if (TagManager.Instance.isEnemyTag(other.gameObject))
         {
             parentTowerBehaviour.targetList.Remove(other.gameObject);
             if (parentTowerBehaviour.target == other.gameObject)

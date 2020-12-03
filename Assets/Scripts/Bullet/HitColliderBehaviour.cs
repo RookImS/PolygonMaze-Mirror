@@ -31,14 +31,14 @@ public class HitColliderBehaviour : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if(TagManager.Instance.isEnemyTag(other.gameObject.tag))
+        if(TagManager.Instance.isEnemyTag(other.gameObject))
         {
             parentBulletBehaviour.enemyList.Add(other.gameObject);
         }
     }
     private void OnTriggerExit(Collider other)
     {
-        if(TagManager.Instance.isEnemyTag(other.gameObject.tag))
+        if(TagManager.Instance.isEnemyTag(other.gameObject))
         {
             parentBulletBehaviour.enemyList.Remove(other.gameObject);
         }

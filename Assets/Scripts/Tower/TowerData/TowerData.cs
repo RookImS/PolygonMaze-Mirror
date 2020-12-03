@@ -26,9 +26,4 @@ public class TowerData : MonoBehaviour
     public virtual void Shoot(Transform muzzle)
     {
     }
-
-    public void ApplyTowerSkill(TowerSkill towerSkill)
-    {
-        this.towerSkill = towerSkill;
-    }
 }

@@ -182,7 +182,7 @@ public class ObstacleDeployBehaviour : MonoBehaviour
 
     private void OnTriggerStay(Collider other)
     {
-        if (TagManager.Instance.isNotDeployableTag(other.gameObject.tag))
+        if (TagManager.Instance.isNotDeployableTag(other.gameObject))
         {
             if (isProperLocate)
                 isOverlapped = true;
@@ -191,7 +191,7 @@ public class ObstacleDeployBehaviour : MonoBehaviour
 
     private void OnTriggerExit(Collider other)
     {
-        if (TagManager.Instance.isNotDeployableTag(other.gameObject.tag))
+        if (TagManager.Instance.isNotDeployableTag(other.gameObject))
         {
             isOverlapped = false;
         }

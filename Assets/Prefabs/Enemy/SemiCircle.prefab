@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 1305009841147989740}
   - component: {fileID: 2968503567986400731}
   - component: {fileID: 2035499216702226949}
+  - component: {fileID: 7880843278063144273}
   - component: {fileID: 8099589086724157262}
   - component: {fileID: 347632175663705194}
   - component: {fileID: 8858372172024150530}
@@ -78,6 +79,26 @@ MonoBehaviour:
       damage: 0
       applyDuration: 0
       applyTimer: 0
+--- !u!114 &7880843278063144273
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2794680669866632871}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 50511f5e8eceb4049a155208a97a8e78, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hpBar: {fileID: 1851173057697602164, guid: 3a4fa8b3575a2b94e8c24a5fdd8064e5, type: 3}
+  hpUI: {fileID: 0}
+  owner: {fileID: 0}
+  ownerData: {fileID: 0}
+  m_hpBar: {fileID: 0}
+  currentHp: {fileID: 0}
+  changeHp: {fileID: 0}
+  needChange: 0
 --- !u!65 &8099589086724157262
 BoxCollider:
   m_ObjectHideFlags: 0
