@@ -23,6 +23,8 @@ public class HpBar : MonoBehaviour
 
         m_hpBar = Instantiate(hpBar, hpUI.transform);
 
+        m_hpBar.GetComponent<Canvas>().sortingLayerName = "Ingame";
+        m_hpBar.GetComponent<Canvas>().sortingOrder = 0;
         currentHp = m_hpBar.transform.Find("currentHp").gameObject.GetComponent<Slider>();
         currentHp.maxValue = ownerData.Stats.stats.hp;
         currentHp.value = currentHp.maxValue;

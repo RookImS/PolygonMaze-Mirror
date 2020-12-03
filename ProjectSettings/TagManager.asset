@@ -53,9 +53,15 @@ TagManager:
   - name: Background
     uniqueID: 2443475973
     locked: 0
-  - name: Default
-    uniqueID: 0
+  - name: Ingame
+    uniqueID: 3655224929
+    locked: 0
+  - name: UI
+    uniqueID: 4090809605
     locked: 0
   - name: Deploy
     uniqueID: 356635979
+    locked: 0
+  - name: Default
+    uniqueID: 0
     locked: 0

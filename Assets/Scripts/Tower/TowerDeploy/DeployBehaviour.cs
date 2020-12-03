@@ -130,7 +130,7 @@ public class DeployBehaviour : MonoBehaviour
         RaycastHit hit;
 
         // locate tower at mousePos(realPos)
-        transform.position = new Vector3(realPos.x, 0f, realPos.z);
+        transform.position = new Vector3(realPos.x, 0f, realPos.z+0.5f);
         transform.eulerAngles = new Vector3(0f, 0f, 0f);
 
         if (Physics.Raycast(ray, out hit, Camera.main.transform.position.y * 1.3f, layerMask))

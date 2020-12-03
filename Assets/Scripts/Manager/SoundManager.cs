@@ -79,25 +79,25 @@ public class SoundManager : MonoSingleton<SoundManager>
 
     public void PlayBGM(string soundName)
     {
-        /*
+
         Sound[] sounds = bgmSounds;
 
         for (int i = 0; i < sounds.Length; i++)
         {
             if (soundName == sounds[i].soundName)
             {
-                if(bgmPlayer.clip != null)
+                if (bgmPlayer.clip != null)
                     if (soundName == "OutGame_BGM" && bgmPlayer.clip.name == "OutGame_BGM")
-                            return;
-                
+                        return;
+
                 bgmPlayer.clip = sounds[i].clip;
                 bgmPlayer.PlayDelayed(1.5f);
                 return;
             }
         }
-        */
+
     }
-  
+
 
     public void PlaySound(SoundSpecific soundSpecific, string soundName)
     {

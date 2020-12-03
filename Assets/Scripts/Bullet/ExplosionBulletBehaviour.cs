@@ -16,6 +16,7 @@ public class ExplosionBulletBehaviour : BulletBehaviour
         m_BulletData = GetComponent<BulletData>();
         enemyList = new List<GameObject>();
 
+        attackStartTime = 0.3f;
         age = 0f;
         attackTime = 0.7f;
         attackNumber = 0;
