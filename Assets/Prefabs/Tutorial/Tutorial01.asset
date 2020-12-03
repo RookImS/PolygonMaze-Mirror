@@ -23,25 +23,40 @@ MonoBehaviour:
       - "\uBE68\uAC04\uC0C9 \uBD80\uBD84\uC740 \uC801\uC774 \uD0C8\uCD9C\uD558\uB294
         \uCD9C\uAD6C\uC785\uB2C8\uB2E4."
       posX: -280
-      posY: 340
+      posY: 200
       width: 1200
       height: 250
     animationList:
-    - obj: {fileID: 9206189686154152021, guid: fdc3ea6c83d188e4e98380216bcea866, type: 3}
+    - obj: {fileID: 7235439674290227489, guid: 8ae96a00a9807ae44a0060487f192af5, type: 3}
       order: 1
       length: 1
-      posX: -900
-      posY: -250
+      posX: -8.32
+      posY: -2.1
       rotation: 0
       enable: 0
-    - obj: {fileID: 9206189686154152021, guid: 4c9394379ab8ecd43a855fb16f7ae51e, type: 3}
+    - obj: {fileID: 7235439674290227489, guid: 8ae96a00a9807ae44a0060487f192af5, type: 3}
       order: 2
       length: 1
-      posX: 900
-      posY: -250
+      posX: 8.32
+      posY: -2.1
       rotation: 0
       enable: 0
     fieldAnimationList: []
+    maskAnimationList:
+    - obj: {fileID: 0}
+      order: 1
+      length: 1
+      posX: -8.32
+      posY: -2.1
+      rotation: 0
+      enable: 0
+    - obj: {fileID: 0}
+      order: 2
+      length: 1
+      posX: 8.32
+      posY: -2.1
+      rotation: 0
+      enable: 0
   - dialogue:
       name: 1_LifeDesc
       sentences:
@@ -50,18 +65,26 @@ MonoBehaviour:
       - "\uB9CC\uC57D \uB77C\uC774\uD504\uAC00 0\uC774 \uB418\uBA74 \uAC8C\uC784\uC5D0\uC11C
         \uD328\uBC30\uD569\uB2C8\uB2E4."
       posX: -280
-      posY: 340
+      posY: 200
       width: 1200
       height: 250
     animationList:
-    - obj: {fileID: 9206189686154152021, guid: d5cc5e9a7891ce84e99e9bf24b033cc8, type: 3}
+    - obj: {fileID: 7235439674290227489, guid: 8ae96a00a9807ae44a0060487f192af5, type: 3}
       order: 1
       length: 2
-      posX: 615
-      posY: -325
+      posX: -6.75
+      posY: 5
       rotation: 0
       enable: 0
     fieldAnimationList: []
+    maskAnimationList:
+    - obj: {fileID: 0}
+      order: 1
+      length: 1
+      posX: -6.75
+      posY: 5
+      rotation: 0
+      enable: 0
   - dialogue:
       name: 2_EnemyDesc
       sentences:
@@ -70,55 +93,79 @@ MonoBehaviour:
         \uB0A8\uC740 \uC801\uC758 \uC218\uAC00 0\uC774 \uB418\uBA74 \uC2A4\uD14C\uC774\uC9C0\uB97C
         \uD074\uB9AC\uC5B4\uD560 \uC218 \uC788\uC2B5\uB2C8\uB2E4."
       posX: -280
-      posY: 340
+      posY: 200
       width: 1200
       height: 250
     animationList:
-    - obj: {fileID: 9206189686154152021, guid: d5cc5e9a7891ce84e99e9bf24b033cc8, type: 3}
+    - obj: {fileID: 7235439674290227489, guid: 8ae96a00a9807ae44a0060487f192af5, type: 3}
       order: 1
       length: 2
-      posX: 860
-      posY: -325
+      posX: 0
+      posY: 5
       rotation: 0
       enable: 0
     fieldAnimationList: []
+    maskAnimationList:
+    - obj: {fileID: 0}
+      order: 1
+      length: 1
+      posX: 0
+      posY: 5
+      rotation: 0
+      enable: 0
   - dialogue:
-      name: 3_ObstacleDesc
+      name: 3_CostDesc
+      sentences:
+      - "\uD604\uC7AC \uAC00\uC9C0\uACE0 \uC788\uB294 \uCF54\uC2A4\uD2B8\uC785\uB2C8\uB2E4."
+      - "\uD0C0\uC6CC\uB97C \uBC30\uCE58\uD560 \uB54C \uC0AC\uC6A9\uD558\uAC8C \uB429\uB2C8\uB2E4."
+      posX: -280
+      posY: 200
+      width: 1200
+      height: 250
+    animationList:
+    - obj: {fileID: 7235439674290227489, guid: 8ae96a00a9807ae44a0060487f192af5, type: 3}
+      order: 1
+      length: 2
+      posX: -3.4
+      posY: 5
+      rotation: 0
+      enable: 0
+    fieldAnimationList: []
+    maskAnimationList:
+    - obj: {fileID: 0}
+      order: 1
+      length: 2
+      posX: -3.4
+      posY: 5
+      rotation: 0
+      enable: 0
+  - dialogue:
+      name: 4_ObstacleDesc
       sentences:
       - "\uAC8C\uC784 \uC2DC\uC791\uC2DC \uAE30\uBCF8\uC801\uC73C\uB85C \uC124\uCE58\uB418\uC5B4
         \uC788\uB294 \uC7A5\uC560\uBB3C\uC785\uB2C8\uB2E4. \uC7A5\uC560\uBB3C\uC740
         \uD68C\uC0C9\uC73C\uB85C \uCE60\uD574\uC838\uC788\uC2B5\uB2C8\uB2E4."
       posX: -280
-      posY: 340
+      posY: 200
       width: 1200
       height: 250
     animationList:
-    - obj: {fileID: 9206189686154152021, guid: fdc3ea6c83d188e4e98380216bcea866, type: 3}
-      order: 1
-      length: 1
-      posX: -550
-      posY: -175
-      rotation: 0
-      enable: 0
-    fieldAnimationList: []
-  - dialogue:
-      name: 4_CostDesc
-      sentences:
-      - "\uD604\uC7AC \uAC00\uC9C0\uACE0 \uC788\uB294 \uCF54\uC2A4\uD2B8\uC785\uB2C8\uB2E4."
-      - "\uD0C0\uC6CC\uB97C \uBC30\uCE58\uD560 \uB54C \uC0AC\uC6A9\uD558\uAC8C \uB429\uB2C8\uB2E4."
-      posX: -280
-      posY: 340
-      width: 1200
-      height: 250
-    animationList:
-    - obj: {fileID: 9206189686154152021, guid: d5cc5e9a7891ce84e99e9bf24b033cc8, type: 3}
+    - obj: {fileID: 7235439674290227489, guid: 8ae96a00a9807ae44a0060487f192af5, type: 3}
       order: 1
       length: 2
-      posX: 615
-      posY: -425
+      posX: -5.54
+      posY: -1.28
       rotation: 0
       enable: 0
     fieldAnimationList: []
+    maskAnimationList:
+    - obj: {fileID: 0}
+      order: 1
+      length: 2
+      posX: -5.54
+      posY: -1.28
+      rotation: 0
+      enable: 0
   - dialogue:
       name: 5_DeployDesc
       sentences:
@@ -128,28 +175,36 @@ MonoBehaviour:
         \uC124\uCE58\uD55C \uD0C0\uC6CC\uC758 \uBCC0\uC5D0 \uB9DE\uB2FF\uC544\uC57C
         \uC124\uCE58\uD560 \uC218 \uC788\uC2B5\uB2C8\uB2E4."
       posX: -280
-      posY: 340
+      posY: 200
       width: 1200
       height: 250
-    animationList: []
+    animationList:
+    - obj: {fileID: 7235439674290227489, guid: 8ae96a00a9807ae44a0060487f192af5, type: 3}
+      order: 1
+      length: 2
+      posX: -8.24
+      posY: -3.85
+      rotation: 0
+      enable: 0
     fieldAnimationList: []
+    maskAnimationList:
+    - obj: {fileID: 0}
+      order: 1
+      length: 2
+      posX: -8.24
+      posY: -3.85
+      rotation: 0
+      enable: 0
   - dialogue:
       name: 6_TriangleDesc
       sentences:
       - "\uD45C\uC2DC\uB41C \uC704\uCE58\uC5D0 \uC0BC\uAC01\uD615 \uD0C0\uC6CC\uB97C
         \uBC30\uCE58\uD558\uC138\uC694."
       posX: -280
-      posY: 340
+      posY: 200
       width: 1200
       height: 250
-    animationList:
-    - obj: {fileID: 9206189686154152021, guid: fdc3ea6c83d188e4e98380216bcea866, type: 3}
-      order: 1
-      length: 1
-      posX: 0
-      posY: 0
-      rotation: 0
-      enable: 0
+    animationList: []
     fieldAnimationList:
     - obj: {fileID: 5889517342648953037, guid: 51554605c8a9ee5438765a985678efaa, type: 3}
       order: 1
@@ -158,42 +213,36 @@ MonoBehaviour:
       posY: -140
       rotation: 30
       enable: 0
+    maskAnimationList: []
   - dialogue:
       name: 7_GainDesc
-      sentences:
-      - "\uC801\uC744 \uCC98\uCE58\uD558\uBA74 \uCF54\uC2A4\uD2B8\uB97C \uC5BB\uC744
-        \uC218 \uC788\uC2B5\uB2C8\uB2E4."
-      posX: -280
-      posY: 340
-      width: 1200
-      height: 250
-    animationList:
-    - obj: {fileID: 9206189686154152021, guid: d5cc5e9a7891ce84e99e9bf24b033cc8, type: 3}
-      order: 1
-      length: 1
-      posX: 615
-      posY: -425
-      rotation: 0
-      enable: 0
-    fieldAnimationList: []
-  - dialogue:
-      name: 8_PathDesc
-      sentences:
-      - "\uD0C0\uC6CC\uB294 \uC801\uC744 \uACF5\uACA9\uD560 \uC218\uB3C4 \uC788\uC9C0\uB9CC
-        \uC801\uC758 \uACBD\uB85C\uB97C \uBCC0\uACBD\uD560 \uC218\uB3C4 \uC788\uC2B5\uB2C8\uB2E4."
+      sentences: []
       posX: -280
       posY: 340
       width: 1200
       height: 250
     animationList: []
     fieldAnimationList: []
+    maskAnimationList: []
+  - dialogue:
+      name: 8_PathDesc
+      sentences:
+      - "\uD0C0\uC6CC\uB294 \uC801\uC744 \uACF5\uACA9\uD560 \uC218\uB3C4 \uC788\uC9C0\uB9CC
+        \uC801\uC758 \uACBD\uB85C\uB97C \uBCC0\uACBD\uD560 \uC218\uB3C4 \uC788\uC2B5\uB2C8\uB2E4."
+      posX: -280
+      posY: 200
+      width: 1200
+      height: 250
+    animationList: []
+    fieldAnimationList: []
+    maskAnimationList: []
   - dialogue:
       name: 9_SquareDesc
       sentences:
       - "\uD45C\uC2DC\uB41C \uC704\uCE58\uC5D0 \uC0AC\uAC01\uD615 \uD0C0\uC6CC\uB97C
         \uBC30\uCE58\uD558\uC138\uC694."
       posX: -280
-      posY: 340
+      posY: 200
       width: 1200
       height: 250
     animationList: []
@@ -201,28 +250,30 @@ MonoBehaviour:
     - obj: {fileID: 4293294981893517376, guid: 9966b84660736d84091a5e5a3119ea47, type: 3}
       order: 1
       length: 2
-      posX: -576.5
-      posY: -290.5
+      posX: -571
+      posY: -280
       rotation: 0
       enable: 0
     - obj: {fileID: 4293294981893517376, guid: 9966b84660736d84091a5e5a3119ea47, type: 3}
       order: 1
       length: 2
-      posX: 442.5
-      posY: -290.5
+      posX: 410
+      posY: -280
       rotation: 0
       enable: 0
+    maskAnimationList: []
   - dialogue:
       name: 10_PathCheckDesc
       sentences:
       - "\uC0AC\uAC01\uD615 \uD0C0\uC6CC\uC758 \uBC30\uCE58\uB85C \uC778\uD574 \uC801\uC758
         \uACBD\uB85C\uAC00 \uBC14\uB010 \uAC83\uC744 \uD655\uC778\uD560 \uC218 \uC788\uC2B5\uB2C8\uB2E4."
       posX: -280
-      posY: 340
+      posY: 200
       width: 1200
       height: 250
     animationList: []
     fieldAnimationList: []
+    maskAnimationList: []
   - dialogue:
       name: 11_NoDeployDesc
       sentences:
@@ -236,10 +287,11 @@ MonoBehaviour:
     - obj: {fileID: 8391835449026218188, guid: dbdc66d33e8c5374a8520b35d2bacd36, type: 3}
       order: 1
       length: 2
-      posX: 334.8
-      posY: 289.6
+      posX: 307
+      posY: 277
       rotation: 0
       enable: 0
+    maskAnimationList: []
   - dialogue:
       name: 12_NoDeployDesc2
       sentences:
@@ -247,20 +299,22 @@ MonoBehaviour:
         \uAE38\uC744 \uBAA8\uB450 \uCC28\uB2E8\uD558\uB294 \uC704\uCE58\uC774\uAE30\uB54C\uBB38\uC5D0
         \uBC30\uCE58\uD560 \uC218 \uC5C6\uC2B5\uB2C8\uB2E4."
       posX: -280
-      posY: 340
+      posY: 200
       width: 1200
       height: 250
     animationList: []
     fieldAnimationList: []
+    maskAnimationList: []
   - dialogue:
       name: 13_Continue
       sentences:
       - "\uAC8C\uC784\uC744 \uACC4\uC18D \uC9C4\uD589\uD558\uC5EC \uAC8C\uC784\uC744
         \uD074\uB9AC\uC5B4\uD574\uBCF4\uC138\uC694!"
       posX: -280
-      posY: 340
+      posY: 200
       width: 1200
       height: 250
     animationList: []
     fieldAnimationList: []
+    maskAnimationList: []
   tutorialChecker: {fileID: 3565427586884206454, guid: 4819b34b03d6c954faebbca3a8cbfd67, type: 3}

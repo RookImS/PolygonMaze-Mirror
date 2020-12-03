@@ -20,11 +20,17 @@ public class TutorialObject : ScriptableObject
             fieldAnimationList = new List<AniObject>();
             foreach (AniObject temp in t.fieldAnimationList)
                 fieldAnimationList.Add(new AniObject(temp));
+
+            maskAnimationList = new List<AniObject>();
+            foreach (AniObject temp in t.maskAnimationList)
+                maskAnimationList.Add(new AniObject(temp));
         }
 
         public Dialogue dialogue;
         public List<AniObject> animationList;
         public List<AniObject> fieldAnimationList;
+        public List<AniObject> maskAnimationList;
+        //public AniObject maskAnimation;
     }
 
     public int chapter;
