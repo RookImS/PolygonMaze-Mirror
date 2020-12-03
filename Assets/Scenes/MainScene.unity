@@ -805,6 +805,12 @@ MonoBehaviour:
   otherUISounds:
   - soundName: Coin_Sound
     clip: {fileID: 8300000, guid: 173fee6920814cf4199e80cf1d273779, type: 3}
+  - soundName: Tower_Locate_Sound
+    clip: {fileID: 8300000, guid: ecba44ecd0fdf0743a0afc4fb65350f7, type: 3}
+  - soundName: Tower_Click_Sound
+    clip: {fileID: 8300000, guid: b503b8a49a86e3e4daf115a0dcdceb0c, type: 3}
+  - soundName: Tutorial_Pass_Sound
+    clip: {fileID: 8300000, guid: 48d98ee6a0b57ff449b451431279cd0c, type: 3}
   enemySounds: []
   towerSounds:
   - soundName: Triangle_Attack

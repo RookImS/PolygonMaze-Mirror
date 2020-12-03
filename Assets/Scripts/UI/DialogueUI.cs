@@ -53,6 +53,8 @@ public class DialogueUI : MonoBehaviour
             StopAllCoroutines();
             StartCoroutine(TypeSentence(arg_sentence));
         }
+
+        SoundManager.instance.PlaySound(SoundManager.SoundSpecific.OTHERUI, "Tutorial_Pass_Sound");
     }
 
     public int GetRemainSentencesCount()

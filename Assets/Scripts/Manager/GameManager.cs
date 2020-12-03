@@ -368,7 +368,7 @@ public class GameManager : MonoSingleton<GameManager>
     public void ProcessStageClear()
     {
         bool temp = false;
-        stageClearInfo.stageChpater[loadStageChapter].stageLevel[loadStageLevel].isClear = true;
+        stageClearInfo.stageChpater[loadStageChapter-1].stageLevel[loadStageLevel-1].isClear = true;
 
         /* 업적 시스템 추가될 경우
         if(temp)

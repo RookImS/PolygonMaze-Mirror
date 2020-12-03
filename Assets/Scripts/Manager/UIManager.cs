@@ -59,6 +59,8 @@ public class UIManager : MonoBehaviour
             {
                 infoUI.EnableInfo(hitTower);
             }
+
+            SoundManager.instance.PlaySound(SoundManager.SoundSpecific.OTHERUI, "Tower_Click_Sound");
         }
         else
         {
