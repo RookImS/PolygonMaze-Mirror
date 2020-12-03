@@ -49,6 +49,11 @@ public class SkillUI : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragH
         skill = GameManager.Instance.currentDeck[randomValue];
     }
 
+    public void OnMouseDown()
+    {
+        SoundManager.Instance.PlaySound(SoundManager.SoundSpecific.BUTTON, "Tower_Button");
+    }
+
     public void OnBeginDrag(PointerEventData eventData)
     {
         newObject = null;
@@ -61,7 +66,6 @@ public class SkillUI : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragH
         newObject = Instantiate(skill, mousePos, skill.transform.rotation);
 
         Time.timeScale = 0.3f;
-        SoundManager.Instance.PlaySound(SoundManager.SoundSpecific.BUTTON, "Tower_Button");
     }
     public void OnDrag(PointerEventData eventData)
     {

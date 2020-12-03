@@ -20,6 +20,6 @@ public class Blue : FieldSkill
 
         modifier.Stats = changeStat;
 
-        obj.GetComponent<EnemyData>().Stats.AddTimedModifier(modifier, applyDuration, id, skillSprite);
+        obj.GetComponent<EnemyData>().Stats.AddTimedModifier(modifier, applyDuration, id, skillSprite, skillSoundSpecific, apply_sound_name);
     }
 }

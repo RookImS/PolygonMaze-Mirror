@@ -234,6 +234,11 @@ MonoBehaviour:
   color: {r: 1, g: 1, b: 0, a: 1}
   applyInterval: 0.1
   applyCountDown: 0
+  skillSoundSpecific: 0
+  ready_sound_name: Yellow_Ready_Sound
+  use_sound_name: Yellow_Use_Sound
+  effect_sound_name: Yellow_Effect_Sound
+  apply_sound_name: Yellow_Apply_Sound
   modifier:
     ModifierMode: 1
     Stats:

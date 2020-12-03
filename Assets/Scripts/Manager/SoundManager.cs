@@ -39,7 +39,12 @@ public class SoundManager : MonoSingleton<SoundManager>
 
     [Header("Audio Source")]
     [SerializeField] public AudioSource bgmPlayer;
-    [SerializeField] public AudioSource[] audioPlayer;
+    public AudioSourceCollection skillLoopAudioSourceCollection;
+    public AudioSourceCollection skillAudioSourceCollection;
+    public AudioSourceCollection otherAudioSourceCollection;
+    private AudioSource[] skillLoopAudioPlayer;
+    private AudioSource[] skillAudioPlayer;
+    private AudioSource[] otherAudioPlayer;
 
     public enum SoundSpecific
     {
@@ -66,11 +71,15 @@ public class SoundManager : MonoSingleton<SoundManager>
 
     private void Start()
     {
+        skillLoopAudioPlayer = skillLoopAudioSourceCollection.audioSources;
+        skillAudioPlayer = skillAudioSourceCollection.audioSources;
+        otherAudioPlayer = otherAudioSourceCollection.audioSources;
         PlayBGM("OutGame_BGM");
     }
 
     public void PlayBGM(string soundName)
     {
+        /*
         Sound[] sounds = bgmSounds;
 
         for (int i = 0; i < sounds.Length; i++)
@@ -86,6 +95,7 @@ public class SoundManager : MonoSingleton<SoundManager>
                 return;
             }
         }
+        */
     }
   
 
@@ -104,12 +114,12 @@ public class SoundManager : MonoSingleton<SoundManager>
         {
             if (soundName == sounds[i].soundName)
             {
-                for (int j = 0; j < audioPlayer.Length; j++)
+                for (int j = 0; j < otherAudioPlayer.Length; j++)
                 {
-                    if (!audioPlayer[j].isPlaying)
+                    if (!otherAudioPlayer[j].isPlaying)
                     {
-                        audioPlayer[j].clip = sounds[i].clip;
-                        audioPlayer[j].Play();
+                        otherAudioPlayer[j].clip = sounds[i].clip;
+                        otherAudioPlayer[j].Play();
                         return;
                     }
                 }
@@ -128,24 +138,24 @@ public class SoundManager : MonoSingleton<SoundManager>
         {
             if (soundName == sounds[i].soundName)
             {
-                for (int j = 0; j < audioPlayer.Length; j++)
+                for (int j = 0; j < otherAudioPlayer.Length; j++)
                 {
-                    if (!audioPlayer[j].isPlaying)
+                    if (!otherAudioPlayer[j].isPlaying)
                     {
-                        audioPlayer[j].clip = sounds[i].clip;
-                        audioPlayer[j].Play();
+                        otherAudioPlayer[j].clip = sounds[i].clip;
+                        otherAudioPlayer[j].Play();
                         return;
                     }
                 }
 
-                Debug.Log("Audio Source is full");
+                Debug.Log("Tower Audio Source is full");
                 return;
             }  
         }
     }
 
 
-    public void PlaySound(SkillSoundSpecific skillSoundSpecific, string soundName)
+    public void PlaySkillSound(SkillSoundSpecific skillSoundSpecific, string soundName)
     {
         Sound[] sounds;
 
@@ -162,19 +172,66 @@ public class SoundManager : MonoSingleton<SoundManager>
         {
             if (soundName == sounds[i].soundName)
             {
-                for (int j = 0; j < audioPlayer.Length; j++)
+                for (int j = 0; j < skillAudioPlayer.Length; j++)
                 {
-                    if (!audioPlayer[j].isPlaying)
+                    if (!skillAudioPlayer[j].isPlaying)
                     {
-                        audioPlayer[j].clip = sounds[i].clip;
-                        audioPlayer[j].Play();
+                        skillAudioPlayer[j].clip = sounds[i].clip;
+                        skillAudioPlayer[j].Play();
                         return;
                     }
                 }
 
-                Debug.Log("Audio Source is full");
+                Debug.Log("Skill Audio Source is full");
                 return;
             }  
         }
+    }
+
+    public AudioSource GetLoopSkillAudio()
+    {
+        for (int j = 0; j < skillLoopAudioPlayer.Length; j++)
+        {
+            if (!skillLoopAudioPlayer[j].isPlaying)
+            {
+                return skillLoopAudioPlayer[j];
+            }
+        }
+
+        Debug.Log("Skill Audio Source is full");
+        return null;
+    }
+
+    public void PlayLoopSkillSound(AudioSource audioSource, SkillSoundSpecific skillSoundSpecific, string soundName)
+    {
+        Sound[] sounds;
+
+        if (audioSource == null)
+            return;
+
+        if (skillSoundSpecific == SkillSoundSpecific.YELLOW)
+            sounds = yellowSounds;
+        else if (skillSoundSpecific == SkillSoundSpecific.RED)
+            sounds = redSounds;
+        else if (skillSoundSpecific == SkillSoundSpecific.GREEN)
+            sounds = greenSounds;
+        else
+            sounds = blueSounds;
+
+        for (int i = 0; i < sounds.Length; i++)
+        {
+            if (soundName == sounds[i].soundName)
+            {
+                audioSource.clip = sounds[i].clip;
+                audioSource.Play();
+                break;
+            }
+        }
+    }
+
+    public void StopAudio(AudioSource audioSource)
+    {
+        if (audioSource != null)
+            audioSource.Stop();
     }
 }

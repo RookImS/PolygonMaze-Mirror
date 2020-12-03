@@ -119,7 +119,8 @@ public class EnemyStatSystem
     }
 
 
-    public bool AddTimedModifier(StatModifier modifier, float duration, string id, Sprite sprite)
+    public bool AddTimedModifier(StatModifier modifier, float duration, string id, Sprite sprite,
+        SoundManager.SkillSoundSpecific soundSpecific, string apply_sound_name)
     {
         bool found = false;
         int index = m_TimedModifierStack.Count;
@@ -135,6 +136,7 @@ public class EnemyStatSystem
         if (!found)
         {
             m_TimedModifierStack.Add(new TimedStatModifier() { Id = id });
+            SoundManager.instance.PlaySkillSound(soundSpecific, apply_sound_name);
         }
 
         m_TimedModifierStack[index].EffectSprite = sprite;

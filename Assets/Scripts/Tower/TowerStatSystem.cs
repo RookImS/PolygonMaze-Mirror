@@ -110,7 +110,8 @@ public class TowerStatSystem
         UpdateFinalStats();
     }
 
-    public void AddTimedModifier(StatModifier modifier, float duration, string id, Sprite sprite)
+    public void AddTimedModifier(StatModifier modifier, float duration, string id, Sprite sprite,
+        SoundManager.SkillSoundSpecific skillSoundSpecific, string apply_sound_name)
     {
         bool found = false;
         int index = m_TimedModifierStack.Count;
@@ -126,6 +127,7 @@ public class TowerStatSystem
         if (!found)
         {
             m_TimedModifierStack.Add(new TimedStatModifier() { Id = id });
+            SoundManager.instance.PlaySkillSound(skillSoundSpecific, apply_sound_name);
         }
 
         m_TimedModifierStack[index].EffectSprite = sprite;

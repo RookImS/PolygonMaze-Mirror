@@ -2,7 +2,7 @@
 
 public class MonoSingleton<T> : MonoBehaviour where T : MonoBehaviour
 {
-    protected static T instance = null;
+    public static T instance = null;
     public static T Instance
     {
         get
@@ -15,13 +15,13 @@ public class MonoSingleton<T> : MonoBehaviour where T : MonoBehaviour
                 {
                     instance = new GameObject("@" + typeof(T).ToString()).AddComponent<T>();
                 }
-                DontDestroyOnLoad(Instance);
+                DontDestroyOnLoad(instance.gameObject);
             }
             return instance;
         }
     }
 
-    protected void Awake()
+    public void Awake()
     {
         if (instance == null)
         {
@@ -31,7 +31,7 @@ public class MonoSingleton<T> : MonoBehaviour where T : MonoBehaviour
             {
                 instance = new GameObject("@" + typeof(T).ToString()).AddComponent<T>();  
             }
-            DontDestroyOnLoad(Instance);
+            DontDestroyOnLoad(instance.gameObject);
         }
         else
         {
