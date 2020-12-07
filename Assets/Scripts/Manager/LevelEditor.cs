@@ -325,7 +325,11 @@ public class LevelEditor : MonoBehaviour
         UpdateStageData();
 
         string jsonData = JsonUtility.ToJson(stageData);
-        string path = string.Format("Assets/StageData/{0}-{1}.json", stageData.stageChapter, stageData.stageLevel);
+        string path;
+        if (Application.platform == RuntimePlatform.Android)
+            path = Application.persistentDataPath + string.Format("/StageData/{0}-{1}.json");
+        else
+            path = string.Format("Assets/StageData/{0}-{1}.json");
 
         System.IO.FileInfo file = new System.IO.FileInfo(path);
         file.Directory.Create();

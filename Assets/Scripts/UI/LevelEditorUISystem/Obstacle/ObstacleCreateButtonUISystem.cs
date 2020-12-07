@@ -13,8 +13,6 @@ public class ObstacleCreateButtonUISystem : MonoBehaviour, IBeginDragHandler, ID
     private GameObject newObject;
     [HideInInspector] public GameObject hitObject;
 
-    private bool isDeployable;
-
     public bool isProgressDeploy;
 
     Vector3 mousePos;
@@ -31,7 +29,6 @@ public class ObstacleCreateButtonUISystem : MonoBehaviour, IBeginDragHandler, ID
 
     private void Init()
     {
-        isDeployable = false;
         isProgressDeploy = false;
     }
 

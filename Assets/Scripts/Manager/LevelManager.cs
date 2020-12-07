@@ -125,6 +125,7 @@ public class LevelManager : MonoBehaviour
     {
         int loadStageChapter = GameManager.Instance.GetLoadStageChapter();
         int loadStageLevel = GameManager.Instance.GetLoadStageLevel();
+
         string streamingAssetsDirectory = "jar:file://" + Application.dataPath + "!/assets/";
         string filepath = streamingAssetsDirectory + string.Format("{0}-{1}.json", loadStageChapter, loadStageLevel);
         WWW www = new WWW(filepath);

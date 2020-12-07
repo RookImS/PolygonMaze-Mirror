@@ -11,7 +11,7 @@ public class ExplosionBulletBehaviour : BulletBehaviour
     private float attackTime;
     private int attackNumber;
 
-    private void Awake()
+    private new void Awake()
     {
         m_BulletData = GetComponent<BulletData>();
         enemyList = new List<GameObject>();

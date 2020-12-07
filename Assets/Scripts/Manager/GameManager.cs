@@ -55,7 +55,7 @@ public class GameManager : MonoSingleton<GameManager>
     private int chapterMax = 10;
     private int levelMax = 10;
 
-    private void Awake()
+    private new void Awake()
     {
         Init();
     }
