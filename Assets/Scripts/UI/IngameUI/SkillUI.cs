@@ -6,12 +6,17 @@ using TMPro;
 public class SkillUI : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler
 {
     [HideInInspector] public GameObject skill;
+    public int skillRefreshCost;
+
     public Image skillImage;
-    public CanvasGroup canvasGroup;
+    public CanvasGroup slotCanvasGroup;
+    public CanvasGroup refreshCanvasGroup;
     public TextMeshProUGUI skillCostText;
+    public TextMeshProUGUI skillRefreshCostText;
 
     private GameObject newObject;
     private bool skillUseEnable;
+    private bool skillRefreshEnable;
 
     private Vector3 mousePos;
 
@@ -28,34 +33,57 @@ public class SkillUI : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragH
     private void Init()
     {
         SelectNextSkill();
+        skillRefreshCostText.text = skillRefreshCost.ToString();
     }
 
     private void UpdateSkillCostText()
     {
-        if (skill.GetComponent<Skill>().cost > PlayerControl.Instance.playerData.currentCost)
-            skillUseEnable = false;
-        else
+        if (PlayerControl.Instance.CheckCost(skill.GetComponent<Skill>().cost))
             skillUseEnable = true;
+        else
+            skillUseEnable = false;
 
         if (skillUseEnable)
         {
-            skillCostText.color = Color.white;  
-            canvasGroup.blocksRaycasts = true;
+            skillCostText.color = Color.white;
+            slotCanvasGroup.blocksRaycasts = true;
         }
         else
         {
             skillCostText.color = Color.red;
-            canvasGroup.blocksRaycasts = false;
+            slotCanvasGroup.blocksRaycasts = false;
+        }
+
+        if (PlayerControl.Instance.CheckCost(skillRefreshCost))
+            skillRefreshEnable = true;
+        else
+            skillRefreshEnable = false;
+
+        if (skillRefreshEnable)
+        {
+            skillRefreshCostText.color = Color.white;
+            refreshCanvasGroup.blocksRaycasts = true;
+        }
+        else
+        {
+            skillRefreshCostText.color = Color.red;
+            refreshCanvasGroup.blocksRaycasts = false;
         }
     }
 
-    private void SelectNextSkill()
+    public void SelectNextSkill()
     {
         int randomValue = Random.Range(0, GameManager.Instance.currentDeck.Count);
         skill = GameManager.Instance.currentDeck[randomValue];
 
         skillCostText.text = skill.GetComponent<Skill>().cost.ToString();
         skillImage.color = skill.GetComponent<Skill>().color;
+    }
+
+    public void SkillRefresh()
+    {
+        if(PlayerControl.Instance.UseCost(skillRefreshCost))
+            SelectNextSkill();
     }
 
     public void OnMouseDown()
@@ -65,29 +93,31 @@ public class SkillUI : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragH
 
     public void OnBeginDrag(PointerEventData eventData)
     {
-            newObject = null;
-            UIManager.instance.infoUI.DisableInfo();
-            UIManager.instance.canvasGroup.blocksRaycasts = false;
+        newObject = null;
+        UIManager.instance.infoUI.DisableInfo();
+        UIManager.instance.BlockRaycastOff();
 
-            mousePos = Input.mousePosition;
+        mousePos = Input.mousePosition;
 
-            newObject = Instantiate(skill, mousePos, skill.transform.rotation);
+        newObject = Instantiate(skill, mousePos, skill.transform.rotation);
 
-            Time.timeScale = 0.3f;
+        Time.timeScale = 0.3f;
     }
     public void OnDrag(PointerEventData eventData)
     {
 
-            mousePos = Input.mousePosition;
+        mousePos = Input.mousePosition;
 
-            newObject.GetComponent<Skill>().LocateSkill(mousePos);
+        newObject.GetComponent<Skill>().LocateSkill(mousePos);
     }
     public void OnEndDrag(PointerEventData eventData)
     {
-        if (newObject.GetComponent<Skill>().UseSkill())
+        mousePos = Input.mousePosition;
+
+        if (newObject.GetComponent<Skill>().UseSkill(mousePos))
             SelectNextSkill();
 
-        UIManager.instance.canvasGroup.blocksRaycasts = true;
+        UIManager.instance.BlockRaycastOn();
         Time.timeScale = 1f;
     }
 }

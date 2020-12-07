@@ -7,29 +7,47 @@ public class Red : FieldSkill
     List<GameObject> hitList;
     public int damage;
 
+    private float timeCheck = 0f;
+    private float delayTime = 1.4f;
+    private float affectEndTime = 1.8f;
+
+
+
+    private void Update()
+    {
+        if (effectObject.activeSelf)
+        {
+            if (affectEndTime > timeCheck)
+                timeCheck += Time.deltaTime;
+        }
+    }
+
     public override void ApplySkill(GameObject obj)
     {
-        if(hitList == null)
-            hitList = new List<GameObject>();
-
-        bool alreadyHit = false;
-
-        for(int i = 0; i < hitList.Count; i++)
+        if (delayTime <= timeCheck && timeCheck <= affectEndTime)
         {
-            if (hitList[i] == null)
-                continue;
+            if (hitList == null)
+                hitList = new List<GameObject>();
 
-            if (hitList[i] == obj)
+            bool alreadyHit = false;
+
+            for (int i = 0; i < hitList.Count; i++)
             {
-                alreadyHit = true;
-                break;
-            }
-        }
+                if (hitList[i] == null)
+                    continue;
 
-        if(!alreadyHit)
-        {
-            obj.GetComponent<EnemyData>().Damage(damage);
-            hitList.Add(obj);
+                if (hitList[i] == obj)
+                {
+                    alreadyHit = true;
+                    break;
+                }
+            }
+
+            if (!alreadyHit)
+            {
+                obj.GetComponent<EnemyData>().Damage(damage);
+                hitList.Add(obj);
+            }
         }
     }
 }

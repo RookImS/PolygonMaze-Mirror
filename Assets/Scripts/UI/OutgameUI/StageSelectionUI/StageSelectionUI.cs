@@ -43,12 +43,6 @@ public class StageSelectionUI : MonoBehaviour
             GameManager.Instance.currentDeck = GameManager.Instance.deckList[num];
 
             isSelectDeck = true;
-
-            for(int i = 0; i < GameManager.Instance.deckList[num].Count; i++)
-            {
-                Debug.Log(i + ": " + GameManager.Instance.deckList[num][i]);
-            }
-            Debug.Log("스킬이 등록되었습니다.");
         }
         else
         {

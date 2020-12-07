@@ -11,7 +11,8 @@ public class DeployBehaviour : MonoBehaviour
     public LayerMask layerMask;
     public int cost;
     public float innerRadius;
-    public Renderer rend;
+    public Renderer towerRend;
+    public Renderer rangeRend;
     public TowerData data;
 
     private GameObject towersGameObject;
@@ -85,7 +86,8 @@ public class DeployBehaviour : MonoBehaviour
         {
             if (isPathEnable && isProperLocate && !isOverlapped)
             {
-                rend.material.color = new Color(1f, 1f, 1f, 170 / 255f);
+                towerRend.material.color = new Color(1f, 1f, 1f, 170 / 255f);
+                rangeRend.material.color = new Color(140 / 255f, 1f, 180 / 255f, 200 / 255f);
 
                 return true;
             }
@@ -95,12 +97,14 @@ public class DeployBehaviour : MonoBehaviour
                 {
                     if (!isSkipFrame)
                     {
-                        rend.material.color = new Color(1f, 170 / 255f, 170 / 255f, 170 / 255f);
+                        towerRend.material.color = new Color(1f, 170 / 255f, 170 / 255f, 170 / 255f);
+                        rangeRend.material.color = new Color(1f, 170 / 255f, 170 / 255f, 200 / 255f);
                     }
                 }
                 else
                 {
-                    rend.material.color = new Color(1f, 1f, 1f, 170 / 255f);
+                    towerRend.material.color = new Color(1f, 1f, 1f, 170 / 255f);
+                    rangeRend.material.color = new Color(1f, 1f, 1f, 200 / 255f);
                 }
 
                 return false;
@@ -108,7 +112,8 @@ public class DeployBehaviour : MonoBehaviour
         }
         else
         {
-            rend.material.color = new Color(1f, 170 / 255f, 170 / 255f, 170 / 255f);
+            towerRend.material.color = new Color(1f, 170 / 255f, 170 / 255f, 170 / 255f);
+            rangeRend.material.color = new Color(1f, 170 / 255f, 170 / 255f, 200 / 255f);
             return false;
         }
     }

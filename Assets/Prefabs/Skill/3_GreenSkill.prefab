@@ -4690,7 +4690,7 @@ ParticleSystemRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -639742367
-  m_SortingLayer: -2
+  m_SortingLayer: -3
   m_SortingOrder: 1
   m_RenderMode: 0
   m_SortMode: 0
@@ -9408,7 +9408,7 @@ ParticleSystemRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -639742367
-  m_SortingLayer: -2
+  m_SortingLayer: -3
   m_SortingOrder: 1
   m_RenderMode: 0
   m_SortMode: 0
@@ -14293,7 +14293,7 @@ ParticleSystemRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -639742367
-  m_SortingLayer: -2
+  m_SortingLayer: -3
   m_SortingOrder: 1
   m_RenderMode: 0
   m_SortMode: 0
@@ -19194,7 +19194,7 @@ ParticleSystemRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -639742367
-  m_SortingLayer: -2
+  m_SortingLayer: -3
   m_SortingOrder: 1
   m_RenderMode: 1
   m_SortMode: 0
@@ -24095,7 +24095,7 @@ ParticleSystemRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -639742367
-  m_SortingLayer: -2
+  m_SortingLayer: -3
   m_SortingOrder: 1
   m_RenderMode: 1
   m_SortMode: 0
@@ -28974,7 +28974,7 @@ ParticleSystemRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -639742367
-  m_SortingLayer: -2
+  m_SortingLayer: -3
   m_SortingOrder: 1
   m_RenderMode: 0
   m_SortMode: 0
@@ -33852,9 +33852,9 @@ ParticleSystemRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: -639742367
-  m_SortingLayer: -2
-  m_SortingOrder: 1
+  m_SortingLayerID: 356635979
+  m_SortingLayer: -1
+  m_SortingOrder: 0
   m_RenderMode: 0
   m_SortMode: 0
   m_MinParticleSize: 0
@@ -38732,9 +38732,9 @@ ParticleSystemRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: -639742367
-  m_SortingLayer: -2
-  m_SortingOrder: 1
+  m_SortingLayerID: 356635979
+  m_SortingLayer: -1
+  m_SortingOrder: 0
   m_RenderMode: 0
   m_SortMode: 0
   m_MinParticleSize: 0
@@ -38827,6 +38827,8 @@ MonoBehaviour:
   cost: 150
   skillSprite: {fileID: 0}
   color: {r: 0, g: 1, b: 0, a: 1}
+  rangeObject: {fileID: 3304276746429907011}
+  effectObject: {fileID: 3261570831783587373}
   skillSoundSpecific: 2
   ready_sound_name: Green_Ready_Sound
   use_sound_name: Green_Use_Sound
@@ -43650,7 +43652,7 @@ ParticleSystemRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -639742367
-  m_SortingLayer: -2
+  m_SortingLayer: -3
   m_SortingOrder: 1
   m_RenderMode: 0
   m_SortMode: 0
@@ -48529,7 +48531,7 @@ ParticleSystemRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -639742367
-  m_SortingLayer: -2
+  m_SortingLayer: -3
   m_SortingOrder: 1
   m_RenderMode: 0
   m_SortMode: 0

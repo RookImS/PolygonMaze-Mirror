@@ -30,6 +30,7 @@ public class SkillListUI : MonoBehaviour
         {
             GameObject skill = GameManager.Instance.skills[i];
             GameObject skillSlot = skillSlots.transform.GetChild(i).gameObject;
+
             skillSlot.GetComponent<Button>().onClick.AddListener(() => SelectSkill(skill));
             skillSlot.transform.GetChild(0).GetComponent<Image>().color = skill.GetComponent<Skill>().color;
         }

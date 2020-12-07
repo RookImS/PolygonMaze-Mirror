@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 5551606408486179407}
   - component: {fileID: 618928112414887619}
   m_Layer: 0
-  m_Name: SquareObstacle 1
+  m_Name: SquareObstacle
   m_TagString: Obstacle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -91,7 +91,7 @@ Transform:
   m_GameObject: {fileID: 1017998469570781527}
   m_LocalRotation: {x: -0, y: 0.7071068, z: -0, w: -0.7071068}
   m_LocalPosition: {x: -0.6, y: 0, z: 0}
-  m_LocalScale: {x: 0.9, y: 1, z: 0.29999998}
+  m_LocalScale: {x: 0.9, y: 1, z: 0.5}
   m_Children: []
   m_Father: {fileID: 7799561296072505388}
   m_RootOrder: 3
@@ -150,7 +150,7 @@ Transform:
   m_GameObject: {fileID: 2005355134393170183}
   m_LocalRotation: {x: -0, y: 1, z: -0, w: 0}
   m_LocalPosition: {x: 0, y: 0, z: -0.59999996}
-  m_LocalScale: {x: 0.9, y: 1, z: 0.29999998}
+  m_LocalScale: {x: 0.9, y: 1, z: 0.5}
   m_Children: []
   m_Father: {fileID: 7799561296072505388}
   m_RootOrder: 2
@@ -209,7 +209,7 @@ Transform:
   m_GameObject: {fileID: 6900273141751546890}
   m_LocalRotation: {x: -0, y: 0.7071068, z: -0, w: 0.7071068}
   m_LocalPosition: {x: 0.6, y: 0, z: 0}
-  m_LocalScale: {x: 0.9, y: 1, z: 0.29999998}
+  m_LocalScale: {x: 0.9, y: 1, z: 0.5}
   m_Children: []
   m_Father: {fileID: 7799561296072505388}
   m_RootOrder: 1
@@ -268,7 +268,7 @@ Transform:
   m_GameObject: {fileID: 7600002218255787267}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0.6}
-  m_LocalScale: {x: 0.9, y: 1, z: 0.29999998}
+  m_LocalScale: {x: 0.9, y: 1, z: 0.5}
   m_Children: []
   m_Father: {fileID: 7799561296072505388}
   m_RootOrder: 0

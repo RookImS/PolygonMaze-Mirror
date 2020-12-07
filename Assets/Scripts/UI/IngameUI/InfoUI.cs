@@ -11,7 +11,6 @@ public class InfoUI : MonoBehaviour
 
     public void EnableInfo(GameObject tower)
     {
-        Debug.Log(tower);
         DisableInfo();
         TowerData data = tower.GetComponent<TowerData>();
         info.SetActive(true);
@@ -21,8 +20,6 @@ public class InfoUI : MonoBehaviour
         selectedTower = tower;
         tower.GetComponent<TowerBehaviour>().isClicked = true;
     }
-
-
 
     public void DisableInfo()
     {
