@@ -84,7 +84,12 @@ public class GameManager : MonoSingleton<GameManager>
 
         for (int i = 0; i < 3; i++)
         {
-            string path = string.Format("Assets/UserData/DeckData/Deck{0}.json", i);
+            string path;
+            if(Application.platform == RuntimePlatform.Android)
+                path = Application.persistentDataPath + string.Format("/DeckData/Deck{0}.json", i);
+            else
+                path = string.Format("Assets/UserData/DeckData/Deck{0}.json", i);
+            //string path = string.Format("Assets/UserData/DeckData/Deck{0}.json", i);
             System.IO.FileInfo file = new System.IO.FileInfo(path);
 
             try
@@ -168,7 +173,12 @@ public class GameManager : MonoSingleton<GameManager>
         }
 
         string jsonData = JsonUtility.ToJson(allDeckInfo.deck[order]);
-        string path = string.Format("Assets/UserData/DeckData/Deck{0}.json", order);
+        string path;
+        if (Application.platform == RuntimePlatform.Android)
+            path = Application.persistentDataPath + string.Format("/DeckData/Deck{0}.json", order);
+        else
+            path = string.Format("Assets/UserData/DeckData/Deck{0}.json", order);
+        //string path = string.Format("Assets/UserData/DeckData/Deck{0}.json", order);
 
         System.IO.FileInfo file = new System.IO.FileInfo(path);
         file.Directory.Create();
@@ -192,8 +202,12 @@ public class GameManager : MonoSingleton<GameManager>
     public void LoadStageClearInfo()
     {
         MakeEmptyStageClearInfo();
-
-        string path = string.Format("Assets/UserData/StageClearData.json");
+        string path;
+        if (Application.platform == RuntimePlatform.Android)
+            path = Application.persistentDataPath + string.Format("/StageClearData.json");
+        else
+            path = string.Format("Assets/UserData/StageClearData.json");
+        //string path = string.Format("Assets/UserData/StageClearData.json");
         System.IO.FileInfo file = new System.IO.FileInfo(path);
 
         try
@@ -245,7 +259,12 @@ public class GameManager : MonoSingleton<GameManager>
     {
 
         string jsonData = JsonUtility.ToJson(stageClearInfo);
-        string path = string.Format("Assets/UserData/StageClearData.json");
+        string path;
+        if (Application.platform == RuntimePlatform.Android)
+            path = Application.persistentDataPath + string.Format("/StageClearData.json");
+        else
+            path = string.Format("Assets/UserData/StageClearData.json");
+        //string path = string.Format("Assets/UserData/StageClearData.json");
 
         System.IO.FileInfo file = new System.IO.FileInfo(path);
         file.Directory.Create();
