@@ -125,31 +125,32 @@ public class LevelManager : MonoBehaviour
     {
         int loadStageChapter = GameManager.Instance.GetLoadStageChapter();
         int loadStageLevel = GameManager.Instance.GetLoadStageLevel();
-        string streamingAssetsDirectory = "jar:file://" + Application.dataPath + "!/assets/";
-        string filepath = streamingAssetsDirectory + string.Format("{0}-{1}.json", loadStageChapter, loadStageLevel);
-        WWW www = new WWW(filepath);
-        while (!www.isDone) { };
-        string path = www.text;
+
+        WWW www;
+        string streamingAssetsDirectory;
+        string filepath;
+        string data;
+
 
         if (Application.platform == RuntimePlatform.Android)
-            path = www.text;
+        {
+            streamingAssetsDirectory = "jar:file://" + Application.dataPath + "!/assets/";
+            filepath = streamingAssetsDirectory + string.Format("{0}-{1}.json", loadStageChapter, loadStageLevel);
+            www = new WWW(filepath);
+            while (!www.isDone) { };
+            data = www.text;
+        }
         else
-            path = string.Format("Assets/StageData/{0}-{1}.json", loadStageChapter, loadStageLevel);
-
-        System.IO.FileInfo file = new System.IO.FileInfo(path);
+        {
+            filepath = string.Format("Assets/StageData/{0}-{1}.json", loadStageChapter, loadStageLevel);
+            data = File.ReadAllText(filepath);
+        }
 
         try
         {
-            if (path != "")
+            if (data != "")
             {
-                if (Application.platform == RuntimePlatform.Android)
-                    this.stageData = JsonUtility.FromJson<StageData>(path);
-                else
-                {
-                    string jsonData = File.ReadAllText(path);
-                    this.stageData = JsonUtility.FromJson<StageData>(jsonData);
-                }
-
+                this.stageData = JsonUtility.FromJson<StageData>(data);
                 if (StageLoadChecker())
                     return true;
                 else

@@ -39,7 +39,7 @@ public class SoundSettingSystem : MonoBehaviour
             bgmSpeakerImage.GetComponent<Image>().sprite = notMuteSpeaker;
 
         seSlider.GetComponent<Slider>().value = SoundManager.instance.GetSEVolume();
-        bgmVolumeText.GetComponent<TMP_Text>().text
+        seVolumeText.GetComponent<TMP_Text>().text
             = Mathf.CeilToInt(seSlider.GetComponent<Slider>().value * 100).ToString();
 
         if (seSlider.GetComponent<Slider>().value <= 0)
@@ -53,34 +53,10 @@ public class SoundSettingSystem : MonoBehaviour
             seSpeakerImage.GetComponent<Image>().sprite = notMuteSpeaker;
     }
 
-    public void PlayCommonButtonSE()
-    {
-        SoundManager.Instance.PlaySound(SoundManager.SoundSpecific.BUTTON, "Common_Button");
-    }
-
-    public void PlayConfirmButtonSE()
-    {
-        SoundManager.Instance.PlaySound(SoundManager.SoundSpecific.BUTTON, "Confirm_Button");
-    }
-
-    public void PlayCancleButtonSE()
-    {
-        SoundManager.Instance.PlaySound(SoundManager.SoundSpecific.BUTTON, "Cancle_Button");
-    }
-
-    public void PlayButtonFailSE()
-    {
-        SoundManager.Instance.PlaySound(SoundManager.SoundSpecific.BUTTON, "Button_Fail");
-    }
-
-    public void PlayTowerButtonSE()
-    {
-        SoundManager.Instance.PlaySound(SoundManager.SoundSpecific.BUTTON, "Tower_Button");
-    }
 
     public void OnClickBGMButton()
     {
-        PlayCommonButtonSE();
+        SoundManager.instance.PlaySound(SoundManager.SoundSpecific.BUTTON, "Common_Button");
 
         if (SoundManager.instance.GetIsMuteBGM())
         {

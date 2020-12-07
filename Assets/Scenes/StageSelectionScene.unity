@@ -202,14 +202,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dd54b7dcbcd6610429fd88d3a56bbecc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bgmSpeakerImage: {fileID: 1900360598}
-  bgmVolumeText: {fileID: 1900360603}
-  bgmSlider: {fileID: 1900360595}
-  seSpeakerImage: {fileID: 1900360596}
-  seVolumeText: {fileID: 1900360602}
-  seSlider: {fileID: 1900360594}
-  notMuteSpeaker: {fileID: 21300000, guid: a882215ab9c088745b4f30710cd4b940, type: 3}
-  muteSpeaker: {fileID: 21300000, guid: 3b5bc55913755674d973a4f0daf25a0a, type: 3}
 --- !u!1 &52246447
 GameObject:
   m_ObjectHideFlags: 0
@@ -5490,10 +5482,34 @@ PrefabInstance:
     - target: {fileID: 4756910506927040616, guid: e61540ff58dea3449a90211bb1438ec4, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 1900360593}
+      objectReference: {fileID: 13341939}
     - target: {fileID: 4756910506927040616, guid: e61540ff58dea3449a90211bb1438ec4, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: PlayCommonButtonSE
+      objectReference: {fileID: 0}
+    - target: {fileID: 4756910506927040616, guid: e61540ff58dea3449a90211bb1438ec4, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: NonFunctionUISound, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 4756910506927040616, guid: e61540ff58dea3449a90211bb1438ec4, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4756910506927040616, guid: e61540ff58dea3449a90211bb1438ec4, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
+      value: 
+      objectReference: {fileID: 1900360593}
+    - target: {fileID: 4756910506927040616, guid: e61540ff58dea3449a90211bb1438ec4, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
       value: SetActive
+      objectReference: {fileID: 0}
+    - target: {fileID: 4756910506927040616, guid: e61540ff58dea3449a90211bb1438ec4, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_TargetAssemblyTypeName
+      value: UnityEngine.GameObject, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 4756910506927040616, guid: e61540ff58dea3449a90211bb1438ec4, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Mode
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 4884466019911668698, guid: e61540ff58dea3449a90211bb1438ec4, type: 3}
       propertyPath: m_AnchorMax.y
@@ -5604,169 +5620,7 @@ PrefabInstance:
   m_SourcePrefab: {fileID: 100100000, guid: e61540ff58dea3449a90211bb1438ec4, type: 3}
 --- !u!1 &1900360593 stripped
 GameObject:
-  m_CorrespondingSourceObject: {fileID: 577189123402026633, guid: e61540ff58dea3449a90211bb1438ec4, type: 3}
-  m_PrefabInstance: {fileID: 1900360592}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &1900360594 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 2283028210449084318, guid: e61540ff58dea3449a90211bb1438ec4, type: 3}
-  m_PrefabInstance: {fileID: 1900360592}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &1900360595 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 2998704815533554744, guid: e61540ff58dea3449a90211bb1438ec4, type: 3}
-  m_PrefabInstance: {fileID: 1900360592}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &1900360596 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 4611756391853241437, guid: e61540ff58dea3449a90211bb1438ec4, type: 3}
-  m_PrefabInstance: {fileID: 1900360592}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1900360597 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 9052355038477192751, guid: e61540ff58dea3449a90211bb1438ec4, type: 3}
-  m_PrefabInstance: {fileID: 1900360592}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1900360596}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!1 &1900360598 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 9110704375381261468, guid: e61540ff58dea3449a90211bb1438ec4, type: 3}
-  m_PrefabInstance: {fileID: 1900360592}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1900360599 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 5764831627100948192, guid: e61540ff58dea3449a90211bb1438ec4, type: 3}
-  m_PrefabInstance: {fileID: 1900360592}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1900360598}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &1900360600
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1900360596}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Navigation:
-    m_Mode: 3
-    m_SelectOnUp: {fileID: 0}
-    m_SelectOnDown: {fileID: 0}
-    m_SelectOnLeft: {fileID: 0}
-    m_SelectOnRight: {fileID: 0}
-  m_Transition: 1
-  m_Colors:
-    m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
-    m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
-    m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
-    m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
-    m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
-    m_ColorMultiplier: 1
-    m_FadeDuration: 0.1
-  m_SpriteState:
-    m_HighlightedSprite: {fileID: 0}
-    m_PressedSprite: {fileID: 0}
-    m_SelectedSprite: {fileID: 0}
-    m_DisabledSprite: {fileID: 0}
-  m_AnimationTriggers:
-    m_NormalTrigger: Normal
-    m_HighlightedTrigger: Highlighted
-    m_PressedTrigger: Pressed
-    m_SelectedTrigger: Selected
-    m_DisabledTrigger: Disabled
-  m_Interactable: 1
-  m_TargetGraphic: {fileID: 1900360597}
-  m_OnClick:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 13341939}
-        m_TargetAssemblyTypeName: UISystem, Assembly-CSharp
-        m_MethodName: OnClickSEButton
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
---- !u!114 &1900360601
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1900360598}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Navigation:
-    m_Mode: 3
-    m_SelectOnUp: {fileID: 0}
-    m_SelectOnDown: {fileID: 0}
-    m_SelectOnLeft: {fileID: 0}
-    m_SelectOnRight: {fileID: 0}
-  m_Transition: 1
-  m_Colors:
-    m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
-    m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
-    m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
-    m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
-    m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
-    m_ColorMultiplier: 1
-    m_FadeDuration: 0.1
-  m_SpriteState:
-    m_HighlightedSprite: {fileID: 0}
-    m_PressedSprite: {fileID: 0}
-    m_SelectedSprite: {fileID: 0}
-    m_DisabledSprite: {fileID: 0}
-  m_AnimationTriggers:
-    m_NormalTrigger: Normal
-    m_HighlightedTrigger: Highlighted
-    m_PressedTrigger: Pressed
-    m_SelectedTrigger: Selected
-    m_DisabledTrigger: Disabled
-  m_Interactable: 1
-  m_TargetGraphic: {fileID: 1900360599}
-  m_OnClick:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 13341939}
-        m_TargetAssemblyTypeName: UISystem, Assembly-CSharp
-        m_MethodName: OnClickBGMButton
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
---- !u!1 &1900360602 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 3080572260771405395, guid: e61540ff58dea3449a90211bb1438ec4, type: 3}
-  m_PrefabInstance: {fileID: 1900360592}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &1900360603 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 9215918045234772426, guid: e61540ff58dea3449a90211bb1438ec4, type: 3}
+  m_CorrespondingSourceObject: {fileID: 7124908995074915418, guid: e61540ff58dea3449a90211bb1438ec4, type: 3}
   m_PrefabInstance: {fileID: 1900360592}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &1914022596
