@@ -125,20 +125,16 @@ public class LevelManager : MonoBehaviour
     {
         int loadStageChapter = GameManager.Instance.GetLoadStageChapter();
         int loadStageLevel = GameManager.Instance.GetLoadStageLevel();
-
         string streamingAssetsDirectory = "jar:file://" + Application.dataPath + "!/assets/";
         string filepath = streamingAssetsDirectory + string.Format("{0}-{1}.json", loadStageChapter, loadStageLevel);
         WWW www = new WWW(filepath);
         while (!www.isDone) { };
         string path = www.text;
 
-        // (!www.isDone) { };
-        //string path;
-        //if (Application.platform == RuntimePlatform.Android)
-        //    path = Application.persistentDataPath + string.Format("/{0}-{1}.json", loadStageChapter, loadStageLevel);
-        //else
-        //    path = string.Format("Assets/StageData/{0}-{1}.json", loadStageChapter, loadStageLevel);
-        //string path = string.Format("Assets/StageData/{0}-{1}.json", loadStageChapter, loadStageLevel);
+        if (Application.platform == RuntimePlatform.Android)
+            path = www.text;
+        else
+            path = string.Format("Assets/StageData/{0}-{1}.json", loadStageChapter, loadStageLevel);
 
         System.IO.FileInfo file = new System.IO.FileInfo(path);
 
@@ -146,8 +142,13 @@ public class LevelManager : MonoBehaviour
         {
             if (path != "")
             {
-                //string jsonData = File.ReadAllText(path);
-                this.stageData = JsonUtility.FromJson<StageData>(path);
+                if (Application.platform == RuntimePlatform.Android)
+                    this.stageData = JsonUtility.FromJson<StageData>(path);
+                else
+                {
+                    string jsonData = File.ReadAllText(path);
+                    this.stageData = JsonUtility.FromJson<StageData>(jsonData);
+                }
 
                 if (StageLoadChecker())
                     return true;
@@ -176,8 +177,6 @@ public class LevelManager : MonoBehaviour
 
             return false;
         }
-
-        
     }
 
     public bool StageLoadChecker()

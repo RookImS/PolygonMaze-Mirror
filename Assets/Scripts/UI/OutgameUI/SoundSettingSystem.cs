@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 
-public class UISystem : MonoBehaviour
+public class SoundSettingSystem : MonoBehaviour
 {
     public GameObject bgmSpeakerImage;
     public GameObject bgmVolumeText;
