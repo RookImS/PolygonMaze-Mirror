@@ -15,6 +15,9 @@ public class Skill : MonoBehaviour
     public Sprite skillSprite;
     public Color color;
 
+    public GameObject rangeObject;
+    public GameObject effectObject;
+
     //[HideInInspector] public float applyInterval;     // 스킬이 적용되는 간격
     //[HideInInspector] public float applyCountDown;
 
@@ -62,9 +65,9 @@ public class Skill : MonoBehaviour
         
     }
 
-    public bool UseSkill()
+    public bool UseSkill(Vector3 mousePos)
     {
-        if (EventSystem.current.IsPointerOverGameObject()/* || !isEnoughMoney*/)
+        if (!EventSystem.current.IsPointerOverGameObject()/* || !isEnoughMoney*/)
         {
             SoundManager.instance.StopAudio(currentAudioSource1);
             Destroy(this.gameObject);
@@ -75,8 +78,8 @@ public class Skill : MonoBehaviour
         {
             PlayerControl.Instance.UseCost(cost);
             GetComponent<SphereCollider>().enabled = true;
-            transform.Find("Range").gameObject.SetActive(false);
-            transform.Find("Effect").gameObject.SetActive(true);
+            rangeObject.SetActive(false);
+            effectObject.SetActive(true);
             StartCoroutine("CheckSkillDuration");
             isDeploy = true;
 

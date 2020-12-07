@@ -39,10 +39,10 @@ public class DeployUI : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
 
     private void UpdateTowerCostText()
     {
-        if (deployTower.GetComponent<DeployBehaviour>().cost > PlayerControl.Instance.playerData.currentCost)
-            isDeployable = false;
-        else
+        if (PlayerControl.Instance.CheckCost(deployTower.GetComponent<DeployBehaviour>().cost))
             isDeployable = true;
+        else
+            isDeployable = false;
 
         if (isDeployable)
             towerCostText.color = Color.white;
@@ -55,7 +55,7 @@ public class DeployUI : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
         newObject = null;
         hitObject = null;
         UIManager.instance.infoUI.DisableInfo();
-        UIManager.instance.canvasGroup.blocksRaycasts = false;
+        UIManager.instance.BlockRaycastOff();
 
         isProgressDeploy = true;
         mousePos = Input.mousePosition;
@@ -78,6 +78,6 @@ public class DeployUI : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
         Time.timeScale = 1f;
 
         isProgressDeploy = false;
-        UIManager.instance.canvasGroup.blocksRaycasts = true;
+        UIManager.instance.BlockRaycastOn();
     }
 }

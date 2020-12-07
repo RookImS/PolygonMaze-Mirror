@@ -11,7 +11,6 @@ public class FieldSkill : Skill
         if (other.gameObject.CompareTag("Enemy"))
         {
                 ApplySkill(other.gameObject);
-                //applyCountDown = applyInterval;
         }
     }
 }

@@ -48,7 +48,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemyList: []
   hitCollider: {fileID: 8705282115458604392}
-  VFX: {fileID: 0}
+  VFX: {fileID: 3892369789177195344, guid: 311a4559dae4aea47a3127e8c07e4381, type: 3}
   life: 1.5
 --- !u!114 &5128043430975107869
 MonoBehaviour:
@@ -253,7 +253,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5407487305228948325, guid: e94c6dc1681c1cb4f9ac6d45fafcbeb9, type: 3}
       propertyPath: m_SortingLayer
-      value: -2
+      value: -3
       objectReference: {fileID: 0}
     - target: {fileID: 5407487305228948325, guid: e94c6dc1681c1cb4f9ac6d45fafcbeb9, type: 3}
       propertyPath: m_SortingOrder
@@ -329,7 +329,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5468672771103677297, guid: e94c6dc1681c1cb4f9ac6d45fafcbeb9, type: 3}
       propertyPath: m_SortingLayer
-      value: -2
+      value: -3
       objectReference: {fileID: 0}
     - target: {fileID: 5469433273397066679, guid: e94c6dc1681c1cb4f9ac6d45fafcbeb9, type: 3}
       propertyPath: m_SortingLayerID
@@ -337,7 +337,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5469433273397066679, guid: e94c6dc1681c1cb4f9ac6d45fafcbeb9, type: 3}
       propertyPath: m_SortingLayer
-      value: -2
+      value: -3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e94c6dc1681c1cb4f9ac6d45fafcbeb9, type: 3}

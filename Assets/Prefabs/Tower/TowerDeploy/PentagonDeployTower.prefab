@@ -54,7 +54,8 @@ MonoBehaviour:
     m_Bits: 512
   cost: 120
   innerRadius: 0.688
-  rend: {fileID: 2411353627673286273}
+  towerRend: {fileID: 2411353627673286273}
+  rangeRend: {fileID: 4824183914008333687}
   data: {fileID: 8996109028398955740, guid: 839d106aeeab58f46bd7583d20639abd, type: 3}
 --- !u!64 &387785620365507434
 MeshCollider:
@@ -256,7 +257,7 @@ SpriteRenderer:
   m_SortingLayer: -1
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 6bed728e7ea0d214d9adb7dbb3ea6a26, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 0.39215687}
+  m_Color: {r: 1, g: 1, b: 1, a: 0.78431374}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0

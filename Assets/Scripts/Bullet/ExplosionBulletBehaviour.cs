@@ -63,6 +63,12 @@ public class ExplosionBulletBehaviour : BulletBehaviour
                     continue;
 
                 enemyList[i].GetComponent<EnemyBehaviour>().Damage(m_BulletData.stats.stats.damage);
+
+                Vector3 pos = new Vector3(enemyList[i].transform.position.x, enemyList[i].transform.position.y + 2, enemyList[i].transform.position.z);
+                Vector3 rot = transform.rotation.eulerAngles;
+
+                rot = new Vector3(rot.x, rot.y, rot.z);
+                Instantiate(VFX, pos, Quaternion.Euler(rot));
             }
         }
         //Destroy(this.gameObject);

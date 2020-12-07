@@ -7,10 +7,10 @@ public class UIManager : MonoBehaviour
     public static UIManager instance { get; private set; }
     public LayerMask towerMask;
 
-    [HideInInspector] public CanvasGroup canvasGroup;
-
     [HideInInspector] public InfoUI infoUI;
     [HideInInspector] public bool isPanelOn;
+
+    private CanvasGroup canvasGroup;
 
     private void Awake()
     {
@@ -26,7 +26,7 @@ public class UIManager : MonoBehaviour
     private void Init()
     {
         canvasGroup = GetComponent<CanvasGroup>();
-        canvasGroup.blocksRaycasts = true;
+        BlockRaycastOn();
         infoUI = GameObject.Find("InfoUI").GetComponent<InfoUI>();
     }
 
@@ -41,6 +41,16 @@ public class UIManager : MonoBehaviour
         }
 
         ControlTowerInfo(ray);
+    }
+
+    public void BlockRaycastOn()
+    {
+        canvasGroup.blocksRaycasts = true;
+    }
+
+    public void BlockRaycastOff()
+    {
+        canvasGroup.blocksRaycasts = false;
     }
 
     private void ControlTowerInfo(Ray ray)
@@ -65,4 +75,6 @@ public class UIManager : MonoBehaviour
             infoUI.DisableInfo();
         }
     }
+
+    
 }

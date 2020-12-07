@@ -1,10 +1,12 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using TMPro;
 
 public class DialogueUI : MonoBehaviour
 {
+    public Tutorial tutorial;
+
     public GameObject invokePanel;
     public GameObject textPanel;
     public GameObject TMProtext;
@@ -14,12 +16,26 @@ public class DialogueUI : MonoBehaviour
     private GameObject m_textPanel;
     private GameObject m_text;
 
+    private EventTrigger eventTrigger;
+    private EventTrigger.Entry entry;
+
     private void Awake()
+    {
+        Init();
+    }
+
+    private void Init()
     {
         checkPrintSentence = false;
         m_dialogue = null;
         m_textPanel = null;
         m_text = null;
+
+        eventTrigger = invokePanel.GetComponent<EventTrigger>();
+
+        entry = new EventTrigger.Entry();
+        entry.callback.AddListener((eventData) => tutorial.InvokeNextTutorial());
+        entry.eventID = EventTriggerType.PointerClick;
     }
 
     public void StartDialogue(Dialogue dialogue)
@@ -27,6 +43,7 @@ public class DialogueUI : MonoBehaviour
         m_dialogue = dialogue;
         invokePanel.SetActive(true);
 
+        StartCoroutine(AddInvokeTrigger());
         GameManager.Instance.TimeStop();
         MakeDialoguePanel();
     }
@@ -34,6 +51,9 @@ public class DialogueUI : MonoBehaviour
     public void EndDialogue()
     {
         DestroyDialoguePanel();
+
+        eventTrigger.triggers.Remove(entry);
+
         GameManager.Instance.TimeRestore();
 
         invokePanel.SetActive(false);
@@ -50,7 +70,7 @@ public class DialogueUI : MonoBehaviour
             checkPrintSentence = true;
 
             string arg_sentence = m_dialogue.sentences[0];
-            StopAllCoroutines();
+
             StartCoroutine(TypeSentence(arg_sentence));
         }
     }
@@ -97,6 +117,15 @@ public class DialogueUI : MonoBehaviour
 
         checkPrintSentence = false;
         m_dialogue.sentences.RemoveAt(0);
+        yield return null;
+    }
+
+    IEnumerator AddInvokeTrigger()
+    {
+        yield return new WaitForSecondsRealtime(0.7f);
+
+        eventTrigger.triggers.Add(entry);
+
         yield return null;
     }
 }

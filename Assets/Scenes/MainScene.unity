@@ -828,7 +828,7 @@ MonoBehaviour:
   - soundName: Red_Ready_Sound
     clip: {fileID: 8300000, guid: af157bcbd6b47f34aa4860b49210e6c2, type: 3}
   - soundName: Red_Use_Sound
-    clip: {fileID: 8300000, guid: 77bc041681562784fb7b70829d2ad4c7, type: 3}
+    clip: {fileID: 8300000, guid: e76f1bd2ff3a59647b9ea3b4e6ed4ecb, type: 3}
   greenSounds:
   - soundName: Green_Ready_Sound
     clip: {fileID: 8300000, guid: 51521fd1528b9d44f80ba8d5bfb5cfbe, type: 3}
