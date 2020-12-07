@@ -238,8 +238,6 @@ public class SaveLoadExitUISystem : MonoBehaviour
      */
     public void OnClickLoadButtonInLoadPanel()
     {
-        bool flag = false;
-
         if (LevelEditor.instance.GetReadyFlag().loadSetting == true)
         {
             GameManager.Instance.SetLoadStageChapter(this.loadStageChapter);

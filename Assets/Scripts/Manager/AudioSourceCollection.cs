@@ -6,15 +6,5 @@ public class AudioSourceCollection : MonoBehaviour
 {
     [Header("Audio Source")]
     [SerializeField] public AudioSource[] audioSources;
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    [SerializeField] public AudioSource[] audioSourcesForMute;
 }

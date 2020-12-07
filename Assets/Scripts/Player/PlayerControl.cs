@@ -6,7 +6,7 @@ public class PlayerControl : MonoSingleton<PlayerControl>
 {
     public PlayerData playerData;
 
-    private void Awake()
+    private new void Awake()
     {
         playerData = new PlayerData();
         Init();

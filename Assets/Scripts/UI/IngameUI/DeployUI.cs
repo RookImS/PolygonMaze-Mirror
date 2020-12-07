@@ -5,7 +5,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using TMPro;
 
-public class DeployUI : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler
+public class DeployUI : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler, IPointerDownHandler
 {
     public GameObject deployTower;
     public GameObject realTower;
@@ -50,6 +50,11 @@ public class DeployUI : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
             towerCostText.color = Color.red;
     }
 
+    public void OnPointerDown(PointerEventData pointerEventData)
+    {
+        SoundManager.Instance.PlaySound(SoundManager.SoundSpecific.BUTTON, "Tower_Button");
+    }
+
     public void OnBeginDrag(PointerEventData eventData)
     {
         newObject = null;
@@ -62,8 +67,7 @@ public class DeployUI : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
 
         newObject = Instantiate(deployTower, mousePos, deployTower.transform.rotation);
 
-        Time.timeScale = 0.3f;
-        SoundManager.Instance.PlaySound(SoundManager.SoundSpecific.BUTTON, "Tower_Button");
+        Time.timeScale = 0.3f;    
     }
     public void OnDrag(PointerEventData eventData)
     {
@@ -79,5 +83,6 @@ public class DeployUI : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
 
         isProgressDeploy = false;
         UIManager.instance.canvasGroup.blocksRaycasts = true;
+        SoundManager.Instance.PlaySound(SoundManager.SoundSpecific.OTHERUI, "Tower_Locate_Sound");
     }
 }

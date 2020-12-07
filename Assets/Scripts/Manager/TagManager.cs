@@ -7,7 +7,7 @@ public class TagManager : MonoSingleton<TagManager>
     List<string> buildingObjectTagList;
     List<string> enemyTagList;
 
-    private void Awake()
+    private new void Awake()
     {
         buildingObjectTagList = new List<string>();
         enemyTagList = new List<string>();

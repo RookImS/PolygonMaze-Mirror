@@ -55,7 +55,7 @@ public class GameManager : MonoSingleton<GameManager>
     private int chapterMax = 10;
     private int levelMax = 10;
 
-    private void Awake()
+    private new void Awake()
     {
         Init();
     }
@@ -84,7 +84,12 @@ public class GameManager : MonoSingleton<GameManager>
 
         for (int i = 0; i < 3; i++)
         {
-            string path = string.Format("Assets/UserData/DeckData/Deck{0}.json", i);
+            string path;
+            if(Application.platform == RuntimePlatform.Android)
+                path = Application.persistentDataPath + string.Format("/DeckData/Deck{0}.json", i);
+            else
+                path = string.Format("Assets/UserData/DeckData/Deck{0}.json", i);
+            //string path = string.Format("Assets/UserData/DeckData/Deck{0}.json", i);
             System.IO.FileInfo file = new System.IO.FileInfo(path);
 
             try
@@ -168,7 +173,12 @@ public class GameManager : MonoSingleton<GameManager>
         }
 
         string jsonData = JsonUtility.ToJson(allDeckInfo.deck[order]);
-        string path = string.Format("Assets/UserData/DeckData/Deck{0}.json", order);
+        string path;
+        if (Application.platform == RuntimePlatform.Android)
+            path = Application.persistentDataPath + string.Format("/DeckData/Deck{0}.json", order);
+        else
+            path = string.Format("Assets/UserData/DeckData/Deck{0}.json", order);
+        //string path = string.Format("Assets/UserData/DeckData/Deck{0}.json", order);
 
         System.IO.FileInfo file = new System.IO.FileInfo(path);
         file.Directory.Create();
@@ -192,8 +202,12 @@ public class GameManager : MonoSingleton<GameManager>
     public void LoadStageClearInfo()
     {
         MakeEmptyStageClearInfo();
-
-        string path = string.Format("Assets/UserData/StageClearData.json");
+        string path;
+        if (Application.platform == RuntimePlatform.Android)
+            path = Application.persistentDataPath + string.Format("/StageClearData.json");
+        else
+            path = string.Format("Assets/UserData/StageClearData.json");
+        //string path = string.Format("Assets/UserData/StageClearData.json");
         System.IO.FileInfo file = new System.IO.FileInfo(path);
 
         try
@@ -245,7 +259,12 @@ public class GameManager : MonoSingleton<GameManager>
     {
 
         string jsonData = JsonUtility.ToJson(stageClearInfo);
-        string path = string.Format("Assets/UserData/StageClearData.json");
+        string path;
+        if (Application.platform == RuntimePlatform.Android)
+            path = Application.persistentDataPath + string.Format("/StageClearData.json");
+        else
+            path = string.Format("Assets/UserData/StageClearData.json");
+        //string path = string.Format("Assets/UserData/StageClearData.json");
 
         System.IO.FileInfo file = new System.IO.FileInfo(path);
         file.Directory.Create();
@@ -354,6 +373,9 @@ public class GameManager : MonoSingleton<GameManager>
         isGameOver = true;
         PanelSystem panelSys = inGameUI.transform.Find("IngamePanel").gameObject.GetComponent<PanelSystem>();
         panelSys.SetPanel(panelSys.gameOverPanel);
+
+        SoundManager.Instance.StopBGMPlayer();
+        SoundManager.Instance.PlaySound(SoundManager.SoundSpecific.OTHERUI, "Player_Game_Over_Sound");
     }
 
     public void StageClear()
@@ -362,13 +384,15 @@ public class GameManager : MonoSingleton<GameManager>
         PanelSystem panelSys = inGameUI.transform.Find("IngamePanel").gameObject.GetComponent<PanelSystem>();
         panelSys.SetPanel(panelSys.stageClearPanel);
 
-        ProcessStageClear();
+        SoundManager.Instance.StopBGMPlayer();
+        SoundManager.Instance.PlaySound(SoundManager.SoundSpecific.OTHERUI, "Player_Game_Clear_Sound");
+        ProcessStageClearInfo();
     }
 
-    public void ProcessStageClear()
+    public void ProcessStageClearInfo()
     {
         bool temp = false;
-        stageClearInfo.stageChpater[loadStageChapter].stageLevel[loadStageLevel].isClear = true;
+        stageClearInfo.stageChpater[loadStageChapter-1].stageLevel[loadStageLevel-1].isClear = true;
 
         /* 업적 시스템 추가될 경우
         if(temp)

@@ -126,15 +126,28 @@ public class LevelManager : MonoBehaviour
         int loadStageChapter = GameManager.Instance.GetLoadStageChapter();
         int loadStageLevel = GameManager.Instance.GetLoadStageLevel();
 
-        string path = string.Format("Assets/StageData/{0}-{1}.json", loadStageChapter, loadStageLevel);
+        string streamingAssetsDirectory = "jar:file://" + Application.dataPath + "!/assets/";
+        string filepath = streamingAssetsDirectory + string.Format("{0}-{1}.json", loadStageChapter, loadStageLevel);
+        WWW www = new WWW(filepath);
+        while (!www.isDone) { };
+        string path = www.text;
+
+        // (!www.isDone) { };
+        //string path;
+        //if (Application.platform == RuntimePlatform.Android)
+        //    path = Application.persistentDataPath + string.Format("/{0}-{1}.json", loadStageChapter, loadStageLevel);
+        //else
+        //    path = string.Format("Assets/StageData/{0}-{1}.json", loadStageChapter, loadStageLevel);
+        //string path = string.Format("Assets/StageData/{0}-{1}.json", loadStageChapter, loadStageLevel);
+
         System.IO.FileInfo file = new System.IO.FileInfo(path);
 
         try
         {
-            if (File.Exists(path))
+            if (path != "")
             {
-                string jsonData = File.ReadAllText(path);
-                this.stageData = JsonUtility.FromJson<StageData>(jsonData);
+                //string jsonData = File.ReadAllText(path);
+                this.stageData = JsonUtility.FromJson<StageData>(path);
 
                 if (StageLoadChecker())
                     return true;

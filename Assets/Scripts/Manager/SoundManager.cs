@@ -12,7 +12,6 @@ public class SoundManager : MonoSingleton<SoundManager>
         public AudioClip clip;
     }
 
-    [Header("Sound Register")]
     [Header("BGM Sound Register")]
     [SerializeField] public Sound[] bgmSounds;
 
@@ -41,16 +40,24 @@ public class SoundManager : MonoSingleton<SoundManager>
     [SerializeField] public AudioSource bgmPlayer;
     public AudioSourceCollection skillLoopAudioSourceCollection;
     public AudioSourceCollection skillAudioSourceCollection;
+    public AudioSourceCollection towerAudioSourceCollection;
     public AudioSourceCollection otherAudioSourceCollection;
     private AudioSource[] skillLoopAudioPlayer;
     private AudioSource[] skillAudioPlayer;
+    private AudioSource[] towerAudioPlayer;
     private AudioSource[] otherAudioPlayer;
+    private AudioSource[] audioPlayerForMute;
+
+    private bool isMuteBGM;
+    private bool isMuteSE;
+    private float bgmVolume;
+    private float seVolume;
 
     public enum SoundSpecific
     {
         BUTTON,
         OTHERUI,
-        Enemy
+        ENEMY
     }
 
     public enum TowerSoundSpecific
@@ -73,13 +80,25 @@ public class SoundManager : MonoSingleton<SoundManager>
     {
         skillLoopAudioPlayer = skillLoopAudioSourceCollection.audioSources;
         skillAudioPlayer = skillAudioSourceCollection.audioSources;
+        towerAudioPlayer = towerAudioSourceCollection.audioSources;
         otherAudioPlayer = otherAudioSourceCollection.audioSources;
+        audioPlayerForMute = otherAudioSourceCollection.audioSourcesForMute;
+
+        isMuteBGM = false;
+        isMuteSE = false;
+        bgmVolume = 1.0f;
+        seVolume = 1.0f;
+
         PlayBGM("OutGame_BGM");
+    }
+
+    public void StopBGMPlayer()
+    {
+        bgmPlayer.Stop();
     }
 
     public void PlayBGM(string soundName)
     {
-
         Sound[] sounds = bgmSounds;
 
         for (int i = 0; i < sounds.Length; i++)
@@ -97,7 +116,6 @@ public class SoundManager : MonoSingleton<SoundManager>
         }
 
     }
-
 
     public void PlaySound(SoundSpecific soundSpecific, string soundName)
     {
@@ -119,7 +137,11 @@ public class SoundManager : MonoSingleton<SoundManager>
                     if (!otherAudioPlayer[j].isPlaying)
                     {
                         otherAudioPlayer[j].clip = sounds[i].clip;
-                        otherAudioPlayer[j].Play();
+                        if (soundName == "Player_Game_Clear_Sound"
+                            || soundName == "Player_Game_Over_Sound")
+                            otherAudioPlayer[j].PlayDelayed(0.5f);
+                        else
+                            otherAudioPlayer[j].Play();
                         return;
                     }
                 }
@@ -138,12 +160,12 @@ public class SoundManager : MonoSingleton<SoundManager>
         {
             if (soundName == sounds[i].soundName)
             {
-                for (int j = 0; j < otherAudioPlayer.Length; j++)
+                for (int j = 0; j < towerAudioPlayer.Length; j++)
                 {
-                    if (!otherAudioPlayer[j].isPlaying)
+                    if (!towerAudioPlayer[j].isPlaying)
                     {
-                        otherAudioPlayer[j].clip = sounds[i].clip;
-                        otherAudioPlayer[j].Play();
+                        towerAudioPlayer[j].clip = sounds[i].clip;
+                        towerAudioPlayer[j].Play();
                         return;
                     }
                 }
@@ -151,6 +173,30 @@ public class SoundManager : MonoSingleton<SoundManager>
                 Debug.Log("Tower Audio Source is full");
                 return;
             }  
+        }
+    }
+
+    public void PlaySoundForMute(string soundName)
+    {
+        Sound[] sounds = buttonSounds;
+
+        for (int i = 0; i < sounds.Length; i++)
+        {
+            if (soundName == sounds[i].soundName)
+            {
+                for (int j = 0; j < audioPlayerForMute.Length; j++)
+                {
+                    if (!audioPlayerForMute[j].isPlaying)
+                    {
+                        audioPlayerForMute[j].clip = sounds[i].clip;
+                        audioPlayerForMute[j].Play();
+                        return;
+                    }
+                }
+
+                Debug.Log("Audio Source For Mute is full");
+                return;
+            }
         }
     }
 
@@ -190,11 +236,11 @@ public class SoundManager : MonoSingleton<SoundManager>
 
     public AudioSource GetLoopSkillAudio()
     {
-        for (int j = 0; j < skillLoopAudioPlayer.Length; j++)
+        for (int i = 0; i < skillLoopAudioPlayer.Length; i++)
         {
-            if (!skillLoopAudioPlayer[j].isPlaying)
+            if (!skillLoopAudioPlayer[i].isPlaying)
             {
-                return skillLoopAudioPlayer[j];
+                return skillLoopAudioPlayer[i];
             }
         }
 
@@ -233,5 +279,76 @@ public class SoundManager : MonoSingleton<SoundManager>
     {
         if (audioSource != null)
             audioSource.Stop();
+    }
+
+    public void ControlBGMPlayerSound(float value)
+    {
+        bgmVolume = value;
+        bgmPlayer.volume = value;
+    }
+
+    public float GetBGMVolume()
+    {
+        return bgmVolume;
+    }
+
+    public void ControlBGMPlayerMute(bool ismute)
+    {
+        bgmPlayer.mute = ismute;
+        isMuteBGM = ismute;
+    }
+
+    public bool GetIsMuteBGM()
+    {
+        return isMuteBGM;
+    }
+
+    public void ControlSEPlayerSound(float value)
+    {
+        seVolume = value;
+
+        foreach (AudioSource audioSource in skillLoopAudioPlayer)
+            audioSource.volume = value;
+
+        foreach (AudioSource audioSource in skillAudioPlayer)
+            audioSource.volume = value;
+        
+        foreach(AudioSource audioSource in towerAudioPlayer)
+            audioSource.volume = value;
+
+        foreach (AudioSource audioSource in otherAudioPlayer)
+            audioSource.volume = value;
+    }
+
+    public float GetSEVolume()
+    {
+        return seVolume;
+    }
+
+    public void ControlSEPlayerMute(bool ismute)
+    {
+        foreach (AudioSource audioSource in skillLoopAudioPlayer)
+            audioSource.mute = ismute;
+
+        foreach (AudioSource audioSource in skillAudioPlayer)
+            audioSource.mute = ismute;
+
+        foreach (AudioSource audioSource in towerAudioPlayer)
+            audioSource.mute = ismute;
+
+        foreach (AudioSource audioSource in otherAudioPlayer)
+            audioSource.mute = ismute;
+
+        isMuteSE = ismute;
+    }
+
+    public bool GetIsMuteSE()
+    {
+        return isMuteSE;
+    }
+
+    public void SetIsMuteSE(bool isMuteSE)
+    {
+        this.isMuteSE = isMuteSE;
     }
 }
