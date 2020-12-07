@@ -5,7 +5,6 @@ using System;
 using System.IO;
 using System.Security.Cryptography;
 using UnityEngine.AI;
-using TreeEditor;
 
 public class LevelEditor : MonoBehaviour
 {
@@ -412,8 +411,12 @@ public class LevelEditor : MonoBehaviour
     {
         int loadStageChapter = GameManager.Instance.GetLoadStageChapter();
         int loadStageLevel = GameManager.Instance.GetLoadStageLevel();
-
-        string path = string.Format("Assets/StageData/{0}-{1}.json", loadStageChapter, loadStageLevel);
+        string path;
+        if (Application.platform == RuntimePlatform.Android)
+            path = Application.persistentDataPath + string.Format("/{0}-{1}.json", loadStageChapter, loadStageLevel);
+        else
+            path = string.Format("Assets/StageData/{0}-{1}.json", loadStageChapter, loadStageLevel);
+        //string path = string.Format("Assets/StageData/{0}-{1}.json", loadStageChapter, loadStageLevel);
         System.IO.FileInfo file = new System.IO.FileInfo(path);
 
         try
