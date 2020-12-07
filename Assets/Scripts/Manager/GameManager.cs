@@ -354,6 +354,9 @@ public class GameManager : MonoSingleton<GameManager>
         isGameOver = true;
         PanelSystem panelSys = inGameUI.transform.Find("IngamePanel").gameObject.GetComponent<PanelSystem>();
         panelSys.SetPanel(panelSys.gameOverPanel);
+
+        SoundManager.Instance.StopBGMPlayer();
+        SoundManager.Instance.PlaySound(SoundManager.SoundSpecific.OTHERUI, "Player_Game_Over_Sound");
     }
 
     public void StageClear()
@@ -362,10 +365,12 @@ public class GameManager : MonoSingleton<GameManager>
         PanelSystem panelSys = inGameUI.transform.Find("IngamePanel").gameObject.GetComponent<PanelSystem>();
         panelSys.SetPanel(panelSys.stageClearPanel);
 
-        ProcessStageClear();
+        SoundManager.Instance.StopBGMPlayer();
+        SoundManager.Instance.PlaySound(SoundManager.SoundSpecific.OTHERUI, "Player_Game_Clear_Sound");
+        ProcessStageClearInfo();
     }
 
-    public void ProcessStageClear()
+    public void ProcessStageClearInfo()
     {
         bool temp = false;
         stageClearInfo.stageChpater[loadStageChapter-1].stageLevel[loadStageLevel-1].isClear = true;
