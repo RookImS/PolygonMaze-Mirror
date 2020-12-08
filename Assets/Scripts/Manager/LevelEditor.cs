@@ -324,12 +324,15 @@ public class LevelEditor : MonoBehaviour
     {
         UpdateStageData();
 
+        int stageChapter = this.stageData.stageChapter;
+        int stageLevel = this.stageData.stageLevel;
+
         string jsonData = JsonUtility.ToJson(stageData);
         string path;
         if (Application.platform == RuntimePlatform.Android)
-            path = Application.persistentDataPath + string.Format("/StageData/{0}-{1}.json");
+            path = Application.persistentDataPath + string.Format("/StageData/{0}-{1}.json", stageChapter, stageLevel);
         else
-            path = string.Format("Assets/StageData/{0}-{1}.json");
+            path = string.Format("Assets/StageData/{0}-{1}.json", stageChapter, stageLevel);
 
         System.IO.FileInfo file = new System.IO.FileInfo(path);
         file.Directory.Create();
