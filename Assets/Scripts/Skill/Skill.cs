@@ -62,12 +62,19 @@ public class Skill : MonoBehaviour
 
         transform.position = new Vector3(realPos.x, 1.1f, realPos.z);
 
-        
+
     }
 
     public bool UseSkill(Vector3 mousePos)
     {
-        if (!EventSystem.current.IsPointerOverGameObject()/* || !isEnoughMoney*/)
+        bool isCheckUI;
+
+        if (Application.platform == RuntimePlatform.Android)
+            isCheckUI = EventSystem.current.IsPointerOverGameObject(Input.GetTouch(0).fingerId);
+        else
+            isCheckUI = EventSystem.current.IsPointerOverGameObject();
+
+        if (!isCheckUI)
         {
             SoundManager.instance.StopAudio(currentAudioSource1);
             Destroy(this.gameObject);
@@ -85,12 +92,11 @@ public class Skill : MonoBehaviour
 
             SoundManager.Instance.PlaySkillSound(skillSoundSpecific, use_sound_name);
 
-            if(effect_sound_name != "Space")
+            if (effect_sound_name != "Space")
                 SoundManager.Instance.PlayLoopSkillSound(currentAudioSource1, skillSoundSpecific, effect_sound_name);
 
             return true;
         }
-
     }
 
     public virtual void ApplySkill(GameObject obj)
