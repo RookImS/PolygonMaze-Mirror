@@ -12,9 +12,12 @@ public class DialogueUI : MonoBehaviour
     public GameObject TMProtext;
 
     private bool checkPrintSentence;
+    private IEnumerator coroutine;
+
     private Dialogue m_dialogue;
     private GameObject m_textPanel;
     private GameObject m_text;
+    private TextMeshProUGUI dialogueText;
 
     private EventTrigger eventTrigger;
     private EventTrigger.Entry entry;
@@ -64,6 +67,8 @@ public class DialogueUI : MonoBehaviour
         if (checkPrintSentence)
         {
             checkPrintSentence = false;
+            StopCoroutine(coroutine);
+            PrintSentence();
         }
         else
         {
@@ -71,7 +76,8 @@ public class DialogueUI : MonoBehaviour
 
             string arg_sentence = m_dialogue.sentences[0];
 
-            StartCoroutine(TypeSentence(arg_sentence));
+            coroutine = TypeSentence(arg_sentence);
+            StartCoroutine(coroutine);
         }
 
         SoundManager.instance.PlaySound(SoundManager.SoundSpecific.OTHERUI, "Tutorial_Pass_Sound");
@@ -97,24 +103,21 @@ public class DialogueUI : MonoBehaviour
     }
 
 
+    private void PrintSentence()
+    {
+        dialogueText.text = m_dialogue.sentences[0];
+        m_dialogue.sentences.RemoveAt(0);
+    }
 
     IEnumerator TypeSentence(string sentence)
     {
-        TextMeshProUGUI dialogueText = m_text.GetComponent<TextMeshProUGUI>();
+        dialogueText = m_text.GetComponent<TextMeshProUGUI>();
         dialogueText.text = "";
 
         foreach (char letter in sentence.ToCharArray())
         {
-            if (checkPrintSentence)
-            {
                 dialogueText.text += letter;
                 yield return new WaitForSecondsRealtime(0.1f);
-            }
-            else
-            {
-                dialogueText.text = sentence;
-                break;
-            }
         }
 
         checkPrintSentence = false;
