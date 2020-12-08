@@ -3,6 +3,8 @@
 public class MonoSingleton<T> : MonoBehaviour where T : MonoBehaviour
 {
     public static T instance = null;
+    public static bool isDontDestroy = false;
+
     public static T Instance
     {
         get
@@ -15,7 +17,12 @@ public class MonoSingleton<T> : MonoBehaviour where T : MonoBehaviour
                 {
                     instance = new GameObject("@" + typeof(T).ToString()).AddComponent<T>();
                 }
-                DontDestroyOnLoad(instance.gameObject);
+
+                if (!isDontDestroy)
+                {
+                    DontDestroyOnLoad(instance.gameObject);
+                    isDontDestroy = true;
+                }
             }
             return instance;
         }
@@ -31,7 +38,12 @@ public class MonoSingleton<T> : MonoBehaviour where T : MonoBehaviour
             {
                 instance = new GameObject("@" + typeof(T).ToString()).AddComponent<T>();  
             }
-            DontDestroyOnLoad(instance.gameObject);
+
+            if (!isDontDestroy)
+            {
+                DontDestroyOnLoad(instance.gameObject);
+                isDontDestroy = true;
+            }
         }
         else
         {
