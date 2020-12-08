@@ -2702,14 +2702,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dd54b7dcbcd6610429fd88d3a56bbecc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bgmSpeakerImage: {fileID: 0}
-  bgmVolumeText: {fileID: 0}
-  bgmSlider: {fileID: 0}
-  seSpeakerImage: {fileID: 0}
-  seVolumeText: {fileID: 0}
-  seSlider: {fileID: 0}
-  notMuteSpeaker: {fileID: 0}
-  muteSpeaker: {fileID: 0}
 --- !u!1 &589751926
 GameObject:
   m_ObjectHideFlags: 0
@@ -3798,7 +3790,7 @@ SpriteMask:
   m_FrontSortingLayer: -2
   m_BackSortingLayer: -2
   m_FrontSortingOrder: 1
-  m_BackSortingOrder: -2
+  m_BackSortingOrder: -3
   m_IsCustomRangeActive: 1
   m_SpriteSortPoint: 0
 --- !u!1 &829179804
