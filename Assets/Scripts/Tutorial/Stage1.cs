@@ -115,7 +115,9 @@ public class Stage1 : TutorialChecker
 
         phase9Checker1 = phase9Tower1.transform.Find("SideCollider").GetChild(2).gameObject.GetComponent<MeshCollider>();
         phase9Checker2 = phase9Tower2.transform.Find("SideCollider").GetChild(2).gameObject.GetComponent<MeshCollider>();
+
     }
+
     private bool Phase9Checker()
     {
         if (phase9Checker1.enabled || phase9Checker2.enabled)
@@ -142,7 +144,7 @@ public class Stage1 : TutorialChecker
         activeList.Add(phase11Tower);
 
         DisableSCinExceptIndex(phase11Tower, 3);
-        
+
         DisableSCExceptGameObject();
     }
     private bool Phase11Checker()

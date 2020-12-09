@@ -21,7 +21,9 @@ public class DeployBehaviour : MonoBehaviour
     private NavMeshSurface enemyNav;
 
     private Ray[] rayArray;
-    private float checkRadius;
+    private float checkRadius1;
+    private float checkRadius2;
+    private float correction;
 
     private bool isDeployEnable;
     private bool isProperLocate;
@@ -57,7 +59,9 @@ public class DeployBehaviour : MonoBehaviour
         isSkipFrame = true;
 
         rayArray = new Ray[17];
-        checkRadius = 0.3f;
+        checkRadius1 = 0.3f;
+        checkRadius2 = 0.5f;
+        correction = 0.5f;
     }
 
     private bool CheckPath()
@@ -152,11 +156,15 @@ public class DeployBehaviour : MonoBehaviour
         RaycastHit checkHit;
 
         rayArray[0] = Camera.main.ScreenPointToRay(Camera.main.WorldToScreenPoint(pos));
-        for (int i = 1; i <= 8; i++)
-            rayArray[i] = Camera.main.ScreenPointToRay(Camera.main.WorldToScreenPoint(CalcCircularPos(pos, checkRadius, i)));
+        for (int i = 1; i <= 4; i++)
+            rayArray[i] = Camera.main.ScreenPointToRay(Camera.main.WorldToScreenPoint(CalcCircularPos(pos, checkRadius1, checkRadius1, i)));
+        for (int i = 5; i <= 8; i++)
+            rayArray[i] = Camera.main.ScreenPointToRay(Camera.main.WorldToScreenPoint(CalcCircularPos(pos, checkRadius1, checkRadius2, i)));
 
-        for (int i = 9; i <= 16; i++)
-            rayArray[i] = Camera.main.ScreenPointToRay(Camera.main.WorldToScreenPoint(CalcCircularPos(pos, checkRadius * 0.5f, i)));
+        for (int i = 9; i <= 12; i++)
+            rayArray[i] = Camera.main.ScreenPointToRay(Camera.main.WorldToScreenPoint(CalcCircularPos(pos, checkRadius1 * 0.5f, checkRadius1 * 0.5f, i)));
+        for (int i = 13; i <= 16; i++)
+            rayArray[i] = Camera.main.ScreenPointToRay(Camera.main.WorldToScreenPoint(CalcCircularPos(pos, checkRadius1 * 0.5f, checkRadius2 * 0.5f, i)));
 
         bool isFirstColliderHit = true;
         foreach (Ray ray in rayArray)
@@ -214,39 +222,39 @@ public class DeployBehaviour : MonoBehaviour
         return hitCollider;
     }
 
-    private Vector3 CalcCircularPos(Vector3 pos, in float radius, in int direction)
+    private Vector3 CalcCircularPos(Vector3 pos, in float radius1, in float radius2, in int direction)
     {
         Vector3 result = new Vector3();
         result = pos;
         switch(direction)
         {
             case 1:
-                result.x += radius;
+                result.x += radius1;
                 break;
             case 2:
-                result.x += radius * 0.707f;    // root(2)/2 for rcos(pi/4)
-                result.y += radius * 0.707f;    // root(2)/2 for rsin(pi/4)
+                result.x += radius1 * 0.707f;    // root(2)/2 for rcos(pi/4)
+                result.y += radius2 * 0.707f;    // root(2)/2 for rsin(pi/4)
                 break;
             case 3:
-                result.y += radius;
+                result.y += radius2;
                 break;
             case 4:
-                result.x -= radius * 0.707f;
-                result.y += radius * 0.707f;
+                result.x -= radius1 * 0.707f;
+                result.y += radius2 * 0.707f;
                 break;
             case 5:
-                result.x -= radius;
+                result.x -= radius1;
                 break;
             case 6:
-                result.x -= radius * 0.707f;
-                result.y -= radius * 0.707f;
+                result.x -= radius1 * 0.707f;
+                result.y -= radius2 * 0.707f;
                 break;
             case 7:
-                result.y -= radius;
+                result.y -= radius2;
                 break;
             case 8:
-                result.x += radius * 0.707f;
-                result.y -= radius * 0.707f;
+                result.x += radius1 * 0.707f;
+                result.y -= radius2 * 0.707f;
                 break;
             default:
                 break;
@@ -256,9 +264,13 @@ public class DeployBehaviour : MonoBehaviour
     }
     public GameObject LocateTower(Vector3 mousePos)
     {
-        Vector3 realPos = Camera.main.ScreenToWorldPoint(mousePos);
+        checker.FixPosition();
 
-        Collider hitCollider = AroundRaycast(realPos);
+        Vector3 realPos = Camera.main.ScreenToWorldPoint(mousePos);
+        Vector3 correctionPos = realPos;
+        correctionPos.z += correction;
+
+        Collider hitCollider = AroundRaycast(correctionPos);
         if (hitCollider != null)
         {
             //locate proper position
@@ -267,7 +279,6 @@ public class DeployBehaviour : MonoBehaviour
             // update checker navMesh
             GetComponent<NavMeshModifier>().ignoreFromBuild = false;
             checkerNav.UpdateNavMesh(checkerNav.navMeshData);
-            checker.FixPosition();
 
             isProperLocate = true;
 
@@ -276,7 +287,7 @@ public class DeployBehaviour : MonoBehaviour
         else
         {
             // locate tower at mousePos(realPos)
-            transform.position = new Vector3(realPos.x, 0f, realPos.z + 0.5f);
+            transform.position = new Vector3(correctionPos.x, 0, correctionPos.z);
             transform.eulerAngles = new Vector3(0f, 0f, 0f);
 
             //update checker navMesh

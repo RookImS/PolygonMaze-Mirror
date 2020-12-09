@@ -51,8 +51,7 @@ public class SkillListUI : MonoBehaviour
 
         GameObject selectedSlot = EventSystem.current.currentSelectedGameObject;
 
-        skillPanel.transform.position = new Vector2(selectedSlot.transform.position.x, selectedSlot.transform.position.y);
-
+        skillPanel.transform.position = selectedSlot.transform.position;
         Vector2 recPos = skillPanel.transform.GetComponent<RectTransform>().anchoredPosition;
         float correctPos = 
             (skillPanel.GetComponent<RectTransform>().rect.height - selectedSlot.GetComponent<RectTransform>().rect.height) / 2;

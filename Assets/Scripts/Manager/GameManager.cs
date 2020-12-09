@@ -62,6 +62,7 @@ public class GameManager : MonoSingleton<GameManager>
 
     public void Init()
     {
+        Application.targetFrameRate = 60;
         SceneManager.sceneLoaded += OnSceneLoaded;
 
         loadStageChapter = 0;

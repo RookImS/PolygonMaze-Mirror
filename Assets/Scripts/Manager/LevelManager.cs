@@ -38,7 +38,7 @@ public class LevelManager : MonoBehaviour
     private List<EnemyWave> enemyWaveList;
     private bool isSuccessStageLoad;
     [HideInInspector] public bool isWaveSystemOn;
-    [HideInInspector] public bool isWaveComplete;
+    //[HideInInspector] public bool isWaveComplete;
 
     [Header("Preserved Variables")]
     public GameObject stageGameObject;
@@ -72,6 +72,7 @@ public class LevelManager : MonoBehaviour
     public GameObject ellipseEnemyPrefab;
     public GameObject ringEnemyPrefab;
 
+    [HideInInspector] public int currentWave;
     [HideInInspector] public int m_enemyCount;
 
     private void Awake()
@@ -88,16 +89,17 @@ public class LevelManager : MonoBehaviour
         }
     }
 
-    private void Start()
-    {
-        if(isSuccessStageLoad)
-            StartCoroutine(StartStage());
-    }
+    //private void Start()
+    //{
+    //    if(isSuccessStageLoad)
+    //        StartCoroutine(StartStage());
+    //}
 
     public void Init()
     {
         instance = this;
 
+        currentWave = 0;
         m_enemyCount = 0;
         GameManager.Instance.InitIngameSetting();
     }
@@ -106,7 +108,7 @@ public class LevelManager : MonoBehaviour
     {
         int enemyCount = 0;
 
-        for(int i = 0; i< waves.transform.childCount; i++)
+        for (int i = 0; i < waves.transform.childCount; i++)
         {
             enemyCount += waves.transform.GetChild(i).childCount;
         }
@@ -212,7 +214,7 @@ public class LevelManager : MonoBehaviour
         LoadChecker();
         LoadWaves();
         LoadTutorial();
-        isWaveComplete = true;
+        //isWaveComplete = true;
     }
 
     public void LoadPlayerLifeAndStartCost()
@@ -232,7 +234,7 @@ public class LevelManager : MonoBehaviour
         if (obstacles != null)
             Destroy(obstacles);
 
-        if(obstacles == null)
+        if (obstacles == null)
             obstacles = new GameObject("Obstacles");
         obstacles.transform.SetParent(this.stageGameObject.transform);
 
@@ -498,7 +500,7 @@ public class LevelManager : MonoBehaviour
 
 
             //if(enemyWaveInfo.isTutorialWave == false)
-                waveValue++;
+            waveValue++;
         }
     }
 
@@ -510,8 +512,15 @@ public class LevelManager : MonoBehaviour
         if (tutorial.GetComponent<Tutorial>().tutorial.chapter == GameManager.Instance.GetLoadStageChapter()
             && tutorial.GetComponent<Tutorial>().tutorial.level == GameManager.Instance.GetLoadStageLevel())
         {
-            isWaveSystemOn = false;
             tutorial.gameObject.SetActive(true);
+        }
+    }
+
+    public void CallWave()
+    {
+        if (currentWave < enemyWaveList.Count && isWaveSystemOn)
+        {
+            StartCoroutine(StartWave(enemyWaveList[currentWave]));
         }
     }
 
@@ -520,16 +529,17 @@ public class LevelManager : MonoBehaviour
      * 2. TakeBreakTime 2 & StartWave 2.
      * 3. ...
      */
-    private IEnumerator StartStage()
+    /*private IEnumerator StartStage()
     {
 
-        foreach (EnemyWave enemyWave in this.enemyWaveList)
+        /*foreach (EnemyWave enemyWave in this.enemyWaveList)
         {
             while (!(isWaveSystemOn && isWaveComplete))
             {
                 yield return new WaitForSeconds(0.1f);
             }
 
+            /*
             isWaveComplete = false;
 
             yield return StartCoroutine(TakeBreakTime(enemyWave.breakTime));
@@ -542,32 +552,34 @@ public class LevelManager : MonoBehaviour
             }
 
             isWaveComplete = true;
-            /*
-            if(enemyWaveInfo.nextWaveTrigger
-                == StageScriptableObject.EnemyWaveInfo.NextWaveTrigger.EnemyExterminated)
-            {
-                StartCoroutine(StartWave(enemyWaveInfo, waveValue));
+            */
+    /*
+    if(enemyWaveInfo.nextWaveTrigger
+        == StageScriptableObject.EnemyWaveInfo.NextWaveTrigger.EnemyExterminated)
+    {
+        StartCoroutine(StartWave(enemyWaveInfo, waveValue));
 
-                currentWaveEnemyNum = GetCurrentWaveEnemyNum(enemyWaveInfo);
-                while (!(this.enemyWaveList[waveValue - 1].oneWaveEnemyList.Count == currentWaveEnemyNum))
-                    break;   
-            }
-            else if (enemyWaveInfo.nextWaveTrigger
-                == StageScriptableObject.EnemyWaveInfo.NextWaveTrigger.FirstEnemyDead)
-            {
-                StartCoroutine(StartWave(enemyWaveInfo, waveValue));
-
-                while (!(this.enemyWaveList[waveValue - 1].oneWaveEnemyList[0] == null))
-                    break;
-            }
-            else if (enemyWaveInfo.nextWaveTrigger
-                == StageScriptableObject.EnemyWaveInfo.NextWaveTrigger.FirstEnemyDead)
-            {
-
-            }*/
-
-        }
+        currentWaveEnemyNum = GetCurrentWaveEnemyNum(enemyWaveInfo);
+        while (!(this.enemyWaveList[waveValue - 1].oneWaveEnemyList.Count == currentWaveEnemyNum))
+            break;   
     }
+    else if (enemyWaveInfo.nextWaveTrigger
+        == StageScriptableObject.EnemyWaveInfo.NextWaveTrigger.FirstEnemyDead)
+    {
+        StartCoroutine(StartWave(enemyWaveInfo, waveValue));
+
+        while (!(this.enemyWaveList[waveValue - 1].oneWaveEnemyList[0] == null))
+            break;
+    }
+    else if (enemyWaveInfo.nextWaveTrigger
+        == StageScriptableObject.EnemyWaveInfo.NextWaveTrigger.FirstEnemyDead)
+    {
+
+    }
+
+}
+
+}*/
 
     /* TakeBreakTime
      * 1. Take breaktime beafore the wave 
@@ -595,12 +607,16 @@ public class LevelManager : MonoBehaviour
      */
     private IEnumerator StartWave(EnemyWave enemyWave)
     {
-        foreach (GameObject enemy in enemyWave.oneWaveEnemies)
+        if (isSuccessStageLoad)
         {
-            enemy.SetActive(true);
-            enemy.GetComponent<EnemyData>().hpBar.m_hpBar.SetActive(true);
-            enemyWave.activeNum++;
-            yield return new WaitForSeconds(enemyWave.enemySpawnDuration);
+            currentWave++;
+            foreach (GameObject enemy in enemyWave.oneWaveEnemies)
+            {
+                enemy.SetActive(true);
+                enemy.GetComponent<EnemyData>().hpBar.m_hpBar.SetActive(true);
+                enemyWave.activeNum++;
+                yield return new WaitForSeconds(enemyWave.enemySpawnDuration);
+            }
         }
     }
 }

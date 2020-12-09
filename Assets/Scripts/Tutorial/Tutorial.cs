@@ -7,7 +7,6 @@ public class Tutorial : MonoBehaviour
 {
     public GameObject aniUI;
     public GameObject maskUI;
-    //public GameObject maskObject;
     public GameObject mask;
     public GameObject fieldAniUI;
     public TutorialObject tutorial;

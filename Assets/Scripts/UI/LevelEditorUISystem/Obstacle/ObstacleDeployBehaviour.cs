@@ -115,6 +115,8 @@ public class ObstacleDeployBehaviour : MonoBehaviour
 
     public GameObject LocateObstacle(Vector3 mousePos)
     {
+        checker.FixPosition();
+
         Vector3 realPos = Camera.main.ScreenToWorldPoint(mousePos);
         Ray ray = Camera.main.ScreenPointToRay(mousePos);
         RaycastHit hit;
@@ -133,7 +135,6 @@ public class ObstacleDeployBehaviour : MonoBehaviour
             // update checker navMesh
             GetComponent<NavMeshModifier>().ignoreFromBuild = false;
             checkerNav.UpdateNavMesh(checkerNav.navMeshData);
-            checker.FixPosition();
 
             isProperLocate = true;
 

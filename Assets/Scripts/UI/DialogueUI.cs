@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using TMPro;
@@ -19,9 +20,6 @@ public class DialogueUI : MonoBehaviour
     private GameObject m_text;
     private TextMeshProUGUI dialogueText;
 
-    private EventTrigger eventTrigger;
-    private EventTrigger.Entry entry;
-
     private void Awake()
     {
         Init();
@@ -33,12 +31,6 @@ public class DialogueUI : MonoBehaviour
         m_dialogue = null;
         m_textPanel = null;
         m_text = null;
-
-        eventTrigger = invokePanel.GetComponent<EventTrigger>();
-
-        entry = new EventTrigger.Entry();
-        entry.callback.AddListener((eventData) => tutorial.InvokeNextTutorial());
-        entry.eventID = EventTriggerType.PointerClick;
     }
 
     public void StartDialogue(Dialogue dialogue)
@@ -46,7 +38,7 @@ public class DialogueUI : MonoBehaviour
         m_dialogue = dialogue;
         invokePanel.SetActive(true);
 
-        StartCoroutine(AddInvokeTrigger());
+        StartCoroutine(WaitInvokePanel());
         GameManager.Instance.TimeStop();
         MakeDialoguePanel();
     }
@@ -54,8 +46,6 @@ public class DialogueUI : MonoBehaviour
     public void EndDialogue()
     {
         DestroyDialoguePanel();
-
-        eventTrigger.triggers.Remove(entry);
 
         GameManager.Instance.TimeRestore();
 
@@ -116,8 +106,8 @@ public class DialogueUI : MonoBehaviour
 
         foreach (char letter in sentence.ToCharArray())
         {
-                dialogueText.text += letter;
-                yield return new WaitForSecondsRealtime(0.1f);
+            dialogueText.text += letter;
+            yield return new WaitForSecondsRealtime(0.1f);
         }
 
         checkPrintSentence = false;
@@ -125,11 +115,11 @@ public class DialogueUI : MonoBehaviour
         yield return null;
     }
 
-    IEnumerator AddInvokeTrigger()
+    IEnumerator WaitInvokePanel()
     {
-        yield return new WaitForSecondsRealtime(0.7f);
-
-        eventTrigger.triggers.Add(entry);
+        invokePanel.GetComponent<EventTrigger>().enabled = false;
+        yield return new WaitForSecondsRealtime(0.5f);
+        invokePanel.GetComponent<EventTrigger>().enabled = true;
 
         yield return null;
     }
