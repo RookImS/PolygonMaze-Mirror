@@ -20,6 +20,9 @@ public class DeployBehaviour : MonoBehaviour
     private NavMeshSurface checkerNav;
     private NavMeshSurface enemyNav;
 
+    private Ray[] rayArray;
+    private float checkRadius;
+
     private bool isDeployEnable;
     private bool isProperLocate;
     private bool isPathEnable;
@@ -52,6 +55,9 @@ public class DeployBehaviour : MonoBehaviour
         isDeployEnable = false;
         isProperLocate = false;
         isSkipFrame = true;
+
+        rayArray = new Ray[17];
+        checkRadius = 0.3f;
     }
 
     private bool CheckPath()
@@ -118,7 +124,7 @@ public class DeployBehaviour : MonoBehaviour
         }
     }
 
-    private void locateProperPos(Transform pos)
+    private void LocateProperPos(Transform pos)
     {
         Vector3 rotateAngle = new Vector3(0f, (pos.rotation.eulerAngles.y + 180) % 360, 0f);
         transform.eulerAngles = rotateAngle;
@@ -128,22 +134,135 @@ public class DeployBehaviour : MonoBehaviour
         transform.position = pos.position + targetPoint;
     }
 
+    private class CheckHitCollider
+    {
+        public CheckHitCollider(Collider collider, int num)
+        {
+            this.collider = collider;
+            this.num = num;
+        }
+
+        public Collider collider;
+        public int num;
+    };
+
+    private Collider AroundRaycast(Vector3 pos)
+    {
+        List<CheckHitCollider> hitColliderList = new List<CheckHitCollider>();
+        RaycastHit checkHit;
+
+        rayArray[0] = Camera.main.ScreenPointToRay(Camera.main.WorldToScreenPoint(pos));
+        for (int i = 1; i <= 8; i++)
+            rayArray[i] = Camera.main.ScreenPointToRay(Camera.main.WorldToScreenPoint(CalcCircularPos(pos, checkRadius, i)));
+
+        for (int i = 9; i <= 16; i++)
+            rayArray[i] = Camera.main.ScreenPointToRay(Camera.main.WorldToScreenPoint(CalcCircularPos(pos, checkRadius * 0.5f, i)));
+
+        bool isFirstColliderHit = true;
+        foreach (Ray ray in rayArray)
+        {
+            if(Physics.Raycast(ray, out checkHit, Camera.main.transform.position.y * 1.3f, layerMask))
+            {
+                isFirstColliderHit = true;
+                foreach (CheckHitCollider obj in hitColliderList)
+                {
+                    if (System.Object.ReferenceEquals(obj.collider, checkHit.collider))
+                    {
+                        obj.num++;
+                        isFirstColliderHit = false;
+                        break;
+                    }
+                }
+                if(isFirstColliderHit)
+                {
+                    CheckHitCollider newObj = new CheckHitCollider(checkHit.collider, 1);
+                    hitColliderList.Add(newObj);
+                }
+            }
+        }
+
+        if (hitColliderList.Count == 0)
+            return null;
+
+        List<CheckHitCollider> maxHitNumList = new List<CheckHitCollider>();
+
+        bool isMax = true;
+        foreach (CheckHitCollider obj in hitColliderList)
+        {
+            isMax = true;
+            foreach(CheckHitCollider maxNumObj in maxHitNumList)
+            {
+                if (obj.num > maxNumObj.num)
+                {
+                    maxHitNumList.Clear();
+                    break;
+                }
+                else if (obj.num < maxNumObj.num)
+                    isMax = false;
+            }
+            if (isMax)
+                maxHitNumList.Add(obj);
+        }
+
+        Collider hitCollider = maxHitNumList[0].collider;
+        for (int i = 1; i < maxHitNumList.Count; i++)
+        {
+            if (Vector3.SqrMagnitude(pos - maxHitNumList[i].collider.transform.position) > Vector3.SqrMagnitude(pos - hitCollider.transform.position))
+                hitCollider = maxHitNumList[i].collider;
+        }
+
+        return hitCollider;
+    }
+
+    private Vector3 CalcCircularPos(Vector3 pos, in float radius, in int direction)
+    {
+        Vector3 result = new Vector3();
+        result = pos;
+        switch(direction)
+        {
+            case 1:
+                result.x += radius;
+                break;
+            case 2:
+                result.x += radius * 0.707f;    // root(2)/2 for rcos(pi/4)
+                result.y += radius * 0.707f;    // root(2)/2 for rsin(pi/4)
+                break;
+            case 3:
+                result.y += radius;
+                break;
+            case 4:
+                result.x -= radius * 0.707f;
+                result.y += radius * 0.707f;
+                break;
+            case 5:
+                result.x -= radius;
+                break;
+            case 6:
+                result.x -= radius * 0.707f;
+                result.y -= radius * 0.707f;
+                break;
+            case 7:
+                result.y -= radius;
+                break;
+            case 8:
+                result.x += radius * 0.707f;
+                result.y -= radius * 0.707f;
+                break;
+            default:
+                break;
+        }
+
+        return result;
+    }
     public GameObject LocateTower(Vector3 mousePos)
     {
         Vector3 realPos = Camera.main.ScreenToWorldPoint(mousePos);
-        Ray ray = Camera.main.ScreenPointToRay(mousePos);
-        RaycastHit hit;
 
-        // locate tower at mousePos(realPos)
-        transform.position = new Vector3(realPos.x, 0f, realPos.z+0.5f);
-        transform.eulerAngles = new Vector3(0f, 0f, 0f);
-
-        if (Physics.Raycast(ray, out hit, Camera.main.transform.position.y * 1.3f, layerMask))
+        Collider hitCollider = AroundRaycast(realPos);
+        if (hitCollider != null)
         {
-            Collider objectHit = hit.collider;
-
             //locate proper position
-            locateProperPos(objectHit.transform);
+            LocateProperPos(hitCollider.transform);
 
             // update checker navMesh
             GetComponent<NavMeshModifier>().ignoreFromBuild = false;
@@ -152,10 +271,14 @@ public class DeployBehaviour : MonoBehaviour
 
             isProperLocate = true;
 
-            return objectHit.gameObject.GetComponent<SideColliderBehaviour>().parentObject;
+            return hitCollider.gameObject.GetComponent<SideColliderBehaviour>().parentObject;
         }
         else
         {
+            // locate tower at mousePos(realPos)
+            transform.position = new Vector3(realPos.x, 0f, realPos.z + 0.5f);
+            transform.eulerAngles = new Vector3(0f, 0f, 0f);
+
             //update checker navMesh
             GetComponent<NavMeshModifier>().ignoreFromBuild = true;
             checkerNav.UpdateNavMesh(checkerNav.navMeshData);
