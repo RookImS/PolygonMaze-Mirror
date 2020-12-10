@@ -43585,7 +43585,7 @@ MonoBehaviour:
   skillDuration: 4
   applyDuration: 0
   id: Red
-  desc: 
+  desc: "\uBE68\uAC1B\uB2E4"
   range: 3
   cost: 150
   skillSprite: {fileID: 0}

@@ -102,7 +102,6 @@ public class DialogueUI : MonoBehaviour
         Destroy(m_textPanel);
     }
 
-
     private void PrintSentence()
     {
         dialogueText.text = m_dialogue.sentences[0];
@@ -127,8 +126,8 @@ public class DialogueUI : MonoBehaviour
 
     IEnumerator AddInvokeTrigger()
     {
-        yield return new WaitForSecondsRealtime(0.7f);
-
+        //yield return new WaitForSecondsRealtime(0.7f);
+        yield return null;
         eventTrigger.triggers.Add(entry);
 
         yield return null;

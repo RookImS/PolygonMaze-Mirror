@@ -35,7 +35,7 @@ public class GameManager : MonoSingleton<GameManager>
             public List<StageInfo> stageLevel;
         }
 
-        public List<StageLevelInfo> stageChpater;
+        public List<StageLevelInfo> stageChapter;
     }
 
     public Stack<string> sceneStack = new Stack<string>();  //BackKey 기능을 위해 씬 Buildindex를 저장하는 스택 
@@ -46,9 +46,10 @@ public class GameManager : MonoSingleton<GameManager>
     public List<GameObject> currentDeck;
 
     private AllDeckInfo allDeckInfo;
-    private StageClearInfo stageClearInfo;
+    public StageClearInfo stageClearInfo;
 
     public bool isStart;
+    public bool isSelectDeck;
     private int loadStageChapter;
     private int loadStageLevel;
 
@@ -57,7 +58,19 @@ public class GameManager : MonoSingleton<GameManager>
 
     private new void Awake()
     {
+        base.Awake();
         Init();
+        for (int a = 0; a < 10; a++)
+        {
+            for (int b = 0; b < 10; b++)
+            {
+                if (GameManager.instance.stageClearInfo.stageChapter[a].stageLevel[b].isClear)
+                {
+                    Debug.Log(a + "-" + b);
+                }
+
+            }
+        }
     }
 
     public void Init()
@@ -237,20 +250,20 @@ public class GameManager : MonoSingleton<GameManager>
     public void MakeEmptyStageClearInfo()
     {
         stageClearInfo = new StageClearInfo();
-        stageClearInfo.stageChpater = new List<StageClearInfo.StageLevelInfo>();
+        stageClearInfo.stageChapter = new List<StageClearInfo.StageLevelInfo>();
 
         for (int i = 0; i < chapterMax; i++)
         {
-            stageClearInfo.stageChpater.Add(new StageClearInfo.StageLevelInfo());
-            stageClearInfo.stageChpater[i].stageLevel = new List<StageClearInfo.StageLevelInfo.StageInfo>();
+            stageClearInfo.stageChapter.Add(new StageClearInfo.StageLevelInfo());
+            stageClearInfo.stageChapter[i].stageLevel = new List<StageClearInfo.StageLevelInfo.StageInfo>();
 
             for (int j = 0; j < levelMax; j++)
             {
-                stageClearInfo.stageChpater[i].stageLevel.Add(new StageClearInfo.StageLevelInfo.StageInfo());
-                stageClearInfo.stageChpater[i].stageLevel[j].isClear = false;
-                stageClearInfo.stageChpater[i].stageLevel[j].achievement1 = false;
-                stageClearInfo.stageChpater[i].stageLevel[j].achievement2 = false;
-                stageClearInfo.stageChpater[i].stageLevel[j].achievement3 = false;
+                stageClearInfo.stageChapter[i].stageLevel.Add(new StageClearInfo.StageLevelInfo.StageInfo());
+                stageClearInfo.stageChapter[i].stageLevel[j].isClear = false;
+                stageClearInfo.stageChapter[i].stageLevel[j].achievement1 = false;
+                stageClearInfo.stageChapter[i].stageLevel[j].achievement2 = false;
+                stageClearInfo.stageChapter[i].stageLevel[j].achievement3 = false;
             }
         }
     }
@@ -392,15 +405,15 @@ public class GameManager : MonoSingleton<GameManager>
     public void ProcessStageClearInfo()
     {
         bool temp = false;
-        stageClearInfo.stageChpater[loadStageChapter-1].stageLevel[loadStageLevel-1].isClear = true;
+        stageClearInfo.stageChapter[loadStageChapter-1].stageLevel[loadStageLevel-1].isClear = true;
 
         /* 업적 시스템 추가될 경우
         if(temp)
-            stageClearInfo.stageChpater[loadStageChapter].stageLevel[loadStageLevel].achievement1 = true;
+            stageClearInfo.stageChapter[loadStageChapter].stageLevel[loadStageLevel].achievement1 = true;
         if (temp)
-            stageClearInfo.stageChpater[loadStageChapter].stageLevel[loadStageLevel].achievement2 = true;
+            stageClearInfo.stageChapter[loadStageChapter].stageLevel[loadStageLevel].achievement2 = true;
         if (temp)
-            stageClearInfo.stageChpater[loadStageChapter].stageLevel[loadStageLevel].achievement3 = true;
+            stageClearInfo.stageChapter[loadStageChapter].stageLevel[loadStageLevel].achievement3 = true;
         */
     }
 }

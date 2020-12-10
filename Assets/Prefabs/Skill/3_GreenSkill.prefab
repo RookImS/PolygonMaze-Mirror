@@ -38822,7 +38822,7 @@ MonoBehaviour:
   skillDuration: 2
   applyDuration: 2
   id: Green
-  desc: 
+  desc: "\uCD08\uB85D\uCD08\uB85D\uD558\uB2E4"
   range: 1.5
   cost: 150
   skillSprite: {fileID: 0}
