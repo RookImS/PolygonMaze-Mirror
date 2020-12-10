@@ -10,7 +10,6 @@ public class TowerData : MonoBehaviour
     public TowerStatSystem Stats;
 
     [HideInInspector] public List<GameObject> neighbor;
-    [HideInInspector] public TowerSkill towerSkill;
 
     private void Update()
     {
@@ -20,7 +19,6 @@ public class TowerData : MonoBehaviour
     public virtual void Init()
     {
         Stats.Init(this);
-        towerSkill = null;
     }
 
     public virtual void Shoot(Transform muzzle)

@@ -14,13 +14,6 @@ public class NormalBulletBehaviour : BulletBehaviour
     {
         if(enemyList.Count > 0)
             Attack();
-
-    }
-
-    public override void Init(TowerStatSystem t_stat)
-    {
-        m_BulletData.Init(t_stat);
-        hitCollider.GetComponent<SphereCollider>().radius = m_BulletData.stats.stats.splashRange;
     }
 
     private IEnumerator CheckRange()
@@ -47,7 +40,7 @@ public class NormalBulletBehaviour : BulletBehaviour
                 continue;
 
             enemy.GetComponent<EnemyBehaviour>().Damage(m_BulletData.stats.stats.damage);
-            Vector3 pos = new Vector3(enemy.transform.position.x, enemy.transform.position.y + 2, enemy.transform.position.z);
+            Vector3 pos = new Vector3(enemy.transform.position.x, enemy.transform.position.y + 1f, enemy.transform.position.z);
             Vector3 rot = transform.rotation.eulerAngles;
 
             rot = new Vector3(rot.x, rot.y + 180, rot.z);

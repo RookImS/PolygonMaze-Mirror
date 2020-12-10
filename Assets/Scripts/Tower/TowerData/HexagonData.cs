@@ -4,19 +4,30 @@ using UnityEngine;
 
 public class HexagonData : TowerData
 {
-    public int ticRate;
-    public float attackDuration;
-
     public override void Init()
     {
-        Stats.Init(this);
-        Stats.stats.attackRate = 1f / (1f / Stats.stats.attackRate + attackDuration);
-        towerSkill = null;
+        base.Init();
     }
+
     public override void Shoot(Transform muzzle)
     {
-        GameObject bulletInstance = Instantiate(bullet, muzzle.position, muzzle.rotation);
-        bulletInstance.GetComponent<BulletBehaviour>().Init(Stats, ticRate, attackDuration);
+        
+        bullet.GetComponent<SnipeBulletBehaviour>().Hit();
         SoundManager.Instance.PlaySound(SoundManager.TowerSoundSpecific.HEXAGON, "Hexagon_Attack");
+    }
+
+    public void ReloadBullet()
+    {
+        bullet.GetComponent<BulletBehaviour>().Init(Stats);
+        bullet.SetActive(false);
+        bullet.GetComponent<SnipeBulletBehaviour>().Reload();
+    }
+
+    public void LocateBullet(GameObject target)
+    {
+        if (!bullet.activeSelf)
+            bullet.SetActive(true);
+
+        bullet.transform.position = target.transform.position;
     }
 }

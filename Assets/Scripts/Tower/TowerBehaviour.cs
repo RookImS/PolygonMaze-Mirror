@@ -10,14 +10,14 @@ public class TowerBehaviour : MonoBehaviour
     [HideInInspector] public List<GameObject> targetList;
     [HideInInspector] public bool isClicked;
 
-    private TowerData m_TowerData;
-    private float fireCountDown;
+    protected TowerData m_TowerData;
+    protected float fireCountDown;
 
     private void Awake()
     {
         Init();
     }
-    private void Update()
+    protected virtual void Update()
     {
         if (targetList.Count > 0)
         {
@@ -39,12 +39,13 @@ public class TowerBehaviour : MonoBehaviour
         {
             Invoke("Attack", m_TowerData.Stats.stats.aheadDelay);
             fireCountDown = 1f / m_TowerData.Stats.stats.attackRate;
+            fireCountDown += m_TowerData.Stats.stats.aheadDelay;
         }
         if(fireCountDown > 0f)
             fireCountDown -= Time.deltaTime;
     }
 
-    private void Init()
+    protected virtual void Init()
     {
         targetList = new List<GameObject>();
         target = null;
@@ -62,7 +63,7 @@ public class TowerBehaviour : MonoBehaviour
     {
         muzzle.LookAt(target.transform.position);
     }
-    private void SetTarget()
+    protected virtual void SetTarget()
     {
         GameObject nearestEnemy = null;
         float shortestDistance = Mathf.Infinity;
@@ -89,7 +90,7 @@ public class TowerBehaviour : MonoBehaviour
         }
     }
 
-    private void Attack()
+    protected void Attack()
     {
         m_TowerData.Shoot(muzzle);
     }

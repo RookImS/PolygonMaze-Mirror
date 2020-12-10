@@ -17,12 +17,8 @@ public class BulletBehaviour : MonoBehaviour
 
     public virtual void Init(TowerStatSystem t_stat)
     {
-
-    }
-
-    public virtual void Init(TowerStatSystem t_stat, int ticRate, float attackDuration)
-    {
-
+        m_BulletData.Init(t_stat);
+        hitCollider.GetComponent<SphereCollider>().radius = m_BulletData.stats.stats.splashRange;
     }
 
     protected virtual void Attack()

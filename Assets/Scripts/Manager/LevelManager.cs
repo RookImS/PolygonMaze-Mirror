@@ -267,6 +267,7 @@ public class LevelManager : MonoBehaviour
 
 
         towers = new GameObject("Towers");
+        towers.AddComponent<HexagonManager>();
         towers.transform.SetParent(this.stageGameObject.transform);
 
         //foreach (StageScriptableObject.TowerInfo info in this.stageData.baseTowers)
