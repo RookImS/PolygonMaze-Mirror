@@ -83,6 +83,7 @@ public class DeckUI : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
             Debug.Log(order + "덱 제거완료");
         }
     }
+
     public void InsertDeck(int num)
     {
         if (skillListUI.insertCheck)
@@ -104,6 +105,7 @@ public class DeckUI : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
             skillListUI.insertCheck = false;
 
             GameManager.Instance.SaveDeckInfos(order);
+            Debug.Log("hi");
         }
         else
             return;

@@ -221,7 +221,7 @@ public class GameManager : MonoSingleton<GameManager>
         {
             for (int i = 0; i < 3; i++)
             {
-                allDeckInfo.deckInfoList[order].deckIDs[i] = "space";
+                allDeckInfo.deckInfoList[order].deckIDs[i] = "space";   
             }
         }
         else
@@ -232,13 +232,17 @@ public class GameManager : MonoSingleton<GameManager>
             }
         }
 
+        if (deckList[order] == currentDeck)
+            allDeckInfo.deckInfoList[order].isCurrent = true;
+        else
+            allDeckInfo.deckInfoList[order].isCurrent = false;
+
         string jsonData = JsonUtility.ToJson(allDeckInfo.deckInfoList[order]);
         string path;
         if (Application.platform == RuntimePlatform.Android)
             path = Application.persistentDataPath + string.Format("/DeckData/Deck{0}.json", order);
         else
             path = string.Format("Assets/UserData/DeckData/Deck{0}.json", order);
-        //string path = string.Format("Assets/UserData/DeckData/Deck{0}.json", order);
 
         System.IO.FileInfo file = new System.IO.FileInfo(path);
         file.Directory.Create();
@@ -267,8 +271,9 @@ public class GameManager : MonoSingleton<GameManager>
             path = Application.persistentDataPath + string.Format("/StageClearData.json");
         else
             path = string.Format("Assets/UserData/StageClearData.json");
-        //string path = string.Format("Assets/UserData/StageClearData.json");
+        
         System.IO.FileInfo file = new System.IO.FileInfo(path);
+        file.Directory.Create();
 
         try
         {
