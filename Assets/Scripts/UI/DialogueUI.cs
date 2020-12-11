@@ -92,7 +92,6 @@ public class DialogueUI : MonoBehaviour
         Destroy(m_textPanel);
     }
 
-
     private void PrintSentence()
     {
         dialogueText.text = m_dialogue.sentences[0];

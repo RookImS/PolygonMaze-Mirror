@@ -4,58 +4,28 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using TMPro;
 using UnityEngine.UI;
+using System;
+
 public class StageSelectionUI : MonoBehaviour
 {
     public GameObject menu;
     public string sceneToLoad;
     public TextMeshProUGUI stageNum;
-    private bool isSelectDeck;
-
     private void Awake()
     {
         Init();
-  
     }
 
     private void Init()
     {
-        isSelectDeck = false;
-
         GameManager.Instance.SetLoadStageChapter(0);
         GameManager.Instance.SetLoadStageLevel(0);
-    }
 
-    public void SelectDeck(int num)
-    {
-        bool isNull = false;
-
-        for(int i = 0; i< GameManager.Instance.deckList[num].Count; i++)
-        {
-            if (GameManager.Instance.deckList[num][i] == null)
-            {
-                isNull = true;
-                break;
-            }
-        }
-
-        if (!isNull)
-        {
-            GameManager.Instance.currentDeck = GameManager.Instance.deckList[num];
-
-            isSelectDeck = true;
-        }
-        else
-        {
-            isSelectDeck = false;
-            Debug.Log("스킬의 수가 부족하다.");
-        }
-
-        SoundManager.Instance.PlaySound(SoundManager.SoundSpecific.BUTTON, "Common_Button");
     }
 
     public void LoadGame()
     {
-        if (isSelectDeck)
+        if (GameManager.Instance.isSelectDeck)
         {
             SoundManager.Instance.PlayBGM("InGame_BGM");
             SceneManager.LoadScene(sceneToLoad);
@@ -77,7 +47,7 @@ public class StageSelectionUI : MonoBehaviour
 
         if(chapterAndLevel.Length != 2)
         {
-            Debug.Log("OnClickStageButton evenet setting error.");
+            Debug.Log("OnClickStageButton event setting error.");
         }
         else         
         {

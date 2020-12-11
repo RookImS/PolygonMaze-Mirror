@@ -123,6 +123,7 @@ public class Tutorial : MonoSingleton<Tutorial>
             //    else
             //        maskUI.SetActive(false);
             //}
+
             if(tutorialList[phase].maskAnimationList.Count == 0)
             {
                 maskUI.SetActive(false);

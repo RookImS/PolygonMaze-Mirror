@@ -759,8 +759,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: be14f85f0c4708649912fb4da3bf79c4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  skillResource: {fileID: 0}
+  skills: []
+  currentDeck: []
+  isStart: 0
   inGameUI: {fileID: 0}
-  currentGameState: 0
+  isGameOver: 0
+  isStageClear: 0
 --- !u!4 &504976959
 Transform:
   m_ObjectHideFlags: 0
@@ -1026,8 +1031,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ee831bdb06a0d9f4f8f96b4b452e16ee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  SceneToLoad: WikiScene
-  Stage1Button: {fileID: 1058633653}
+  sceneToLoad: 
 --- !u!1 &1197090735
 GameObject:
   m_ObjectHideFlags: 0
@@ -1672,8 +1676,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ee831bdb06a0d9f4f8f96b4b452e16ee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  SceneToLoad: DeckCompositionScene
-  Stage1Button: {fileID: 1718188048}
+  sceneToLoad: 
 --- !u!1 &1747216447
 GameObject:
   m_ObjectHideFlags: 0
@@ -2030,8 +2033,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ee831bdb06a0d9f4f8f96b4b452e16ee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  SceneToLoad: StageSelectionScene
-  Stage1Button: {fileID: 1921106127}
+  sceneToLoad: 
 --- !u!1 &1969440912
 GameObject:
   m_ObjectHideFlags: 0
@@ -2177,8 +2179,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ee831bdb06a0d9f4f8f96b4b452e16ee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  SceneToLoad: AchievementScene
-  Stage1Button: {fileID: 1969440914}
+  sceneToLoad: 
 --- !u!1 &1976767180
 GameObject:
   m_ObjectHideFlags: 0

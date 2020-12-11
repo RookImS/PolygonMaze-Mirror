@@ -14722,7 +14722,7 @@ MonoBehaviour:
   skillDuration: 5
   applyDuration: 1
   id: Blue
-  desc: 
+  desc: "\uD478\uB974\uB2E4"
   range: 1.5
   cost: 100
   skillSprite: {fileID: 0}

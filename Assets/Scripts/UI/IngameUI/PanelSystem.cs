@@ -29,7 +29,8 @@ public class PanelSystem : MonoBehaviour
     }
     public void ReturnToMain()
     {
-        GameManager.Instance.LoadScene("MainScene");
+        //GameManager.Instance.LoadScene("MainScene");
+        GameManager.Instance.LoadScene("TestMain");
         GameManager.Instance.TimeRestore();
         SoundManager.Instance.PlaySound(SoundManager.SoundSpecific.BUTTON, "Common_Button");
         Tutorial.instance.CleanTutorial();
