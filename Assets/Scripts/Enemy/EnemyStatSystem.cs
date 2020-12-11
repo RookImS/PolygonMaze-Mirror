@@ -238,7 +238,7 @@ public class EnemyStatSystem
     {
         currentHp = Mathf.Clamp(currentHp + amount, 0, stats.hp);
 
-        if (currentHp <= 0)
+        if (!isDead && currentHp <= 0)
             m_Owner.Death();
 
         m_Owner.hpBar.ApplyHpBar();

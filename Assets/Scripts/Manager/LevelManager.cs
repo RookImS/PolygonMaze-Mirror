@@ -263,7 +263,7 @@ public class LevelManager : MonoBehaviour
     public void LoadTowers()
     {
         GameObject towers = null;
-        GameObject prefab = null;
+       //GameObject prefab = null;
 
 
         towers = new GameObject("Towers");
@@ -467,8 +467,8 @@ public class LevelManager : MonoBehaviour
             this.enemyWaveList.Add(enemyWave);
 
             enemyWave.enemySpawnDuration = enemyWaveInfo.enemySpawnDuration;
-            enemyWave.nextWaveTrigger = (LevelManager.EnemyWave.NextWaveTrigger)enemyWaveInfo.nextWaveTrigger;
-            enemyWave.breakTime = enemyWaveInfo.breakTime;
+            //enemyWave.nextWaveTrigger = (LevelManager.EnemyWave.NextWaveTrigger)enemyWaveInfo.nextWaveTrigger;
+            //enemyWave.breakTime = enemyWaveInfo.breakTime;
             enemyWave.activeNum = 0;
 
             foreach (StageData.Enemies enemyInfo in enemyWaveInfo.enemyOneWave)
@@ -504,17 +504,32 @@ public class LevelManager : MonoBehaviour
         }
     }
 
+
     public void LoadTutorial()
     {
+        TutorialObject to = null;
         isWaveSystemOn = true;
-        Transform tutorial = this.transform.Find("Tutorial");
 
-        if (tutorial.GetComponent<Tutorial>().tutorial.chapter == GameManager.Instance.GetLoadStageChapter()
-            && tutorial.GetComponent<Tutorial>().tutorial.level == GameManager.Instance.GetLoadStageLevel())
+        if (to = FindTutorialObject())
         {
-            tutorial.gameObject.SetActive(true);
+            Tutorial.Instance.tutorial = to;
+            isWaveSystemOn = false;
+            Tutorial.Instance.StartTutorial();
         }
     }
+
+    public TutorialObject FindTutorialObject()
+    {
+        foreach (TutorialObject t in GameManager.instance.ingameTutorials)
+        {
+            if (t.chapter == GameManager.Instance.GetLoadStageChapter()
+                && t.level == GameManager.Instance.GetLoadStageLevel())
+                return t;
+        }
+
+        return null;
+    }
+
 
     public void CallWave()
     {

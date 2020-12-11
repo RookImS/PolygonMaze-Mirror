@@ -32,6 +32,7 @@ public class PanelSystem : MonoBehaviour
         GameManager.Instance.LoadScene("MainScene");
         GameManager.Instance.TimeRestore();
         SoundManager.Instance.PlaySound(SoundManager.SoundSpecific.BUTTON, "Common_Button");
+        Tutorial.instance.CleanTutorial();
     }
 
     public void RestartGame()
@@ -39,5 +40,6 @@ public class PanelSystem : MonoBehaviour
         GameManager.Instance.LoadScene(SceneManager.GetActiveScene().name);
         GameManager.Instance.TimeRestore();
         SoundManager.Instance.PlaySound(SoundManager.SoundSpecific.BUTTON, "Common_Button");
+        Tutorial.instance.CleanTutorial();
     }
 }

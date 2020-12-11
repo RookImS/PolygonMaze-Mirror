@@ -31,6 +31,7 @@ public class Stage1 : TutorialChecker
                 break;
         }
     }
+
     public override bool StartCheck(int phase)
     {
         switch (phase)
@@ -45,6 +46,7 @@ public class Stage1 : TutorialChecker
                 return true;
         }
     }
+
     public override void SettingRestore(int phase)
     {
         switch (phase)
@@ -68,6 +70,7 @@ public class Stage1 : TutorialChecker
         activeList.Clear();
         restoreList.Clear();
     }
+
     private void Phase6Setter()
     {
         HighlightDeploySlot(0);
@@ -83,6 +86,7 @@ public class Stage1 : TutorialChecker
 
         phase6Checker = phase6Tower.transform.Find("SideCollider").GetChild(2).gameObject.GetComponent<MeshCollider>();
     }
+
     private bool Phase6Checker()
     {
         if (phase6Checker.enabled)
@@ -90,6 +94,7 @@ public class Stage1 : TutorialChecker
         else
             return true;
     }
+
     private void Phase6Complete()
     {
         RestoreDeploySlot(0);
@@ -129,10 +134,12 @@ public class Stage1 : TutorialChecker
             return true;
         }
     }
+
     private void Phase9Complete()
     {
         RestoreDeploySlot(1);
     }
+
     private void Phase11Setter()
     {
         HighlightDeploySlot(3);
@@ -147,6 +154,7 @@ public class Stage1 : TutorialChecker
 
         DisableSCExceptGameObject();
     }
+
     private bool Phase11Checker()
     {
         if (phase11Tower.Equals(phase11DeployUI.hitObject) && !phase11DeployUI.isProgressDeploy)
@@ -154,6 +162,7 @@ public class Stage1 : TutorialChecker
         else
             return false;
     }
+
     private void Phase11Complete()
     {
         RestoreDeploySlot(3);

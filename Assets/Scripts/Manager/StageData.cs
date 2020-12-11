@@ -71,6 +71,8 @@ public class StageData
     {
         public List<Enemies> enemyOneWave;
         public float enemySpawnDuration;
+
+        /*
         [Serializable]
         public enum NextWaveTrigger
         {
@@ -82,6 +84,7 @@ public class StageData
         public NextWaveTrigger nextWaveTrigger;
 
         public float breakTime;
+        */
     }
 
     public List<EnemyWaveInfo> enemyWaveInfos;
