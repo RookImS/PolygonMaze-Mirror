@@ -38,17 +38,20 @@ public class GameManager : MonoSingleton<GameManager>
         public List<StageLevelInfo> stageChpater;
     }
 
-    public Stack<string> sceneStack = new Stack<string>();  //BackKey 기능을 위해 씬 Buildindex를 저장하는 스택 
+    [HideInInspector] public Stack<string> sceneStack = new Stack<string>();  //BackKey 기능을 위해 씬 Buildindex를 저장하는 스택 
 
-    public SkillsScriptableObject skillResource;
-    public List<GameObject> skills;
-    public List<List<GameObject>> deckList;
-    public List<GameObject> currentDeck;
+    private SkillsScriptableObject skillResource;
+    [HideInInspector] public List<GameObject> skills;
+    [HideInInspector] public List<List<GameObject>> deckList;
+    [HideInInspector] public List<GameObject> currentDeck;
+
+    private TutorialsScriptableObject tutorialResource;
+    [HideInInspector] public List<TutorialObject> ingameTutorials;
+    [HideInInspector] public List<TutorialObject> outgameTutorials;
 
     private AllDeckInfo allDeckInfo;
     private StageClearInfo stageClearInfo;
 
-    public bool isStart;
     private int loadStageChapter;
     private int loadStageLevel;
 
@@ -57,6 +60,8 @@ public class GameManager : MonoSingleton<GameManager>
 
     private new void Awake()
     {
+        base.Awake();
+
         Init();
     }
 
@@ -77,6 +82,10 @@ public class GameManager : MonoSingleton<GameManager>
     {
         skillResource = (SkillsScriptableObject)Resources.Load("SkillList", typeof(SkillsScriptableObject));
         skills = skillResource.skillList;
+
+        tutorialResource = (TutorialsScriptableObject)Resources.Load("TutorialList", typeof(TutorialsScriptableObject));
+        ingameTutorials = tutorialResource.ingameTutorialList;
+        outgameTutorials = tutorialResource.outgameTutorialList;
     }
 
     private void LoadDeckInfos()

@@ -78,6 +78,12 @@ public class SoundManager : MonoSingleton<SoundManager>
 
     private void Start()
     {
+        Init();
+        PlayBGM("OutGame_BGM");
+    }
+
+    private void Init()
+    {
         skillLoopAudioPlayer = skillLoopAudioSourceCollection.audioSources;
         skillAudioPlayer = skillAudioSourceCollection.audioSources;
         towerAudioPlayer = towerAudioSourceCollection.audioSources;
@@ -88,8 +94,6 @@ public class SoundManager : MonoSingleton<SoundManager>
         isMuteSE = false;
         bgmVolume = 1.0f;
         seVolume = 1.0f;
-
-        PlayBGM("OutGame_BGM");
     }
 
     public void StopBGMPlayer()

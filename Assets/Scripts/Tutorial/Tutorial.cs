@@ -3,13 +3,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Tutorial : MonoBehaviour
+public class Tutorial : MonoSingleton<Tutorial>
 {
     public GameObject aniUI;
     public GameObject maskUI;
     public GameObject mask;
     public GameObject fieldAniUI;
-    public TutorialObject tutorial;
+    [HideInInspector] public TutorialObject tutorial;
     public DialogueUI dialogueUI;
     
     private List<TutorialObject.Tutorial> tutorialList;
@@ -20,18 +20,23 @@ public class Tutorial : MonoBehaviour
     private int chapterOrder;   // 튜토리얼 현재 챕터내에서 몇 번째 동작을 하는 중인지 나타냄
     public event Action nextTutorialChapter;
 
-    private void Awake()
+    public void CleanTutorial()
     {
-        Init();
-    }
-    private void Start()
-    {
-        tutorialChecker = Instantiate(tutorial.tutorialChecker, this.transform).GetComponent<TutorialChecker>();
-        phaseLength = tutorialList.Count;
-        nextTutorialChapter?.Invoke();
+        for (int i = 0; i < fieldAniUI.transform.childCount; i++)
+            Destroy(fieldAniUI.transform.GetChild(i).gameObject);
+
+        for (int i = 0; i < dialogueUI.invokePanel.transform.childCount; i++)
+            Destroy(dialogueUI.invokePanel.transform.GetChild(i).gameObject);
+
+        nextTutorialChapter -= StartPhase;
+
+        if(tutorialChecker != null)
+            Destroy(tutorialChecker.gameObject);
+
+        StopAllCoroutines();
     }
 
-    private void Init()
+    public void StartTutorial()
     {
         phase = 0;
         phaseLength = 0;
@@ -42,10 +47,16 @@ public class Tutorial : MonoBehaviour
             tutorialList.Add(new TutorialObject.Tutorial(temp));
 
         nextTutorialChapter += StartPhase;
+
+        tutorialChecker = Instantiate(tutorial.tutorialChecker, this.transform).GetComponent<TutorialChecker>();
+        phaseLength = tutorialList.Count;
+        nextTutorialChapter?.Invoke();
     }
+
     private void StartPhase()
     {
-        LevelManager.instance.isWaveSystemOn = false;
+        if (LevelManager.instance != null)
+            LevelManager.instance.isWaveSystemOn = false;
         chapterLength = tutorialList[phase].dialogue.sentences.Count;
         dialogueUI.StartDialogue(tutorialList[phase].dialogue);
         InvokeNextTutorial();
@@ -135,6 +146,9 @@ public class Tutorial : MonoBehaviour
 
     private IEnumerator PhaseChecker()
     {
+        if (tutorialChecker == null)
+            yield return null;
+
         while (!tutorialChecker.StartCheck(phase))
             yield return new WaitForSeconds(0.1f);
 
@@ -144,7 +158,10 @@ public class Tutorial : MonoBehaviour
         if (phase == phaseLength)
         {
             nextTutorialChapter -= StartPhase;
-            LevelManager.instance.isWaveSystemOn = true;
+            if(LevelManager.instance != null)
+                LevelManager.instance.isWaveSystemOn = true;
+
+            maskUI.SetActive(false);
         }
 
         nextTutorialChapter?.Invoke();

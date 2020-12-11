@@ -59,6 +59,7 @@ public class TutorialChecker : MonoBehaviour
                 deployUI.transform.GetChild(i).gameObject.GetComponent<DeployUI>().enabled = false;
         }
     }
+
     public void RestoreDeploySlot(int index)
     {
         for (int i = 0; i < deployUI.transform.childCount; i++)
@@ -69,14 +70,17 @@ public class TutorialChecker : MonoBehaviour
                 deployUI.transform.GetChild(i).gameObject.GetComponent<DeployUI>().enabled = true;
         }
     }
+
     public virtual void StartSetting(int phase)
     {
 
     }
+
     public virtual bool StartCheck(int phase)
     {
         return false;
     }
+
     public virtual void SettingRestore(int phase)
     {
 

@@ -668,8 +668,8 @@ public class LevelEditor : MonoBehaviour
             }
 
             enemyWaveInfo.enemySpawnDuration = this.stageData.enemyWaveInfos[i].enemySpawnDuration;
-            enemyWaveInfo.nextWaveTrigger = this.stageData.enemyWaveInfos[i].nextWaveTrigger;
-            enemyWaveInfo.breakTime = this.stageData.enemyWaveInfos[i].breakTime;
+            //enemyWaveInfo.nextWaveTrigger = this.stageData.enemyWaveInfos[i].nextWaveTrigger;
+            //enemyWaveInfo.breakTime = this.stageData.enemyWaveInfos[i].breakTime;
 
             enemyWaveInfoList.Add(enemyWaveInfo);
         }
