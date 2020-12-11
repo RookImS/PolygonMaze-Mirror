@@ -25,7 +25,7 @@ public class StageSelectionUI : MonoBehaviour
 
     public void LoadGame()
     {
-        if (GameManager.Instance.isSelectDeck)
+        if (GameManager.Instance.currentDeck != null)
         {
             SoundManager.Instance.PlayBGM("InGame_BGM");
             SceneManager.LoadScene(sceneToLoad);

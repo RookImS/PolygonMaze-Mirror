@@ -155,7 +155,6 @@ public class Stage1_1 : TutorialChecker
     private void Phase10Setter()
     {
         HighlightDeploySlot(3);
-        PlayerControl.instance.GainCost(150);
         
         phase10Obstacle1 = obstacles.transform.GetChild(12).gameObject;
         phase10DeployUI1 = deployUI.transform.GetChild(3).GetComponent<DeployUI>();
@@ -179,6 +178,5 @@ public class Stage1_1 : TutorialChecker
     private void Phase10Complete()
     {
         RestoreDeploySlot(3);
-        PlayerControl.instance.GainCost(-150);
     }
 }

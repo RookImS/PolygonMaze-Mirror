@@ -17,14 +17,19 @@ public class DeckUI : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
     private bool isClicked;
     private float clickTime;
 
-    private void Awake()
+    private void Start()
     {
         Init();
-        
     }
     private void Init()
     {
         deck = GameManager.Instance.deckList[order];
+
+        if (System.Object.ReferenceEquals(deck, GameManager.Instance.currentDeck))
+        {
+            Debug.Log(order + " check");
+            flagToggle.isOn = true;
+        }
 
         isClicked = false;
         clickTime = 0;
@@ -63,15 +68,19 @@ public class DeckUI : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
         if (flagGroup.AnyTogglesOn())
         {
             GameManager.Instance.currentDeck = GameManager.Instance.deckList[order];
-            GameManager.Instance.isSelectDeck = true;
-            Debug.Log(order);
-            Debug.Log("덱 삽입완료");
+            for (int i = 0; i < GameManager.instance.allDeckInfo.deckInfoList.Count; i++)
+            {
+                if(i== order)
+                    GameManager.instance.allDeckInfo.deckInfoList[i].isCurrent = true;
+                else
+                    GameManager.instance.allDeckInfo.deckInfoList[i].isCurrent = false;
+            }
+            Debug.Log(order + " 덱 삽입완료");
         }
         else
         {
-            GameManager.Instance.currentDeck = null;
-            GameManager.Instance.isSelectDeck = false;
-            Debug.Log("덱 제거완료");
+            GameManager.Instance.currentDeck = null;    // 나중에는 무조건 깃발 하나 유지
+            Debug.Log(order + "덱 제거완료");
         }
     }
     public void InsertDeck(int num)
@@ -128,7 +137,6 @@ public class DeckUI : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
                 Debug.Log("덱 제거완료");
             }
         }
-        GameManager.Instance.isSelectDeck = flagGroup.AnyTogglesOn();
     }
     IEnumerator touchTime()
     {

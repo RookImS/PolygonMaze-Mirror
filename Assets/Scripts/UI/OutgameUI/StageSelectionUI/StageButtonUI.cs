@@ -12,7 +12,6 @@ public class StageButtonUI : MonoBehaviour
     void Start()
     {
         Init();
-        Debug.Log(isStageClear);
         StageClearCheck();
     }
 

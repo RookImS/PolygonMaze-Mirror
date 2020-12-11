@@ -12,10 +12,11 @@ public class GameManager : MonoSingleton<GameManager>
         [System.Serializable]
         public class DeckInfo
         {
+            public bool isCurrent;
             public List<string> deckIDs;
         }
 
-        public List<DeckInfo> deck;
+        public List<DeckInfo> deckInfoList;
     }
 
     [System.Serializable]
@@ -49,11 +50,10 @@ public class GameManager : MonoSingleton<GameManager>
     [HideInInspector] public List<TutorialObject> ingameTutorials;
     [HideInInspector] public List<TutorialObject> outgameTutorials;
 
-    private AllDeckInfo allDeckInfo;
+    public AllDeckInfo allDeckInfo;
     public StageClearInfo stageClearInfo;
 
     public bool isStart;
-    public bool isSelectDeck;
     private int loadStageChapter;
     private int loadStageLevel;
 
@@ -65,17 +65,6 @@ public class GameManager : MonoSingleton<GameManager>
         base.Awake();
 
         Init();
-        for (int a = 0; a < 10; a++)
-        {
-            for (int b = 0; b < 10; b++)
-            {
-                if (GameManager.instance.stageClearInfo.stageChapter[a].stageLevel[b].isClear)
-                {
-                    Debug.Log(a + "-" + b);
-                }
-
-            }
-        }
     }
 
     public void Init()
@@ -87,6 +76,7 @@ public class GameManager : MonoSingleton<GameManager>
         loadStageLevel = 0;
 
         LoadResource();
+        LoadDefaultDeck();
         LoadDeckInfos();
         LoadStageClearInfo();
     }
@@ -101,10 +91,55 @@ public class GameManager : MonoSingleton<GameManager>
         outgameTutorials = tutorialResource.outgameTutorialList;
     }
 
-    private void LoadDeckInfos()
+    private void LoadDefaultDeck()
     {
         MakeEmptyDeck();
 
+        string path;
+        if (Application.platform == RuntimePlatform.Android)
+            path = Application.persistentDataPath + string.Format("/DeckData/DefaultDeck.json");
+        else
+            path = string.Format("Assets/UserData/DeckData/DefaultDeck.json");
+
+        try
+        {
+            if (File.Exists(path))
+            {
+                string jsonData = File.ReadAllText(path);
+                this.allDeckInfo.deckInfoList[0] = JsonUtility.FromJson<AllDeckInfo.DeckInfo>(jsonData);
+            }
+            else
+            {
+                return;
+            }
+        }
+        catch (System.ArgumentException e1)
+        {
+            Debug.Log(e1.Message);
+
+        }
+        catch (System.Exception e2)
+        {
+            Debug.Log(e2.Message);
+        }
+
+        currentDeck = deckList[0];
+        for (int j = 0; j < 3; j++)
+        {
+            for (int k = 0; k < skills.Count; k++)
+            {
+                if (skills[k].GetComponent<Skill>().id
+                    == this.allDeckInfo.deckInfoList[0].deckIDs[j])
+                    deckList[0][j] = skills[k];
+                else if ("space"
+                    == this.allDeckInfo.deckInfoList[0].deckIDs[j])
+                    deckList[0][j] = null;
+            }
+        }
+    }
+
+    private void LoadDeckInfos()
+    {
         for (int i = 0; i < 3; i++)
         {
             string path;
@@ -113,14 +148,13 @@ public class GameManager : MonoSingleton<GameManager>
             else
                 path = string.Format("Assets/UserData/DeckData/Deck{0}.json", i);
             //string path = string.Format("Assets/UserData/DeckData/Deck{0}.json", i);
-            System.IO.FileInfo file = new System.IO.FileInfo(path);
 
             try
             {
                 if (File.Exists(path))
                 {
                     string jsonData = File.ReadAllText(path);
-                    this.allDeckInfo.deck[i] = JsonUtility.FromJson<AllDeckInfo.DeckInfo>(jsonData);
+                    this.allDeckInfo.deckInfoList[i] = JsonUtility.FromJson<AllDeckInfo.DeckInfo>(jsonData);
                 }
                 else
                 {
@@ -137,15 +171,17 @@ public class GameManager : MonoSingleton<GameManager>
                 Debug.Log(e2.Message);
             }
 
+            if (allDeckInfo.deckInfoList[i].isCurrent)
+                currentDeck = deckList[i];
             for (int j = 0; j < 3; j++)
             {
                 for (int k = 0; k < skills.Count; k++)
                 {
                     if (skills[k].GetComponent<Skill>().id
-                        == this.allDeckInfo.deck[i].deckIDs[j])
+                        == this.allDeckInfo.deckInfoList[i].deckIDs[j])
                         deckList[i][j] = skills[k];
                     else if ("space"
-                        == this.allDeckInfo.deck[i].deckIDs[j])
+                        == this.allDeckInfo.deckInfoList[i].deckIDs[j])
                         deckList[i][j] = null;
                 }
             }
@@ -156,16 +192,17 @@ public class GameManager : MonoSingleton<GameManager>
     {
         deckList = new List<List<GameObject>>();
         allDeckInfo = new AllDeckInfo();
-        allDeckInfo.deck = new List<AllDeckInfo.DeckInfo>();
+        allDeckInfo.deckInfoList = new List<AllDeckInfo.DeckInfo>();
         for (int i = 0; i < 3; i++)
         {
             deckList.Add(new List<GameObject>());
-            allDeckInfo.deck.Add(new AllDeckInfo.DeckInfo());
-            allDeckInfo.deck[i].deckIDs = new List<string>();
+            allDeckInfo.deckInfoList.Add(new AllDeckInfo.DeckInfo());
+            allDeckInfo.deckInfoList[i].deckIDs = new List<string>();
+            allDeckInfo.deckInfoList[i].isCurrent = false;
             for (int j = 0; j < 3; j++)
             {
                 deckList[i].Add(null);
-                allDeckInfo.deck[i].deckIDs.Add("space");
+                allDeckInfo.deckInfoList[i].deckIDs.Add("space");
             }
         }
     }
@@ -184,18 +221,18 @@ public class GameManager : MonoSingleton<GameManager>
         {
             for (int i = 0; i < 3; i++)
             {
-                allDeckInfo.deck[order].deckIDs[i] = "space";
+                allDeckInfo.deckInfoList[order].deckIDs[i] = "space";
             }
         }
         else
         {
             for (int i = 0; i < 3; i++)
             {
-                allDeckInfo.deck[order].deckIDs[i] = deckList[order][i].GetComponent<Skill>().id;
+                allDeckInfo.deckInfoList[order].deckIDs[i] = deckList[order][i].GetComponent<Skill>().id;
             }
         }
 
-        string jsonData = JsonUtility.ToJson(allDeckInfo.deck[order]);
+        string jsonData = JsonUtility.ToJson(allDeckInfo.deckInfoList[order]);
         string path;
         if (Application.platform == RuntimePlatform.Android)
             path = Application.persistentDataPath + string.Format("/DeckData/Deck{0}.json", order);
