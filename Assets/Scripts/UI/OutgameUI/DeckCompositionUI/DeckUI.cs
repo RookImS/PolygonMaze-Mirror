@@ -27,7 +27,6 @@ public class DeckUI : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
 
         if (System.Object.ReferenceEquals(deck, GameManager.Instance.currentDeck))
         {
-            Debug.Log(order + " check");
             flagToggle.isOn = true;
         }
 
@@ -35,9 +34,9 @@ public class DeckUI : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
         clickTime = 0;
         DeckCheck(order);
 
-        for(int i = 0; i < deck.Count; i++)
+        for (int i = 0; i < deck.Count; i++)
         {
-            if(deck[i] == null)           
+            if (deck[i] == null)
                 thisDeck.transform.GetChild(i).Find("SkillImage").GetComponent<Image>().color = Color.white;
             else
                 thisDeck.transform.GetChild(i).Find("SkillImage").GetComponent<Image>().color = deck[i].GetComponent<Skill>().color;
@@ -46,41 +45,24 @@ public class DeckUI : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
     public void OnPointerDown(PointerEventData pointerEventData)
     {
         isClicked = true;
-        StartCoroutine(touchTime());
+        StartCoroutine(CheckCallSkillList());
     }
 
     public void OnPointerUp(PointerEventData pointerEventData)
     {
-        if (clickTime >= 0.5)
-        {
-            Debug.Log("길게 누름");
-            SkillList.SetActive(true);
-        }
-        else
-        {
-            DeckCheck(order);
-        }
         StopAllCoroutines();
-        Init();
+        isClicked = false;
+        clickTime = 0;
     }
     public void ToggleDeck()
     {
-        if (flagGroup.AnyTogglesOn())
+        GameManager.Instance.currentDeck = GameManager.Instance.deckList[order];
+        for (int i = 0; i < GameManager.instance.allDeckInfo.deckInfoList.Count; i++)
         {
-            GameManager.Instance.currentDeck = GameManager.Instance.deckList[order];
-            for (int i = 0; i < GameManager.instance.allDeckInfo.deckInfoList.Count; i++)
-            {
-                if(i== order)
-                    GameManager.instance.allDeckInfo.deckInfoList[i].isCurrent = true;
-                else
-                    GameManager.instance.allDeckInfo.deckInfoList[i].isCurrent = false;
-            }
-            Debug.Log(order + " 덱 삽입완료");
-        }
-        else
-        {
-            GameManager.Instance.currentDeck = null;    // 나중에는 무조건 깃발 하나 유지
-            Debug.Log(order + "덱 제거완료");
+            if (i == order)
+                GameManager.instance.allDeckInfo.deckInfoList[i].isCurrent = true;
+            else
+                GameManager.instance.allDeckInfo.deckInfoList[i].isCurrent = false;
         }
     }
 
@@ -88,30 +70,40 @@ public class DeckUI : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
     {
         if (skillListUI.insertCheck)
         {
+            //GameObject selectSlotSkill = deck[num];
+
             for (int i = 0; i < deck.Count; i++)
             {
                 if (i == num)
                     continue;
                 if (deck[i] == skillListUI.selectedSkill)
                 {
-                    deck[i] = null;
-                    thisDeck.transform.GetChild(i).Find("SkillImage").GetComponent<Image>().color = Color.white;
+                    if (deck[num] == null)
+                    {
+                        deck[i] = null;
+                        thisDeck.transform.GetChild(i).Find("SkillImage").GetComponent<Image>().color = Color.white;
+                    }
+                    else
+                    {
+                        deck[i] = deck[num];
+                        thisDeck.transform.GetChild(i).Find("SkillImage").GetComponent<Image>().color = deck[num].GetComponent<Skill>().color;
+                    }
+
                 }
             }
             deck[num] = skillListUI.selectedSkill;
             thisDeck.transform.GetChild(num).Find("SkillImage").GetComponent<Image>().color = skillListUI.selectedSkill.GetComponent<Skill>().color;
-            
+
             DeckCheck(order);
             skillListUI.insertCheck = false;
-
+            skillListUI.skillPanel.SetActive(false);
             GameManager.Instance.SaveDeckInfos(order);
-            Debug.Log("hi");
         }
         else
             return;
     }
 
-    void DeckCheck(int num)
+    public void DeckCheck(int num)
     {
         bool isNull = false;
         for (int i = 0; i < GameManager.Instance.deckList[num].Count; i++)
@@ -125,22 +117,16 @@ public class DeckUI : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
 
         if (!isNull)
         {
-            //GameManager.Instance.currentDeck = GameManager.Instance.deckList[num];
             flagToggle.interactable = true;
+            GetComponent<CanvasGroup>().alpha = 1f;
             //Debug.Log("덱이 완성되었다.");
         }
         else
         {
             flagToggle.interactable = false;
-            if (skillListUI.insertCheck)
-            {
-                flagGroup.SetAllTogglesOff();
-                GameManager.Instance.currentDeck = null;
-                Debug.Log("덱 제거완료");
-            }
         }
     }
-    IEnumerator touchTime()
+    private IEnumerator CheckCallSkillList()
     {
         while (true)
         {
@@ -154,7 +140,12 @@ public class DeckUI : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
                 Init();
                 yield return null;
             }
+            if (clickTime >= 0.5f)
+                break;
         }
 
+        flagToggle.interactable = false;
+        SkillList.SetActive(true);
+        skillListUI.HighlightDeck(order);
     }
 }

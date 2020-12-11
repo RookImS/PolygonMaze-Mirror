@@ -118,6 +118,8 @@ public class Stage1_1 : TutorialChecker
 
     private void Phase8Setter()
     {
+        HighlightDeploySlot(2);
+
         float x, z;
 
         for(int i = 0; i < towers.transform.childCount; i++)

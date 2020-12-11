@@ -9,12 +9,13 @@ public class SkillListUI : MonoBehaviour
     public GameObject skillSlots;
     public GameObject skillPanel;
     public SkillInfo skillInfo;
-    public CanvasGroup Deck0;
-    public CanvasGroup Deck1;
-    public CanvasGroup Deck2;
+    public List<CanvasGroup> deckList;
+    public List<CanvasGroup> deckPanelList;
     public ToggleGroup flagGroup;
     public GameObject bgPanel;
     public bool insertCheck;
+
+    private int selectedDeck;
 
     private void Awake()
     {
@@ -83,26 +84,51 @@ public class SkillListUI : MonoBehaviour
         SoundManager.Instance.PlaySound(SoundManager.SoundSpecific.BUTTON, "Common_Button");
     }
 
+    public void HighlightDeck(int num)
+    {
+        selectedDeck = num;
+
+        for (int i = 0; i < deckPanelList.Count; i++)
+        {
+            if (i == num)
+                continue;
+
+            deckPanelList[i].blocksRaycasts = false;
+            deckPanelList[i].interactable = false;
+            deckPanelList[i].alpha = 0.3f;
+        }
+    }
+
+    public void ExitSkillList()
+    {
+        for (int i = 0; i < deckPanelList.Count; i++)
+        {
+            if (i == selectedDeck)
+                continue;
+
+            deckPanelList[i].blocksRaycasts = true;
+            deckPanelList[i].interactable = true;
+            deckPanelList[i].alpha = 1f;
+        }
+
+        deckPanelList[selectedDeck].gameObject.GetComponent<DeckUI>().DeckCheck(selectedDeck);
+        gameObject.SetActive(false);
+    }
+
     void OnEnable()
     {
-        //Deck0.interactable = true;
-        //Deck1.interactable = true;
-        //Deck2.interactable = true;
-        Deck0.blocksRaycasts = true;
-        Deck1.blocksRaycasts = true;
-        Deck2.blocksRaycasts = true;
-        //flagGroup.SetAllTogglesOff();
+        foreach (CanvasGroup deck in deckList)
+        {
+            deck.blocksRaycasts = true;
+        }
         bgPanel.SetActive(true);
     }
     void OnDisable()
     {
-        //Deck0.interactable = false;
-        //Deck1.interactable = false;
-        //Deck2.interactable = false;
-        Deck0.blocksRaycasts = false;
-        Deck1.blocksRaycasts = false;
-        Deck2.blocksRaycasts = false;
-        //flagGroup.SetAllTogglesOff();
+        foreach (CanvasGroup deck in deckList)
+        {
+            deck.blocksRaycasts = false;
+        }
         bgPanel.SetActive(false);
     }
 }
