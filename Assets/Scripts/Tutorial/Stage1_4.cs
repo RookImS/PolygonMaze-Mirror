@@ -142,7 +142,6 @@ public class Stage1_4 : TutorialChecker
 
         if (LevelManager.instance.waves.transform.GetChild(0).childCount == 0)
         {
-            Debug.Log("hi");
             return true;
         }
 
