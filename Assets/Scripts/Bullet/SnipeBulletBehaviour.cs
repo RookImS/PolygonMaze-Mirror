@@ -6,14 +6,12 @@ public class SnipeBulletBehaviour : BulletBehaviour
 {
     public GameObject FirstTargetEffect;
     public GameObject TargetEffect;
-    public GameObject AttackEffect;
+    private GameObject attackEffect;
     public bool isFirstAttack;
 
     public override void Init(TowerStatSystem t_stat)
     {
-        m_BulletData.Init(t_stat);
-        hitCollider.GetComponent<SphereCollider>().radius = m_BulletData.stats.stats.splashRange;
-
+        base.Init(t_stat);
         isFirstAttack = true;
     }
 
@@ -30,9 +28,22 @@ public class SnipeBulletBehaviour : BulletBehaviour
 
     public void Reload()
     {
-        FirstTargetEffect.SetActive(true);
+        //if (isFirstAttack)
+        //{
+            if (attackEffect != null)
+            {
+                attackEffect.transform.SetParent(bulletEffectGameObject.transform);
+
+                var main = attackEffect.GetComponent<ParticleSystem>().main;
+                main.stopAction = ParticleSystemStopAction.Destroy;
+            }
+      //  }
+
+
+        FirstTargetEffect.SetActive(false);
         TargetEffect.SetActive(false);
-        isFirstAttack = true;
+
+        FirstTargetEffect.SetActive(true);
         enemyList.Clear();
     }
 
@@ -50,13 +61,21 @@ public class SnipeBulletBehaviour : BulletBehaviour
             //Instantiate(VFX, pos, Quaternion.Euler(rot));
         }
 
-        enemyList.Clear();
-        isFirstAttack = false;
-
         hitCollider.SetActive(false);
 
-        FirstTargetEffect.SetActive(false);
         TargetEffect.SetActive(true);
-        AttackEffect.SetActive(true);
+
+        enemyList.Clear();
+
+        if (attackEffect == null)
+        {
+            attackEffect = Instantiate(VFX, transform);
+            attackEffect.transform.localPosition += new Vector3(0f, 1f, 0f);
+            //isFirstAttack = false;
+        }
+        else
+        {
+            attackEffect.SetActive(true);
+        }
     }
 }
