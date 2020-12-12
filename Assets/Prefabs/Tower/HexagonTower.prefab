@@ -492,7 +492,7 @@ MonoBehaviour:
   bullet: {fileID: 2436857747367263560}
   Stats:
     baseStats:
-      damage: 100
+      damage: 250
       aheadDelay: 3
       attackRate: 1
       recogRange: 0

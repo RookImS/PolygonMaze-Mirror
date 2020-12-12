@@ -2191,7 +2191,7 @@ MonoBehaviour:
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: 10-10
+          m_StringArgument: 1-5
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!114 &677689622
@@ -2867,7 +2867,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4110881647729318977, guid: 9d0b7f3c9c0f4d9498023a22e844b475, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -50.000137
+      value: -50.000122
       objectReference: {fileID: 0}
     - target: {fileID: 4110881647729318977, guid: 9d0b7f3c9c0f4d9498023a22e844b475, type: 3}
       propertyPath: m_SizeDelta.x
@@ -5740,7 +5740,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6534460933949428265, guid: e61540ff58dea3449a90211bb1438ec4, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -33.999985
+      value: -34
       objectReference: {fileID: 0}
     - target: {fileID: 6804164643693778713, guid: e61540ff58dea3449a90211bb1438ec4, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size

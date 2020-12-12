@@ -62,7 +62,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hpBar: {fileID: 60666585470947810}
-  reward: 10
+  reward: 15
   damage: 1
   Stats:
     isDead: 0
