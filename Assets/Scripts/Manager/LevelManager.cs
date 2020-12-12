@@ -31,13 +31,14 @@ public class LevelManager : MonoBehaviour
         public int activeNum;
     }
 
-    private StageData stageData;
+    [HideInInspector] public StageData stageData;
 
     private Vector3 spawnerPosition;
-    private GameObject waves;
-    private List<EnemyWave> enemyWaveList;
+    [HideInInspector] public GameObject waves;
+    [HideInInspector] public List<EnemyWave> enemyWaveList;
     private bool isSuccessStageLoad;
     [HideInInspector] public bool isWaveSystemOn;
+    [HideInInspector] public bool isWaveProgress;
     //[HideInInspector] public bool isWaveComplete;
 
     [Header("Preserved Variables")]
@@ -98,6 +99,9 @@ public class LevelManager : MonoBehaviour
     public void Init()
     {
         instance = this;
+
+        isWaveSystemOn = false;
+        isWaveProgress = false;
 
         currentWave = 0;
         m_enemyCount = 0;
@@ -534,9 +538,10 @@ public class LevelManager : MonoBehaviour
 
     public void CallWave()
     {
-        if (currentWave < enemyWaveList.Count && isWaveSystemOn)
+        if (currentWave < enemyWaveList.Count)
         {
             StartCoroutine(StartWave(enemyWaveList[currentWave]));
+            isWaveSystemOn = true;
         }
     }
 
@@ -625,6 +630,7 @@ public class LevelManager : MonoBehaviour
     {
         if (isSuccessStageLoad)
         {
+            isWaveProgress = true;
             currentWave++;
             foreach (GameObject enemy in enemyWave.oneWaveEnemies)
             {
@@ -633,6 +639,8 @@ public class LevelManager : MonoBehaviour
                 enemyWave.activeNum++;
                 yield return new WaitForSeconds(enemyWave.enemySpawnDuration);
             }
+
+            isWaveProgress = false;
         }
     }
 }

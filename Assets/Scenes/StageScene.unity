@@ -2368,6 +2368,7 @@ MonoBehaviour:
   hitObject: {fileID: 0}
   towerCostText: {fileID: 197109122}
   isProgressDeploy: 0
+  isActive: 0
 --- !u!1 &452476173
 GameObject:
   m_ObjectHideFlags: 0
@@ -3201,6 +3202,7 @@ MonoBehaviour:
   hitObject: {fileID: 0}
   towerCostText: {fileID: 1036383723}
   isProgressDeploy: 0
+  isActive: 0
 --- !u!1 &708506425
 GameObject:
   m_ObjectHideFlags: 0
@@ -4852,6 +4854,7 @@ MonoBehaviour:
   hitObject: {fileID: 0}
   towerCostText: {fileID: 94559635}
   isProgressDeploy: 0
+  isActive: 0
 --- !u!1 &1147444532
 GameObject:
   m_ObjectHideFlags: 0
@@ -4912,6 +4915,7 @@ MonoBehaviour:
   refreshCanvasGroup: {fileID: 1842541904}
   skillCostText: {fileID: 409755261}
   skillRefreshCostText: {fileID: 1422876315}
+  isActive: 0
 --- !u!114 &1147444535
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8769,6 +8773,7 @@ MonoBehaviour:
   hitObject: {fileID: 0}
   towerCostText: {fileID: 1285357345}
   isProgressDeploy: 0
+  isActive: 0
 --- !u!114 &1932320229
 MonoBehaviour:
   m_ObjectHideFlags: 0

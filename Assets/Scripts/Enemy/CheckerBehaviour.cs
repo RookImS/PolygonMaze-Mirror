@@ -8,6 +8,7 @@ public class CheckerBehaviour : MonoBehaviour
 {
     public GameObject pathTrackerAgent;
     public float trackerDuration;
+    [HideInInspector] public bool isActive;
      
     private Vector3 basePosition;
     private Vector3[] c;    // trash value for error correct
@@ -39,7 +40,8 @@ public class CheckerBehaviour : MonoBehaviour
 
     private void Update()
     {
-        if (destination != null)
+
+        if (isActive && destination != null)
         {
             if (pathTrackerObject.transform.childCount == 0)
             {
@@ -51,8 +53,7 @@ public class CheckerBehaviour : MonoBehaviour
 
                 if (countDown <= 0f)
                 {
-                    m_pathTrackerAgent = Instantiate(pathTrackerAgent, transform.position, transform.rotation, pathTrackerObject.transform);
-                    countDown = trackerDuration;
+                    CreateCheckerAgent();
                 }
 
                 countDown -= Time.deltaTime;
@@ -67,6 +68,7 @@ public class CheckerBehaviour : MonoBehaviour
     private void Init()
     {
         agent = GetComponent<NavMeshAgent>();
+        isActive = true;
         m_pathTrackerAgent = null;
         countDown = 0f;
     }
@@ -88,6 +90,12 @@ public class CheckerBehaviour : MonoBehaviour
             }
         }
         return false;
+    }
+
+    public void CreateCheckerAgent()
+    {
+        m_pathTrackerAgent = Instantiate(pathTrackerAgent, transform.position, transform.rotation, pathTrackerObject.transform);
+        countDown = trackerDuration;
     }
 
     public bool CalculatePath()

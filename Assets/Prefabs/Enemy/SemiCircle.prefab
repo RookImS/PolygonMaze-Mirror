@@ -67,13 +67,13 @@ MonoBehaviour:
   Stats:
     isDead: 0
     baseStats:
-      hp: 1500
+      hp: 1200
       speed: 2
       def: 5
     baseStatModifier:
       ModifierMode: 1
       Stats:
-        hp: 500
+        hp: 400
         speed: 0
         def: 0
       damage: 0

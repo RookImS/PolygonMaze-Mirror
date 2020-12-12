@@ -17,6 +17,7 @@ public class DeployUI : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
     public TextMeshProUGUI towerCostText;
 
     [HideInInspector] public bool isProgressDeploy;
+    [HideInInspector] public bool isActive;
 
     private Vector3 mousePos;
 
@@ -35,6 +36,7 @@ public class DeployUI : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
         towerCostText.text = deployTower.GetComponent<DeployBehaviour>().cost.ToString();
         isDeployable = false;
         isProgressDeploy = false;
+        isActive = true;
     }
 
     private void UpdateTowerCostText()
@@ -52,37 +54,47 @@ public class DeployUI : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
 
     public void OnPointerDown(PointerEventData pointerEventData)
     {
-        SoundManager.Instance.PlaySound(SoundManager.SoundSpecific.BUTTON, "Tower_Button");
+        if(isActive)
+            SoundManager.Instance.PlaySound(SoundManager.SoundSpecific.BUTTON, "Tower_Button");
     }
 
     public void OnBeginDrag(PointerEventData eventData)
     {
-        newObject = null;
-        hitObject = null;
-        UIManager.instance.infoUI.DisableInfo();
-        UIManager.instance.BlockRaycastOff();
+        if (isActive)
+        {
+            newObject = null;
+            hitObject = null;
+            UIManager.instance.infoUI.DisableInfo();
+            UIManager.instance.BlockRaycastOff();
 
-        isProgressDeploy = true;
-        mousePos = Input.mousePosition;
+            isProgressDeploy = true;
+            mousePos = Input.mousePosition;
 
-        newObject = Instantiate(deployTower, mousePos, deployTower.transform.rotation);
+            newObject = Instantiate(deployTower, mousePos, deployTower.transform.rotation);
 
-        Time.timeScale = 0.3f;    
+            Time.timeScale = 0.3f;
+        }
     }
     public void OnDrag(PointerEventData eventData)
     {
-        mousePos = Input.mousePosition;
+        if (isActive)
+        {
+            mousePos = Input.mousePosition;
 
-        hitObject = newObject.GetComponent<DeployBehaviour>().LocateTower(mousePos);
+            hitObject = newObject.GetComponent<DeployBehaviour>().LocateTower(mousePos);
+        }
     }
     public void OnEndDrag(PointerEventData eventData)
     {
-        newObject.GetComponent<DeployBehaviour>().DeployTower(hitObject, realTower);
+        if (isActive)
+        {
+            newObject.GetComponent<DeployBehaviour>().DeployTower(hitObject, realTower);
 
-        Time.timeScale = 1f;
+            Time.timeScale = 1f;
 
-        isProgressDeploy = false;
-        UIManager.instance.BlockRaycastOn();
-        SoundManager.Instance.PlaySound(SoundManager.SoundSpecific.OTHERUI, "Tower_Locate_Sound");
+            isProgressDeploy = false;
+            UIManager.instance.BlockRaycastOn();
+            SoundManager.Instance.PlaySound(SoundManager.SoundSpecific.OTHERUI, "Tower_Locate_Sound");
+        }
     }
 }

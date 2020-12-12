@@ -14,6 +14,8 @@ public class AniObject
         rotation = a.rotation;
         obj = a.obj;
         enable = a.enable;
+        isMaskOn = a.isMaskOn;
+        isMaskOff = a.isMaskOff;
     }
 
     [Header("애니메이션 오브젝트")]
@@ -31,4 +33,6 @@ public class AniObject
     public float rotation;
 
     [HideInInspector]public bool enable = false;
+    public bool isMaskOn = false;
+    public bool isMaskOff = false;
 }

@@ -14,4 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ingameTutorialList:
   - {fileID: 11400000, guid: 45d32a892e036c041af79d669d75df04, type: 2}
+  - {fileID: 11400000, guid: 943237bef3b33d44f88f2a338db5d329, type: 2}
+  - {fileID: 11400000, guid: 52f885dc86343c1479f5cfbe55aadad3, type: 2}
+  - {fileID: 11400000, guid: c3ff2f408d5d9ca4c9a067647434c6cb, type: 2}
   outgameTutorialList: []

@@ -7,21 +7,22 @@ public class Tutorial : MonoSingleton<Tutorial>
 {
     public GameObject aniUI;
     public GameObject maskUI;
-    public GameObject mask;
+    //public GameObject mask;
     public GameObject fieldAniUI;
     [HideInInspector] public TutorialObject tutorial;
     public DialogueUI dialogueUI;
-    
-    private List<TutorialObject.Tutorial> tutorialList;
+
+    [HideInInspector] public List<TutorialObject.Tutorial> tutorialList;
     private TutorialChecker tutorialChecker;
     private int phase;          // 튜토리얼 중 몇 번째 챕터인가를 나타냄
     private int phaseLength;    // 튜토리얼이 몇 챕터로 이루어져있는지 나타냄
     private int chapterLength;  // 튜토리얼 현재 챕터의 길이
-    private int chapterOrder;   // 튜토리얼 현재 챕터내에서 몇 번째 동작을 하는 중인지 나타냄
+    [HideInInspector] int chapterOrder;   // 튜토리얼 현재 챕터내에서 몇 번째 동작을 하는 중인지 나타냄
     public event Action nextTutorialChapter;
 
     public void CleanTutorial()
     {
+        tutorialList = null;
         for (int i = 0; i < fieldAniUI.transform.childCount; i++)
             Destroy(fieldAniUI.transform.GetChild(i).gameObject);
 
@@ -29,11 +30,15 @@ public class Tutorial : MonoSingleton<Tutorial>
             Destroy(dialogueUI.invokePanel.transform.GetChild(i).gameObject);
 
         nextTutorialChapter -= StartPhase;
+        //maskUI.SetActive(false);
 
-        if(tutorialChecker != null)
+        if (tutorialChecker != null)
             Destroy(tutorialChecker.gameObject);
 
+        dialogueUI.CleanDialogueUI();
         StopAllCoroutines();
+
+        Debug.Log("hio");
     }
 
     public void StartTutorial()
@@ -75,7 +80,10 @@ public class Tutorial : MonoSingleton<Tutorial>
         {
             dialogueUI.DisplayNextSentence();
 
-            chapterOrder = chapterLength - dialogueUI.GetRemainSentencesCount() + 1;
+            if (dialogueUI.instancePrint)
+                chapterOrder = chapterLength - dialogueUI.GetRemainSentencesCount();
+            else
+                chapterOrder = chapterLength - dialogueUI.GetRemainSentencesCount() + 1;
 
             foreach (AniObject ani in tutorialList[phase].animationList)
             {
@@ -93,6 +101,7 @@ public class Tutorial : MonoSingleton<Tutorial>
                     }
                 }
             }
+
             foreach (AniObject ani in tutorialList[phase].fieldAnimationList)
             {
                 if (!ani.enable)
@@ -108,39 +117,25 @@ public class Tutorial : MonoSingleton<Tutorial>
                 }
             }
 
-            //tutorialList[phase].maskAnimationList.obj = mask;
-
-            //if (!tutorialList[phase].maskAnimation.enable)
-            //{
-            //    if (tutorialList[phase].maskAnimation.order == chapterOrder)
-            //    {
-            //        maskUI.SetActive(true);
-            //        tutorialList[phase].maskAnimation.enable = true;
-            //        tutorialList[phase].maskAnimation.obj.transform.localPosition = new Vector2(tutorialList[phase].maskAnimation.posX, tutorialList[phase].maskAnimation.posY);
-            //        tutorialList[phase].maskAnimation.obj.transform.localRotation = Quaternion.Euler(0f, 0f, tutorialList[phase].maskAnimation.rotation);
-            //        //tutorialList[phase].maskAnimation.obj.SetActive(false);
-            //    }
-            //    else
-            //        maskUI.SetActive(false);
-            //}
-
-            if(tutorialList[phase].maskAnimationList.Count == 0)
-            {
-                maskUI.SetActive(false);
-            }
+           
             foreach (AniObject ani in tutorialList[phase].maskAnimationList)
             {
                 if (!ani.enable)
                 {
                     if (ani.order == chapterOrder)
                     {
-                        maskUI.SetActive(true);
+                        if (ani.isMaskOn)
+                            maskUI.SetActive(true);
                         ani.enable = true;
-                        ani.obj = mask;
-                        ani.obj.transform.localPosition = new Vector2(ani.posX, ani.posY);
-                        ani.obj.transform.localRotation = Quaternion.Euler(0f, 0f, ani.rotation);
+  
+                        GameObject tempAniObject = Instantiate(ani.obj, maskUI.transform);
+                        tempAniObject.transform.localPosition = new Vector2(ani.posX, ani.posY);
+                        tempAniObject.transform.localRotation = Quaternion.Euler(0f, 0f, ani.rotation);
+                        StartCoroutine(DestoryMaskObject(tempAniObject, chapterOrder + ani.length, ani.isMaskOff));
                     }
                 }
+
+                
             }
         }
     }
@@ -162,7 +157,7 @@ public class Tutorial : MonoSingleton<Tutorial>
             if(LevelManager.instance != null)
                 LevelManager.instance.isWaveSystemOn = true;
 
-            maskUI.SetActive(false);
+            CleanTutorial();
         }
 
         nextTutorialChapter?.Invoke();
@@ -181,5 +176,20 @@ public class Tutorial : MonoSingleton<Tutorial>
         yield return null;
     }
 
+    private IEnumerator DestoryMaskObject(GameObject aniObject, int endOrder, bool isMaskOff)
+    {
+        int appearPhase = phase;    // 애니메이션 실행된 phase
 
+        while (!(appearPhase != phase || chapterOrder >= endOrder))
+        {
+            yield return new WaitForSecondsRealtime(0.1f);
+        }
+
+        if (isMaskOff)
+            maskUI.SetActive(false);
+
+        Destroy(aniObject);
+
+        yield return null;
+    }
 }

@@ -25,7 +25,7 @@ public class DeckUI : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
     {
         deck = GameManager.Instance.deckList[order];
 
-        if (System.Object.ReferenceEquals(deck, GameManager.Instance.currentDeck))
+        if (deck == GameManager.Instance.currentDeck)
         {
             flagToggle.isOn = true;
         }
@@ -54,6 +54,7 @@ public class DeckUI : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
         isClicked = false;
         clickTime = 0;
     }
+
     public void ToggleDeck()
     {
         GameManager.Instance.currentDeck = GameManager.Instance.deckList[order];
