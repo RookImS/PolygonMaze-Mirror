@@ -2,10 +2,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-
+using TMPro;
 public class SkillInfo : MonoBehaviour
 {
-    public Text Name;
-    public Text Desc;
-    public Image Skillimage;
+    public TextMeshProUGUI skillName;
+    public TextMeshProUGUI skillDuration;
+    public TextMeshProUGUI skillCost;
+    public TextMeshProUGUI skillRange;
+    public TextMeshProUGUI skillDesc;
+    public Image skillImage;
 }

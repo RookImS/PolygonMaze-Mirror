@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
 
-public class DeckUI : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
+public class DeckUI : MonoBehaviour, IPointerDownHandler
 {
     public SkillListUI skillListUI;
     public int order;
@@ -15,6 +15,7 @@ public class DeckUI : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
 
     private List<GameObject> deck;
     private bool isClicked;
+    private bool isSkill;
     private float clickTime;
 
     private void Start()
@@ -25,12 +26,13 @@ public class DeckUI : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
     {
         deck = GameManager.Instance.deckList[order];
 
-        if (deck == GameManager.Instance.currentDeck)
+        if (System.Object.ReferenceEquals(deck, GameManager.Instance.currentDeck) && flagToggle.interactable)
         {
             flagToggle.isOn = true;
         }
 
         isClicked = false;
+        isSkill = false;
         clickTime = 0;
         DeckCheck(order);
 
@@ -47,14 +49,22 @@ public class DeckUI : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
         isClicked = true;
         StartCoroutine(CheckCallSkillList());
     }
-
-    public void OnPointerUp(PointerEventData pointerEventData)
+    public void PointerDown(int num)
+    {
+        isSkill = true;
+        StartCoroutine(CallDeleteSkill(num));
+    }
+    public void PointerUp(int num)
     {
         StopAllCoroutines();
+        if (isSkill && !(deck[num] == null))
+        {
+            skillListUI.SelectSkill(deck[num]);
+        }
+        isSkill = false;
         isClicked = false;
         clickTime = 0;
     }
-
     public void ToggleDeck()
     {
         GameManager.Instance.currentDeck = GameManager.Instance.deckList[order];
@@ -97,13 +107,12 @@ public class DeckUI : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
 
             DeckCheck(order);
             skillListUI.insertCheck = false;
-            skillListUI.skillPanel.SetActive(false);
+            //skillListUI.skillPanel.SetActive(false);
             GameManager.Instance.SaveDeckInfos(order);
         }
         else
             return;
     }
-
     public void DeckCheck(int num)
     {
         bool isNull = false;
@@ -125,6 +134,31 @@ public class DeckUI : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
         else
         {
             flagToggle.interactable = false;
+        }
+    }
+    IEnumerator CallDeleteSkill(int num)
+    {
+        while (true)
+        {
+            if (isSkill)
+            {
+                clickTime += Time.deltaTime;
+                yield return null;
+                if (skillListUI.insertCheck)
+                {
+                    InsertDeck(num);
+                    isSkill = false;
+                    break;
+                }
+            }
+
+            if (clickTime >= 0.5f)
+            {
+                deck[num] = null;
+                thisDeck.transform.GetChild(num).Find("SkillImage").GetComponent<Image>().color = Color.white;
+                isSkill = false;
+                break;
+            }
         }
     }
     private IEnumerator CheckCallSkillList()

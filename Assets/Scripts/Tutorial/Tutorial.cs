@@ -37,8 +37,6 @@ public class Tutorial : MonoSingleton<Tutorial>
 
         dialogueUI.CleanDialogueUI();
         StopAllCoroutines();
-
-        Debug.Log("hio");
     }
 
     public void StartTutorial()

@@ -157,4 +157,4 @@ MonoBehaviour:
       enable: 0
       isMaskOn: 0
       isMaskOff: 1
-  tutorialChecker: {fileID: 3977131758416484666, guid: ae6d7fb5cf49db546886c0cb192f3a38, type: 3}
+  tutorialChecker: {fileID: 6156986595596405074, guid: ae6d7fb5cf49db546886c0cb192f3a38, type: 3}
