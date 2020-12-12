@@ -18,10 +18,11 @@ MonoBehaviour:
   - dialogue:
       name: 0_PentagonDesc
       sentences:
-      - "\uC624\uAC01\uD615\uC740 \uACF5\uACA9 \uC18D\uB3C4\uB294 \uB290\uB9AC\uC9C0\uB9CC
-        \uB2E4\uC218\uC758 \uC801\uC744 \uACF5\uACA9\uD560 \uC218 \uC788\uB294 \uB3C4\uD615\uC785\uB2C8\uB2E4."
-      - "\uC624\uAC01\uD615\uC740 \uB2E4\uC218\uC758 \uC801\uC744 \uC0C1\uB300\uD560
-        \uB54C \uD6A8\uC728\uC774 \uC88B\uC2B5\uB2C8\uB2E4."
+      - "<color=black>\uC624\uAC01\uD615</color>\uC740 \uACF5\uACA9 \uC18D\uB3C4\uB294
+        \uB290\uB9AC\uC9C0\uB9CC \n<color=green>\uB2E4\uC218\uC758 \uC801\uC744 \uACF5\uACA9</color>\uD560
+        \uC218 \uC788\uB294 \uB3C4\uD615\uC785\uB2C8\uB2E4."
+      - "<color=black>\uC624\uAC01\uD615</color>\uC740 \uB2E4\uC218\uC758 \uC801\uC744
+        \uC0C1\uB300\uD560 \uB54C \uD6A8\uC728\uC774 \uC88B\uC2B5\uB2C8\uB2E4."
       posX: -280
       posY: 200
       width: 1200
@@ -32,7 +33,7 @@ MonoBehaviour:
     - obj: {fileID: 5986014392007800861, guid: 9e467158778a4a74e8bd22246ec4d3e2, type: 3}
       order: 1
       length: 2
-      posX: -7.44
+      posX: -4.08
       posY: -3.7
       rotation: 0
       enable: 0
@@ -41,13 +42,14 @@ MonoBehaviour:
   - dialogue:
       name: 1_HexagonDesc
       sentences:
-      - "\uC721\uAC01\uD615\uC740 \uC0AC\uC815\uAC70\uB9AC \uC81C\uD55C\uC774 \uC5C6\uACE0,
-        \uC801\uC758 \uBC29\uC5B4\uB825\uC744 \uBB34\uC2DC\uD558\uB294 \uACF5\uACA9\uC744
-        \uD560 \uC218 \uC788\uB294 \uB3C4\uD615\uC785\uB2C8\uB2E4."
-      - "\uB610\uD55C, \uC721\uAC01\uD615\uC740 \uBC29\uC5B4\uB825\uC774 \uB192\uC740
-        \uC801\uC744 \uC6B0\uC120\uC801\uC73C\uB85C \uD0C0\uAC9F\uD305\uD569\uB2C8\uB2E4."
-      - "\uC721\uAC01\uD615\uC740 \uBC29\uC5B4\uB825\uC774 \uB192\uC740 \uC18C\uC218\uC758
-        \uC801\uC744 \uC0C1\uB300\uD560 \uB54C \uD6A8\uC728\uC774 \uC88B\uC2B5\uB2C8\uB2E4."
+      - "<color=black>\uC721\uAC01\uD615</color>\uC740 \uC0AC\uC815\uAC70\uB9AC \uC81C\uD55C\uC774
+        \uC5C6\uACE0, \n<color=green>\uC801\uC758 \uBC29\uC5B4\uB825\uC744 \uBB34\uC2DC\uD558\uB294
+        \uACF5\uACA9</color>\uC744 \uD558\uB294 \uB3C4\uD615\uC785\uB2C8\uB2E4."
+      - "\uB610\uD55C, <color=black>\uC721\uAC01\uD615</color>\uC740 <color=red>\uBC29\uC5B4\uB825\uC774
+        \uB192\uC740 \uC801</color>\uC744 \n\uC6B0\uC120\uC801\uC73C\uB85C \uD0C0\uAC9F\uD305\uD569\uB2C8\uB2E4."
+      - "<color=black>\uC721\uAC01\uD615</color>\uC740 \uBC29\uC5B4\uB825\uC774 \uB192\uC740
+        \uC18C\uC218\uC758 \uC801\uC744 \uC0C1\uB300\uD560 \uB54C\n\uD6A8\uC728\uC774
+        \uC88B\uC2B5\uB2C8\uB2E4."
       posX: -280
       posY: 200
       width: 1200
@@ -58,8 +60,8 @@ MonoBehaviour:
     - obj: {fileID: 5986014392007800861, guid: 9e467158778a4a74e8bd22246ec4d3e2, type: 3}
       order: 1
       length: 3
-      posX: -5.76
-      posY: -3.68
+      posX: -2.4
+      posY: -3.7
       rotation: 0
       enable: 0
       isMaskOn: 0
@@ -68,9 +70,10 @@ MonoBehaviour:
       name: 2_StageDesc
       sentences:
       - "\uC774\uBC88 \uC2A4\uD14C\uC774\uC9C0\uC758 \uCCAB \uBC88\uC9F8 \uC6E8\uC774\uBE0C\uC5D0\uC11C
-        \uBC29\uC5B4\uB825\uC774 \uB0AE\uC740 \uB2E4\uC218\uC758 \uC801\uC774 \uB4F1\uC7A5\uD569\uB2C8\uB2E4."
-      - "\uD574\uB2F9 \uC801\uC744 \uC0C1\uB300\uD558\uAE30 \uC88B\uC740 \uC624\uAC01\uD615\uC744
-        \uC124\uCE58\uD574\uC11C \uAC8C\uC784\uC744 \uD074\uB9AC\uC5B4\uD574\uBCF4\uC138\uC694."
+        \n<color=black>\uBC29\uC5B4\uB825\uC774 \uB0AE\uC740 \uB2E4\uC218\uC758 \uC801</color>\uC774
+        \uB4F1\uC7A5\uD569\uB2C8\uB2E4."
+      - "\uD574\uB2F9 \uC801\uC744 \uC0C1\uB300\uD558\uAE30 \uC88B\uC740 <color=black?\uC624\uAC01\uD615</color>\uC744
+        \uC124\uCE58\uD574\uC11C \uAC8C\uC784\uC744 <color=green>\uD074\uB9AC\uC5B4</color>\uD574\uBCF4\uC138\uC694."
       posX: -280
       posY: 200
       width: 1200
@@ -81,9 +84,9 @@ MonoBehaviour:
   - dialogue:
       name: 3_SemiCircle
       sentences:
-      - "\uBC18\uC6D0\uC785\uB2C8\uB2E4. \uBC18\uC6D0\uC740 \uC870\uAE08 \uBE60\uB978
-        \uC774\uB3D9\uC18D\uB3C4\uC640 \uC801\uB2F9\uD55C \uCCB4\uB825\uC744 \uAC00\uC9C4
-        \uC801\uC785\uB2C8\uB2E4."
+      - "<color=black>\uBC18\uC6D0</color>\uC785\uB2C8\uB2E4. <color=black>\uBC18\uC6D0</color>\uC740
+        <color=red>\uC870\uAE08 \uBE60\uB978 \uC774\uB3D9\uC18D\uB3C4\uC640 \n\uC801\uB2F9\uD55C
+        \uCCB4\uB825</color>\uC744 \uAC00\uC9C4 \uC801\uC785\uB2C8\uB2E4."
       posX: -237
       posY: -10
       width: 1200
@@ -104,9 +107,9 @@ MonoBehaviour:
       name: 4_GoddDesc
       sentences:
       - "\uC798\uD558\uC168\uC5B4\uC694. \uB2E4\uC74C \uC6E8\uC774\uBE0C\uC5D0\uC11C\uB294
-        \uBC29\uC5B4\uB825\uC774 \uB192\uC740 \uC801\uC774 \uB4F1\uC7A5\uD569\uB2C8\uB2E4."
-      - "\uD574\uB2F9 \uC801\uC744 \uC0C1\uB300\uD558\uAE30 \uC88B\uC740 \uC721\uAC01\uD615\uC744
-        \uC124\uCE58\uD574\uC11C \uAC8C\uC784\uC744 \uD074\uB9AC\uC5B4\uD574\uBCF4\uC138\uC694."
+        <color=black>\uBC29\uC5B4\uB825\uC774 \uB192\uC740 \uC801</color>\uC774 \uB4F1\uC7A5\uD569\uB2C8\uB2E4."
+      - "\uD574\uB2F9 \uC801\uC744 \uC0C1\uB300\uD558\uAE30 \uC88B\uC740 <color=black>\uC721\uAC01\uD615</color>\uC744
+        \uC124\uCE58\uD574\uC11C \n\uAC8C\uC784\uC744 <color=green>\uD074\uB9AC\uC5B4</color>\uD574\uBCF4\uC138\uC694."
       posX: -280
       posY: 200
       width: 1200
@@ -117,9 +120,10 @@ MonoBehaviour:
   - dialogue:
       name: 5_RingDesc
       sentences:
-      - "\uB9C1\uC785\uB2C8\uB2E4. \uB9C1\uC740 \uCCB4\uB825\uACFC \uBC29\uC5B4\uB825
-        \uBAA8\uB450 \uB192\uC740 \uC801\uC785\uB2C8\uB2E4."
-      - "\uC721\uAC01\uD615\uC744 \uC124\uCE58\uD558\uC5EC \uB300\uC751\uD574\uBCF4\uC138\uC694."
+      - "<color=black>\uB9C1</color>\uC785\uB2C8\uB2E4. <color=black>\uB9C1</color>\uC740
+        <color=red>\uCCB4\uB825\uACFC \uBC29\uC5B4\uB825 \uBAA8\uB450 \uB192\uC740</color>
+        \uC801\uC785\uB2C8\uB2E4."
+      - "<color=black>\uC721\uAC01\uD615</color>\uC744 \uC124\uCE58\uD558\uC5EC \uB300\uC751\uD574\uBCF4\uC138\uC694."
       posX: -237
       posY: -10
       width: 1200
@@ -139,8 +143,8 @@ MonoBehaviour:
   - dialogue:
       name: 6_GoodDesc
       sentences:
-      - "\uC798\uD558\uC168\uC5B4\uC694. \uB9C8\uC9C0\uB9C9 \uC6E8\uC774\uBE0C\uB97C
-        \uC9C4\uD589\uD574\uC11C \uAC8C\uC784\uC744 \uD074\uB9AC\uC5B4\uD574\uBCF4\uC138\uC694."
+      - "\uC798\uD588\uC2B5\uB2C8\uB2E4. \uB9C8\uC9C0\uB9C9 \uC6E8\uC774\uBE0C\uB97C
+        \uC9C4\uD589\uD574\uC11C \uAC8C\uC784\uC744 <color=green>\uD074\uB9AC\uC5B4</color>\uD574\uBCF4\uC138\uC694."
       posX: -280
       posY: 200
       width: 1200

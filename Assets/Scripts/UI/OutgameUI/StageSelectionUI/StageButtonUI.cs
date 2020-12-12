@@ -8,7 +8,7 @@ public class StageButtonUI : MonoBehaviour
     public int a;
     public int b;
     public bool isStageClear;
-
+    public GameObject clearFlag;
     void Start()
     {
         Init();
@@ -21,10 +21,7 @@ public class StageButtonUI : MonoBehaviour
     }
     public void StageClearCheck()
     {
-        if (isStageClear)
-        {
-            gameObject.GetComponent<Button>().image.color = Color.red;
-        }
+        clearFlag.SetActive(isStageClear);
     }
 
 }
