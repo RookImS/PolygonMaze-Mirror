@@ -25,9 +25,8 @@ public class DeckUI : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
     {
         deck = GameManager.Instance.deckList[order];
 
-        if (System.Object.ReferenceEquals(deck, GameManager.Instance.currentDeck))
+        if (deck == GameManager.Instance.currentDeck)
         {
-            Debug.Log(order + " check");
             flagToggle.isOn = true;
         }
 
@@ -63,6 +62,7 @@ public class DeckUI : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
         StopAllCoroutines();
         Init();
     }
+
     public void ToggleDeck()
     {
         if (flagGroup.AnyTogglesOn())
@@ -105,7 +105,6 @@ public class DeckUI : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
             skillListUI.insertCheck = false;
 
             GameManager.Instance.SaveDeckInfos(order);
-            Debug.Log("hi");
         }
         else
             return;

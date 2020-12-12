@@ -9,9 +9,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5585554676869777217}
-  - component: {fileID: 3565427586884206454}
+  - component: {fileID: 1002790031988579295}
   m_Layer: 0
-  m_Name: Stage1
+  m_Name: Stage1-2Checker
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -31,7 +31,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &3565427586884206454
+--- !u!114 &1002790031988579295
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -40,6 +40,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 8726730976408880013}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 94e3123868aabd940ad50f6e1c632e27, type: 3}
+  m_Script: {fileID: 11500000, guid: 18c675b44a654564eb0b26f134046651, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  obstacles: {fileID: 0}
+  towers: {fileID: 0}
+  deployUI: {fileID: 0}
+  activeList: []
+  restoreList: []

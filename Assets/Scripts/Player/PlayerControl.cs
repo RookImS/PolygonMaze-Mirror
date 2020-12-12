@@ -22,6 +22,11 @@ public class PlayerControl : MonoSingleton<PlayerControl>
         playerData.SetPlayer(cost, life);
     }
 
+    public void SetCost(int cost)
+    {
+        playerData.SetCost(cost);
+    }
+
     public void GainCost(int reward)
     {
         playerData.ChangeCost(reward);

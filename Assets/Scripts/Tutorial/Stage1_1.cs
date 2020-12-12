@@ -26,6 +26,12 @@ public class Stage1_1 : TutorialChecker
         phase10DeployUI1 = null;
     }
 
+    private new void Start()
+    {
+        base.Start();
+        SetBaseSetting();
+    }
+
     public override void StartSetting(int phase)
     {
         switch (phase)
@@ -86,6 +92,7 @@ public class Stage1_1 : TutorialChecker
     private void Phase6Setter()
     {
         HighlightDeploySlot(1);
+        RestoreDeploySlot(1);
 
         phase6Obstacle1 = obstacles.transform.GetChild(4).gameObject;
         phase6Obstacle2 = obstacles.transform.GetChild(5).gameObject;
@@ -112,12 +119,16 @@ public class Stage1_1 : TutorialChecker
     }
 
     private void Phase6Complete()
-    { 
-        RestoreDeploySlot(1);
+    {
+        UnhighlightDeploySlot(1);
+        BlockDeploySlot(1);
     }
 
     private void Phase8Setter()
     {
+        HighlightDeploySlot(2);
+        RestoreDeploySlot(2);
+
         float x, z;
 
         for(int i = 0; i < towers.transform.childCount; i++)
@@ -149,13 +160,15 @@ public class Stage1_1 : TutorialChecker
 
     private void Phase8Complete()
     {
-        RestoreDeploySlot(2);
+        UnhighlightDeploySlot(2);
+        BlockDeploySlot(2);
     }
 
     private void Phase10Setter()
     {
         HighlightDeploySlot(3);
-        
+        RestoreDeploySlot(3);
+
         phase10Obstacle1 = obstacles.transform.GetChild(12).gameObject;
         phase10DeployUI1 = deployUI.transform.GetChild(3).GetComponent<DeployUI>();
 
@@ -177,6 +190,7 @@ public class Stage1_1 : TutorialChecker
 
     private void Phase10Complete()
     {
-        RestoreDeploySlot(3);
+        UnhighlightDeploySlot(3);
+        BlockDeploySlot(3);
     }
 }

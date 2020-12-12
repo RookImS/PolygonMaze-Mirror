@@ -29,20 +29,24 @@ MonoBehaviour:
     animationList: []
     fieldAnimationList: []
     maskAnimationList:
-    - obj: {fileID: 0}
+    - obj: {fileID: 5986014392007800861, guid: 9e467158778a4a74e8bd22246ec4d3e2, type: 3}
       order: 1
       length: 1
       posX: -8.32
       posY: -2.1
       rotation: 0
       enable: 0
-    - obj: {fileID: 0}
+      isMaskOn: 1
+      isMaskOff: 0
+    - obj: {fileID: 5986014392007800861, guid: 9e467158778a4a74e8bd22246ec4d3e2, type: 3}
       order: 2
       length: 1
       posX: 8.32
       posY: -2.1
       rotation: 0
       enable: 0
+      isMaskOn: 0
+      isMaskOff: 0
   - dialogue:
       name: 1_LifeDesc
       sentences:
@@ -57,13 +61,15 @@ MonoBehaviour:
     animationList: []
     fieldAnimationList: []
     maskAnimationList:
-    - obj: {fileID: 0}
+    - obj: {fileID: 5986014392007800861, guid: 9e467158778a4a74e8bd22246ec4d3e2, type: 3}
       order: 1
       length: 2
       posX: -6.75
       posY: 5
       rotation: 0
       enable: 0
+      isMaskOn: 0
+      isMaskOff: 0
   - dialogue:
       name: 2_CostDesc
       sentences:
@@ -78,13 +84,15 @@ MonoBehaviour:
     animationList: []
     fieldAnimationList: []
     maskAnimationList:
-    - obj: {fileID: 0}
+    - obj: {fileID: 5986014392007800861, guid: 9e467158778a4a74e8bd22246ec4d3e2, type: 3}
       order: 1
       length: 3
       posX: -3.4
       posY: 5
       rotation: 0
       enable: 0
+      isMaskOn: 0
+      isMaskOff: 0
   - dialogue:
       name: 3_EnemyDesc
       sentences:
@@ -99,13 +107,15 @@ MonoBehaviour:
     animationList: []
     fieldAnimationList: []
     maskAnimationList:
-    - obj: {fileID: 0}
+    - obj: {fileID: 5986014392007800861, guid: 9e467158778a4a74e8bd22246ec4d3e2, type: 3}
       order: 1
       length: 2
       posX: -0.2
       posY: 5
       rotation: 0
       enable: 0
+      isMaskOn: 0
+      isMaskOff: 0
   - dialogue:
       name: 4_ObstacleDesc
       sentences:
@@ -119,13 +129,15 @@ MonoBehaviour:
     animationList: []
     fieldAnimationList: []
     maskAnimationList:
-    - obj: {fileID: 0}
+    - obj: {fileID: 5986014392007800861, guid: 9e467158778a4a74e8bd22246ec4d3e2, type: 3}
       order: 1
       length: 1
       posX: -4.5
       posY: 1.75
       rotation: 0
       enable: 0
+      isMaskOn: 0
+      isMaskOff: 0
   - dialogue:
       name: 5_DeployDesc
       sentences:
@@ -141,13 +153,15 @@ MonoBehaviour:
     animationList: []
     fieldAnimationList: []
     maskAnimationList:
-    - obj: {fileID: 0}
+    - obj: {fileID: 5986014392007800861, guid: 9e467158778a4a74e8bd22246ec4d3e2, type: 3}
       order: 1
       length: 2
       posX: -4.5
       posY: 1.75
       rotation: 0
       enable: 0
+      isMaskOn: 0
+      isMaskOff: 1
   - dialogue:
       name: 6_SquareDesc
       sentences:
@@ -166,6 +180,8 @@ MonoBehaviour:
       posY: 235
       rotation: 0
       enable: 0
+      isMaskOn: 0
+      isMaskOff: 0
     - obj: {fileID: 4293294981893517376, guid: 9966b84660736d84091a5e5a3119ea47, type: 3}
       order: 1
       length: 2
@@ -173,6 +189,8 @@ MonoBehaviour:
       posY: 70
       rotation: 0
       enable: 0
+      isMaskOn: 0
+      isMaskOff: 0
     maskAnimationList: []
   - dialogue:
       name: 7_GoodDesc
@@ -190,8 +208,8 @@ MonoBehaviour:
       sentences:
       - "\uD45C\uC2DC\uB41C \uC704\uCE58\uC5D0 \uC624\uAC01\uD615 \uD0C0\uC6CC\uB97C
         \uBC30\uCE58\uD558\uC138\uC694."
-      posX: 225
-      posY: -190
+      posX: -280
+      posY: 200
       width: 1200
       height: 250
     animationList: []
@@ -203,13 +221,15 @@ MonoBehaviour:
       posY: -55
       rotation: 0
       enable: 0
+      isMaskOn: 0
+      isMaskOff: 0
     maskAnimationList: []
   - dialogue:
       name: 9_GoodDesc
       sentences:
       - "\uC798\uD558\uC168\uC5B4\uC694."
-      posX: 225
-      posY: -190
+      posX: -280
+      posY: 200
       width: 1200
       height: 250
     animationList: []
@@ -232,6 +252,8 @@ MonoBehaviour:
       posY: 274
       rotation: 0
       enable: 0
+      isMaskOn: 0
+      isMaskOff: 0
     maskAnimationList: []
   - dialogue:
       name: 11_NoDeployDesc2
@@ -261,11 +283,13 @@ MonoBehaviour:
     animationList: []
     fieldAnimationList: []
     maskAnimationList:
-    - obj: {fileID: 0}
+    - obj: {fileID: 5986014392007800861, guid: 9e467158778a4a74e8bd22246ec4d3e2, type: 3}
       order: 1
       length: 1
       posX: 6.75
       posY: -3.8
       rotation: 0
       enable: 0
+      isMaskOn: 1
+      isMaskOff: 1
   tutorialChecker: {fileID: -4083470232005463463, guid: 41ee0536c41aa3547b9d1a169e00bf62, type: 3}

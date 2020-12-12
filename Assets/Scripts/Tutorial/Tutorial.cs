@@ -7,7 +7,7 @@ public class Tutorial : MonoSingleton<Tutorial>
 {
     public GameObject aniUI;
     public GameObject maskUI;
-    public GameObject mask;
+    //public GameObject mask;
     public GameObject fieldAniUI;
     [HideInInspector] public TutorialObject tutorial;
     public DialogueUI dialogueUI;
@@ -28,9 +28,12 @@ public class Tutorial : MonoSingleton<Tutorial>
         for (int i = 0; i < dialogueUI.invokePanel.transform.childCount; i++)
             Destroy(dialogueUI.invokePanel.transform.GetChild(i).gameObject);
 
-        nextTutorialChapter -= StartPhase;
+        for(int i = 0; i < maskUI.transform.childCount; i++)
 
-        if(tutorialChecker != null)
+        nextTutorialChapter -= StartPhase;
+        //maskUI.SetActive(false);
+
+        if (tutorialChecker != null)
             Destroy(tutorialChecker.gameObject);
 
         StopAllCoroutines();
@@ -75,7 +78,10 @@ public class Tutorial : MonoSingleton<Tutorial>
         {
             dialogueUI.DisplayNextSentence();
 
-            chapterOrder = chapterLength - dialogueUI.GetRemainSentencesCount() + 1;
+            if (dialogueUI.instancePrint)
+                chapterOrder = chapterLength - dialogueUI.GetRemainSentencesCount();
+            else
+                chapterOrder = chapterLength - dialogueUI.GetRemainSentencesCount() + 1;
 
             foreach (AniObject ani in tutorialList[phase].animationList)
             {
@@ -93,6 +99,7 @@ public class Tutorial : MonoSingleton<Tutorial>
                     }
                 }
             }
+
             foreach (AniObject ani in tutorialList[phase].fieldAnimationList)
             {
                 if (!ani.enable)
@@ -108,37 +115,21 @@ public class Tutorial : MonoSingleton<Tutorial>
                 }
             }
 
-            //tutorialList[phase].maskAnimationList.obj = mask;
-
-            //if (!tutorialList[phase].maskAnimation.enable)
-            //{
-            //    if (tutorialList[phase].maskAnimation.order == chapterOrder)
-            //    {
-            //        maskUI.SetActive(true);
-            //        tutorialList[phase].maskAnimation.enable = true;
-            //        tutorialList[phase].maskAnimation.obj.transform.localPosition = new Vector2(tutorialList[phase].maskAnimation.posX, tutorialList[phase].maskAnimation.posY);
-            //        tutorialList[phase].maskAnimation.obj.transform.localRotation = Quaternion.Euler(0f, 0f, tutorialList[phase].maskAnimation.rotation);
-            //        //tutorialList[phase].maskAnimation.obj.SetActive(false);
-            //    }
-            //    else
-            //        maskUI.SetActive(false);
-            //}
-
-            if(tutorialList[phase].maskAnimationList.Count == 0)
-            {
-                maskUI.SetActive(false);
-            }
+           
             foreach (AniObject ani in tutorialList[phase].maskAnimationList)
             {
                 if (!ani.enable)
                 {
                     if (ani.order == chapterOrder)
                     {
-                        maskUI.SetActive(true);
+                        if (ani.isMaskOn)
+                            maskUI.SetActive(true);
                         ani.enable = true;
-                        ani.obj = mask;
-                        ani.obj.transform.localPosition = new Vector2(ani.posX, ani.posY);
-                        ani.obj.transform.localRotation = Quaternion.Euler(0f, 0f, ani.rotation);
+  
+                        GameObject tempAniObject = Instantiate(ani.obj, maskUI.transform);
+                        tempAniObject.transform.localPosition = new Vector2(ani.posX, ani.posY);
+                        tempAniObject.transform.localRotation = Quaternion.Euler(0f, 0f, ani.rotation);
+                        StartCoroutine(DestoryMaskObject(tempAniObject, chapterOrder + ani.length, ani.isMaskOff));
                     }
                 }
             }
@@ -162,7 +153,7 @@ public class Tutorial : MonoSingleton<Tutorial>
             if(LevelManager.instance != null)
                 LevelManager.instance.isWaveSystemOn = true;
 
-            maskUI.SetActive(false);
+            CleanTutorial();
         }
 
         nextTutorialChapter?.Invoke();
@@ -181,5 +172,20 @@ public class Tutorial : MonoSingleton<Tutorial>
         yield return null;
     }
 
+    private IEnumerator DestoryMaskObject(GameObject aniObject, int endOrder, bool isMaskOff)
+    {
+        int appearPhase = phase;    // 애니메이션 실행된 phase
 
+        while (!(appearPhase != phase || chapterOrder >= endOrder))
+        {
+            yield return new WaitForSecondsRealtime(0.1f);
+        }
+
+        if (isMaskOff)
+            maskUI.SetActive(false);
+
+        Destroy(aniObject);
+
+        yield return null;
+    }
 }

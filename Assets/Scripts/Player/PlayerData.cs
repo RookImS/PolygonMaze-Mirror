@@ -23,6 +23,11 @@ public class PlayerData
         // 컬러덱?
     }
 
+    public void SetCost(int cost)
+    {
+        currentCost = cost;
+    }
+
     public bool CheckCost(int cost)
     {
         if (currentCost + cost < 0)

@@ -13,6 +13,7 @@ public class DialogueUI : MonoBehaviour
     public GameObject TMProtext;
 
     private bool checkPrintSentence;
+    [HideInInspector]public bool instancePrint;
     private IEnumerator coroutine;
 
     private Dialogue m_dialogue;
@@ -28,6 +29,7 @@ public class DialogueUI : MonoBehaviour
     private void Init()
     {
         checkPrintSentence = false;
+        instancePrint = false;
         m_dialogue = null;
         m_textPanel = null;
         m_text = null;
@@ -39,16 +41,12 @@ public class DialogueUI : MonoBehaviour
         invokePanel.SetActive(true);
 
         StartCoroutine(WaitInvokePanel());
-        GameManager.Instance.TimeStop();
         MakeDialoguePanel();
     }
 
     public void EndDialogue()
     {
         DestroyDialoguePanel();
-
-        GameManager.Instance.TimeRestore();
-
         invokePanel.SetActive(false);
     }
 
@@ -63,7 +61,6 @@ public class DialogueUI : MonoBehaviour
         else
         {
             checkPrintSentence = true;
-
             string arg_sentence = m_dialogue.sentences[0];
 
             coroutine = TypeSentence(arg_sentence);
@@ -96,12 +93,14 @@ public class DialogueUI : MonoBehaviour
     {
         dialogueText.text = m_dialogue.sentences[0];
         m_dialogue.sentences.RemoveAt(0);
+        instancePrint = true;
     }
 
     IEnumerator TypeSentence(string sentence)
     {
         dialogueText = m_text.GetComponent<TextMeshProUGUI>();
         dialogueText.text = "";
+        instancePrint = false;
 
         foreach (char letter in sentence.ToCharArray())
         {

@@ -13,8 +13,10 @@ public class SkillUI : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragH
     public CanvasGroup refreshCanvasGroup;
     public TextMeshProUGUI skillCostText;
     public TextMeshProUGUI skillRefreshCostText;
+    [HideInInspector] public bool isActive;
+    [HideInInspector] public bool isFirst;
 
-    private GameObject newObject;
+    [HideInInspector] public GameObject newObject;
     private bool skillUseEnable;
     private bool skillRefreshEnable;
 
@@ -33,6 +35,8 @@ public class SkillUI : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragH
     private void Init()
     {
         SelectNextSkill();
+        isActive = true;
+        isFirst = false;
         skillRefreshCostText.text = skillRefreshCost.ToString();
     }
 
@@ -82,42 +86,54 @@ public class SkillUI : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragH
 
     public void SkillRefresh()
     {
-        if(PlayerControl.Instance.UseCost(skillRefreshCost))
+        if (PlayerControl.Instance.UseCost(skillRefreshCost))
+        {
             SelectNextSkill();
+            isFirst = true;
+        }
     }
 
     public void OnMouseDown()
     {
-        SoundManager.Instance.PlaySound(SoundManager.SoundSpecific.BUTTON, "Tower_Button");
+        if(isActive)
+            SoundManager.Instance.PlaySound(SoundManager.SoundSpecific.BUTTON, "Tower_Button");
     }
 
     public void OnBeginDrag(PointerEventData eventData)
     {
-        newObject = null;
-        UIManager.instance.infoUI.DisableInfo();
-        UIManager.instance.BlockRaycastOff();
+        if (isActive)
+        {
+            newObject = null;
+            UIManager.instance.infoUI.DisableInfo();
+            UIManager.instance.BlockRaycastOff();
 
-        mousePos = Input.mousePosition;
+            mousePos = Input.mousePosition;
 
-        newObject = Instantiate(skill, mousePos, skill.transform.rotation);
+            newObject = Instantiate(skill, mousePos, skill.transform.rotation);
 
-        Time.timeScale = 0.3f;
+            Time.timeScale = 0.3f;
+        }
     }
     public void OnDrag(PointerEventData eventData)
     {
+        if (isActive)
+        {
+            mousePos = Input.mousePosition;
 
-        mousePos = Input.mousePosition;
-
-        newObject.GetComponent<Skill>().LocateSkill(mousePos);
+            newObject.GetComponent<Skill>().LocateSkill(mousePos);
+        }
     }
     public void OnEndDrag(PointerEventData eventData)
     {
-        mousePos = Input.mousePosition;
+        if (isActive)
+        {
+            mousePos = Input.mousePosition;
 
-        if (newObject.GetComponent<Skill>().UseSkill(mousePos))
-            SelectNextSkill();
+            if (newObject.GetComponent<Skill>().UseSkill(mousePos))
+                SelectNextSkill();
 
-        UIManager.instance.BlockRaycastOn();
-        Time.timeScale = 1f;
+            UIManager.instance.BlockRaycastOn();
+            Time.timeScale = 1f;
+        }
     }
 }

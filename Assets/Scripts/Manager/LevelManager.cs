@@ -31,7 +31,7 @@ public class LevelManager : MonoBehaviour
         public int activeNum;
     }
 
-    private StageData stageData;
+    [HideInInspector] public StageData stageData;
 
     private Vector3 spawnerPosition;
     private GameObject waves;
