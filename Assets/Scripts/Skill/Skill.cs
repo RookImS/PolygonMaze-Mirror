@@ -2,13 +2,14 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
-
+using UnityEngine.UI;
 public class Skill : MonoBehaviour
 {
     public float skillDuration;     // 스킬 자체의 유지시간
     public float applyDuration;     // 걸린 스킬의 유지시간
-
+    
     public string id;
+    [TextArea]
     public string desc;
     public float range;
     public int cost;

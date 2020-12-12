@@ -13,6 +13,8 @@ public class DialogueUI : MonoBehaviour
     public GameObject TMProtext;
 
     private bool checkPrintSentence;
+    private bool isColor;
+    private String colortag;
     private IEnumerator coroutine;
 
     private Dialogue m_dialogue;
@@ -28,6 +30,7 @@ public class DialogueUI : MonoBehaviour
     private void Init()
     {
         checkPrintSentence = false;
+        isColor = false;
         m_dialogue = null;
         m_textPanel = null;
         m_text = null;
@@ -105,6 +108,20 @@ public class DialogueUI : MonoBehaviour
 
         foreach (char letter in sentence.ToCharArray())
         {
+            if (letter.Equals('<') || isColor)
+            {
+                colortag += letter;
+                if (letter.Equals('>'))
+                {
+                    dialogueText.text += colortag;
+                    colortag = null;
+                    isColor = false;
+                    continue;
+                }
+                Debug.Log("test");
+                isColor = true;
+                continue;
+            }
             dialogueText.text += letter;
             yield return new WaitForSecondsRealtime(0.1f);
         }
