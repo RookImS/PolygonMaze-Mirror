@@ -119,36 +119,9 @@ MonoBehaviour:
       posY: 200
       width: 1200
       height: 250
-    animationList:
-    - obj: {fileID: 0}
-      order: 0
-      length: 0
-      posX: 0
-      posY: 0
-      rotation: 0
-      enable: 0
-      isMaskOn: 0
-      isMaskOff: 0
-    fieldAnimationList:
-    - obj: {fileID: 0}
-      order: 0
-      length: 0
-      posX: 0
-      posY: 0
-      rotation: 0
-      enable: 0
-      isMaskOn: 0
-      isMaskOff: 0
-    maskAnimationList:
-    - obj: {fileID: 0}
-      order: 0
-      length: 0
-      posX: 0
-      posY: 0
-      rotation: 0
-      enable: 0
-      isMaskOn: 0
-      isMaskOff: 0
+    animationList: []
+    fieldAnimationList: []
+    maskAnimationList: []
   - dialogue:
       name: 6_SkillRefreshDesc
       sentences:

@@ -162,7 +162,6 @@ public class TutorialChecker : MonoBehaviour
     {
         BlockAllUI();
         BlockChecker();
-        PlayerControl.instance.SetCost(1000);
     }
 
     public void BlockAllUI()
@@ -226,7 +225,6 @@ public class TutorialChecker : MonoBehaviour
         RestoreAllUI();
         RestoreChecker();
         RestoreCheckerDuration();
-        PlayerControl.instance.SetCost(LevelManager.instance.stageData.startCost);
     }
 
     public void RestoreAllUI()

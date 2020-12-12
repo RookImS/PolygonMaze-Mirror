@@ -73,7 +73,7 @@ MonoBehaviour:
     baseStatModifier:
       ModifierMode: 1
       Stats:
-        hp: 1000
+        hp: 800
         speed: 0
         def: 0
       damage: 0

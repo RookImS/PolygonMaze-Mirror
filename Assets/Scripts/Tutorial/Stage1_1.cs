@@ -30,6 +30,7 @@ public class Stage1_1 : TutorialChecker
     {
         base.Start();
         SetBaseSetting();
+        PlayerControl.instance.SetCost(1000);
     }
 
     public override void StartSetting(int phase)
@@ -192,5 +193,11 @@ public class Stage1_1 : TutorialChecker
     {
         UnhighlightDeploySlot(3);
         BlockDeploySlot(3);
+    }
+
+    private new void OnDestroy()
+    {
+        base.OnDestroy();
+        PlayerControl.instance.SetCost(LevelManager.instance.stageData.startCost);
     }
 }

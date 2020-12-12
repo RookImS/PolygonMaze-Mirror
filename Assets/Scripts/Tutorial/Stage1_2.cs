@@ -28,8 +28,11 @@ public class Stage1_2 : TutorialChecker
     {
         base.Start();
         SetBaseSetting();
+        PlayerControl.instance.SetCost(1000);
+
         PhaseM1Setter();
     }
+
     public override void StartSetting(int phase)
     {
         switch (phase)
@@ -193,5 +196,11 @@ public class Stage1_2 : TutorialChecker
     {
         UnhighlightOneUI(UISpecific.SKillRefreshUI);
         BlockOneUI(UISpecific.SKillRefreshUI);
+    }
+
+    private new void OnDestroy()
+    {
+        base.OnDestroy();
+        PlayerControl.instance.SetCost(LevelManager.instance.stageData.startCost);
     }
 }

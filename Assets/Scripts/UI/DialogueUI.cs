@@ -35,6 +35,11 @@ public class DialogueUI : MonoBehaviour
         m_text = null;
     }
 
+    public void CleanDialogueUI()
+    {
+        StopAllCoroutines();
+    }
+
     public void StartDialogue(Dialogue dialogue)
     {
         m_dialogue = dialogue;

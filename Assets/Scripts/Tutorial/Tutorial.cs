@@ -11,24 +11,23 @@ public class Tutorial : MonoSingleton<Tutorial>
     public GameObject fieldAniUI;
     [HideInInspector] public TutorialObject tutorial;
     public DialogueUI dialogueUI;
-    
-    private List<TutorialObject.Tutorial> tutorialList;
+
+    [HideInInspector] public List<TutorialObject.Tutorial> tutorialList;
     private TutorialChecker tutorialChecker;
     private int phase;          // 튜토리얼 중 몇 번째 챕터인가를 나타냄
     private int phaseLength;    // 튜토리얼이 몇 챕터로 이루어져있는지 나타냄
     private int chapterLength;  // 튜토리얼 현재 챕터의 길이
-    private int chapterOrder;   // 튜토리얼 현재 챕터내에서 몇 번째 동작을 하는 중인지 나타냄
+    [HideInInspector] int chapterOrder;   // 튜토리얼 현재 챕터내에서 몇 번째 동작을 하는 중인지 나타냄
     public event Action nextTutorialChapter;
 
     public void CleanTutorial()
     {
+        tutorialList = null;
         for (int i = 0; i < fieldAniUI.transform.childCount; i++)
             Destroy(fieldAniUI.transform.GetChild(i).gameObject);
 
         for (int i = 0; i < dialogueUI.invokePanel.transform.childCount; i++)
             Destroy(dialogueUI.invokePanel.transform.GetChild(i).gameObject);
-
-        for(int i = 0; i < maskUI.transform.childCount; i++)
 
         nextTutorialChapter -= StartPhase;
         //maskUI.SetActive(false);
@@ -36,7 +35,10 @@ public class Tutorial : MonoSingleton<Tutorial>
         if (tutorialChecker != null)
             Destroy(tutorialChecker.gameObject);
 
+        dialogueUI.CleanDialogueUI();
         StopAllCoroutines();
+
+        Debug.Log("hio");
     }
 
     public void StartTutorial()
@@ -132,6 +134,8 @@ public class Tutorial : MonoSingleton<Tutorial>
                         StartCoroutine(DestoryMaskObject(tempAniObject, chapterOrder + ani.length, ani.isMaskOff));
                     }
                 }
+
+                
             }
         }
     }
