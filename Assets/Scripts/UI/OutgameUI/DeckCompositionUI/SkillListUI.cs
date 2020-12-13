@@ -72,22 +72,18 @@ public class SkillListUI : MonoBehaviour
             }
         }
         skillInfo.skillRange.text = rangeText + "(" + selectedSkill.GetComponent<Skill>().range.ToString() +")";
-        //skillPanel.gameObject.SetActive(true);
 
-        //GameObject selectedSlot = EventSystem.current.currentSelectedGameObject;
-        //skillPanel.transform.position = EventSystem.current.currentSelectedGameObject.transform.position;
-        //Vector2 recPos = skillPanel.transform.GetComponent<RectTransform>().anchoredPosition;
-        //float correctPos_x =
-        //    (skillPanel.GetComponent<RectTransform>().rect.width - EventSystem.current.currentSelectedGameObject.GetComponent<RectTransform>().rect.width) / 2;
-        //float correctPos_y = 
-        //    skillPanel.GetComponent<RectTransform>().rect.height / 2;
-        //skillPanel.transform.GetComponent<RectTransform>().anchoredPosition = new Vector2(recPos.x + correctPos_x, recPos.y - correctPos_y);
+        if (SoundManager.Instance != null)
+            SoundManager.instance.PlaySound(SoundManager.SoundSpecific.BUTTON, "Common_Button");
+
     }
 
     public void GetInsertSkill()
     {
         insertCheck = true;
-        SoundManager.Instance.PlaySound(SoundManager.SoundSpecific.BUTTON, "Common_Button");
+
+        if (SoundManager.Instance != null)
+            SoundManager.Instance.PlaySound(SoundManager.SoundSpecific.BUTTON, "Common_Button");
     }
 
     public void HighlightDeck(int num)
@@ -119,6 +115,9 @@ public class SkillListUI : MonoBehaviour
 
         deckPanelList[selectedDeck].gameObject.GetComponent<DeckUI>().DeckCheck(selectedDeck);
         gameObject.SetActive(false);
+
+        if (SoundManager.instance != null)
+            SoundManager.instance.PlaySound(SoundManager.SoundSpecific.BUTTON, "Cancle_Button");
     }
 
     void OnEnable()

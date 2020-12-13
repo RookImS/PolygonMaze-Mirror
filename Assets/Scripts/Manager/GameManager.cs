@@ -50,8 +50,8 @@ public class GameManager : MonoSingleton<GameManager>
     [HideInInspector] public List<TutorialObject> ingameTutorials;
     [HideInInspector] public List<TutorialObject> outgameTutorials;
 
-    public AllDeckInfo allDeckInfo;
-    public StageClearInfo stageClearInfo;
+    [HideInInspector] public AllDeckInfo allDeckInfo;
+    [HideInInspector] public StageClearInfo stageClearInfo;
 
     public bool isStart;
     private int loadStageChapter;
@@ -354,10 +354,13 @@ public class GameManager : MonoSingleton<GameManager>
     {
         SceneManager.LoadScene(sceneName);
 
-        if (sceneName == "StageScene")
-            SoundManager.instance.PlayBGM("InGame_BGM");
-        else
-            SoundManager.instance.PlayBGM("OutGame_BGM");
+        if (SoundManager.instance != null)
+        {
+            if (sceneName == "StageScene")
+                SoundManager.instance.PlayBGM("InGame_BGM");
+            else
+                SoundManager.instance.PlayBGM("OutGame_BGM");
+        }
 
     }
 
@@ -386,8 +389,10 @@ public class GameManager : MonoSingleton<GameManager>
         this.loadStageLevel = loadStageLevel;
     }
 
-    public void OnApplicationQuit()
+    public new void OnApplicationQuit()
     {
+        base.OnApplicationQuit();
+
         SaveStageClearInfo();
         for (int i = 0; i < 3; i++)
             SaveDeckInfos(i);
@@ -441,8 +446,11 @@ public class GameManager : MonoSingleton<GameManager>
         PanelSystem panelSys = inGameUI.transform.Find("IngamePanel").gameObject.GetComponent<PanelSystem>();
         panelSys.SetPanel(panelSys.gameOverPanel);
 
-        SoundManager.Instance.StopBGMPlayer();
-        SoundManager.Instance.PlaySound(SoundManager.SoundSpecific.OTHERUI, "Player_Game_Over_Sound");
+        if (SoundManager.instance != null)
+        {
+            SoundManager.Instance.StopBGMPlayer();
+            SoundManager.Instance.PlaySound(SoundManager.SoundSpecific.OTHERUI, "Player_Game_Over_Sound");
+        }
     }
 
     public void StageClear()
@@ -451,8 +459,11 @@ public class GameManager : MonoSingleton<GameManager>
         PanelSystem panelSys = inGameUI.transform.Find("IngamePanel").gameObject.GetComponent<PanelSystem>();
         panelSys.SetPanel(panelSys.stageClearPanel);
 
-        SoundManager.Instance.StopBGMPlayer();
-        SoundManager.Instance.PlaySound(SoundManager.SoundSpecific.OTHERUI, "Player_Game_Clear_Sound");
+        if (SoundManager.instance != null)
+        {
+            SoundManager.Instance.StopBGMPlayer();
+            SoundManager.Instance.PlaySound(SoundManager.SoundSpecific.OTHERUI, "Player_Game_Clear_Sound");
+        }
         ProcessStageClearInfo();
     }
 

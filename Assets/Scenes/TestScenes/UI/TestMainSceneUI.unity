@@ -759,9 +759,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: be14f85f0c4708649912fb4da3bf79c4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  skillResource: {fileID: 0}
   skills: []
   currentDeck: []
+  ingameTutorials: []
+  outgameTutorials: []
+  allDeckInfo:
+    deckInfoList: []
+  stageClearInfo:
+    stageChapter: []
   isStart: 0
   inGameUI: {fileID: 0}
   isGameOver: 0

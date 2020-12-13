@@ -322,6 +322,9 @@ public class SoundManager : MonoSingleton<SoundManager>
 
         foreach (AudioSource audioSource in otherAudioPlayer)
             audioSource.volume = value;
+
+        foreach (AudioSource audioSource in audioPlayerForMute)
+            audioSource.volume = value;
     }
 
     public float GetSEVolume()
@@ -355,4 +358,5 @@ public class SoundManager : MonoSingleton<SoundManager>
     {
         this.isMuteSE = isMuteSE;
     }
+
 }

@@ -8,6 +8,7 @@ public class SquareData : TowerData
     {
         GameObject bulletInstance = Instantiate(bullet, muzzle.position, muzzle.rotation);
         bulletInstance.GetComponent<BulletBehaviour>().Init(Stats);
-        SoundManager.Instance.PlaySound(SoundManager.TowerSoundSpecific.HEXAGON, "Square_Attack");
+        if (SoundManager.Instance != null)
+            SoundManager.Instance.PlaySound(SoundManager.TowerSoundSpecific.HEXAGON, "Square_Attack");
     }
 }

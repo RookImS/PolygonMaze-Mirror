@@ -136,7 +136,8 @@ public class EnemyStatSystem
         if (!found)
         {
             m_TimedModifierStack.Add(new TimedStatModifier() { Id = id });
-            SoundManager.instance.PlaySkillSound(soundSpecific, apply_sound_name);
+            if (SoundManager.instance != null)
+                SoundManager.instance.PlaySkillSound(soundSpecific, apply_sound_name);
         }
 
         m_TimedModifierStack[index].EffectSprite = sprite;

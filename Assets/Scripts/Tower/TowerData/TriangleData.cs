@@ -25,6 +25,7 @@ public class TriangleData : TowerData
         foreach(GameObject bulletInstance in bulletInstanceList)
             bulletInstance.GetComponent<BulletBehaviour>().Init(Stats);
 
-        SoundManager.Instance.PlaySound(SoundManager.TowerSoundSpecific.HEXAGON, "Triangle_Attack");
+        if (SoundManager.Instance != null)
+            SoundManager.Instance.PlaySound(SoundManager.TowerSoundSpecific.HEXAGON, "Triangle_Attack");
     }
 }

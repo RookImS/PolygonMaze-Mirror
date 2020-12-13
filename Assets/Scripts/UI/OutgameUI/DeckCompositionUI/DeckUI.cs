@@ -16,19 +16,23 @@ public class DeckUI : MonoBehaviour, IPointerDownHandler
     private List<GameObject> deck;
     private bool isClicked;
     private bool isSkill;
+    private bool isFirst;
     private float clickTime;
 
     private void Start()
     {
         Init();
     }
+
     private void Init()
     {
         deck = GameManager.Instance.deckList[order];
 
+        isFirst = true;
         if (System.Object.ReferenceEquals(deck, GameManager.Instance.currentDeck) && flagToggle.interactable)
         {
             flagToggle.isOn = true;
+            isFirst = false;
         }
 
         isClicked = false;
@@ -65,6 +69,7 @@ public class DeckUI : MonoBehaviour, IPointerDownHandler
         isClicked = false;
         clickTime = 0;
     }
+
     public void ToggleDeck()
     {
         GameManager.Instance.currentDeck = GameManager.Instance.deckList[order];
@@ -75,6 +80,9 @@ public class DeckUI : MonoBehaviour, IPointerDownHandler
             else
                 GameManager.instance.allDeckInfo.deckInfoList[i].isCurrent = false;
         }
+
+        if (!isFirst && flagToggle.isOn && SoundManager.Instance != null)
+            SoundManager.instance.PlaySound(SoundManager.SoundSpecific.BUTTON, "Deck_Select_SE");
     }
 
     public void InsertDeck(int num)
@@ -102,13 +110,17 @@ public class DeckUI : MonoBehaviour, IPointerDownHandler
 
                 }
             }
+
             deck[num] = skillListUI.selectedSkill;
             thisDeck.transform.GetChild(num).Find("SkillImage").GetComponent<Image>().color = skillListUI.selectedSkill.GetComponent<Skill>().color;
 
             DeckCheck(order);
             skillListUI.insertCheck = false;
-            //skillListUI.skillPanel.SetActive(false);
+   
             GameManager.Instance.SaveDeckInfos(order);
+
+            if (SoundManager.Instance != null)
+                SoundManager.instance.PlaySound(SoundManager.SoundSpecific.BUTTON, "Common_Button");
         }
         else
             return;
@@ -157,9 +169,13 @@ public class DeckUI : MonoBehaviour, IPointerDownHandler
                 deck[num] = null;
                 thisDeck.transform.GetChild(num).Find("SkillImage").GetComponent<Image>().color = Color.white;
                 isSkill = false;
+                if (SoundManager.instance != null)
+                    SoundManager.instance.PlaySound(SoundManager.SoundSpecific.BUTTON, "Button_Fail");
                 break;
             }
         }
+
+
     }
     private IEnumerator CheckCallSkillList()
     {
@@ -175,6 +191,7 @@ public class DeckUI : MonoBehaviour, IPointerDownHandler
                 Init();
                 yield return null;
             }
+
             if (clickTime >= 0.5f)
                 break;
         }
@@ -182,5 +199,8 @@ public class DeckUI : MonoBehaviour, IPointerDownHandler
         flagToggle.interactable = false;
         SkillList.SetActive(true);
         skillListUI.HighlightDeck(order);
+
+        if (SoundManager.instance != null)
+            SoundManager.instance.PlaySound(SoundManager.SoundSpecific.BUTTON, "Deck_Click");
     }
 }

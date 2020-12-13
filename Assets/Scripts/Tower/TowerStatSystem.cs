@@ -127,7 +127,8 @@ public class TowerStatSystem
         if (!found)
         {
             m_TimedModifierStack.Add(new TimedStatModifier() { Id = id });
-            SoundManager.instance.PlaySkillSound(skillSoundSpecific, apply_sound_name);
+            if (SoundManager.Instance != null)
+                SoundManager.instance.PlaySkillSound(skillSoundSpecific, apply_sound_name);
         }
 
         m_TimedModifierStack[index].EffectSprite = sprite;

@@ -16,6 +16,7 @@ public class MenuUI : MonoBehaviour
     public void SelectMenu()
     {
         GameManager.Instance.LoadScene(sceneToLoad);
-        SoundManager.Instance.PlaySound(SoundManager.SoundSpecific.BUTTON, "Common_Button");
+        if (SoundManager.instance != null)
+            SoundManager.Instance.PlaySound(SoundManager.SoundSpecific.BUTTON, "Common_Button");
     }
 }

@@ -75,7 +75,8 @@ public class DialogueUI : MonoBehaviour
             StartCoroutine(coroutine);
         }
 
-        SoundManager.instance.PlaySound(SoundManager.SoundSpecific.OTHERUI, "Tutorial_Pass_Sound");
+        if (SoundManager.Instance != null)
+            SoundManager.instance.PlaySound(SoundManager.SoundSpecific.OTHERUI, "Tutorial_Pass_Sound");
     }
 
     public int GetRemainSentencesCount()

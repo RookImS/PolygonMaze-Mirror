@@ -95,8 +95,11 @@ public class SkillUI : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragH
 
     public void OnMouseDown()
     {
-        if(isActive)
-            SoundManager.Instance.PlaySound(SoundManager.SoundSpecific.BUTTON, "Tower_Button");
+        if (isActive)
+        {
+            if(SoundManager.Instance != null)
+                SoundManager.Instance.PlaySound(SoundManager.SoundSpecific.BUTTON, "Tower_Button");
+        }
     }
 
     public void OnBeginDrag(PointerEventData eventData)

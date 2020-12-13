@@ -24,6 +24,8 @@ public class SoundSettingSystem : MonoBehaviour
 
     public void Init()
     {
+        if (SoundManager.instance == null) return;
+
         bgmSlider.GetComponent<Slider>().value = SoundManager.instance.GetBGMVolume();
         bgmVolumeText.GetComponent<TMP_Text>().text
             = Mathf.CeilToInt(bgmSlider.GetComponent<Slider>().value * 100).ToString();
@@ -56,6 +58,8 @@ public class SoundSettingSystem : MonoBehaviour
 
     public void OnClickBGMButton()
     {
+        if (SoundManager.instance == null) return;
+
         SoundManager.instance.PlaySound(SoundManager.SoundSpecific.BUTTON, "Common_Button");
 
         if (SoundManager.instance.GetIsMuteBGM())
@@ -72,6 +76,8 @@ public class SoundSettingSystem : MonoBehaviour
 
     public void OnChangedBGMSlider()
     {
+        if (SoundManager.instance == null) return;
+
         if (bgmSlider.GetComponent<Slider>().value <= 0)
             bgmSpeakerImage.GetComponent<Image>().sprite = muteSpeaker;
         else if(SoundManager.instance.GetBGMVolume() <= 0)
@@ -84,6 +90,8 @@ public class SoundSettingSystem : MonoBehaviour
 
     public void OnClickSEButton()
     {
+        if (SoundManager.instance == null) return;
+
         SoundManager.instance.PlaySoundForMute("Common_Button");
 
         if (SoundManager.instance.GetIsMuteSE())
@@ -100,6 +108,8 @@ public class SoundSettingSystem : MonoBehaviour
 
     public void OnChangedSESlider()
     {
+        if (SoundManager.instance == null) return;
+
         if (seSlider.GetComponent<Slider>().value <= 0)
             seSpeakerImage.GetComponent<Image>().sprite = muteSpeaker;
         else if (SoundManager.instance.GetSEVolume() <= 0)

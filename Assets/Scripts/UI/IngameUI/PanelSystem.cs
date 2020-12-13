@@ -17,7 +17,8 @@ public class PanelSystem : MonoBehaviour
         panel.SetActive(true);
         GameManager.Instance.TimeStop();
         UIManager.instance.isPanelOn = true;
-        SoundManager.Instance.PlaySound(SoundManager.SoundSpecific.BUTTON, "Common_Button");
+        if (SoundManager.instance != null)
+            SoundManager.Instance.PlaySound(SoundManager.SoundSpecific.BUTTON, "Common_Button");
     }
     public void Resume()
     {
@@ -25,14 +26,15 @@ public class PanelSystem : MonoBehaviour
         pausePanel.SetActive(false);
         GameManager.Instance.TimeRestore();
         UIManager.instance.isPanelOn = false;
-        SoundManager.Instance.PlaySound(SoundManager.SoundSpecific.BUTTON, "Common_Button");
+        if (SoundManager.instance != null)
+            SoundManager.Instance.PlaySound(SoundManager.SoundSpecific.BUTTON, "Common_Button");
     }
     public void ReturnToMain()
     {
-        //GameManager.Instance.LoadScene("MainScene");
-        GameManager.Instance.LoadScene("TestMain");
+        GameManager.Instance.LoadScene("MainScene");
         GameManager.Instance.TimeRestore();
-        SoundManager.Instance.PlaySound(SoundManager.SoundSpecific.BUTTON, "Common_Button");
+        if (SoundManager.instance != null)
+            SoundManager.Instance.PlaySound(SoundManager.SoundSpecific.BUTTON, "Common_Button");
         Tutorial.instance.CleanTutorial();
     }
 
@@ -40,7 +42,8 @@ public class PanelSystem : MonoBehaviour
     {
         GameManager.Instance.LoadScene(SceneManager.GetActiveScene().name);
         GameManager.Instance.TimeRestore();
-        SoundManager.Instance.PlaySound(SoundManager.SoundSpecific.BUTTON, "Common_Button");
+        if (SoundManager.instance != null)
+            SoundManager.Instance.PlaySound(SoundManager.SoundSpecific.BUTTON, "Common_Button");
         Tutorial.instance.CleanTutorial();
     }
 }

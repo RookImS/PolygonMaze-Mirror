@@ -50,7 +50,10 @@ public class EnemyBehaviour : MonoBehaviour
     public void ExitDestination()
     {
         m_EnemyData.Attack();
-        SoundManager.instance.PlaySound(SoundManager.SoundSpecific.ENEMY, "Enemy_Escape_Sound");
+
+        if(SoundManager.instance != null)
+            SoundManager.instance.PlaySound(SoundManager.SoundSpecific.ENEMY, "Enemy_Escape_Sound");
+
         Destroy(this.gameObject);
     }
 

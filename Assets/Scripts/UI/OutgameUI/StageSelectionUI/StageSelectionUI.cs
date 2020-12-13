@@ -27,14 +27,19 @@ public class StageSelectionUI : MonoBehaviour
     {
         if (GameManager.Instance.currentDeck != null)
         {
-            SoundManager.Instance.PlayBGM("InGame_BGM");
+            
             SceneManager.LoadScene(sceneToLoad);
-            SoundManager.Instance.PlaySound(SoundManager.SoundSpecific.BUTTON, "Confirm_Button");
+            if (SoundManager.instance != null)
+            {
+                SoundManager.Instance.PlayBGM("InGame_BGM");
+                SoundManager.Instance.PlaySound(SoundManager.SoundSpecific.BUTTON, "Confirm_Button");
+            }
         }
         else
         {
             Debug.Log("Deck 없어!");
-            SoundManager.Instance.PlaySound(SoundManager.SoundSpecific.BUTTON, "Button_Fail");
+            if (SoundManager.instance != null)
+                SoundManager.Instance.PlaySound(SoundManager.SoundSpecific.BUTTON, "Button_Fail");
         }
     }
 
@@ -64,13 +69,15 @@ public class StageSelectionUI : MonoBehaviour
         }
 
         menu.SetActive(true);
-        SoundManager.Instance.PlaySound(SoundManager.SoundSpecific.BUTTON, "Common_Button");
+        if (SoundManager.instance != null)
+            SoundManager.Instance.PlaySound(SoundManager.SoundSpecific.BUTTON, "Common_Button");
     }
 
     public void OnClickCancleButton()
     {
         Init();
         menu.SetActive(false);
-        SoundManager.Instance.PlaySound(SoundManager.SoundSpecific.BUTTON, "Cancle_Button");
+        if (SoundManager.instance != null)
+            SoundManager.Instance.PlaySound(SoundManager.SoundSpecific.BUTTON, "Cancle_Button");
     }
 }

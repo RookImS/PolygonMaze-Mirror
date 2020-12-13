@@ -52,8 +52,11 @@ public class Skill : MonoBehaviour
         //applyInterval = 0.1f;
 
         //isEnoughMoney = false;
-        currentAudioSource1 = SoundManager.Instance.GetLoopSkillAudio();
-        SoundManager.Instance.PlayLoopSkillSound(currentAudioSource1, skillSoundSpecific, ready_sound_name);
+        if (SoundManager.instance != null)
+        {
+            currentAudioSource1 = SoundManager.Instance.GetLoopSkillAudio();
+            SoundManager.Instance.PlayLoopSkillSound(currentAudioSource1, skillSoundSpecific, ready_sound_name);
+        }
         isDeploy = false;
     }
 
@@ -77,7 +80,8 @@ public class Skill : MonoBehaviour
 
         if (!isCheckUI)
         {
-            SoundManager.instance.StopAudio(currentAudioSource1);
+            if (SoundManager.instance != null)
+                SoundManager.instance.StopAudio(currentAudioSource1);
             Destroy(this.gameObject);
 
             return false;
@@ -91,10 +95,13 @@ public class Skill : MonoBehaviour
             StartCoroutine("CheckSkillDuration");
             isDeploy = true;
 
-            SoundManager.Instance.PlaySkillSound(skillSoundSpecific, use_sound_name);
+            if (SoundManager.instance != null)
+            {
+                SoundManager.Instance.PlaySkillSound(skillSoundSpecific, use_sound_name);
 
-            if (effect_sound_name != "Space")
-                SoundManager.Instance.PlayLoopSkillSound(currentAudioSource1, skillSoundSpecific, effect_sound_name);
+                if (effect_sound_name != "Space")
+                    SoundManager.Instance.PlayLoopSkillSound(currentAudioSource1, skillSoundSpecific, effect_sound_name);
+            }
 
             return true;
         }
@@ -114,6 +121,7 @@ public class Skill : MonoBehaviour
 
     public void OnDestroy()
     {
-        SoundManager.Instance.StopAudio(currentAudioSource1);
+        if (SoundManager.instance != null)
+            SoundManager.Instance.StopAudio(currentAudioSource1);
     }
 }
