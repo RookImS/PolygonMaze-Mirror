@@ -419,10 +419,12 @@ public class GameManager : MonoSingleton<GameManager>
     {
         Time.timeScale = scale;
     }
+
     public void TimeRestore()
     {
         Time.timeScale = 1f;
     }
+
     public void TimeStop()
     {
         Time.timeScale = 0f;

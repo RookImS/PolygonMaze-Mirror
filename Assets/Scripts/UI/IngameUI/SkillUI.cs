@@ -111,7 +111,8 @@ public class SkillUI : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragH
 
             newObject = Instantiate(skill, mousePos, skill.transform.rotation);
 
-            Time.timeScale = 0.3f;
+            if (Tutorial.instance.tutorialChecker == null && Time.timeScale != 0f)
+                GameManager.instance.SlowTime(0.3f);
         }
     }
     public void OnDrag(PointerEventData eventData)
@@ -133,7 +134,9 @@ public class SkillUI : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragH
                 SelectNextSkill();
 
             UIManager.instance.BlockRaycastOn();
-            Time.timeScale = 1f;
+
+            if (Tutorial.instance.tutorialChecker == null && Time.timeScale != 0f)
+                GameManager.instance.TimeRestore();
         }
     }
 }

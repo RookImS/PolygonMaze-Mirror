@@ -137,6 +137,7 @@ public class LevelManager : MonoBehaviour
         string filepath;
         string data;
 
+        this.stageData = null;
 
         if (Application.platform == RuntimePlatform.Android)
         {

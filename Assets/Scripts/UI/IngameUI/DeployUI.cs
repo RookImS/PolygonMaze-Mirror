@@ -72,7 +72,8 @@ public class DeployUI : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
 
             newObject = Instantiate(deployTower, mousePos, deployTower.transform.rotation);
 
-            Time.timeScale = 0.3f;
+            if(Tutorial.instance.tutorialChecker == null && Time.timeScale != 0f)
+                GameManager.instance.SlowTime(0.3f);
         }
     }
     public void OnDrag(PointerEventData eventData)
@@ -90,8 +91,9 @@ public class DeployUI : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
         {
             newObject.GetComponent<DeployBehaviour>().DeployTower(hitObject, realTower);
 
-            Time.timeScale = 1f;
-
+            if (Tutorial.instance.tutorialChecker == null && Time.timeScale != 0f)
+                GameManager.instance.TimeRestore();
+            
             isProgressDeploy = false;
             UIManager.instance.BlockRaycastOn();
             SoundManager.Instance.PlaySound(SoundManager.SoundSpecific.OTHERUI, "Tower_Locate_Sound");

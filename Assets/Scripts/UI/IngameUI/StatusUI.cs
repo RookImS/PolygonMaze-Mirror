@@ -42,7 +42,9 @@ public class StatusUI : MonoBehaviour
     {
         currentCost = PlayerControl.Instance.playerData.currentCost;
         currentLife = PlayerControl.Instance.playerData.currentLife;
-        currentEnemyCount = LevelManager.instance.UpdateEnemyCount();
+
+        if(LevelManager.instance.stageData != null)
+            currentEnemyCount = LevelManager.instance.UpdateEnemyCount();
 
         if (preCost != currentCost)
             costText.text = PlayerControl.Instance.playerData.currentCost.ToString();

@@ -13,7 +13,7 @@ public class Tutorial : MonoSingleton<Tutorial>
     public DialogueUI dialogueUI;
 
     [HideInInspector] public List<TutorialObject.Tutorial> tutorialList;
-    private TutorialChecker tutorialChecker;
+    [HideInInspector] public TutorialChecker tutorialChecker;
     private int phase;          // 튜토리얼 중 몇 번째 챕터인가를 나타냄
     private int phaseLength;    // 튜토리얼이 몇 챕터로 이루어져있는지 나타냄
     private int chapterLength;  // 튜토리얼 현재 챕터의 길이
@@ -33,7 +33,10 @@ public class Tutorial : MonoSingleton<Tutorial>
         //maskUI.SetActive(false);
 
         if (tutorialChecker != null)
+        {
             Destroy(tutorialChecker.gameObject);
+            tutorialChecker = null;
+        }
 
         dialogueUI.CleanDialogueUI();
         StopAllCoroutines();
