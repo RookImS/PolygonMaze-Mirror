@@ -57,7 +57,8 @@ public class PlayerData
 
     public void Death()
     {
-        GameManager.Instance.GameOver();
+        if(!GameManager.Instance.isGameOver)
+            GameManager.Instance.GameOver();
     }
 
 }
