@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 8304448521951915}
   - component: {fileID: 7109968388010999}
   m_Layer: 0
-  m_Name: fire_hit_impact_final
+  m_Name: RedSkillHitEffect
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -9895,7 +9895,7 @@ ParticleSystem:
       serializedVersion: 2
       minMaxState: 0
       minColor: {r: 0.15205516, g: 0.048659172, b: 0.36764705, a: 0.384}
-      maxColor: {r: 1, g: 0.08823532, b: 0.08823532, a: 1}
+      maxColor: {r: 1, g: 0.4009434, b: 0.4009434, a: 1}
       maxGradient:
         serializedVersion: 2
         key0: {r: 1, g: 1, b: 1, a: 1}
@@ -24211,7 +24211,7 @@ Transform:
   m_GameObject: {fileID: 8751425908211729220}
   m_LocalRotation: {x: -0, y: 0.7071068, z: -0, w: 0.7071068}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.4, y: 0.4, z: 0.4}
+  m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
   m_Children: []
   m_Father: {fileID: 202026701607142587}
   m_RootOrder: 1

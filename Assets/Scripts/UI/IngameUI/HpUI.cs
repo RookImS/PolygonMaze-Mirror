@@ -22,7 +22,6 @@ public class HpUI : MonoBehaviour
             if(hpBarList[i].needChange)
             {
                 hpBarList[i].changeHp.value = Mathf.Lerp(hpBarList[i].changeHp.value, hpBarList[i].currentHp.value, Time.deltaTime * 5);
-                hpBarList[i].CheckNeedChange();
             }
         }
     }

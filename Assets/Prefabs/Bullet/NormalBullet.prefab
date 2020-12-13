@@ -51,6 +51,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemyList: []
   hitCollider: {fileID: 1718079793294334707}
+  bulletEffectGameObject: {fileID: 0}
   VFX: {fileID: 379331475945519723, guid: 3c2482bea86aa2f4bb3e6339b09028bc, type: 3}
 --- !u!114 &5706605205228580587
 MonoBehaviour:
@@ -71,7 +72,6 @@ MonoBehaviour:
       damage: 0
       splashRange: 0
       attackRange: 0
-  towerSkill: {fileID: 0}
 --- !u!65 &2499822655854436719
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -5065,7 +5065,7 @@ ParticleSystemRenderer:
   m_RendererPriority: 0
   m_Materials:
   - {fileID: 2100000, guid: 99d404cd1f3c08949850068fe920e052, type: 2}
-  - {fileID: 2100000, guid: 2e2ec68e64e5126489ef901ef2719fe8, type: 2}
+  - {fileID: 2100000, guid: 6a292e1eddb63134e89411f718c67e82, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -5084,7 +5084,7 @@ ParticleSystemRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -639742367
-  m_SortingLayer: -2
+  m_SortingLayer: -4
   m_SortingOrder: 1
   m_RenderMode: 4
   m_SortMode: 0

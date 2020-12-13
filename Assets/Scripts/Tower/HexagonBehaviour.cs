@@ -4,7 +4,14 @@ using UnityEngine;
 
 public class HexagonBehaviour : TowerBehaviour
 {
-    public Transform EnemyList;
+    public GameObject hexagonFirstChargeEffect;
+    public GameObject hexagonChargeEffect;
+    public GameObject hexagonTrailEffect;
+
+    private GameObject m_hexagonTrailEffect;
+
+    private Coroutine coroutine;
+    private Transform EnemyList;
 
     protected override void Update()
     {
@@ -12,18 +19,41 @@ public class HexagonBehaviour : TowerBehaviour
         {
             ((HexagonData)m_TowerData).ReloadBullet();
 
+            if (hexagonFirstChargeEffect.activeSelf || hexagonChargeEffect.activeSelf)
+            {
+                if(coroutine != null)
+                    StopCoroutine(coroutine);
+
+                hexagonFirstChargeEffect.SetActive(false);
+            }
+
             SetTarget();
+
+            if (target != null)
+            {
+                muzzle.LookAt(target.transform);
+
+                coroutine = StartCoroutine(ShootTrailDelay(2.8f));
+                hexagonFirstChargeEffect.SetActive(true);
+            }
+
             fireCountDown = m_TowerData.Stats.stats.aheadDelay;
         }
 
         if (target != null)          // 실제로 countdown 계산 및 처음 쏘는 것이 아닐때
         {
+            muzzle.LookAt(target.transform);
             ((HexagonData)m_TowerData).LocateBullet(target);
 
             if (fireCountDown <= 0f)
             {
                 Attack();
                 fireCountDown = 1f / m_TowerData.Stats.stats.attackRate;
+
+                coroutine = StartCoroutine(ShootTrailDelay(0.8f));
+
+                hexagonChargeEffect.SetActive(false);
+                hexagonChargeEffect.SetActive(true);
             }
             if (fireCountDown > 0f)
                 fireCountDown -= Time.deltaTime;
@@ -113,5 +143,17 @@ public class HexagonBehaviour : TowerBehaviour
         }
 
         return false;
+    }
+
+    private IEnumerator ShootTrailDelay(float delay)
+    {
+        yield return new WaitForSeconds(delay);
+
+        m_hexagonTrailEffect = Instantiate(hexagonTrailEffect, muzzle);
+        m_hexagonTrailEffect.transform.position += new Vector3(0f, 1f, 0f);
+
+        float distance = Vector3.Distance(muzzle.position, target.transform.position);
+        var main = m_hexagonTrailEffect.GetComponent<ParticleSystem>().main;
+        main.startLifetime = distance / 75f;
     }
 }

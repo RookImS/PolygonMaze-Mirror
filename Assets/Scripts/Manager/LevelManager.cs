@@ -629,7 +629,7 @@ public class LevelManager : MonoBehaviour
             foreach (GameObject enemy in enemyWave.oneWaveEnemies)
             {
                 enemy.SetActive(true);
-                enemy.GetComponent<EnemyData>().hpBar.m_hpBar.SetActive(true);
+                //enemy.GetComponent<EnemyData>().hpBar.m_hpBar.SetActive(true);
                 enemyWave.activeNum++;
                 yield return new WaitForSeconds(enemyWave.enemySpawnDuration);
             }
