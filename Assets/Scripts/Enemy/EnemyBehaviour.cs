@@ -50,8 +50,10 @@ public class EnemyBehaviour : MonoBehaviour
     public void ExitDestination()
     {
         m_EnemyData.Attack();
+        UIManager.instance.flickerEffect.Play("Base Layer.New Animation");
         SoundManager.instance.PlaySound(SoundManager.SoundSpecific.ENEMY, "Enemy_Escape_Sound");
         Destroy(this.gameObject);
+
     }
 
     public void ChangeAgentSpeed(float speed)

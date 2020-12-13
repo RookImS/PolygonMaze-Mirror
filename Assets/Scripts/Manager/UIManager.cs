@@ -1,11 +1,16 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.UI;
+using TMPro;
 public class UIManager : MonoBehaviour
 { 
     public static UIManager instance { get; private set; }
     public LayerMask towerMask;
+    public Animator flickerEffect;
+    public TextMeshProUGUI currentwaveText;
+    public TextMeshProUGUI MaxwaveText;
+    public Button currentwaveButton;
 
     [HideInInspector] public InfoUI infoUI;
     [HideInInspector] public bool isPanelOn;
@@ -14,6 +19,7 @@ public class UIManager : MonoBehaviour
 
     private void Awake()
     {
+        
         instance = this;
         isPanelOn = false;
     }
@@ -28,6 +34,9 @@ public class UIManager : MonoBehaviour
         canvasGroup = GetComponent<CanvasGroup>();
         BlockRaycastOn();
         infoUI = GameObject.Find("InfoUI").GetComponent<InfoUI>();
+        flickerEffect.enabled = true;
+        MaxwaveText.text = "Max waves : " + LevelManager.instance.waves.transform.childCount.ToString();
+        WaveUI();
     }
 
     public void OnClick()
@@ -41,6 +50,17 @@ public class UIManager : MonoBehaviour
         }
 
         ControlTowerInfo(ray);
+    }
+
+    public void WaveUI()
+    {
+        currentwaveText.text = "Wave" + (LevelManager.instance.currentWave+1).ToString() + "\nStart";
+        if(LevelManager.instance.currentWave + 1 > LevelManager.instance.waves.transform.childCount)
+        {
+            currentwaveText.text = "Wave\nEND";
+            currentwaveButton.interactable = false;
+        }
+        currentwaveText.text.Replace("\\n", "\n");
     }
 
     public void BlockRaycastOn()

@@ -27,6 +27,13 @@ public class PanelSystem : MonoBehaviour
         UIManager.instance.isPanelOn = false;
         SoundManager.Instance.PlaySound(SoundManager.SoundSpecific.BUTTON, "Common_Button");
     }
+    public void ReturnToStageSelection()
+    {
+        GameManager.Instance.LoadScene("StageSelectionScene");
+        GameManager.Instance.TimeRestore();
+        SoundManager.Instance.PlaySound(SoundManager.SoundSpecific.BUTTON, "Common_Button");
+        Tutorial.instance.CleanTutorial();
+    }
     public void ReturnToMain()
     {
         //GameManager.Instance.LoadScene("MainScene");
