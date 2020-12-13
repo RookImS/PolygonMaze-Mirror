@@ -46,6 +46,7 @@ public class Red : FieldSkill
             if (!alreadyHit)
             {
                 obj.GetComponent<EnemyBehaviour>().Damage(damage);
+               Instantiate(VFX, obj.transform.position,Quaternion.Euler(0f,0f,0f));
                 hitList.Add(obj);
             }
         }

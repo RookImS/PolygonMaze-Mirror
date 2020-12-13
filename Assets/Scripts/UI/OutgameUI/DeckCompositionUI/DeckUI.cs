@@ -28,12 +28,13 @@ public class DeckUI : MonoBehaviour, IPointerDownHandler
     {
         deck = GameManager.Instance.deckList[order];
 
-        isFirst = true;
+        isFirst = false;
         if (System.Object.ReferenceEquals(deck, GameManager.Instance.currentDeck) && flagToggle.interactable)
         {
+            isFirst = true;
             flagToggle.isOn = true;
-            isFirst = false;
         }
+        isFirst = false;
 
         isClicked = false;
         isSkill = false;

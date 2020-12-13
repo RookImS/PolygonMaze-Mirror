@@ -43597,6 +43597,7 @@ MonoBehaviour:
   use_sound_name: Red_Use_Sound
   effect_sound_name: Space
   apply_sound_name: 
+  VFX: {fileID: 205045313290698325, guid: 7e6ddb0738ff83047b86c7ced9eb0073, type: 3}
   modifier:
     ModifierMode: 1
     Stats:

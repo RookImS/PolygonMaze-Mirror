@@ -7,6 +7,7 @@ public class BulletBehaviour : MonoBehaviour
     protected BulletData m_BulletData;
     public List<GameObject> enemyList;
     public GameObject hitCollider;
+    public GameObject bulletEffectGameObject;
 
     public GameObject VFX;
     protected void Awake()
@@ -19,6 +20,7 @@ public class BulletBehaviour : MonoBehaviour
     {
         m_BulletData.Init(t_stat);
         hitCollider.GetComponent<SphereCollider>().radius = m_BulletData.stats.stats.splashRange;
+        bulletEffectGameObject = GameObject.Find("BulletEffect");
     }
 
     protected virtual void Attack()

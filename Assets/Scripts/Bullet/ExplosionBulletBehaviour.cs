@@ -45,6 +45,7 @@ public class ExplosionBulletBehaviour : BulletBehaviour
     {
         m_BulletData.Init(t_stat);
         transform.localScale = new Vector3(m_BulletData.stats.stats.attackRange * 2, 1, m_BulletData.stats.stats.attackRange * 2);
+        GameObject.Find("BulletEffect");
     }
     private IEnumerator DestroyAttack()
     { 

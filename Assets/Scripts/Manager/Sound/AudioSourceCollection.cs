@@ -5,6 +5,6 @@ using UnityEngine;
 public class AudioSourceCollection : MonoBehaviour
 {
     [Header("Audio Source")]
-    [SerializeField] public AudioSource[] audioSources;
-    [SerializeField] public AudioSource[] audioSourcesForMute;
+    [SerializeField] public List<AudioSource> audioSources;
+    [SerializeField] public List<AudioSource> audioSourcesForMute;
 }

@@ -44,6 +44,14 @@ public class HpBar : MonoBehaviour
         changeHp.maxValue = currentHp.maxValue;
         currentHp.value = (float)ownerData.Stats.currentHp;
         Invoke("CheckNeedChange", 0.5f);
+
+        if (currentHp.value < currentHp.maxValue)
+            m_hpBar.SetActive(true);
+        else
+        {
+            changeHp.value = currentHp.value;
+            m_hpBar.SetActive(false);
+        }
     }
 
     public bool CheckNeedChange()

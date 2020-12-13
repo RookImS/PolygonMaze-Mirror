@@ -96,7 +96,7 @@ public class DeployBehaviour : MonoBehaviour
         {
             if (isPathEnable && isProperLocate && !isOverlapped)
             {
-                towerRend.material.color = new Color(1f, 1f, 1f, 170 / 255f);
+                towerRend.material.color = new Color(1f, 1f, 1f, 225 / 255f);
                 rangeRend.material.color = new Color(140 / 255f, 1f, 180 / 255f, 200 / 255f);
 
                 return true;
@@ -107,13 +107,13 @@ public class DeployBehaviour : MonoBehaviour
                 {
                     if (!isSkipFrame)
                     {
-                        towerRend.material.color = new Color(1f, 170 / 255f, 170 / 255f, 170 / 255f);
+                        towerRend.material.color = new Color(1f, 170 / 255f, 170 / 255f, 225 / 255f);
                         rangeRend.material.color = new Color(1f, 170 / 255f, 170 / 255f, 200 / 255f);
                     }
                 }
                 else
                 {
-                    towerRend.material.color = new Color(1f, 1f, 1f, 170 / 255f);
+                    towerRend.material.color = new Color(1f, 1f, 1f, 225 / 255f);
                     rangeRend.material.color = new Color(1f, 1f, 1f, 200 / 255f);
                 }
 
@@ -122,7 +122,7 @@ public class DeployBehaviour : MonoBehaviour
         }
         else
         {
-            towerRend.material.color = new Color(1f, 170 / 255f, 170 / 255f, 170 / 255f);
+            towerRend.material.color = new Color(1f, 170 / 255f, 170 / 255f, 225 / 255f);
             rangeRend.material.color = new Color(1f, 170 / 255f, 170 / 255f, 200 / 255f);
             return false;
         }

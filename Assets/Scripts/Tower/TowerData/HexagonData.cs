@@ -13,6 +13,7 @@ public class HexagonData : TowerData
     {
         
         bullet.GetComponent<SnipeBulletBehaviour>().Hit();
+
         if (SoundManager.Instance != null)
             SoundManager.Instance.PlaySound(SoundManager.TowerSoundSpecific.HEXAGON, "Hexagon_Attack");
     }

@@ -85,7 +85,7 @@ Material:
     - _Metallic: 0
     - _Mode: 0
     - _OcclusionStrength: 1
-    - _Opacity: 1
+    - _Opacity: 2.5
     - _Parallax: 0.02
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
@@ -94,7 +94,7 @@ Material:
     - _Usecenterglow: 0
     - _Usedepth: 1
     m_Colors:
-    - _Color: {r: 0.3537736, g: 0.54469395, b: 1, a: 1}
+    - _Color: {r: 0.3340157, g: 0.38664117, b: 0.509434, a: 1}
     - _DistortionSpeedXYPowerZ: {r: 0, g: 0, b: 0, a: 0}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _SpeedMainTexUVNoiseUV: {r: -4, g: 0, b: 0, a: 0}

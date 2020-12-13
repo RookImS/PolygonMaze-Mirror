@@ -26,7 +26,21 @@ MonoBehaviour:
       posY: 200
       width: 1200
       height: 250
-    animationList: []
+    animationList:
+    - obj: {fileID: 9206189686154152021, guid: d5cc5e9a7891ce84e99e9bf24b033cc8, type: 3}
+      order: 1
+      length: 1
+      posX: 0
+      posY: 0
+      rotation: 0
+      enable: 0
+    - obj: {fileID: 9206189686154152021, guid: fdc3ea6c83d188e4e98380216bcea866, type: 3}
+      order: 2
+      length: 1
+      posX: 0
+      posY: 0
+      rotation: 0
+      enable: 0
     fieldAnimationList: []
     maskAnimationList:
     - obj: {fileID: 5986014392007800861, guid: 9e467158778a4a74e8bd22246ec4d3e2, type: 3}

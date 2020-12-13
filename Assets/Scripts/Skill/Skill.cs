@@ -13,6 +13,9 @@ public class Skill : MonoBehaviour
     public string desc;
     public float range;
     public int cost;
+
+    private bool isDeploy;
+
     public Sprite skillSprite;
     public Color color;
 
@@ -29,8 +32,7 @@ public class Skill : MonoBehaviour
     public string effect_sound_name;
     public string apply_sound_name;
 
-    private bool isEnoughMoney;
-    private bool isDeploy;
+    public GameObject VFX;
 
     private void Awake()
     {

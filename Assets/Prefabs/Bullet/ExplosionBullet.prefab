@@ -14668,7 +14668,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemyList: []
   hitCollider: {fileID: 8705282115458604392}
-  VFX: {fileID: 3892369789177195344, guid: 311a4559dae4aea47a3127e8c07e4381, type: 3}
+  VFX: {fileID: 5597693759546057292, guid: f59e136b49b92604d9819db7d416af89, type: 3}
   life: 1.5
 --- !u!114 &5128043430975107869
 MonoBehaviour:
