@@ -45,7 +45,7 @@ public class Red : FieldSkill
 
             if (!alreadyHit)
             {
-                obj.GetComponent<EnemyData>().Damage(damage);
+                obj.GetComponent<EnemyBehaviour>().Damage(damage);
                 hitList.Add(obj);
             }
         }

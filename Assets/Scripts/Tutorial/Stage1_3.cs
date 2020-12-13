@@ -114,10 +114,14 @@ public class Stage1_3 : TutorialChecker
             }
         }
 
-        
-        if (LevelManager.instance.enemyWaveList[0].oneWaveEnemies[0].transform.position.z < 2.6f)
+        if(LevelManager.instance.enemyWaveList[0].oneWaveEnemies[0].activeSelf)
+            LevelManager.instance.enemyWaveList[0].oneWaveEnemies[0].GetComponent<EnemyData>().SetInvincible(true);
+
+
+        if (LevelManager.instance.enemyWaveList[0].oneWaveEnemies[0].transform.position.z < 3.21f)
         {
             Tutorial.instance.maskUI.SetActive(true);
+            
             GameManager.instance.TimeStop();
             return true;
         }
@@ -135,6 +139,8 @@ public class Stage1_3 : TutorialChecker
                 ani.posY = LevelManager.instance.enemyWaveList[0].oneWaveEnemies[0].transform.position.z;
             }
         }
+
+        LevelManager.instance.enemyWaveList[0].oneWaveEnemies[0].GetComponent<EnemyData>().SetInvincible(false);
     }
 
     public bool Phase3Checker()
@@ -148,9 +154,13 @@ public class Stage1_3 : TutorialChecker
             }
         }
 
-        if (LevelManager.instance.enemyWaveList[0].oneWaveEnemies[5].transform.position.z < 2.6f)
+        if (LevelManager.instance.enemyWaveList[0].oneWaveEnemies[5].activeSelf)
+            LevelManager.instance.enemyWaveList[0].oneWaveEnemies[5].GetComponent<EnemyData>().SetInvincible(true);
+
+        if (LevelManager.instance.enemyWaveList[0].oneWaveEnemies[5].transform.position.z < 3.21f)
         {
             Tutorial.instance.maskUI.SetActive(true);
+            LevelManager.instance.enemyWaveList[0].oneWaveEnemies[5].GetComponent<EnemyData>().SetInvincible(false);
             GameManager.instance.TimeStop();
             return true;
         }
@@ -213,10 +223,13 @@ public class Stage1_3 : TutorialChecker
             }
         }
 
+        if (LevelManager.instance.enemyWaveList[1].oneWaveEnemies[9].activeSelf)
+            LevelManager.instance.enemyWaveList[1].oneWaveEnemies[9].GetComponent<EnemyData>().SetInvincible(true);
 
-        if (LevelManager.instance.enemyWaveList[1].oneWaveEnemies[9].transform.position.z < 2.6f)
+        if (LevelManager.instance.enemyWaveList[1].oneWaveEnemies[9].transform.position.z < 3.21f)
         {
             Tutorial.instance.maskUI.SetActive(true);
+            LevelManager.instance.enemyWaveList[1].oneWaveEnemies[9].GetComponent<EnemyData>().SetInvincible(false);
             GameManager.instance.TimeStop();
             return true;
         }

@@ -122,7 +122,7 @@ public class DialogueUI : MonoBehaviour
                     isColor = false;
                     continue;
                 }
-                Debug.Log("test");
+
                 isColor = true;
                 continue;
             }

@@ -107,7 +107,7 @@ public class Stage1_4 : TutorialChecker
         }
 
 
-        if (LevelManager.instance.enemyWaveList[0].oneWaveEnemies[0].transform.position.z < 2.6f)
+        if (LevelManager.instance.enemyWaveList[0].oneWaveEnemies[0].transform.position.z < 3.21f)
         {
             Tutorial.instance.maskUI.SetActive(true);
             GameManager.instance.TimeStop();
@@ -175,7 +175,7 @@ public class Stage1_4 : TutorialChecker
         }
 
 
-        if (LevelManager.instance.enemyWaveList[1].oneWaveEnemies[9].transform.position.z < 2.6f)
+        if (LevelManager.instance.enemyWaveList[1].oneWaveEnemies[9].transform.position.z < 3.21f)
         {
             Tutorial.instance.maskUI.SetActive(true);
             GameManager.instance.TimeStop();

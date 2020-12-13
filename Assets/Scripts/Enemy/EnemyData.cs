@@ -11,6 +11,7 @@ public class EnemyData : MonoBehaviour
 
     public int reward;
     public int damage;
+    private bool isInvincible;
 
     public EnemyStatSystem Stats;
     public EColorSystem EColorSys = new EColorSystem();
@@ -23,6 +24,7 @@ public class EnemyData : MonoBehaviour
 
     public void Init()
     {
+        isInvincible = false;
         Stats.Init(this);
         hpBar.Init();
     }
@@ -72,6 +74,12 @@ public class EnemyData : MonoBehaviour
  
     public void Damage(int damage)
     {
-        Stats.Damage(damage);
+        if (!isInvincible)
+            Stats.Damage(damage); 
+    } 
+
+    public void SetInvincible(bool flag)
+    {
+        isInvincible = flag;
     }
 }

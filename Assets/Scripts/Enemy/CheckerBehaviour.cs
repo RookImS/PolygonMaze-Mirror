@@ -113,6 +113,9 @@ public class CheckerBehaviour : MonoBehaviour
             }
             else
             {
+                if (tempPath.corners.Length == 0)
+                    return false;
+
                 return true;
             }
         }
