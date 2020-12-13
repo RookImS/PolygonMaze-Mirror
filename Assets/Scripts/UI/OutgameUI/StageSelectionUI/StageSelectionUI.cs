@@ -46,7 +46,8 @@ public class StageSelectionUI : MonoBehaviour
     public void OnClickStageButton(string stage)
     {
         string[] chapterAndLevel = stage.Split('-');
-        stageNum.text = stage;
+        stageNum.text = "Stage <color=black>"+stage+"</color> 에\n도전하시겠습니까?";
+        stageNum.text.Replace("\\n", "\n");
         int chapter = 0;
         int level = 0;
 

@@ -544,6 +544,9 @@ public class LevelManager : MonoBehaviour
             StartCoroutine(StartWave(enemyWaveList[currentWave]));
             isWaveSystemOn = true;
         }
+
+        if (SoundManager.Instance != null)
+            SoundManager.Instance.PlaySound(SoundManager.SoundSpecific.BUTTON, "Common_Button");
     }
 
     /* StartStage
