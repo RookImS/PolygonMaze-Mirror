@@ -8,9 +8,6 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/MainScene.unity
     guid: 532e31e797465ba4ca5a3845e8014a5c
-  - enabled: 0
-    path: 
-    guid: 00000000000000000000000000000000
   - enabled: 1
     path: Assets/Scenes/StageScene.unity
     guid: 8a1442fb641d61f4588b50d59baf19dd
@@ -20,9 +17,6 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/StageSelectionScene.unity
     guid: 8ca0aa9ab21c57d41856a942a8270b9d
-  - enabled: 1
-    path: Assets/Scenes/DeckCompositionScene.unity
-    guid: 17fd876adfd4515428a55a08f564fc51
   - enabled: 1
     path: Assets/Scenes/AchievementScene.unity
     guid: 737151f15ab8df24a925138b4785b8b0

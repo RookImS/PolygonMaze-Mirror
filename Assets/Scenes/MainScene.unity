@@ -2584,6 +2584,10 @@ MonoBehaviour:
     clip: {fileID: 8300000, guid: 04e0499c22b059345b22024114612579, type: 3}
   - soundName: Hexagon_Shoot
     clip: {fileID: 8300000, guid: bb74c2c40a101b64e87fddeced4d7d03, type: 3}
+  - soundName: Hexagon_First_Charge
+    clip: {fileID: 8300000, guid: 20ad5b6c18e3f7e49934ef33da985daa, type: 3}
+  - soundName: Hexagon_Charge
+    clip: {fileID: 8300000, guid: 5b67775162220d54cafa10769fdf9d85, type: 3}
   yellowSounds:
   - soundName: Yellow_Ready_Sound
     clip: {fileID: 8300000, guid: ca739ee3697675843b9c77664776b938, type: 3}
@@ -2621,6 +2625,7 @@ MonoBehaviour:
   skillAudioSourceCollection: {fileID: 960947902}
   towerAudioSourceCollection: {fileID: 1076775468}
   otherAudioSourceCollection: {fileID: 411885183}
+  allocateAudioSourceCollection: {fileID: 960091238}
 --- !u!4 &405040619
 Transform:
   m_ObjectHideFlags: 0
@@ -2636,6 +2641,7 @@ Transform:
   - {fileID: 960947923}
   - {fileID: 1076775489}
   - {fileID: 411885193}
+  - {fileID: 960091239}
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -5785,6 +5791,51 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 928346612}
   m_CullTransparentMesh: 0
+--- !u!1 &960091237
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 960091239}
+  - component: {fileID: 960091238}
+  m_Layer: 0
+  m_Name: AllocateAudioSourceCollection
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &960091238
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 960091237}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bef0e78a0c4e16c4d80c2b84d0b39421, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  audioSources: []
+  audioSourcesForMute: []
+--- !u!4 &960091239
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 960091237}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 405040619}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &960947901
 GameObject:
   m_ObjectHideFlags: 0
