@@ -34,7 +34,6 @@ public class UIManager : MonoBehaviour
         canvasGroup = GetComponent<CanvasGroup>();
         BlockRaycastOn();
         infoUI = GameObject.Find("InfoUI").GetComponent<InfoUI>();
-        flickerEffect.enabled = true;
         MaxwaveText.text = "Max waves : " + LevelManager.instance.waves.transform.childCount.ToString();
         WaveUI();
     }

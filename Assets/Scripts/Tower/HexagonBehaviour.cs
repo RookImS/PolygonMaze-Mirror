@@ -157,12 +157,15 @@ public class HexagonBehaviour : TowerBehaviour
     {
         yield return new WaitForSeconds(delay);
 
-        m_hexagonTrailEffect = Instantiate(hexagonTrailEffect, muzzle);
-        m_hexagonTrailEffect.transform.position += new Vector3(0f, 1f, 0f);
+        if (target != null)
+        {
+            m_hexagonTrailEffect = Instantiate(hexagonTrailEffect, muzzle);
+            m_hexagonTrailEffect.transform.position += new Vector3(0f, 1f, 0f);
 
-        float distance = Vector3.Distance(muzzle.position, target.transform.position);
-        var main = m_hexagonTrailEffect.GetComponent<ParticleSystem>().main;
-        main.startLifetime = distance / 75f;
+            float distance = Vector3.Distance(muzzle.position, target.transform.position);
+            var main = m_hexagonTrailEffect.GetComponent<ParticleSystem>().main;
+            main.startLifetime = distance / 50f;
+        }
 
         if(SoundManager.Instance != null)
             SoundManager.Instance.PlaySound(SoundManager.TowerSoundSpecific.HEXAGON, "Hexagon_Shoot");

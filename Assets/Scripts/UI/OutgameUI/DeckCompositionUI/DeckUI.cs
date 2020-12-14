@@ -54,10 +54,18 @@ public class DeckUI : MonoBehaviour, IPointerDownHandler
         isClicked = true;
         StartCoroutine(CheckCallSkillList());
     }
-    public void PointerDown(int num)
+    public void PointerSkillDown(int num)
     {
         isSkill = true;
-        StartCoroutine(CallDeleteSkill(num));
+        if (isSkill)
+        {
+            if (skillListUI.insertCheck)
+            {
+                InsertDeck(num);
+                isSkill = false;
+            }
+        }
+        //StartCoroutine(CallDeleteSkill(num));
     }
     public void PointerUp(int num)
     {
@@ -90,7 +98,7 @@ public class DeckUI : MonoBehaviour, IPointerDownHandler
     {
         if (skillListUI.insertCheck)
         {
-            //GameObject selectSlotSkill = deck[num];
+            GameObject selectSlotSkill = deck[num];
 
             for (int i = 0; i < deck.Count; i++)
             {
@@ -149,35 +157,35 @@ public class DeckUI : MonoBehaviour, IPointerDownHandler
             flagToggle.interactable = false;
         }
     }
-    IEnumerator CallDeleteSkill(int num)
-    {
-        while (true)
-        {
-            if (isSkill)
-            {
-                clickTime += Time.deltaTime;
-                yield return null;
-                if (skillListUI.insertCheck)
-                {
-                    InsertDeck(num);
-                    isSkill = false;
-                    break;
-                }
-            }
+    //IEnumerator CallDeleteSkill(int num)
+    //{
+    //    while (true)
+    //    {
+    //        if (isSkill)
+    //        {
+    //            clickTime += Time.deltaTime;
+    //            yield return null;
+    //            if (skillListUI.insertCheck)
+    //            {
+    //                InsertDeck(num);
+    //                isSkill = false;
+    //                break;
+    //            }
+    //        }
 
-            if (clickTime >= 0.5f)
-            {
-                deck[num] = null;
-                thisDeck.transform.GetChild(num).Find("SkillImage").GetComponent<Image>().color = Color.white;
-                isSkill = false;
-                if (SoundManager.instance != null)
-                    SoundManager.instance.PlaySound(SoundManager.SoundSpecific.BUTTON, "Button_Fail");
-                break;
-            }
-        }
+    //        if (clickTime >= 0.5f)
+    //        {
+    //            deck[num] = null;
+    //            thisDeck.transform.GetChild(num).Find("SkillImage").GetComponent<Image>().color = Color.white;
+    //            isSkill = false;
+    //            if (SoundManager.instance != null)
+    //                SoundManager.instance.PlaySound(SoundManager.SoundSpecific.BUTTON, "Button_Fail");
+    //            break;
+    //        }
+    //    }
 
 
-    }
+    //}
     private IEnumerator CheckCallSkillList()
     {
         while (true)

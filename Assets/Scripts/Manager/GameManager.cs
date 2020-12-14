@@ -76,7 +76,8 @@ public class GameManager : MonoSingleton<GameManager>
         loadStageLevel = 0;
 
         LoadResource();
-        LoadDefaultDeck();
+        MakeEmptyDeck();
+        //LoadDefaultDeck();
         LoadDeckInfos();
         LoadStageClearInfo();
     }
@@ -91,52 +92,52 @@ public class GameManager : MonoSingleton<GameManager>
         outgameTutorials = tutorialResource.outgameTutorialList;
     }
 
-    private void LoadDefaultDeck()
-    {
-        MakeEmptyDeck();
+    //private void LoadDefaultDeck()
+    //{
+    //    MakeEmptyDeck();
 
-        string path;
-        if (Application.platform == RuntimePlatform.Android)
-            path = Application.persistentDataPath + string.Format("/DeckData/DefaultDeck.json");
-        else
-            path = string.Format("Assets/UserData/DeckData/DefaultDeck.json");
+    //    string path;
+    //    if (Application.platform == RuntimePlatform.Android)
+    //        path = Application.persistentDataPath + string.Format("/DeckData/DefaultDeck.json");
+    //    else
+    //        path = string.Format("Assets/UserData/DeckData/DefaultDeck.json");
 
-        try
-        {
-            if (File.Exists(path))
-            {
-                string jsonData = File.ReadAllText(path);
-                this.allDeckInfo.deckInfoList[0] = JsonUtility.FromJson<AllDeckInfo.DeckInfo>(jsonData);
-            }
-            else
-            {
-                return;
-            }
-        }
-        catch (System.ArgumentException e1)
-        {
-            Debug.Log(e1.Message);
+    //    try
+    //    {
+    //        if (File.Exists(path))
+    //        {
+    //            string jsonData = File.ReadAllText(path);
+    //            this.allDeckInfo.deckInfoList[0] = JsonUtility.FromJson<AllDeckInfo.DeckInfo>(jsonData);
+    //        }
+    //        else
+    //        {
+    //            return;
+    //        }
+    //    }
+    //    catch (System.ArgumentException e1)
+    //    {
+    //        Debug.Log(e1.Message);
 
-        }
-        catch (System.Exception e2)
-        {
-            Debug.Log(e2.Message);
-        }
+    //    }
+    //    catch (System.Exception e2)
+    //    {
+    //        Debug.Log(e2.Message);
+    //    }
 
-        currentDeck = deckList[0];
-        for (int j = 0; j < 3; j++)
-        {
-            for (int k = 0; k < skills.Count; k++)
-            {
-                if (skills[k].GetComponent<Skill>().id
-                    == this.allDeckInfo.deckInfoList[0].deckIDs[j])
-                    deckList[0][j] = skills[k];
-                else if ("space"
-                    == this.allDeckInfo.deckInfoList[0].deckIDs[j])
-                    deckList[0][j] = null;
-            }
-        }
-    }
+    //    currentDeck = deckList[0];
+    //    for (int j = 0; j < 3; j++)
+    //    {
+    //        for (int k = 0; k < skills.Count; k++)
+    //        {
+    //            if (skills[k].GetComponent<Skill>().id
+    //                == this.allDeckInfo.deckInfoList[0].deckIDs[j])
+    //                deckList[0][j] = skills[k];
+    //            else if ("space"
+    //                == this.allDeckInfo.deckInfoList[0].deckIDs[j])
+    //                deckList[0][j] = null;
+    //        }
+    //    }
+    //}
 
     private void LoadDeckInfos()
     {
@@ -158,6 +159,16 @@ public class GameManager : MonoSingleton<GameManager>
                 }
                 else
                 {
+                    if (i == 0)
+                    {
+                        List<GameObject> defaultDeck = new List<GameObject>();
+                        defaultDeck.Add(skills[0]);
+                        defaultDeck.Add(skills[1]);
+                        defaultDeck.Add(skills[2]);
+                        deckList[0] = defaultDeck;
+                        currentDeck = deckList[0];
+                    }
+
                     return;
                 }
             }
@@ -173,6 +184,7 @@ public class GameManager : MonoSingleton<GameManager>
 
             if (allDeckInfo.deckInfoList[i].isCurrent)
                 currentDeck = deckList[i];
+
             for (int j = 0; j < 3; j++)
             {
                 for (int k = 0; k < skills.Count; k++)

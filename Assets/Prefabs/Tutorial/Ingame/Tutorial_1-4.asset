@@ -138,7 +138,7 @@ MonoBehaviour:
       posY: 0
       rotation: 0
       enable: 0
-      isMaskOn: 0
+      isMaskOn: 1
       isMaskOff: 1
   - dialogue:
       name: 6_GoodDesc
@@ -151,14 +151,5 @@ MonoBehaviour:
       height: 250
     animationList: []
     fieldAnimationList: []
-    maskAnimationList:
-    - obj: {fileID: 5986014392007800861, guid: 9e467158778a4a74e8bd22246ec4d3e2, type: 3}
-      order: 1
-      length: 2
-      posX: 0
-      posY: 0
-      rotation: 0
-      enable: 0
-      isMaskOn: 0
-      isMaskOff: 1
+    maskAnimationList: []
   tutorialChecker: {fileID: 6156986595596405074, guid: ae6d7fb5cf49db546886c0cb192f3a38, type: 3}
