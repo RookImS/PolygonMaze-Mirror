@@ -16,7 +16,7 @@ public class Skill : MonoBehaviour
 
     private bool isDeploy;
 
-    public Sprite skillSprite;
+    public GameObject skillEffect;
     public Color color;
 
     public GameObject rangeObject;

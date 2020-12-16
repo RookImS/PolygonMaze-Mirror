@@ -23,7 +23,7 @@ public class Yellow : TowerSkill
 
         modifier.Stats = changeStat;
 
-        obj.GetComponent<TowerData>().Stats.AddTimedModifier(modifier, applyDuration, id, skillSprite, skillSoundSpecific, apply_sound_name);
+        obj.GetComponent<TowerData>().Stats.AddTimedModifier(modifier, applyDuration, id, skillEffect, skillSoundSpecific, apply_sound_name);
         
     }
 }

@@ -28,4 +28,10 @@ public class TriangleData : TowerData
         if (SoundManager.Instance != null)
             SoundManager.Instance.PlaySound(SoundManager.TowerSoundSpecific.HEXAGON, "Triangle_Attack");
     }
+
+    public override void SetEffect(GameObject effect)
+    {
+        GameObject newEffect = Instantiate(effect, transform);
+        newEffect.transform.localScale *= 0.778f;
+    }
 }

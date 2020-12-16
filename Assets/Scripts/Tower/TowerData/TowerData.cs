@@ -24,4 +24,15 @@ public class TowerData : MonoBehaviour
     public virtual void Shoot(Transform muzzle)
     {
     }
+
+    public virtual void SetEffect(GameObject effect)
+    {
+        Instantiate(effect, transform);
+    }
+
+    public void RemoveEffect(GameObject effect)
+    {
+        GameObject targetEffect = transform.Find(effect.name + "(Clone)").gameObject;
+        Destroy(targetEffect);
+    }
 }

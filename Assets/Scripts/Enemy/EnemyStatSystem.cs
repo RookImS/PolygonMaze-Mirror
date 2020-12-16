@@ -70,7 +70,7 @@ public class EnemyStatSystem
         public string Id;
         public StatModifier Modifier;
 
-        public Sprite EffectSprite;
+        public GameObject EffectObject;
 
         public float Duration;
         public float Timer;
@@ -119,7 +119,7 @@ public class EnemyStatSystem
     }
 
 
-    public bool AddTimedModifier(StatModifier modifier, float duration, string id, Sprite sprite,
+    public bool AddTimedModifier(StatModifier modifier, float duration, string id, GameObject effect,
         SoundManager.SkillSoundSpecific soundSpecific, string apply_sound_name)
     {
         bool found = false;
@@ -136,11 +136,13 @@ public class EnemyStatSystem
         if (!found)
         {
             m_TimedModifierStack.Add(new TimedStatModifier() { Id = id });
+            m_Owner.SetEffect(effect);
+
             if (SoundManager.instance != null)
                 SoundManager.instance.PlaySkillSound(soundSpecific, apply_sound_name);
         }
 
-        m_TimedModifierStack[index].EffectSprite = sprite;
+        m_TimedModifierStack[index].EffectObject = effect;
         m_TimedModifierStack[index].Duration = duration;
         m_TimedModifierStack[index].Modifier = modifier;
         m_TimedModifierStack[index].Reset();
@@ -208,6 +210,7 @@ public class EnemyStatSystem
                 m_TimedModifierStack[i].Modifier.applyTimer -= Time.deltaTime;
                 if (m_TimedModifierStack[i].Timer <= 0.0f)
                 {//modifier finished, so we remove it from the stack
+                    m_Owner.RemoveEffect(m_TimedModifierStack[i].EffectObject);
                     m_TimedModifierStack.RemoveAt(i);
                     i--;
                     needUpdate = true;

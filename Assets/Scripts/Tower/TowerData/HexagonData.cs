@@ -32,4 +32,10 @@ public class HexagonData : TowerData
 
         bullet.transform.position = target.transform.position;
     }
+
+    public override void SetEffect(GameObject effect)
+    {
+        GameObject newEffect = Instantiate(effect, transform);
+        newEffect.transform.localScale *= 1.932f;
+    }
 }

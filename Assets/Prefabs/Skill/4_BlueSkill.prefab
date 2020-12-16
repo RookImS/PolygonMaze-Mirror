@@ -14725,7 +14725,7 @@ MonoBehaviour:
   desc: "\uC801\uC758 \uC18D\uB3C4\uAC00 50%  \uB290\uB824\uC9D1\uB2C8\uB2E4"
   range: 1.5
   cost: 100
-  skillSprite: {fileID: 0}
+  skillEffect: {fileID: 6652745864322670073, guid: 6586c05d74de4d8468d1c39cf5d92013, type: 3}
   color: {r: 0, g: 0, b: 1, a: 1}
   rangeObject: {fileID: 7086629575996984700}
   effectObject: {fileID: 2441846341808926702}

@@ -44,7 +44,7 @@ public class Green : FieldSkill
             modifier.damage = totalDamage / damageNumber;
             modifier.applyDuration = applyDuration / damageNumber;
 
-            obj.GetComponent<EnemyData>().Stats.AddTimedModifier(modifier, applyDuration, id, skillSprite, skillSoundSpecific, apply_sound_name);
+            obj.GetComponent<EnemyData>().Stats.AddTimedModifier(modifier, applyDuration, id, skillEffect, skillSoundSpecific, apply_sound_name);
             hitList.Add(obj);
         }
 

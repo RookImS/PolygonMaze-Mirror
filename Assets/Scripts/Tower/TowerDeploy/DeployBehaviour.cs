@@ -16,6 +16,8 @@ public class DeployBehaviour : MonoBehaviour
     public TowerData data;
 
     private GameObject towersGameObject;
+    private Collider preHitCollider;
+    private Collider hitCollider;
     private CheckerBehaviour checker;
     private NavMeshSurface checkerNav;
     private NavMeshSurface enemyNav;
@@ -29,7 +31,8 @@ public class DeployBehaviour : MonoBehaviour
     private bool isProperLocate;
     private bool isPathEnable;
     private bool isOverlapped;
-    private bool isSkipFrame;
+    private bool isSkipFrame_path;
+    private bool isSkipFrame_locate;
 
     private void Awake()
     {
@@ -44,7 +47,7 @@ public class DeployBehaviour : MonoBehaviour
     {
         isPathEnable = CheckPath();
         isDeployEnable = CheckDeployEnable();
-        isSkipFrame = CheckSkipFrame();
+        isSkipFrame_path = CheckSkipFrame();
     }
 
     private void Init()
@@ -53,15 +56,17 @@ public class DeployBehaviour : MonoBehaviour
         enemyNav = GameObject.Find("EnemyNavMeshSurface").GetComponent<NavMeshSurface>();
         checker = GameObject.FindGameObjectWithTag("Checker").GetComponent<CheckerBehaviour>();
         towersGameObject = GameObject.Find("Towers");
+        preHitCollider = null;
         
         isDeployEnable = false;
         isProperLocate = false;
-        isSkipFrame = true;
+        isSkipFrame_path = true;
+        isSkipFrame_locate = true;
 
         rayArray = new Ray[17];
         checkRadius1 = 0.3f;
         checkRadius2 = 0.5f;
-        correction = 0.5f;
+        correction = 1f;
     }
 
     private bool CheckPath()
@@ -71,7 +76,7 @@ public class DeployBehaviour : MonoBehaviour
         if (isProperLocate)
         {
             temp = checker.CalculatePath();
-            if (isSkipFrame)
+            if (isSkipFrame_path)
             {
                 return false;
             }
@@ -94,6 +99,12 @@ public class DeployBehaviour : MonoBehaviour
     {
         if (PlayerControl.Instance.CheckCost(cost))
         {
+            if (isSkipFrame_locate)
+            {
+                isSkipFrame_locate = false;
+                return false;
+            }
+
             if (isPathEnable && isProperLocate && !isOverlapped)
             {
                 towerRend.material.color = new Color(1f, 1f, 1f, 225 / 255f);
@@ -105,7 +116,7 @@ public class DeployBehaviour : MonoBehaviour
             {
                 if (isProperLocate)
                 {
-                    if (!isSkipFrame)
+                    if (!isSkipFrame_path)
                     {
                         towerRend.material.color = new Color(1f, 170 / 255f, 170 / 255f, 225 / 255f);
                         rangeRend.material.color = new Color(1f, 170 / 255f, 170 / 255f, 200 / 255f);
@@ -212,14 +223,14 @@ public class DeployBehaviour : MonoBehaviour
                 maxHitNumList.Add(obj);
         }
 
-        Collider hitCollider = maxHitNumList[0].collider;
+        Collider maxHitCollider = maxHitNumList[0].collider;
         for (int i = 1; i < maxHitNumList.Count; i++)
         {
-            if (Vector3.SqrMagnitude(pos - maxHitNumList[i].collider.transform.position) > Vector3.SqrMagnitude(pos - hitCollider.transform.position))
-                hitCollider = maxHitNumList[i].collider;
+            if (Vector3.SqrMagnitude(pos - maxHitNumList[i].collider.transform.position) > Vector3.SqrMagnitude(pos - maxHitCollider.transform.position))
+                maxHitCollider = maxHitNumList[i].collider;
         }
 
-        return hitCollider;
+        return maxHitCollider;
     }
 
     private Vector3 CalcCircularPos(Vector3 pos, in float radius1, in float radius2, in int direction)
@@ -270,7 +281,7 @@ public class DeployBehaviour : MonoBehaviour
         Vector3 correctionPos = realPos;
         correctionPos.z += correction;
 
-        Collider hitCollider = AroundRaycast(correctionPos);
+        hitCollider = AroundRaycast(correctionPos);
         if (hitCollider != null)
         {
             //locate proper position
@@ -281,6 +292,13 @@ public class DeployBehaviour : MonoBehaviour
             checkerNav.UpdateNavMesh(checkerNav.navMeshData);
 
             isProperLocate = true;
+
+            if (System.Object.ReferenceEquals(hitCollider, preHitCollider))
+                isSkipFrame_locate = true;
+            else
+                isSkipFrame_locate = false;
+
+            preHitCollider = hitCollider;
 
             return hitCollider.gameObject.GetComponent<SideColliderBehaviour>().parentObject;
         }
