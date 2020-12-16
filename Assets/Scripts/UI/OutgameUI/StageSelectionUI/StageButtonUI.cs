@@ -5,8 +5,8 @@ using UnityEngine.UI;
 
 public class StageButtonUI : MonoBehaviour
 {
-    public int a;
-    public int b;
+    public int chapter;
+    public int level;
     public bool isStageClear;
     public GameObject clearFlag;
     public Image stageArrow;
@@ -18,17 +18,20 @@ public class StageButtonUI : MonoBehaviour
 
     void Init()
     {
-        isStageClear = GameManager.Instance.stageClearInfo.stageChapter[a].stageLevel[b].isClear;
+        isStageClear = GameManager.Instance.stageClearInfo.stageChapter[chapter - 1].stageLevel[level - 1].isClear;
     }
     public void StageClearCheck()
     {
         if (isStageClear)
         {
             clearFlag.SetActive(true);
-            stageArrow.color = new Color(0, 130f/255f, 0, 1);
-            if (!GameManager.Instance.stageClearInfo.stageChapter[a].stageLevel[b + 1].isClear)
+            if (stageArrow != null)
             {
-                stageArrow.color = Color.yellow;
+                stageArrow.color = new Color(0, 130f / 255f, 0, 1);
+                if (!GameManager.Instance.stageClearInfo.stageChapter[chapter - 1].stageLevel[level].isClear)
+                {
+                    stageArrow.color = Color.yellow;
+                }
             }
         }
         

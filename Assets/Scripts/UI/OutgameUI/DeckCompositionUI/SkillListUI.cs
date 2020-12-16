@@ -82,8 +82,8 @@ public class SkillListUI : MonoBehaviour
     {
         insertCheck = true;
 
-        if (SoundManager.Instance != null)
-            SoundManager.Instance.PlaySound(SoundManager.SoundSpecific.BUTTON, "Common_Button");
+        //if (SoundManager.Instance != null)
+        //    SoundManager.Instance.PlaySound(SoundManager.SoundSpecific.BUTTON, "Common_Button");
     }
 
     public void HighlightDeck(int num)
