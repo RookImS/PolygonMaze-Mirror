@@ -147,7 +147,7 @@ public class Tutorial : MonoSingleton<Tutorial>
             yield return null;
 
         while (!tutorialChecker.StartCheck(phase))
-            yield return new WaitForSeconds(0.1f);
+            yield return null;
 
         tutorialChecker.SettingRestore(phase);
 
