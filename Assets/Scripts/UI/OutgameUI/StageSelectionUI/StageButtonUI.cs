@@ -27,10 +27,13 @@ public class StageButtonUI : MonoBehaviour
         if (GameManager.Instance.stageClearInfo.stageChapter[chapter - 1].stageLevel[level - 1].isClear)
         {
             clearFlag.SetActive(true);
-            stageArrow.color = new Color(0, 130f / 255f, 0, 1);
-            if (!GameManager.Instance.stageClearInfo.stageChapter[chapter - 1].stageLevel[level].isClear)
+            if (chapter != 1 && level != 5)
             {
-                stageArrow.color = Color.yellow;
+                stageArrow.color = new Color(0, 130f / 255f, 0, 1);
+                if (!GameManager.Instance.stageClearInfo.stageChapter[chapter - 1].stageLevel[level].isClear)
+                {
+                    stageArrow.color = Color.yellow;
+                }
             }
         }
 

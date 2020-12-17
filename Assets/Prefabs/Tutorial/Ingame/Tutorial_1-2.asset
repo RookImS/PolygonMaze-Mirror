@@ -58,8 +58,8 @@ MonoBehaviour:
     - obj: {fileID: 4293294981893517376, guid: 9966b84660736d84091a5e5a3119ea47, type: 3}
       order: 2
       length: 2
-      posX: 400
-      posY: -277
+      posX: 396
+      posY: -273
       rotation: 0
       enable: 0
       isMaskOn: 0
