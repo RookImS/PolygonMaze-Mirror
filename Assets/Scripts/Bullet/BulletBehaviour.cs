@@ -7,7 +7,7 @@ public class BulletBehaviour : MonoBehaviour
     protected BulletData m_BulletData;
     public List<GameObject> enemyList;
     public GameObject hitCollider;
-    public GameObject bulletEffectGameObject;
+    protected GameObject bulletEffectGameObject;
 
     public GameObject VFX;
     protected void Awake()

@@ -18,7 +18,7 @@ public class TriangleData : TowerData
         muzzle.Rotate(new Vector3(0f, -(bulletAngle / 2), 0f));
         for (int i = 0; i < bulletNumber; i++)
         {
-            bulletInstanceList.Add(Instantiate(bullet, muzzle.position, muzzle.rotation));
+            bulletInstanceList.Add(Instantiate(bullet, muzzle.position, muzzle.rotation, bulletObject.transform));
             muzzle.Rotate(rotateAngle);
         }
 
@@ -29,7 +29,7 @@ public class TriangleData : TowerData
             SoundManager.Instance.PlaySound(SoundManager.TowerSoundSpecific.HEXAGON, "Triangle_Attack");
     }
 
-    public override void SetEffect(GameObject effect)
+    public override void SetSkillEffect(GameObject effect)
     {
         GameObject newEffect = Instantiate(effect, transform);
         newEffect.transform.localScale *= 0.778f;

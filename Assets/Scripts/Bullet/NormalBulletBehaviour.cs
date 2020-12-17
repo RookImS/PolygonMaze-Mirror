@@ -44,7 +44,7 @@ public class NormalBulletBehaviour : BulletBehaviour
             Vector3 rot = transform.rotation.eulerAngles;
 
             rot = new Vector3(rot.x, rot.y + 180, rot.z);
-            Instantiate(VFX, pos, Quaternion.Euler(rot));
+            Instantiate(VFX, pos, Quaternion.Euler(rot), bulletEffectGameObject.transform);
         }
         Destroy(this.gameObject);
     }

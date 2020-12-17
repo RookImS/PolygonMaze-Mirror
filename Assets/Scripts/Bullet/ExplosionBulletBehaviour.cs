@@ -45,7 +45,7 @@ public class ExplosionBulletBehaviour : BulletBehaviour
     {
         m_BulletData.Init(t_stat);
         transform.localScale = new Vector3(m_BulletData.stats.stats.attackRange * 2, 1, m_BulletData.stats.stats.attackRange * 2);
-        GameObject.Find("BulletEffect");
+        bulletEffectGameObject = GameObject.Find("BulletEffect");
     }
     private IEnumerator DestroyAttack()
     { 
@@ -69,9 +69,8 @@ public class ExplosionBulletBehaviour : BulletBehaviour
                 Vector3 rot = transform.rotation.eulerAngles;
 
                 rot = new Vector3(rot.x, rot.y, rot.z);
-                Instantiate(VFX, pos, Quaternion.Euler(rot));
+                Instantiate(VFX, pos, Quaternion.Euler(rot), bulletEffectGameObject.transform);
             }
         }
-        //Destroy(this.gameObject);
     }
 }

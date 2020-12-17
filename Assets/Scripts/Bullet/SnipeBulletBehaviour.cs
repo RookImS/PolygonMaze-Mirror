@@ -4,21 +4,22 @@ using UnityEngine;
 
 public class SnipeBulletBehaviour : BulletBehaviour
 {
-    public GameObject FirstTargetEffect;
-    public GameObject TargetEffect;
-    private GameObject attackEffect;
+    public GameObject firstTargetEffect;
+    public GameObject targetEffect;
     public bool isFirstAttack;
 
-    public override void Init(TowerStatSystem t_stat)
-    {
-        base.Init(t_stat);
-        isFirstAttack = true;
-    }
+    private GameObject attackEffect;
 
     private void Update()
     {
         if (enemyList.Count > 0)
             Attack();
+    }
+
+    public override void Init(TowerStatSystem t_stat)
+    {
+        base.Init(t_stat);
+        isFirstAttack = true;
     }
 
     public void Hit()
@@ -28,22 +29,18 @@ public class SnipeBulletBehaviour : BulletBehaviour
 
     public void Reload()
     {
-        //if (isFirstAttack)
-        //{
-            if (attackEffect != null)
-            {
-                attackEffect.transform.SetParent(bulletEffectGameObject.transform);
+        if (attackEffect != null)
+        {
+            attackEffect.transform.SetParent(bulletEffectGameObject.transform);
 
-                var main = attackEffect.GetComponent<ParticleSystem>().main;
-                main.stopAction = ParticleSystemStopAction.Destroy;
-            }
-      //  }
+            var main = attackEffect.GetComponent<ParticleSystem>().main;
+            main.stopAction = ParticleSystemStopAction.Destroy;
+        }
 
+        firstTargetEffect.SetActive(false);
+        targetEffect.SetActive(false);
 
-        FirstTargetEffect.SetActive(false);
-        TargetEffect.SetActive(false);
-
-        FirstTargetEffect.SetActive(true);
+        firstTargetEffect.SetActive(true);
         enemyList.Clear();
     }
 
@@ -57,13 +54,11 @@ public class SnipeBulletBehaviour : BulletBehaviour
             enemy.GetComponent<EnemyBehaviour>().Damage(m_BulletData.stats.stats.damage + enemy.GetComponent<EnemyData>().Stats.stats.def);
             Vector3 pos = new Vector3(enemy.transform.position.x, enemy.transform.position.y + 1f, enemy.transform.position.z);
             Vector3 rot = transform.rotation.eulerAngles;
-
-            //Instantiate(VFX, pos, Quaternion.Euler(rot));
         }
 
         hitCollider.SetActive(false);
 
-        TargetEffect.SetActive(true);
+        targetEffect.SetActive(true);
 
         enemyList.Clear();
 
@@ -71,7 +66,6 @@ public class SnipeBulletBehaviour : BulletBehaviour
         {
             attackEffect = Instantiate(VFX, transform);
             attackEffect.transform.localPosition += new Vector3(0f, 1f, 0f);
-            //isFirstAttack = false;
         }
         else
         {

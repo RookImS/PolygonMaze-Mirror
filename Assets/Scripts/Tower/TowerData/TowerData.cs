@@ -11,6 +11,8 @@ public class TowerData : MonoBehaviour
 
     [HideInInspector] public List<GameObject> neighbor;
 
+    protected GameObject bulletObject;
+
     private void Update()
     {
         Stats.Tick();
@@ -19,18 +21,19 @@ public class TowerData : MonoBehaviour
     public virtual void Init()
     {
         Stats.Init(this);
+        bulletObject = GameObject.Find("Bullet");
     }
 
     public virtual void Shoot(Transform muzzle)
     {
     }
 
-    public virtual void SetEffect(GameObject effect)
+    public virtual void SetSkillEffect(GameObject effect)
     {
         Instantiate(effect, transform);
     }
 
-    public void RemoveEffect(GameObject effect)
+    public void RemoveSkillEffect(GameObject effect)
     {
         GameObject targetEffect = transform.Find(effect.name + "(Clone)").gameObject;
         Destroy(targetEffect);

@@ -30,6 +30,11 @@ public class SkillUI : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragH
     private void Update()
     {
         UpdateSkillCostText();
+        if (!isActive || GameManager.Instance.isGameOver || GameManager.Instance.isStageClear)
+        {
+            if(newObject != null)
+                Destroy(newObject);
+        }
     }
 
     private void Init()
@@ -120,7 +125,7 @@ public class SkillUI : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragH
     }
     public void OnDrag(PointerEventData eventData)
     {
-        if (isActive)
+        if (isActive && !GameManager.Instance.isGameOver && !GameManager.Instance.isStageClear)
         {
             mousePos = Input.mousePosition;
 
@@ -129,7 +134,7 @@ public class SkillUI : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragH
     }
     public void OnEndDrag(PointerEventData eventData)
     {
-        if (isActive)
+        if (isActive && !GameManager.Instance.isGameOver && !GameManager.Instance.isStageClear)
         {
             mousePos = Input.mousePosition;
 

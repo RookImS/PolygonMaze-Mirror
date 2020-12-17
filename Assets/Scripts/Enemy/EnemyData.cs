@@ -83,12 +83,12 @@ public class EnemyData : MonoBehaviour
         isInvincible = flag;
     }
 
-    public void SetEffect(GameObject effect)
+    public void SetSkillEffect(GameObject effect)
     {
         GameObject a = Instantiate(effect, transform);
     }
 
-    public void RemoveEffect(GameObject effect)
+    public void RemoveSkillEffect(GameObject effect)
     {
         GameObject targetEffect = transform.Find(effect.name+"(Clone)").gameObject;
         Destroy(targetEffect);

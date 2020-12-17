@@ -29,6 +29,11 @@ public class DeployUI : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
     private void Update()
     {
         UpdateTowerCostText();
+        if (!isActive || GameManager.Instance.isGameOver || GameManager.Instance.isStageClear)
+        {
+            if (newObject != null)
+                Destroy(newObject);
+        }
     }
 
     private void Init()
@@ -78,7 +83,7 @@ public class DeployUI : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
     }
     public void OnDrag(PointerEventData eventData)
     {
-        if (isActive)
+        if (isActive && !GameManager.Instance.isGameOver && !GameManager.Instance.isStageClear)
         {
             mousePos = Input.mousePosition;
 
@@ -87,7 +92,7 @@ public class DeployUI : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
     }
     public void OnEndDrag(PointerEventData eventData)
     {
-        if (isActive)
+        if (isActive && !GameManager.Instance.isGameOver && !GameManager.Instance.isStageClear)
         {
             newObject.GetComponent<DeployBehaviour>().DeployTower(hitObject, realTower);
 

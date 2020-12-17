@@ -136,7 +136,7 @@ public class EnemyStatSystem
         if (!found)
         {
             m_TimedModifierStack.Add(new TimedStatModifier() { Id = id });
-            m_Owner.SetEffect(effect);
+            m_Owner.SetSkillEffect(effect);
 
             if (SoundManager.instance != null)
                 SoundManager.instance.PlaySkillSound(soundSpecific, apply_sound_name);
@@ -210,7 +210,7 @@ public class EnemyStatSystem
                 m_TimedModifierStack[i].Modifier.applyTimer -= Time.deltaTime;
                 if (m_TimedModifierStack[i].Timer <= 0.0f)
                 {//modifier finished, so we remove it from the stack
-                    m_Owner.RemoveEffect(m_TimedModifierStack[i].EffectObject);
+                    m_Owner.RemoveSkillEffect(m_TimedModifierStack[i].EffectObject);
                     m_TimedModifierStack.RemoveAt(i);
                     i--;
                     needUpdate = true;
