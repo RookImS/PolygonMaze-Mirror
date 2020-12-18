@@ -7,23 +7,16 @@ public class Skill : MonoBehaviour
 {
     public float skillDuration;     // 스킬 자체의 유지시간
     public float applyDuration;     // 걸린 스킬의 유지시간
-    
+
+    public Color color;
+    public float range;
+    public int cost;
     public string id;
     [TextArea]
     public string desc;
-    public float range;
-    public int cost;
-
-    private bool isDeploy;
-
-    public GameObject skillEffect;
-    public Color color;
 
     public GameObject rangeObject;
     public GameObject effectObject;
-
-    //[HideInInspector] public float applyInterval;     // 스킬이 적용되는 간격
-    //[HideInInspector] public float applyCountDown;
 
     private AudioSource currentAudioSource1;
     public SoundManager.SkillSoundSpecific skillSoundSpecific;
@@ -39,27 +32,14 @@ public class Skill : MonoBehaviour
         Init();
     }
 
-    private void Update()
-    {
-        //if (!isDeploy)
-        //{
-        //    isEnoughMoney = PlayerControl.Instance.CheckCost(cost);
-        //}
-    }
-
     private void Init()
     {
         transform.localScale = new Vector3(range, range, range);
-        //applyCountDown = 0f;
-        //applyInterval = 0.1f;
-
-        //isEnoughMoney = false;
         if (SoundManager.instance != null)
         {
             currentAudioSource1 = SoundManager.Instance.GetLoopSkillAudio();
             SoundManager.Instance.PlayLoopSkillSound(currentAudioSource1, skillSoundSpecific, ready_sound_name);
         }
-        isDeploy = false;
     }
 
     public void LocateSkill(Vector3 mousePos)
@@ -67,8 +47,6 @@ public class Skill : MonoBehaviour
         Vector3 realPos = Camera.main.ScreenToWorldPoint(mousePos);
 
         transform.position = new Vector3(realPos.x, 1.1f, realPos.z);
-
-
     }
 
     public bool UseSkill(Vector3 mousePos)
@@ -84,6 +62,7 @@ public class Skill : MonoBehaviour
         {
             if (SoundManager.instance != null)
                 SoundManager.instance.StopAudio(currentAudioSource1);
+
             Destroy(this.gameObject);
 
             return false;
@@ -95,7 +74,6 @@ public class Skill : MonoBehaviour
             rangeObject.SetActive(false);
             effectObject.SetActive(true);
             StartCoroutine("CheckSkillDuration");
-            isDeploy = true;
 
             if (SoundManager.instance != null)
             {

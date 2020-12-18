@@ -166,9 +166,9 @@ public class Stage1_2 : TutorialChecker
 
     public bool Phase4Checker()
     {
-        if (skillUI.transform.GetChild(0).GetComponent<SkillUI>().newObject != null)
+        if (skillUI.transform.GetChild(0).GetComponent<SkillUI>().lastNewObject != null)
         {
-            FirstSkill = skillUI.transform.GetChild(0).GetComponent<SkillUI>().newObject.GetComponent<Skill>();
+            FirstSkill = skillUI.transform.GetChild(0).GetComponent<SkillUI>().lastNewObject.GetComponent<Skill>();
             phase4Checker1 = FirstSkill.effectObject.activeSelf;
         }
 

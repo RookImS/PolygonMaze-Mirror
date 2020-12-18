@@ -183,7 +183,7 @@ public class Stage1_1 : TutorialChecker
     private bool Phase10Checker()
     {
         
-        if (phase10Obstacle1.Equals(phase10DeployUI1.hitObject) && !phase10DeployUI1.isProgressDeploy)
+        if (phase10Obstacle1.Equals(phase10DeployUI1.lastHitObject) && !phase10DeployUI1.isProgressDeploy)
             return true;
         else
             return false;

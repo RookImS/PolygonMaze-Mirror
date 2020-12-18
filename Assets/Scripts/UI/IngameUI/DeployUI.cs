@@ -11,7 +11,8 @@ public class DeployUI : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
     public GameObject realTower;
 
     private GameObject newObject;
-    [HideInInspector] public GameObject hitObject;
+    private GameObject hitObject;
+    [HideInInspector] public GameObject lastHitObject;
 
     private bool isDeployable;
     public TextMeshProUGUI towerCostText;
@@ -39,6 +40,7 @@ public class DeployUI : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
     private void Init()
     {
         towerCostText.text = deployTower.GetComponent<DeployBehaviour>().cost.ToString();
+        lastHitObject = null;
         isDeployable = false;
         isProgressDeploy = false;
         isActive = true;
@@ -102,6 +104,9 @@ public class DeployUI : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
             isProgressDeploy = false;
             UIManager.instance.BlockRaycastOn();
             SoundManager.Instance.PlaySound(SoundManager.SoundSpecific.OTHERUI, "Tower_Locate_Sound");
+            lastHitObject = hitObject;
         }
+        newObject = null;
+        hitObject = null;
     }
 }

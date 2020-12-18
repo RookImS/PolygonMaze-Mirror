@@ -14,6 +14,7 @@ public class DeployBehaviour : MonoBehaviour
     public Renderer towerRend;
     public Renderer rangeRend;
     public TowerData data;
+    public float pointCorrection;
 
     private GameObject towersGameObject;
     private CheckerBehaviour checker;
@@ -25,7 +26,6 @@ public class DeployBehaviour : MonoBehaviour
     private Ray[] rayArray;
     private float checkRadius1;
     private float checkRadius2;
-    private float correction;
 
     private bool isDeployEnable;
     private bool isProperLocate;
@@ -69,7 +69,6 @@ public class DeployBehaviour : MonoBehaviour
         rayArray = new Ray[17];
         checkRadius1 = 0.3f;
         checkRadius2 = 0.5f;
-        correction = 1f;
     }
 
     private bool CheckPath()
@@ -276,7 +275,7 @@ public class DeployBehaviour : MonoBehaviour
 
         Vector3 realPos = Camera.main.ScreenToWorldPoint(mousePos);
         Vector3 correctionPos = realPos;
-        correctionPos.z += correction;
+        correctionPos.z += pointCorrection;
 
         Collider hitCollider = AroundRaycast(correctionPos);
         if (hitCollider != null)

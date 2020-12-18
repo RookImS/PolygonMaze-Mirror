@@ -16,7 +16,8 @@ public class SkillUI : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragH
     [HideInInspector] public bool isActive;
     [HideInInspector] public bool isFirst;
 
-    [HideInInspector] public GameObject newObject;
+    [HideInInspector] private GameObject newObject;
+    [HideInInspector] public GameObject lastNewObject;
     private bool skillUseEnable;
     private bool skillRefreshEnable;
 
@@ -32,8 +33,10 @@ public class SkillUI : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragH
         UpdateSkillCostText();
         if (!isActive || GameManager.Instance.isGameOver || GameManager.Instance.isStageClear)
         {
-            if(newObject != null)
+            if (newObject != null)
+            {
                 Destroy(newObject);
+            }
         }
     }
 
@@ -42,6 +45,7 @@ public class SkillUI : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragH
         SelectNextSkill();
         isActive = true;
         isFirst = false;
+        lastNewObject = null;
         skillRefreshCostText.text = skillRefreshCost.ToString();
     }
 
@@ -112,6 +116,7 @@ public class SkillUI : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragH
         if (isActive)
         {
             newObject = null;
+
             UIManager.instance.infoUI.DisableInfo();
             UIManager.instance.BlockRaycastOff();
 
@@ -145,6 +150,8 @@ public class SkillUI : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragH
 
             if (Tutorial.instance.tutorialChecker == null && Time.timeScale != 0f)
                 GameManager.instance.TimeRestore();
+            lastNewObject = newObject;
         }
+        newObject = null;
     }
 }
