@@ -68,8 +68,8 @@ MonoBehaviour:
   - dialogue:
       name: 1_LifeDesc
       sentences:
-      - "\uB77C\uC774\uD504\uC785\uB2C8\uB2E4. \n\uC801\uC774 <#774029>\uCD9C\uAD6C</color>\uB97C
-        \uD1B5\uD574 <#4F2721>\uD0C8\uCD9C</color>\uD558\uBA74 \uAC10\uC18C\uD569\uB2C8\uB2E4."
+      - "\uB77C\uC774\uD504\uC785\uB2C8\uB2E4. \n\uC801\uC774 <color=red>\uCD9C\uAD6C</color>\uB97C
+        \uD1B5\uD574 <color=black>\uD0C8\uCD9C</color>\uD558\uBA74 \uAC10\uC18C\uD569\uB2C8\uB2E4."
       - "\uB9CC\uC57D \uB77C\uC774\uD504\uAC00 0\uC774 \uB418\uBA74 \uAC8C\uC784\uC5D0\uC11C
         <color=red>\uD328\uBC30</color>\uD569\uB2C8\uB2E4."
       posX: -280
@@ -91,7 +91,7 @@ MonoBehaviour:
   - dialogue:
       name: 2_CostDesc
       sentences:
-      - "\uD604\uC7AC \uAC00\uC9C0\uACE0 \uC788\uB294 <#D3B18B>\uCF54\uC2A4\uD2B8</color>\uC785\uB2C8\uB2E4."
+      - "\uD604\uC7AC \uAC00\uC9C0\uACE0 \uC788\uB294 <color=yellow>\uCF54\uC2A4\uD2B8</color>\uC785\uB2C8\uB2E4."
       - "<color=black>\uD0C0\uC6CC</color>\uB97C \uBC30\uCE58\uD558\uAC70\uB098 <color=black>\uC2A4\uD0AC</color>\uC744
         \uC0AC\uC6A9\uD560 \uB54C \n\uC0AC\uC6A9\uD558\uAC8C \uB429\uB2C8\uB2E4."
       - "<color=red>\uC801</color>\uC744 \uCC98\uCE58\uD558\uBA74 \uD68D\uB4DD\uD560

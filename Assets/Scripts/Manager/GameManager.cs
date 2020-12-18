@@ -3,6 +3,7 @@ using System.IO;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.Android;
 
 public class GameManager : MonoSingleton<GameManager>
 {
@@ -75,6 +76,21 @@ public class GameManager : MonoSingleton<GameManager>
         loadStageChapter = 0;
         loadStageLevel = 0;
 
+        if (Permission.HasUserAuthorizedPermission(Permission.ExternalStorageRead))
+        {
+        }
+        else
+        {
+            Permission.RequestUserPermission(Permission.ExternalStorageRead);
+        }
+        if (Permission.HasUserAuthorizedPermission(Permission.ExternalStorageWrite))
+        {
+        }
+        else
+        {
+            Permission.RequestUserPermission(Permission.ExternalStorageWrite);
+        }
+
         LoadResource();
         MakeEmptyDeck();
         //LoadDefaultDeck();
@@ -145,6 +161,7 @@ public class GameManager : MonoSingleton<GameManager>
         {
             string path;
             if(Application.platform == RuntimePlatform.Android)
+                
                 path = Application.persistentDataPath + string.Format("/DeckData/Deck{0}.json", i);
             else
                 path = string.Format("Assets/UserData/DeckData/Deck{0}.json", i);
@@ -252,7 +269,12 @@ public class GameManager : MonoSingleton<GameManager>
         string jsonData = JsonUtility.ToJson(allDeckInfo.deckInfoList[order]);
         string path;
         if (Application.platform == RuntimePlatform.Android)
+        {
             path = Application.persistentDataPath + string.Format("/DeckData/Deck{0}.json", order);
+            Debug.Log(order);
+            Debug.Log(order +"번 덱 경로 "+path);
+        }
+            
         else
             path = string.Format("Assets/UserData/DeckData/Deck{0}.json", order);
 
@@ -334,14 +356,12 @@ public class GameManager : MonoSingleton<GameManager>
 
     public void SaveStageClearInfo()
     {
-
         string jsonData = JsonUtility.ToJson(stageClearInfo);
         string path;
         if (Application.platform == RuntimePlatform.Android)
             path = Application.persistentDataPath + string.Format("/StageClearData.json");
         else
             path = string.Format("Assets/UserData/StageClearData.json");
-        //string path = string.Format("Assets/UserData/StageClearData.json");
 
         System.IO.FileInfo file = new System.IO.FileInfo(path);
         file.Directory.Create();
@@ -404,12 +424,18 @@ public class GameManager : MonoSingleton<GameManager>
     public new void OnApplicationQuit()
     {
         base.OnApplicationQuit();
-
         SaveStageClearInfo();
         for (int i = 0; i < 3; i++)
             SaveDeckInfos(i);
     }
 
+
+    private void OnApplicationPause(bool pause)
+    {
+        SaveStageClearInfo();
+        for (int i = 0; i < 3; i++)
+            SaveDeckInfos(i);
+    }
     // ---------------------- INGAME ----------------------
 
     [HideInInspector] public GameObject inGameUI;
@@ -477,6 +503,7 @@ public class GameManager : MonoSingleton<GameManager>
             SoundManager.Instance.PlaySound(SoundManager.SoundSpecific.OTHERUI, "Player_Game_Clear_Sound");
         }
         ProcessStageClearInfo();
+        SaveStageClearInfo();
     }
 
     public void ProcessStageClearInfo()
