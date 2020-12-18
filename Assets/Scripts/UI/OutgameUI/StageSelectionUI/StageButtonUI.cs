@@ -9,6 +9,7 @@ public class StageButtonUI : MonoBehaviour
     public int level;
     public GameObject clearFlag;
     public Image stageArrow;
+
     void Start()
     {
         StageClearCheck();
@@ -19,10 +20,11 @@ public class StageButtonUI : MonoBehaviour
     {
         if (!this.GetComponent<Button>().interactable)
         {
-            if (GameManager.Instance.stageClearInfo.stageChapter[chapter - 1].stageLevel[level - 2].isClear)
-            {
-                this.GetComponent<Button>().interactable = true;
-            }
+            if(level - 2 >= 0)
+                if (GameManager.Instance.stageClearInfo.stageChapter[chapter - 1].stageLevel[level - 2].isClear)
+                {
+                    this.GetComponent<Button>().interactable = true;
+                }
         }
         if (GameManager.Instance.stageClearInfo.stageChapter[chapter - 1].stageLevel[level - 1].isClear)
         {
@@ -30,6 +32,7 @@ public class StageButtonUI : MonoBehaviour
             if(stageArrow != null)
             {
                 stageArrow.color = new Color(0, 130f / 255f, 0, 1);
+                if(level < GameManager.instance.levelMax)
                 if (!GameManager.Instance.stageClearInfo.stageChapter[chapter - 1].stageLevel[level].isClear)
                 {
                     stageArrow.color = Color.yellow;

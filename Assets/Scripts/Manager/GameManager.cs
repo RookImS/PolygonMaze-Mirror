@@ -3,7 +3,6 @@ using System.IO;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using UnityEngine.Android;
 
 public class GameManager : MonoSingleton<GameManager>
 {
@@ -40,6 +39,15 @@ public class GameManager : MonoSingleton<GameManager>
         public List<StageLevelInfo> stageChapter;
     }
 
+    [System.Serializable]
+    public class SoundInfo
+    {
+        public bool isMuteBGM;
+        public bool isMuteSE;
+        public float bgmVolume;
+        public float seVolume;
+    }
+
     [HideInInspector] public Stack<string> sceneStack = new Stack<string>();  //BackKey 기능을 위해 씬 Buildindex를 저장하는 스택 
 
     private SkillsScriptableObject skillResource;
@@ -53,19 +61,25 @@ public class GameManager : MonoSingleton<GameManager>
 
     [HideInInspector] public AllDeckInfo allDeckInfo;
     [HideInInspector] public StageClearInfo stageClearInfo;
+    [HideInInspector] public SoundInfo soundInfo;
 
     public bool isStart;
     private int loadStageChapter;
     private int loadStageLevel;
 
-    private int chapterMax = 10;
-    private int levelMax = 10;
+    [HideInInspector] public int chapterMax = 10;
+    [HideInInspector] public int levelMax = 5;
 
     private new void Awake()
     {
         base.Awake();
 
         Init();
+    }
+
+    private void Start()
+    {
+        
     }
 
     public void Init()
@@ -76,26 +90,15 @@ public class GameManager : MonoSingleton<GameManager>
         loadStageChapter = 0;
         loadStageLevel = 0;
 
-        if (Permission.HasUserAuthorizedPermission(Permission.ExternalStorageRead))
-        {
-        }
-        else
-        {
-            Permission.RequestUserPermission(Permission.ExternalStorageRead);
-        }
-        if (Permission.HasUserAuthorizedPermission(Permission.ExternalStorageWrite))
-        {
-        }
-        else
-        {
-            Permission.RequestUserPermission(Permission.ExternalStorageWrite);
-        }
-
         LoadResource();
-        MakeEmptyDeck();
-        //LoadDefaultDeck();
+        LoadUserData();
+    }
+
+    private void LoadUserData()
+    {
         LoadDeckInfos();
         LoadStageClearInfo();
+        LoadSoundInfo();
     }
 
     private void LoadResource()
@@ -108,64 +111,43 @@ public class GameManager : MonoSingleton<GameManager>
         outgameTutorials = tutorialResource.outgameTutorialList;
     }
 
-    //private void LoadDefaultDeck()
-    //{
-    //    MakeEmptyDeck();
-
-    //    string path;
-    //    if (Application.platform == RuntimePlatform.Android)
-    //        path = Application.persistentDataPath + string.Format("/DeckData/DefaultDeck.json");
-    //    else
-    //        path = string.Format("Assets/UserData/DeckData/DefaultDeck.json");
-
-    //    try
-    //    {
-    //        if (File.Exists(path))
-    //        {
-    //            string jsonData = File.ReadAllText(path);
-    //            this.allDeckInfo.deckInfoList[0] = JsonUtility.FromJson<AllDeckInfo.DeckInfo>(jsonData);
-    //        }
-    //        else
-    //        {
-    //            return;
-    //        }
-    //    }
-    //    catch (System.ArgumentException e1)
-    //    {
-    //        Debug.Log(e1.Message);
-
-    //    }
-    //    catch (System.Exception e2)
-    //    {
-    //        Debug.Log(e2.Message);
-    //    }
-
-    //    currentDeck = deckList[0];
-    //    for (int j = 0; j < 3; j++)
-    //    {
-    //        for (int k = 0; k < skills.Count; k++)
-    //        {
-    //            if (skills[k].GetComponent<Skill>().id
-    //                == this.allDeckInfo.deckInfoList[0].deckIDs[j])
-    //                deckList[0][j] = skills[k];
-    //            else if ("space"
-    //                == this.allDeckInfo.deckInfoList[0].deckIDs[j])
-    //                deckList[0][j] = null;
-    //        }
-    //    }
-    //}
+    private void MakeEmptyDeck()
+    {
+        deckList = new List<List<GameObject>>();
+        allDeckInfo = new AllDeckInfo();
+        allDeckInfo.deckInfoList = new List<AllDeckInfo.DeckInfo>();
+        for (int i = 0; i < 3; i++)
+        {
+            deckList.Add(new List<GameObject>());
+            allDeckInfo.deckInfoList.Add(new AllDeckInfo.DeckInfo());
+            allDeckInfo.deckInfoList[i].deckIDs = new List<string>();
+            allDeckInfo.deckInfoList[i].isCurrent = false;
+            for (int j = 0; j < 3; j++)
+            {
+                deckList[i].Add(null);
+                allDeckInfo.deckInfoList[i].deckIDs.Add("space");
+            }
+        }
+    }
 
     private void LoadDeckInfos()
     {
+        string dir;
+        string path;
+
+        MakeEmptyDeck();
+
+        if (Application.platform == RuntimePlatform.Android)
+            dir = Application.persistentDataPath + string.Format("/UserData/DeckData");
+        else
+            dir = string.Format("Assets/UserData/DeckData");
+
+        if (!Directory.Exists(dir))
+            Directory.CreateDirectory(dir);
+
         for (int i = 0; i < 3; i++)
         {
-            string path;
-            if(Application.platform == RuntimePlatform.Android)
-                
-                path = Application.persistentDataPath + string.Format("/DeckData/Deck{0}.json", i);
-            else
-                path = string.Format("Assets/UserData/DeckData/Deck{0}.json", i);
-            //string path = string.Format("Assets/UserData/DeckData/Deck{0}.json", i);
+            path = dir + string.Format("/Deck{0}.json", i);
 
             try
             {
@@ -217,25 +199,6 @@ public class GameManager : MonoSingleton<GameManager>
         }
     }
 
-    private void MakeEmptyDeck()
-    {
-        deckList = new List<List<GameObject>>();
-        allDeckInfo = new AllDeckInfo();
-        allDeckInfo.deckInfoList = new List<AllDeckInfo.DeckInfo>();
-        for (int i = 0; i < 3; i++)
-        {
-            deckList.Add(new List<GameObject>());
-            allDeckInfo.deckInfoList.Add(new AllDeckInfo.DeckInfo());
-            allDeckInfo.deckInfoList[i].deckIDs = new List<string>();
-            allDeckInfo.deckInfoList[i].isCurrent = false;
-            for (int j = 0; j < 3; j++)
-            {
-                deckList[i].Add(null);
-                allDeckInfo.deckInfoList[i].deckIDs.Add("space");
-            }
-        }
-    }
-
     private bool CheckSkillNull(List<GameObject> deck)
     {
         for (int i = 0; i < deck.Count; i++)
@@ -267,23 +230,22 @@ public class GameManager : MonoSingleton<GameManager>
             allDeckInfo.deckInfoList[order].isCurrent = false;
 
         string jsonData = JsonUtility.ToJson(allDeckInfo.deckInfoList[order]);
+        string dir;
         string path;
-        if (Application.platform == RuntimePlatform.Android)
-        {
-            path = Application.persistentDataPath + string.Format("/DeckData/Deck{0}.json", order);
-            Debug.Log(order);
-            Debug.Log(order +"번 덱 경로 "+path);
-        }
-            
-        else
-            path = string.Format("Assets/UserData/DeckData/Deck{0}.json", order);
 
-        System.IO.FileInfo file = new System.IO.FileInfo(path);
-        file.Directory.Create();
+        if (Application.platform == RuntimePlatform.Android)
+            dir = Application.persistentDataPath + string.Format("/UserData/DeckData");
+        else
+            dir = string.Format("Assets/UserData/DeckData");
+
+        if (!Directory.Exists(dir))
+            Directory.CreateDirectory(dir);
+
+        path = dir + string.Format("/Deck{0}.json", order);
 
         try
         {
-            File.WriteAllText(file.FullName, jsonData);
+            File.WriteAllText(path, jsonData);
         }
         catch (System.ArgumentException e1)
         {
@@ -296,43 +258,6 @@ public class GameManager : MonoSingleton<GameManager>
             // IOException or UnauthorizedAccessException
         }
     }
-
-    public void LoadStageClearInfo()
-    {
-        MakeEmptyStageClearInfo();
-        string path;
-        if (Application.platform == RuntimePlatform.Android)
-            path = Application.persistentDataPath + string.Format("/StageClearData.json");
-        else
-            path = string.Format("Assets/UserData/StageClearData.json");
-        
-        System.IO.FileInfo file = new System.IO.FileInfo(path);
-        file.Directory.Create();
-
-        try
-        {
-            if (File.Exists(path))
-            {
-                string jsonData = File.ReadAllText(path);
-                this.stageClearInfo = JsonUtility.FromJson<StageClearInfo>(jsonData);
-            }
-            else
-            {
-                
-            }
-        }
-        catch (System.ArgumentException e1)
-        {
-            Debug.Log(e1.Message);
-
-        }
-        catch (System.Exception e2)
-        {
-            Debug.Log(e2.Message);
-        }
-
-    }
-
     public void MakeEmptyStageClearInfo()
     {
         stageClearInfo = new StageClearInfo();
@@ -354,21 +279,63 @@ public class GameManager : MonoSingleton<GameManager>
         }
     }
 
-    public void SaveStageClearInfo()
+    public void LoadStageClearInfo()
     {
-        string jsonData = JsonUtility.ToJson(stageClearInfo);
+        string dir;
         string path;
-        if (Application.platform == RuntimePlatform.Android)
-            path = Application.persistentDataPath + string.Format("/StageClearData.json");
-        else
-            path = string.Format("Assets/UserData/StageClearData.json");
 
-        System.IO.FileInfo file = new System.IO.FileInfo(path);
-        file.Directory.Create();
+        MakeEmptyStageClearInfo();
+
+        if (Application.platform == RuntimePlatform.Android)
+            dir = Application.persistentDataPath + string.Format("/UserData/StageClearData");
+        else
+            dir = string.Format("Assets/UserData/StageClearData");
+
+        if (!Directory.Exists(dir))
+            Directory.CreateDirectory(dir);
+
+        path = dir + string.Format("/StageClearData.json");
 
         try
         {
-            File.WriteAllText(file.FullName, jsonData);
+            if (File.Exists(path))
+            {
+                string jsonData = File.ReadAllText(path);
+                this.stageClearInfo = JsonUtility.FromJson<StageClearInfo>(jsonData);
+            }
+        }
+        catch (System.ArgumentException e1)
+        {
+            Debug.Log(e1.Message);
+
+        }
+        catch (System.Exception e2)
+        {
+            Debug.Log(e2.Message);
+        }
+
+    }
+    
+
+    public void SaveStageClearInfo()
+    {
+        string jsonData = JsonUtility.ToJson(stageClearInfo);
+        string dir;
+        string path;
+        
+        if (Application.platform == RuntimePlatform.Android)
+            dir = Application.persistentDataPath + string.Format("/UserData/StageClearData");
+        else
+            dir = string.Format("Assets/UserData/StageClearData");
+
+        if (!Directory.Exists(dir))
+            Directory.CreateDirectory(dir);
+
+        path = dir + string.Format("/StageClearData.json");
+
+        try
+        {
+            File.WriteAllText(path, jsonData);
         }
         catch (System.ArgumentException e1)
         {
@@ -380,6 +347,16 @@ public class GameManager : MonoSingleton<GameManager>
             Debug.Log(e2.Message);
             // IOException or UnauthorizedAccessException
         }
+    }
+
+    public void LoadSoundInfo()
+    {
+
+    }
+
+    public void SaveSoundInfo()
+    {
+
     }
 
     public void LoadScene(string sceneName)
@@ -433,6 +410,7 @@ public class GameManager : MonoSingleton<GameManager>
     private void OnApplicationPause(bool pause)
     {
         SaveStageClearInfo();
+
         for (int i = 0; i < 3; i++)
             SaveDeckInfos(i);
     }

@@ -78,9 +78,15 @@ public class SoundManager : MonoSingleton<SoundManager>
         BLUE
     }
 
+    private new void Awake()
+    {
+        base.Awake();
+
+        Init();   
+    }
+
     private void Start()
     {
-        Init();
         PlayBGM("OutGame_BGM");
     }
 
