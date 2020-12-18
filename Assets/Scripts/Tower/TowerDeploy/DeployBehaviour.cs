@@ -16,11 +16,11 @@ public class DeployBehaviour : MonoBehaviour
     public TowerData data;
 
     private GameObject towersGameObject;
-    private Collider preHitCollider;
-    private Collider hitCollider;
     private CheckerBehaviour checker;
     private NavMeshSurface checkerNav;
     private NavMeshSurface enemyNav;
+    private GameObject neighborObject;
+    private GameObject realTower;
 
     private Ray[] rayArray;
     private float checkRadius1;
@@ -31,8 +31,8 @@ public class DeployBehaviour : MonoBehaviour
     private bool isProperLocate;
     private bool isPathEnable;
     private bool isOverlapped;
-    private bool isSkipFrame_path;
-    private bool isSkipFrame_locate;
+    private bool isSkipFrame;
+    private bool isDeploy;
 
     private void Awake()
     {
@@ -47,7 +47,11 @@ public class DeployBehaviour : MonoBehaviour
     {
         isPathEnable = CheckPath();
         isDeployEnable = CheckDeployEnable();
-        isSkipFrame_path = CheckSkipFrame();
+
+        if (isDeploy && !isSkipFrame)
+            CheckDeploy();
+
+        isSkipFrame = CheckSkipFrame();
     }
 
     private void Init()
@@ -56,12 +60,11 @@ public class DeployBehaviour : MonoBehaviour
         enemyNav = GameObject.Find("EnemyNavMeshSurface").GetComponent<NavMeshSurface>();
         checker = GameObject.FindGameObjectWithTag("Checker").GetComponent<CheckerBehaviour>();
         towersGameObject = GameObject.Find("Towers");
-        preHitCollider = null;
-        
+
         isDeployEnable = false;
         isProperLocate = false;
-        isSkipFrame_path = true;
-        isSkipFrame_locate = true;
+        isSkipFrame = true;
+        isDeploy = false;
 
         rayArray = new Ray[17];
         checkRadius1 = 0.3f;
@@ -76,7 +79,7 @@ public class DeployBehaviour : MonoBehaviour
         if (isProperLocate)
         {
             temp = checker.CalculatePath();
-            if (isSkipFrame_path)
+            if (isSkipFrame)
             {
                 return false;
             }
@@ -89,7 +92,7 @@ public class DeployBehaviour : MonoBehaviour
 
     private bool CheckSkipFrame()
     {
-        if (isProperLocate)
+        if (isProperLocate || isDeploy)
             return false;
         else
             return true;
@@ -99,12 +102,6 @@ public class DeployBehaviour : MonoBehaviour
     {
         if (PlayerControl.Instance.CheckCost(cost))
         {
-            if (isSkipFrame_locate)
-            {
-                isSkipFrame_locate = false;
-                return false;
-            }
-
             if (isPathEnable && isProperLocate && !isOverlapped)
             {
                 towerRend.material.color = new Color(1f, 1f, 1f, 225 / 255f);
@@ -116,7 +113,7 @@ public class DeployBehaviour : MonoBehaviour
             {
                 if (isProperLocate)
                 {
-                    if (!isSkipFrame_path)
+                    if (!isSkipFrame)
                     {
                         towerRend.material.color = new Color(1f, 170 / 255f, 170 / 255f, 225 / 255f);
                         rangeRend.material.color = new Color(1f, 170 / 255f, 170 / 255f, 200 / 255f);
@@ -180,7 +177,7 @@ public class DeployBehaviour : MonoBehaviour
         bool isFirstColliderHit = true;
         foreach (Ray ray in rayArray)
         {
-            if(Physics.Raycast(ray, out checkHit, Camera.main.transform.position.y * 1.3f, layerMask))
+            if (Physics.Raycast(ray, out checkHit, Camera.main.transform.position.y * 1.3f, layerMask))
             {
                 isFirstColliderHit = true;
                 foreach (CheckHitCollider obj in hitColliderList)
@@ -192,7 +189,7 @@ public class DeployBehaviour : MonoBehaviour
                         break;
                     }
                 }
-                if(isFirstColliderHit)
+                if (isFirstColliderHit)
                 {
                     CheckHitCollider newObj = new CheckHitCollider(checkHit.collider, 1);
                     hitColliderList.Add(newObj);
@@ -209,7 +206,7 @@ public class DeployBehaviour : MonoBehaviour
         foreach (CheckHitCollider obj in hitColliderList)
         {
             isMax = true;
-            foreach(CheckHitCollider maxNumObj in maxHitNumList)
+            foreach (CheckHitCollider maxNumObj in maxHitNumList)
             {
                 if (obj.num > maxNumObj.num)
                 {
@@ -237,7 +234,7 @@ public class DeployBehaviour : MonoBehaviour
     {
         Vector3 result = new Vector3();
         result = pos;
-        switch(direction)
+        switch (direction)
         {
             case 1:
                 result.x += radius1;
@@ -281,7 +278,7 @@ public class DeployBehaviour : MonoBehaviour
         Vector3 correctionPos = realPos;
         correctionPos.z += correction;
 
-        hitCollider = AroundRaycast(correctionPos);
+        Collider hitCollider = AroundRaycast(correctionPos);
         if (hitCollider != null)
         {
             //locate proper position
@@ -292,13 +289,6 @@ public class DeployBehaviour : MonoBehaviour
             checkerNav.UpdateNavMesh(checkerNav.navMeshData);
 
             isProperLocate = true;
-
-            if (System.Object.ReferenceEquals(hitCollider, preHitCollider))
-                isSkipFrame_locate = true;
-            else
-                isSkipFrame_locate = false;
-
-            preHitCollider = hitCollider;
 
             return hitCollider.gameObject.GetComponent<SideColliderBehaviour>().parentObject;
         }
@@ -319,6 +309,15 @@ public class DeployBehaviour : MonoBehaviour
     }
 
     public void DeployTower(GameObject neighborObject, GameObject realTower)
+    {
+        this.neighborObject = neighborObject;
+        this.realTower = realTower;
+
+        isDeploy = true;
+        isSkipFrame = true;
+    }
+
+    private void CheckDeploy()
     {
         if (isDeployEnable)
         {
