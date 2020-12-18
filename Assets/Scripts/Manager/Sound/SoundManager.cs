@@ -385,11 +385,6 @@ public class SoundManager : MonoSingleton<SoundManager>
         return isMuteSE;
     }
 
-    public void SetIsMuteSE(bool isMuteSE)
-    {
-        this.isMuteSE = isMuteSE;
-    }
-
     public AudioSource AllocateAudio()
     {
         AudioSource audioSource = allocateAudioSourceCollection.gameObject.AddComponent<AudioSource>();

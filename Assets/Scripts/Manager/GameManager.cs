@@ -77,11 +77,6 @@ public class GameManager : MonoSingleton<GameManager>
         Init();
     }
 
-    private void Start()
-    {
-        
-    }
-
     public void Init()
     {
         Application.targetFrameRate = 60;
@@ -92,6 +87,7 @@ public class GameManager : MonoSingleton<GameManager>
 
         LoadResource();
         LoadUserData();
+        ChangeSoundSetting();
     }
 
     private void LoadUserData()
@@ -99,6 +95,14 @@ public class GameManager : MonoSingleton<GameManager>
         LoadDeckInfos();
         LoadStageClearInfo();
         LoadSoundInfo();
+    }
+
+    private void SaveUserData()
+    {
+        for (int i = 0; i < 3; i++)
+            SaveDeckInfos(i);
+
+        SaveStageClearInfo();
     }
 
     private void LoadResource()
@@ -349,14 +353,96 @@ public class GameManager : MonoSingleton<GameManager>
         }
     }
 
+    public void MakeEmptySoundInfo()
+    {
+        soundInfo = new SoundInfo();
+        soundInfo.isMuteBGM = false;
+        soundInfo.isMuteSE = false;
+        soundInfo.bgmVolume = 1.0f;
+        soundInfo.seVolume = 1.0f;
+    }
+
     public void LoadSoundInfo()
     {
+        string dir;
+        string path;
 
+        MakeEmptySoundInfo();
+
+        if (Application.platform == RuntimePlatform.Android)
+            dir = Application.persistentDataPath + string.Format("/UserData/SoundData");
+        else
+            dir = string.Format("Assets/UserData/SoundData");
+
+        if (!Directory.Exists(dir))
+            Directory.CreateDirectory(dir);
+
+        path = dir + string.Format("/SoundData.json");
+
+        try
+        {
+            if (File.Exists(path))
+            {
+                string jsonData = File.ReadAllText(path);
+                this.soundInfo = JsonUtility.FromJson<SoundInfo>(jsonData);
+            }
+        }
+        catch (System.ArgumentException e1)
+        {
+            Debug.Log(e1.Message);
+
+        }
+        catch (System.Exception e2)
+        {
+            Debug.Log(e2.Message);
+        }
+    }
+
+    public void ChangeSoundSetting()
+    {
+        SoundManager.Instance.ControlBGMPlayerMute(soundInfo.isMuteBGM);
+        SoundManager.Instance.ControlSEPlayerMute(soundInfo.isMuteSE);
+        SoundManager.Instance.ControlBGMPlayerSound(soundInfo.bgmVolume);
+        SoundManager.Instance.ControlSEPlayerSound(soundInfo.seVolume);
     }
 
     public void SaveSoundInfo()
     {
+        string jsonData; 
+        string dir;
+        string path;
 
+        soundInfo.isMuteBGM = SoundManager.Instance.GetIsMuteBGM();
+        soundInfo.isMuteSE = SoundManager.Instance.GetIsMuteSE();
+        soundInfo.bgmVolume = SoundManager.Instance.GetBGMVolume();
+        soundInfo.seVolume = SoundManager.Instance.GetSEVolume();
+
+        jsonData = JsonUtility.ToJson(soundInfo);
+
+        if (Application.platform == RuntimePlatform.Android)
+            dir = Application.persistentDataPath + string.Format("/UserData/SoundData");
+        else
+            dir = string.Format("Assets/UserData/SoundData");
+
+        if (!Directory.Exists(dir))
+            Directory.CreateDirectory(dir);
+
+        path = dir + string.Format("/SoundData.json");
+
+        try
+        {
+            File.WriteAllText(path, jsonData);
+        }
+        catch (System.ArgumentException e1)
+        {
+            Debug.Log(e1.Message);
+            // stage name 재입력 event
+        }
+        catch (System.Exception e2)
+        {
+            Debug.Log(e2.Message);
+            // IOException or UnauthorizedAccessException
+        }
     }
 
     public void LoadScene(string sceneName)
@@ -401,24 +487,21 @@ public class GameManager : MonoSingleton<GameManager>
     public new void OnApplicationQuit()
     {
         base.OnApplicationQuit();
-        SaveStageClearInfo();
-        for (int i = 0; i < 3; i++)
-            SaveDeckInfos(i);
+
+        SaveUserData();
     }
 
 
     private void OnApplicationPause(bool pause)
     {
-        SaveStageClearInfo();
-
-        for (int i = 0; i < 3; i++)
-            SaveDeckInfos(i);
+        SaveUserData();
     }
     // ---------------------- INGAME ----------------------
 
     [HideInInspector] public GameObject inGameUI;
     [HideInInspector] public bool isGameOver;
     [HideInInspector] public bool isStageClear;
+
     public void InitIngameSetting()
     {
         isGameOver = false;

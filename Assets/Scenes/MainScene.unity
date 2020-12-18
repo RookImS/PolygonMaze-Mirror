@@ -12642,7 +12642,14 @@ MonoBehaviour:
     deckInfoList: []
   stageClearInfo:
     stageChapter: []
+  soundInfo:
+    isMuteBGM: 0
+    isMuteSE: 0
+    bgmVolume: 0
+    seVolume: 0
   isStart: 0
+  chapterMax: 10
+  levelMax: 5
   inGameUI: {fileID: 0}
   isGameOver: 0
   isStageClear: 0
@@ -14849,7 +14856,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1990739362795558118, guid: 0859417508d4a3e4e9d0b874a5cf9b80, type: 3}
       propertyPath: m_Name
-      value: Setting
+      value: SoundSetting
       objectReference: {fileID: 0}
     - target: {fileID: 1990739362795558118, guid: 0859417508d4a3e4e9d0b874a5cf9b80, type: 3}
       propertyPath: m_IsActive

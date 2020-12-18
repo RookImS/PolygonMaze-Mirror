@@ -17,14 +17,19 @@ public class SoundSettingSystem : MonoBehaviour
     public Sprite notMuteSpeaker;
     public Sprite muteSpeaker;
 
-    private void Awake()
+    private void Start()
     {
         Init();
     }
 
     public void Init()
     {
-        //if (SoundManager.instance == null) return;
+        ChangeSoundSetting();
+    }
+
+    public void ChangeSoundSetting()
+    {
+        if (SoundManager.instance == null) return;
 
         bgmSlider.GetComponent<Slider>().value = SoundManager.instance.GetBGMVolume();
         bgmVolumeText.GetComponent<TMP_Text>().text
@@ -54,8 +59,6 @@ public class SoundSettingSystem : MonoBehaviour
         else
             seSpeakerImage.GetComponent<Image>().sprite = notMuteSpeaker;
     }
-
-
     public void OnClickBGMButton()
     {
         if (SoundManager.instance == null) return;
