@@ -57,6 +57,7 @@ MonoBehaviour:
   towerRend: {fileID: 5086290195845957491}
   rangeRend: {fileID: 447244590788346946}
   data: {fileID: 346010008869247010, guid: 240e68458cec7ef41b7cce2a9eaeed4e, type: 3}
+  pointCorrection: 1
 --- !u!64 &4431310719143235321
 MeshCollider:
   m_ObjectHideFlags: 0

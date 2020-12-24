@@ -38834,7 +38834,7 @@ MonoBehaviour:
   use_sound_name: Green_Use_Sound
   effect_sound_name: Green_Effect_Sound
   apply_sound_name: Green_Apply_Sound
-  VFX: {fileID: 0}
+  VFX: {fileID: 4655499531004364548, guid: da570c91ee1a84841b1f9d740ce89e4a, type: 3}
   modifier:
     ModifierMode: 1
     Stats:

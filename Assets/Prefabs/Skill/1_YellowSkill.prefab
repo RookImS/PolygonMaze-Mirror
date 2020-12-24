@@ -29216,7 +29216,7 @@ MonoBehaviour:
   use_sound_name: Yellow_Use_Sound
   effect_sound_name: Yellow_Effect_Sound
   apply_sound_name: Yellow_Apply_Sound
-  VFX: {fileID: 0}
+  VFX: {fileID: 6261026808021181106, guid: d90f669082ac2954492c3dada1199162, type: 3}
   modifier:
     ModifierMode: 1
     Stats:

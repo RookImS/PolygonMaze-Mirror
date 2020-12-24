@@ -30,7 +30,6 @@ public class Tutorial : MonoSingleton<Tutorial>
             Destroy(dialogueUI.invokePanel.transform.GetChild(i).gameObject);
 
         nextTutorialChapter -= StartPhase;
-        //maskUI.SetActive(false);
 
         if (tutorialChecker != null)
         {
